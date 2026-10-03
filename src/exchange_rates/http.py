@@ -1,9 +1,11 @@
 """Reusable browser-fingerprinted HTTP transport with bounded retries."""
 
+from concurrent.futures import CancelledError
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 import math
 import time
+from threading import Event
 from typing import Any, Mapping
 
 from curl_cffi import requests
@@ -58,7 +60,7 @@ class ResponseDecodeError(HttpError):
 
 class HttpClient:
     def __init__(self, timeout: float = 30, retries: int = 3,
-                 interval: float = 0.3):
+                 interval: float = 0.3, cancel_event: Event | None = None):
         if not math.isfinite(timeout) or timeout <= 0:
             raise ValueError("timeout must be finite and positive")
         if isinstance(retries, bool) or not isinstance(retries, int) or retries < 0:
@@ -68,6 +70,7 @@ class HttpClient:
         self.timeout = timeout
         self.retries = retries
         self.interval = interval
+        self.cancel_event = cancel_event
         self._session: requests.Session | None = None
         self._last_started: float | None = None
         self.records: list[dict[str, Any]] = []
@@ -89,15 +92,38 @@ class HttpClient:
             self._session = requests.Session(impersonate="chrome")
         return self._session
 
+    def fork(self, cancel_event: Event | None = None) -> "HttpClient":
+        return HttpClient(self.timeout, self.retries, self.interval, cancel_event)
+
+    def _check_cancelled(self) -> None:
+        if self.cancel_event is not None and self.cancel_event.is_set():
+            raise CancelledError("Currency shard cancelled after another shard failed")
+
+    def _sleep(self, seconds: float) -> None:
+        if self.cancel_event is not None:
+            if self.cancel_event.wait(seconds):
+                self._check_cancelled()
+        else:
+            time.sleep(seconds)
+
     def _wait(self) -> None:
+        self._check_cancelled()
         if self._last_started is not None:
             remaining = self.interval - (time.monotonic() - self._last_started)
             if remaining > 0:
-                time.sleep(remaining)
+                self._sleep(remaining)
         self._last_started = time.monotonic()
 
     def request_json(self, url: str, params: Mapping[str, Any] | None = None,
                      headers: Mapping[str, str] | None = None) -> JsonResponse:
+        return self._request(url, params, headers, decode_json=True)
+
+    def request_text(self, url: str, params: Mapping[str, Any] | None = None,
+                     headers: Mapping[str, str] | None = None) -> JsonResponse:
+        return self._request(url, params, headers, decode_json=False)
+
+    def _request(self, url: str, params: Mapping[str, Any] | None,
+                 headers: Mapping[str, str] | None, *, decode_json: bool) -> JsonResponse:
         session = self._get_session()
         records: list[dict[str, Any]] = []
         for attempt in range(self.retries + 1):
@@ -135,6 +161,8 @@ class HttpClient:
                 result.records = records
                 status = response.status_code
                 if 200 <= status < 300:
+                    if not decode_json:
+                        return result
                     try:
                         result.data = simplejson.loads(
                             result.body_text, use_decimal=True, allow_nan=False,
@@ -151,5 +179,5 @@ class HttpClient:
                 if attempt == self.retries:
                     raise HttpError(f"HTTP {status} for {url} after retries",
                                     status, result, records)
-            time.sleep(max(self.interval, 0.5) * (2 ** attempt))
+            self._sleep(max(self.interval, 0.5) * (2 ** attempt))
         raise AssertionError("unreachable retry state")
