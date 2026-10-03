@@ -1,0 +1,904 @@
+{
+  "currencies": [
+    "USD",
+    "EUR",
+    "JPY",
+    "GBP",
+    "CNY",
+    "CHF",
+    "CAD",
+    "AUD",
+    "NZD",
+    "HKD",
+    "SGD"
+  ],
+  "fetched_at_utc": "2026-10-03T07:19:11.972811Z",
+  "pair_count": 110,
+  "provider": "visa",
+  "rate_direction": "base currency per one transaction currency",
+  "requested_date": "2026-10-02",
+  "response_dates": [
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 0
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 1
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 2
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 3
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 4
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 5
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 6
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 7
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 8
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 9
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 10
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 11
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 12
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 13
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 14
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 15
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 16
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 17
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 18
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 19
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 20
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 21
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 22
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 23
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 24
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 25
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 26
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 27
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 28
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 29
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 30
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 31
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 32
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 33
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 34
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 35
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 36
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 37
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 38
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 39
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 40
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 41
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 42
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 43
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 44
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 45
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 46
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 47
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 48
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 49
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 50
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 51
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 52
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 53
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 54
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 55
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 56
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 57
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 58
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 59
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 60
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 61
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 62
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 63
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 64
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 65
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 66
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 67
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 68
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 69
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 70
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 71
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 72
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 73
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 74
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 75
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 76
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 77
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 78
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 79
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 80
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 81
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 82
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 83
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 84
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 85
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 86
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 87
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 88
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 89
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 90
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 91
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 92
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 93
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 94
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 95
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 96
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 97
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 98
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 99
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 100
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 101
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 102
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 103
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 104
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 105
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 106
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 107
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 108
+    },
+    {
+      "fields": {
+        "conversionInputDate": "10/02/2026",
+        "originalValues.asOfDate": 1790899200
+      },
+      "request_index": 109
+    }
+  ],
+  "source_urls": [
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=USD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=EUR",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=JPY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=GBP",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=CNY",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=CHF",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=CAD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=AUD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=NZD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=SGD&toCurr=HKD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=USD&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=EUR&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=JPY&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=GBP&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CNY&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CHF&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=CAD&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=AUD&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=NZD&toCurr=SGD",
+    "https://www.visa.co.in/cmsapi/fx/rates?amount=1000&fee=0&utcConvertedDate=10%2F02%2F2026&exchangedate=10%2F02%2F2026&fromCurr=HKD&toCurr=SGD"
+  ]
+}
