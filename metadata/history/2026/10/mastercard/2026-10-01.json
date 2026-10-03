@@ -1,0 +1,794 @@
+{
+  "currencies": [
+    "USD",
+    "EUR",
+    "JPY",
+    "GBP",
+    "CNY",
+    "CHF",
+    "CAD",
+    "AUD",
+    "NZD",
+    "HKD",
+    "SGD"
+  ],
+  "fetched_at_utc": "2026-10-03T07:20:06.114196Z",
+  "pair_count": 110,
+  "provider": "mastercard",
+  "rate_direction": "base currency per one transaction currency",
+  "requested_date": "2026-10-01",
+  "response_dates": [
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 0
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 1
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 2
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 3
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 4
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 5
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 6
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 7
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 8
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 9
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 10
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 11
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 12
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 13
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 14
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 15
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 16
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 17
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 18
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 19
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 20
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 21
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 22
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 23
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 24
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 25
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 26
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 27
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 28
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 29
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 30
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 31
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 32
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 33
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 34
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 35
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 36
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 37
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 38
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 39
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 40
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 41
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 42
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 43
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 44
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 45
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 46
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 47
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 48
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 49
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 50
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 51
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 52
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 53
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 54
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 55
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 56
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 57
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 58
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 59
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 60
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 61
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 62
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 63
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 64
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 65
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 66
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 67
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 68
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 69
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 70
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 71
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 72
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 73
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 74
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 75
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 76
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 77
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 78
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 79
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 80
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 81
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 82
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 83
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 84
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 85
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 86
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 87
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 88
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 89
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 90
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 91
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 92
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 93
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 94
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 95
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 96
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 97
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 98
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 99
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 100
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 101
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 102
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 103
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 104
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 105
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 106
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 107
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 108
+    },
+    {
+      "fields": {
+        "data.fxDate": "2026-10-01"
+      },
+      "request_index": 109
+    }
+  ],
+  "source_urls": [
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=USD&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=EUR&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=JPY&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=GBP&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CNY&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CHF&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=CAD&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=AUD&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=NZD&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=HKD&cardholder_billing_currency=SGD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=USD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=EUR&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=JPY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=GBP&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=CNY&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=CHF&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=CAD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=AUD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=NZD&bank_fee=0&transaction_amount=1000",
+    "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates?exchange_date=2026-10-01&transaction_currency=SGD&cardholder_billing_currency=HKD&bank_fee=0&transaction_amount=1000"
+  ]
+}

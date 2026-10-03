@@ -1,0 +1,554 @@
+{
+  "exchangeRateJson": [
+    {
+      "baseCur": "EUR",
+      "rateData": 0.8915830,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 158.4700000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.7587820,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 6.7045000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.8385000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 1.4265000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.4488550,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 1.7882680,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 7.8480000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 1.2826000,
+      "transCur": "USD"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 1.1344994,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 179.3500000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.8554000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 7.6062515,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.9484000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 1.6142000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.6333000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 2.0287891,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 8.9049000,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 1.4551090,
+      "transCur": "EUR"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.0063605,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.0056580,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.0048262,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 0.0426441,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.0053333,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 0.0090733,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 0.0091542,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 0.0113743,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 0.0499109,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.0081580,
+      "transCur": "JPY"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 1.3284994,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 1.1756407,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 210.5272947,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 8.9069240,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 1.1116000,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 1.8899000,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.9123000,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 2.3757129,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 10.4260630,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 1.7039333,
+      "transCur": "GBP"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.1491536,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.1329828,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 23.6363636,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.1131750,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.1250653,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 0.2127675,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 0.2161019,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 0.2667265,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 1.1705571,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.1913043,
+      "transCur": "CNY"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 1.2061271,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 1.0727312,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 191.1349656,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.9133254,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 8.0864793,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 1.7205403,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.7475033,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 2.1568785,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 9.4656857,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 1.5469787,
+      "transCur": "CHF"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.7037298,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.6254300,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 111.5200563,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.5322263,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 4.7181562,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.5900774,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.0162602,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 1.2584574,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 5.5228712,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.9026038,
+      "transCur": "CAD"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.6958996,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.6161809,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 110.1700000,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.5260943,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 4.6656585,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.5835118,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 0.9914000,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 1.2391000,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 5.4614197,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.8910000,
+      "transCur": "AUD"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.5644997,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.5032984,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 89.4562739,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.4283322,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 3.7846885,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.4733330,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 0.8052589,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 0.8120179,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 4.4301940,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.7240274,
+      "transCur": "NZD"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.1274649,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.1136557,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 20.1970000,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.0967180,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 0.8545881,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.1068793,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 0.1818286,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 0.1846781,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 0.2279413,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "SGD",
+      "rateData": 0.1634864,
+      "transCur": "HKD"
+    },
+    {
+      "baseCur": "USD",
+      "rateData": 0.7835148,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "EUR",
+      "rateData": 0.6985685,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "JPY",
+      "rateData": 124.1635979,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "GBP",
+      "rateData": 0.5945170,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "CNY",
+      "rateData": 5.2530753,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "CHF",
+      "rateData": 0.6569772,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "CAD",
+      "rateData": 1.1176839,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "AUD",
+      "rateData": 1.1305822,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "NZD",
+      "rateData": 1.4011345,
+      "transCur": "SGD"
+    },
+    {
+      "baseCur": "HKD",
+      "rateData": 6.1490245,
+      "transCur": "SGD"
+    }
+  ]
+}
