@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "daily-exchange-rates"
+version = "0.1.0"
+description = "Manually collected official exchange rates with verified archives"
+requires-python = ">=3.11"
+license = "AGPL-3.0-only"
+dependencies = ["curl_cffi>=0.13,<0.16", "simplejson>=3.20,<4"]
+
+[project.scripts]
+exchange-rates = "exchange_rates.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.data-files]
+"share/daily-exchange-rates" = ["config/providers.json"]
