@@ -1,11 +1,14 @@
 """Daily provider adapters; every directional pair is fetched independently."""
 
+from concurrent.futures import CancelledError
 from datetime import date, datetime, timezone
 from decimal import Decimal, InvalidOperation, localcontext
-from itertools import permutations
+import hashlib
 import re
 from typing import Any, Callable, Mapping, Sequence
 
+from ..catalog import CurrencyCatalog, discover_currencies
+from ..concurrency import SHARD_COUNT, balanced_shards, run_currency_shards
 from ..http import HttpClient, HttpError, JsonResponse, utc_now
 from ..models import DayResult, json_bytes
 
@@ -121,7 +124,9 @@ def _records(response: JsonResponse) -> list[dict[str, Any]]:
 
 def _result(provider: str, target: date, normalized: bytes,
             responses: list[JsonResponse], pair_count: int,
-            currencies: Sequence[str] | None = None) -> DayResult:
+            currencies: Sequence[str] | None = None, *,
+            catalog: CurrencyCatalog | None = None,
+            raw_parts: dict[str, bytes] | None = None) -> DayResult:
     metadata: dict[str, Any] = {
         "provider": provider, "requested_date": target.isoformat(),
         "fetched_at_utc": utc_now(), "pair_count": pair_count,
@@ -144,11 +149,30 @@ def _result(provider: str, target: date, normalized: bytes,
     metadata["response_dates"] = returned_dates
     if currencies is not None:
         metadata["currencies"] = list(currencies)
-    raw = json_bytes({
-        "provider": provider, "requested_date": target.isoformat(),
-        "requests": [record for response in responses for record in _records(response)],
+    if raw_parts is None:
+        raw = json_bytes({
+            "provider": provider, "requested_date": target.isoformat(),
+            "requests": [record for response in responses for record in _records(response)],
+        })
+        return DayResult(provider, target, normalized, raw, metadata)
+    assert catalog is not None
+    metadata.update({
+        "transaction_currencies": list(catalog.transaction),
+        "billing_currencies": list(catalog.billing),
+        "shard_count": SHARD_COUNT,
+        "shards": [{"index": index, "transaction_currencies": list(codes),
+                    "pair_count": sum(1 for spend in codes for home in catalog.billing if spend != home)}
+                   for index, codes in enumerate(balanced_shards(catalog.transaction))],
+        "catalog_source_urls": [response.url for response in catalog.responses],
     })
-    return DayResult(provider, target, normalized, raw, metadata)
+    raw = json_bytes({
+        "format": "exchange-rates-raw-shards-v1",
+        "provider": provider, "requested_date": target.isoformat(),
+        "parts": [{"name": name, "size": len(body), "sha256": hashlib.sha256(body).hexdigest()}
+                  for name, body in sorted(raw_parts.items())],
+        "catalog_requests": [record for response in catalog.responses for record in _records(response)],
+    })
+    return DayResult(provider, target, normalized, raw, metadata, raw_parts)
 
 
 def _unionpay(target: date, currencies: Sequence[str],
@@ -195,62 +219,85 @@ def _check_bill(rate: Decimal, value: Any, context: str) -> None:
             raise ProviderError(f"{context}: billed amount disagrees with directional rate")
 
 
-def _card(provider: str, target: date, currencies: Sequence[str],
+def _query_pair(provider: str, target: date, spend: str, home: str,
+                endpoint: str, headers: Mapping[str, str], client: HttpClient):
+    if provider == "visa":
+        day = target.strftime("%m/%d/%Y")
+        params = {"amount": "1000", "fee": "0", "utcConvertedDate": day,
+                  "exchangedate": day, "fromCurr": home, "toCurr": spend}
+    else:
+        params = {"exchange_date": target.isoformat(), "transaction_currency": spend,
+                  "cardholder_billing_currency": home, "bank_fee": "0", "transaction_amount": "1000"}
+    response = client.request_json(endpoint, params=params, headers=headers)
+    data = _object(response.data, f"{provider} {spend}/{home}")
+    _check_dates(provider, target, data)
+    if provider == "visa":
+        if data.get("status") != "success":
+            raise ProviderError(f"Visa {spend}/{home}: status is not success: {data.get('status')!r}")
+        values = _object(data.get("originalValues"), "Visa originalValues")
+        rate = _number(values.get("fxRateVisa"), "Visa fxRateVisa")
+        _check_bill(rate, values.get("toAmountWithVisaRate"), "Visa toAmountWithVisaRate")
+    else:
+        values = _object(data.get("data"), "Mastercard data")
+        if values.get("errorCode") not in (None, "", 0, "0"):
+            raise ProviderError(f"Mastercard {spend}/{home}: errorCode={values['errorCode']!r}")
+        rate = _number(values.get("conversionRate"), "Mastercard conversionRate")
+        _check_bill(rate, values.get("crdhldBillAmt"), "Mastercard crdhldBillAmt")
+    _check_dates(provider, target, values)
+    expected_currencies = ({"fromCurrency": spend, "toCurrency": home} if provider == "visa"
+                           else {"transCurr": spend, "crdhldBillCurr": home})
+    for field, expected in expected_currencies.items():
+        if field in values and values[field] != expected:
+            raise ProviderError(f"{provider} {spend}/{home}: response {field}={values[field]!r}, expected {expected}")
+    return {"transCur": spend, "baseCur": home, "rateData": rate}, response
+
+
+def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[str] | None,
           config: Mapping[str, Any], client: HttpClient) -> DayResult:
-    if isinstance(currencies, (str, bytes)):
-        raise ValueError("currencies must be a sequence of currency codes")
-    codes = tuple(currencies)
-    if any(not isinstance(code, str) or not re.fullmatch(r"[A-Z]{3}", code)
-           for code in codes):
-        raise ValueError("currency codes must contain three uppercase letters")
-    if len(codes) < 2 or len(set(codes)) != len(codes):
-        raise ValueError("at least two distinct currency codes are required")
+    if currencies is None:
+        catalog = discover_currencies(provider, config, client)
+    elif isinstance(currencies, CurrencyCatalog):
+        catalog = currencies
+    else:
+        catalog = CurrencyCatalog(currencies, currencies)
     endpoint, headers = _settings(provider, config)
-    rows = []
-    responses = []
-    for spend, home in permutations(codes, 2):
-        if provider == "visa":
-            day = target.strftime("%m/%d/%Y")
-            params = {
-                "amount": "1000", "fee": "0", "utcConvertedDate": day,
-                "exchangedate": day, "fromCurr": home, "toCurr": spend,
-            }
-        else:
-            params = {
-                "exchange_date": target.isoformat(),
-                "transaction_currency": spend,
-                "cardholder_billing_currency": home,
-                "bank_fee": "0", "transaction_amount": "1000",
-            }
-        response = client.request_json(endpoint, params=params, headers=headers)
-        data = _object(response.data, f"{provider} {spend}/{home}")
-        _check_dates(provider, target, data)
-        if provider == "visa":
-            if data.get("status") != "success":
-                raise ProviderError(f"Visa {spend}/{home}: status is not success: {data.get('status')!r}")
-            values = _object(data.get("originalValues"), "Visa originalValues")
-            rate = _number(values.get("fxRateVisa"), "Visa fxRateVisa")
-            _check_bill(rate, values.get("toAmountWithVisaRate"), "Visa toAmountWithVisaRate")
-        else:
-            values = _object(data.get("data"), "Mastercard data")
-            if values.get("errorCode") not in (None, "", 0, "0"):
-                raise ProviderError(f"Mastercard {spend}/{home}: errorCode={values['errorCode']!r}")
-            rate = _number(values.get("conversionRate"), "Mastercard conversionRate")
-            _check_bill(rate, values.get("crdhldBillAmt"), "Mastercard crdhldBillAmt")
-        _check_dates(provider, target, values)
-        returned_currencies = (
-            {"fromCurrency": spend, "toCurrency": home} if provider == "visa"
-            else {"transCurr": spend, "crdhldBillCurr": home}
-        )
-        for field, expected in returned_currencies.items():
-            if field in values and values[field] != expected:
-                raise ProviderError(
-                    f"{provider} {spend}/{home}: response {field}={values[field]!r}, expected {expected}",
-                )
-        rows.append({"transCur": spend, "baseCur": home, "rateData": rate})
-        responses.append(response)
-    return _result(provider, target, json_bytes({"exchangeRateJson": rows}),
-                   responses, len(rows), codes)
+    # Fail an unavailable date before starting all nine workers; reuse this pair.
+    first_pair = next(catalog.pairs())
+    seed = _query_pair(provider, target, *first_pair, endpoint, headers, client)
+
+    def worker(index, spends, cancelled):
+        rows, responses = [], []
+        if spends:
+            with client.fork(cancelled) as shard_client:
+                for spend in spends:
+                    for home in catalog.billing:
+                        if spend == home:
+                            continue
+                        if cancelled.is_set():
+                            raise CancelledError("Another currency shard failed")
+                        if (spend, home) == first_pair:
+                            row, response = seed
+                        else:
+                            shard_client.records.clear()
+                            row, response = _query_pair(provider, target, spend, home, endpoint, headers, shard_client)
+                        rows.append(row)
+                        responses.append(response)
+        raw = json_bytes({
+            "provider": provider, "requested_date": target.isoformat(), "shard_index": index,
+            "transaction_currencies": list(spends),
+            "requests": [record for response in responses for record in _records(response)],
+        }, compact=True)
+        return rows, responses, raw
+
+    batches = run_currency_shards(catalog.transaction, worker)
+    rows = [row for batch in batches for row in batch[0]]
+    responses = [response for batch in batches for response in batch[1]]
+    received = [(row["transCur"], row["baseCur"]) for row in rows]
+    if received != list(catalog.pairs()) or len(received) != catalog.pair_count:
+        raise ProviderError("Currency shard merge contains missing, duplicate or out-of-order pairs")
+    parts = {f"shard-{index + 1:02d}.json": batch[2] for index, batch in enumerate(batches)}
+    return _result(provider, target, json_bytes({"exchangeRateJson": rows}), responses,
+                   len(rows), catalog=catalog, raw_parts=parts)
 
 
 def _visa(target: date, currencies: Sequence[str], config: Mapping[str, Any],
@@ -272,7 +319,15 @@ def provider_ids() -> tuple[str, ...]:
     return tuple(_REGISTRY)
 
 
-def fetch_day(provider: str, target: date, currencies: Sequence[str],
+def prepare_catalog(provider: str, config: Mapping[str, Any], client: HttpClient) -> CurrencyCatalog | None:
+    if provider not in _REGISTRY:
+        raise ValueError(f"Unknown provider: {provider}")
+    if provider in ("visa", "mastercard"):
+        return discover_currencies(provider, config, client)
+    return None
+
+
+def fetch_day(provider: str, target: date, currencies: CurrencyCatalog | Sequence[str] | None,
               config: Mapping[str, Any], client: HttpClient) -> DayResult:
     if type(target) is not date:
         raise TypeError("target must be datetime.date, not datetime.datetime")
