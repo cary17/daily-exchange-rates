@@ -7,6 +7,8 @@ from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
+from exchange_rates.archive_backend import DirectoryArchiveBackend
+from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.cli import dates, main
 from exchange_rates.models import DayResult, json_bytes
 
@@ -33,9 +35,10 @@ class CliTests(unittest.TestCase):
 
     def test_range_failure_keeps_previous_complete_day_without_fallback(self):
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
+            root = Path(temporary) / "data"
+            release_dir = Path(temporary) / "releases"
             from exchange_rates.storage import DataStore
-            store = DataStore(root)
+            store = DataStore(root, DirectoryArchiveBackend(release_dir))
             old = DayResult("visa", date(2026, 10, 2), json_bytes({"exchangeRateJson": []}),
                             json_bytes({"old": True}), {})
             store.save_day(old)
@@ -50,10 +53,13 @@ class CliTests(unittest.TestCase):
                                  json_bytes({"requested": target.isoformat()}), {})
 
             with patch("exchange_rates.cli.HttpClient", FakeClient), \
+                 patch("exchange_rates.cli.prepare_catalog", return_value=CurrencyCatalog(("USD", "CNY"), ("USD", "CNY"))) as discover, \
                  patch("exchange_rates.cli.fetch_day", side_effect=fetch), \
                  contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
                 status = main(["fetch", "--provider", "visa", "--start-date", "2026-10-01",
-                               "--end-date", "2026-10-03", "--data-dir", str(root)])
+                               "--end-date", "2026-10-03", "--data-dir", str(root),
+                               "--release-dir", str(release_dir)])
+            self.assertEqual(discover.call_count, 1)
             self.assertEqual(status, 1)
             self.assertEqual(called, [date(2026, 10, day) for day in (1, 2, 3)])
             self.assertEqual((root / "history/2026/10/visa/2026-10-02.json").read_bytes(), old_body)
@@ -63,14 +69,43 @@ class CliTests(unittest.TestCase):
         value = DayResult("visa", date(2026, 10, 3), b"{}", b"{}", {})
         with tempfile.TemporaryDirectory() as temporary, \
              patch("exchange_rates.cli.HttpClient", FakeClient), \
+             patch("exchange_rates.cli.prepare_catalog", return_value=CurrencyCatalog(("USD", "CNY"), ("USD", "CNY"))), \
+             patch("exchange_rates.cli.GitHubArchiveBackend.from_environment",
+                   return_value=DirectoryArchiveBackend(Path(temporary) / "releases")), \
              patch("exchange_rates.cli.fetch_day", return_value=value), \
-             patch("exchange_rates.cli.DataStore.save_day", side_effect=OSError("Disk failure")), \
+             patch("exchange_rates.cli.DataStore.save_day", side_effect=OSError("Disk failure")) as save, \
              patch("exchange_rates.cli.BranchPublisher") as publisher, \
              contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             status = main(["fetch", "--provider", "visa", "--start-date", "2026-10-03",
                            "--data-dir", temporary, "--publish"])
             self.assertEqual(status, 1)
+            save.assert_called_once()
             publisher.return_value.publish.assert_not_called()
+
+    def test_download_uses_verified_release_backend(self):
+        with tempfile.TemporaryDirectory() as temporary, \
+             patch("exchange_rates.cli.GitHubArchiveBackend") as factory, \
+             patch.dict("os.environ", {"GITHUB_TOKEN": "fixture-token"}), \
+             contextlib.redirect_stdout(io.StringIO()):
+            output = Path(temporary) / "download"
+            factory.return_value.materialize.return_value = {"2026-09.tar.gz": output / "2026-09.tar.gz"}
+            status = main(["download", "--repository", "cary17/daily-exchange-rates",
+                           "--period", "2026-09", "--output-dir", str(output)])
+            self.assertEqual(status, 0)
+            factory.assert_called_once_with("cary17/daily-exchange-rates", "fixture-token")
+            factory.return_value.materialize.assert_called_once_with("2026-09", output)
+
+    def test_download_keeps_existing_output_directory(self):
+        with tempfile.TemporaryDirectory() as temporary, \
+             patch("exchange_rates.cli.GitHubArchiveBackend") as factory, \
+             contextlib.redirect_stderr(io.StringIO()):
+            output = Path(temporary)
+            marker = output / "keep.txt"
+            marker.write_text("keep")
+            self.assertEqual(main(["download", "--repository", "cary17/daily-exchange-rates",
+                                   "--period", "2026-09", "--output-dir", str(output)]), 1)
+            factory.assert_not_called()
+            self.assertEqual(marker.read_text(), "keep")
 
 
 if __name__ == "__main__":

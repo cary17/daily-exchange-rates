@@ -5,6 +5,7 @@ import unittest
 from datetime import date
 from pathlib import Path
 
+from exchange_rates.archive_backend import DirectoryArchiveBackend
 from exchange_rates.models import DayResult, json_bytes
 from exchange_rates.storage import DataStore, StorageError, sha256
 
@@ -19,12 +20,20 @@ class StorageTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
-        self.store = DataStore(self.root)
+        self.root = Path(self.temporary.name) / "data"
+        self.backend = DirectoryArchiveBackend(Path(self.temporary.name) / "releases")
+        self.store = DataStore(self.root, self.backend)
 
     def entries(self, artifact):
         with tarfile.open(artifact.archive, "r:gz") as archive:
             return {member.name: archive.extractfile(member).read() for member in archive}
+
+    def remote_entries(self, period):
+        with tempfile.TemporaryDirectory() as temporary:
+            files = self.backend.materialize(period, Path(temporary))
+            self.assertIsNotNone(files)
+            artifact = self.store._artifact(Path(temporary), period)
+            return self.entries(artifact)
 
     def test_same_day_overwrite_and_older_day_does_not_replace_latest(self):
         self.store.save_day(result(date(2026, 9, 30), rate=7))
@@ -74,15 +83,18 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(periods, ["2025-12", "2025"])
         self.assertTrue(snapshot)
         year = self.store.year_artifact(2025)
-        self.assertEqual(len(self.entries(year)), 6)
-        self.assertTrue(all(name.endswith(".json") for name in self.entries(year)))
-        self.assertFalse((self.root / "history/2025").exists())
+        self.assertFalse(year.archive.exists())
+        self.assertEqual(len(self.remote_entries("2025")), 6)
+        self.assertTrue(all(name.endswith(".json") for name in self.remote_entries("2025")))
+        self.assertTrue(self.store.month_artifact(2025, 11).exists)
+        self.assertTrue(self.store.month_artifact(2025, 12).exists)
         self.assertTrue((self.root / "history/2026/01/visa/2026-01-01.json").exists())
         self.assertEqual(self.store.archive_due(date(2026, 1, 3)), ([], False))
         self.store.save_day(result(date(2025, 11, 21)))
-        self.assertEqual(len(self.entries(year)), 9)
-        self.assertFalse((self.root / "history/2025").exists())
-        self.assertEqual(self.store.verify_archives(), 1)
+        self.assertEqual(len(self.remote_entries("2025")), 9)
+        self.assertEqual(len(self.remote_entries("2025-11")), 6)
+        self.assertFalse(year.archive.exists())
+        self.assertEqual(self.store.verify_archives(), 2)
 
     def test_manual_archive_catches_missed_months_and_years(self):
         self.store.save_day(result(date(2025, 6, 1)))
@@ -90,7 +102,10 @@ class StorageTests(unittest.TestCase):
         periods, snapshot = self.store.archive_due(date(2026, 8, 3))
         self.assertEqual(periods, ["2025-06", "2026-07", "2025"])
         self.assertTrue(snapshot)
-        self.assertEqual(self.store.verify_archives(), 2)
+        self.assertEqual(self.store.verify_archives(), 1)
+        self.assertTrue(self.backend.has("2025-06"))
+        self.assertTrue(self.backend.has("2025"))
+        self.assertFalse(self.store.month_artifact(2025, 6).exists)
 
     def test_corrupted_archive_blocks_supplement_and_keeps_other_files(self):
         day = date(2026, 9, 30)
