@@ -29,9 +29,12 @@ jobs:
           python-version: '3.13'
       - name: Install
         run: |
+          git lfs version
           python -m pip install -r requirements.lock
           python -m pip install --no-deps .
       - name: Archive and publish
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           python -m exchange_rates archive \
             --data-dir "$RUNNER_TEMP/rates-data" \

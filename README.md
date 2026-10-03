@@ -1,12 +1,25 @@
 # Daily Exchange Rates
 
-手动采集 Visa、Mastercard、银联官方汇率。源码位于 `main`，JSON 数据和归档位于 `data`，不发布 Releases。
+手动采集 Visa、Mastercard、银联官方汇率。源码在 `main`，当前数据在 `data`，月度和年度归档在 [Releases](https://github.com/cary17/daily-exchange-rates/releases)。
 
-Visa、Mastercard 获取 USD、EUR、JPY、GBP、CNY、CHF、CAD、AUD、NZD、HKD、SGD 共 11 个核心币种的 110 个有向组合；银联保留官方完整 JSON。汇率不附加手续费，不反推或补造缺失币对。
+Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种平均分成九组并发查询，每组查询全部账单币种；全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
 
-## 安装与本地使用
+## 使用 GitHub Actions
 
-使用 Python 3.13，在源码目录执行：
+将 `main` 设为默认分支，允许 Actions 读写仓库；`data` 的分支规则需允许年度快照的强制推送，并确保账户有可用的 Git LFS 配额。
+
+在 [Actions](https://github.com/cary17/daily-exchange-rates/actions) 分别运行 **Fetch Visa**、**Fetch Mastercard** 或 **Fetch UnionPay**，选择 `main`：
+
+- `start_date`：`YYYY-MM-DD`，留空使用运行时北京时间当天。
+- `end_date`：包含结束日，留空仅抓起始日。
+- 日期严格匹配，未公布或返回其他日期时该日失败，不回退，也不覆盖已有完整数据。
+- 官方目录包含的历史币种同样查询；任一目标币对失败则该日不发布。长区间请分批运行，单次工作流最多 360 分钟。
+
+抓取没有定时任务。每个机构保留独立工作流；九路并发在采集进程内执行，各路使用独立会话。工作流之间串行发布，避免覆盖 `data`。
+
+## 本地使用
+
+需要 Python 3.13 和 `git-lfs`：
 
 ```sh
 python3.13 -m venv .venv
@@ -14,70 +27,60 @@ python3.13 -m venv .venv
 python -m pip install -r requirements.lock
 python -m pip install --no-deps .
 python -m exchange_rates fetch --provider visa --data-dir ./rates-data
-python -m exchange_rates fetch --provider mastercard --start-date 2026-01-01 --end-date 2026-01-03 --data-dir ./rates-data
+python -m exchange_rates fetch --provider mastercard --start-date 2026-09-29 --end-date 2026-09-30 --data-dir ./rates-data
 ```
 
-`--provider` 可选 `visa`、`mastercard`、`unionpay`。发布到已配置的 Git 远端时，追加 `--publish --remote origin --branch data`，并使用新的空 `--data-dir`；程序从远端同步后采集、提交与推送，不清空已有本地数据目录。
+本地归档导出到独立的 `release-output`；`--release-dir` 可指定其它目录。向 GitHub 发布时设置 `GITHUB_REPOSITORY`、`GITHUB_TOKEN` 和 Git 推送认证，追加 `--publish --remote origin --branch data`，并使用新的空 `--data-dir`。
 
-## 手动采集
+## 数据读取
 
-在 GitHub **Settings → Actions → General → Workflow permissions** 允许读写权限，并确保 `data` 的分支保护或规则集允许工作流推送及年度快照的强制推送。将 `main` 设为默认分支。
-
-GitHub 仓库的 **Actions** 中分别运行 **Fetch Visa**、**Fetch Mastercard** 或 **Fetch UnionPay**，选择 `main`：
-
-- `start_date`：`YYYY-MM-DD`，留空使用运行时北京时间当天。
-- `end_date`：`YYYY-MM-DD`，含结束日；留空仅采集起始日。
-- 日期区间无程序硬上限，单次工作流最长运行 360 分钟。建议按实际耗时拆分长区间。
-
-采集没有定时触发，也不会自动回退到其他日期。请求日期、机构实际日期等采集信息保存在独立的 `metadata` 数据中。已封存日期仍可手动补录并重建对应归档。
-
-四个写入工作流共用一个并发组，串行写入 `data`，最多排队 100 个任务；满队列后新增任务会被 GitHub 取消。
-
-## 数据访问
-
-浏览仓库时切换到 `data` 分支。`provider` 为 `visa`、`mastercard` 或 `unionpay`。
-
-| 内容 | 路径 |
+| 内容 | `data` 分支路径 |
 | --- | --- |
-| 最新汇率 | `latest/provider.json` |
-| 最新原始响应 | `raw/latest/provider.json` |
-| 最新采集信息 | `metadata/latest/provider.json` |
-| 每日汇率 | `history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 每日原始响应 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 每日采集信息 | `metadata/history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 月度归档 | `history/YYYY/MM/YYYY-MM.tar.gz` |
-| 年度归档 | `history/YYYY.tar.gz` |
+| 最新统一汇率 | `latest/provider.json` |
+| 最新原始响应或索引 | `raw/latest/provider.json` |
+| 最新原始响应分片 | `raw/latest/provider.parts/shard-01.json` 至 `shard-09.json` |
+| 最新采集元数据 | `metadata/latest/provider.json` |
+| 未归档每日汇率 | `history/YYYY/MM/provider/YYYY-MM-DD.json` |
+| 每日原始响应或索引 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.json` |
+| 每日原始响应分片 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.parts/shard-01.json` 至 `shard-09.json` |
+| 每日元数据 | `metadata/history/YYYY/MM/provider/YYYY-MM-DD.json` |
+| 最近三个月的月包 | `history/YYYY/MM/YYYY-MM.tar.gz`，大包可能分卷 |
 
-将以下模板中的 `OWNER`、`REPO` 替换为仓库信息，可直接读取 `data` 分支数据；每日数据、清单和归档沿用相同 URL 前缀：
+`provider` 为 `visa`、`mastercard` 或 `unionpay`。银联原始记录仍为单文件，无分片。Visa、Mastercard 原始索引包含相对分片目录、文件大小和 SHA256；每片保留请求及完整响应原文。元数据记录目录范围、分片覆盖和接口返回日期。
+
+统一数据使用 `exchangeRateJson`，`rateData` 表示 1 单位 `transCur` 可兑换的 `baseCur` 数量。例：
 
 ```text
-https://raw.githubusercontent.com/OWNER/REPO/data/latest/visa.json
-https://raw.githubusercontent.com/OWNER/REPO/data/raw/latest/unionpay.json
-https://raw.githubusercontent.com/OWNER/REPO/data/metadata/latest/mastercard.json
+https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/visa.json
 ```
 
-Visa、Mastercard 汇率 JSON 仅含 `exchangeRateJson` 列表；`rateData` 表示 1 单位 `transCur` 可兑换的 `baseCur` 数量。原始响应与采集信息单独保存，元数据的 `response_dates` 保留接口返回的日期字段。银联完整 JSON 按机构原文保留。
+单文件超过 100 MiB 自动使用 Git LFS；网页原始链接可能返回 LFS 指针，使用安装了 Git LFS 的 Git 客户端读取完整文件。
 
-## 归档与补跑
+## 归档与下载
 
-**Archive** 于每月北京时间 3 日 00:00 运行，也可在 **Actions** 手动运行。只处理已到期月份，扫描并补齐所有遗漏的到期归档，不自动抓取汇率。本地补跑：
+**Archive** 于每月北京时间 3 日 00:00 运行，也可手动补跑；仅归档已有数据，不抓取汇率。月包发布成功并校验后清理对应明细；所有月包均保留在 Release，仓库只留最近三个已归档日历月的月包。年度包只在 Release，不入 `data`。
+
+一月先完成上年十二月归档，再从月包流式生成展平的年包，成功后重建一次 `data` 分支快照。大归档按 1900 MiB 分卷。封存日期可手动补录，相关月包及已存在的年包一起更新；部分发布失败需重跑原补录，避免月年内容不一致。
+
+Release 标签为 `rates-YYYY-MM` 或 `rates-YYYY`，附件采用内容哈希名称。用以下命令下载、恢复原文件名并验证 SHA256：
 
 ```sh
-python -m exchange_rates archive --data-dir ./rates-data
+python -m exchange_rates download --repository cary17/daily-exchange-rates --period 2026-09 --output-dir downloads/2026-09
+# 单包直接解压；分卷先按编号合并，再解压
+if [ -f downloads/2026-09/2026-09.tar.gz.part001 ]; then
+  cat downloads/2026-09/2026-09.tar.gz.part* > downloads/2026-09/2026-09.tar.gz
+fi
+tar -xzf downloads/2026-09/2026-09.tar.gz
 ```
 
-月包包含 `history`、`raw`、`metadata` 三类每日文件，并保留每日路径；同目录的 `manifest.json` 记录文件日期、机构、大小及哈希，`SHA256SUMS` 校验月包和清单。
-
-一月先归档上一年十二月，再生成上一年年度包。年度包直接包含展平后的三类每日 JSON，不嵌套月包；旁附 `YYYY.manifest.json`、`YYYY.sha256`。验证成功后删除该年已归档的每日文件和月包，保留 `latest`，并将 `data` 重建为一次快照。其他时间保留正常 Git 历史。
-
-年度快照会更换 `data` 的历史链；本地数据副本需重新同步，最直接的方式是重新克隆 `data` 分支：
+年度快照后本地 `data` 副本需重新同步，最直接是重新克隆：
 
 ```sh
-git clone --single-branch --branch data https://github.com/OWNER/REPO.git rates-data
+git clone --single-branch --branch data https://github.com/cary17/daily-exchange-rates.git rates-data
 ```
 
-机构地址、核心币种与请求设置见 `config/providers.json`；新增机构需实现 `src/exchange_rates/providers/` 下的 provider 接口并注册。
+三个月留存指当前分支文件；Git/LFS 历史对象回收及配额由 GitHub 管理。机构配置见 `config/providers.json`；新增查询源可复用 `CurrencyCatalog` 和九分片并发接口，并增加独立工作流。
 
 ## 许可
 
-代码采用 **AGPL-3.0-only**，完整文本见 [LICENSE](LICENSE)。机构原始响应及由其整理的汇率数据不套用代码许可，其权利与使用条件以各机构原始来源为准。
+代码采用 **AGPL-3.0-only**，完整文本见 [LICENSE](LICENSE)。机构原始响应及汇率数据不套用代码许可，使用条件以原始来源为准。

@@ -5,6 +5,9 @@ import subprocess
 from pathlib import Path
 from urllib.parse import urlsplit
 
+GIT_FILE_LIMIT = 100 * 1024 ** 2
+LFS_FILE_LIMIT = 2_000_000_000
+
 
 class PublishError(RuntimeError):
     pass
@@ -19,7 +22,12 @@ def git(cwd: Path, *arguments: str, check: bool = True) -> subprocess.CompletedP
 
 
 class BranchPublisher:
-    def __init__(self, source: Path, data_dir: Path, remote: str = "origin", branch: str = "data"):
+    def __init__(self, source: Path, data_dir: Path, remote: str = "origin", branch: str = "data", *,
+                 lfs_threshold: int = GIT_FILE_LIMIT):
+        if isinstance(lfs_threshold, bool) or not isinstance(lfs_threshold, int) or lfs_threshold <= 0:
+            raise PublishError("LFS threshold must be a positive integer")
+        self.lfs_threshold = lfs_threshold
+        self._lfs_enabled = False
         self.source = source.resolve()
         self.data_dir = data_dir.resolve()
         self.remote = remote
@@ -61,9 +69,39 @@ class BranchPublisher:
             fetched = git(self.data_dir, "rev-parse", "FETCH_HEAD").stdout.strip()
             if fetched != self.expected_tip:
                 raise PublishError("Data branch changed during initialization; rerun the task")
+            attributes = git(self.data_dir, "show", "FETCH_HEAD:.gitattributes", check=False)
+            if attributes.returncode == 0 and "filter=lfs" in attributes.stdout:
+                self._enable_lfs()
             git(self.data_dir, "checkout", "--detach", "FETCH_HEAD")
+            if self._lfs_enabled:
+                git(self.data_dir, "lfs", "pull", "origin")
+
+    def _enable_lfs(self) -> None:
+        if self._lfs_enabled:
+            return
+        available = git(self.data_dir, "lfs", "version", check=False)
+        if available.returncode:
+            raise PublishError("Git LFS is required for large data files; install git-lfs")
+        git(self.data_dir, "lfs", "install", "--local")
+        self._lfs_enabled = True
+
+    def _track_large_files(self) -> None:
+        listing = git(self.data_dir, "ls-files", "--cached", "--others", "--exclude-standard", "-z")
+        for name in filter(None, listing.stdout.split("\0")):
+            path = self.data_dir / name
+            if path.is_symlink() or self.data_dir not in path.resolve().parents:
+                raise PublishError(f"Invalid data path: {name}")
+            if not path.is_file() or name == ".gitattributes":
+                continue
+            size = path.stat().st_size
+            if size > LFS_FILE_LIMIT:
+                raise PublishError(f"File exceeds the supported Git LFS size: {name}")
+            if size > self.lfs_threshold:
+                self._enable_lfs()
+                git(self.data_dir, "lfs", "track", "--filename", name)
 
     def publish(self, message: str, *, snapshot: bool = False) -> bool:
+        self._track_large_files()
         git(self.data_dir, "add", "--all")
         diff = git(self.data_dir, "diff", "--cached", "--quiet", check=False)
         if diff.returncode not in (0, 1):

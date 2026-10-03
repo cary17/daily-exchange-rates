@@ -37,10 +37,12 @@ jobs:
           python-version: '3.13'
       - name: Install
         run: |
+          git lfs version
           python -m pip install -r requirements.lock
           python -m pip install --no-deps .
       - name: Fetch and publish UnionPay
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           START_DATE: ${{ inputs.start_date }}
           END_DATE: ${{ inputs.end_date }}
         run: |

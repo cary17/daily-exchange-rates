@@ -2,15 +2,17 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
+import os
 import sys
 import sysconfig
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from .archive_backend import DirectoryArchiveBackend, GitHubArchiveBackend
+from .concurrency import SHARD_COUNT
 from .http import HttpClient
-from .providers import fetch_day, provider_ids
+from .providers import fetch_day, prepare_catalog, provider_ids
 from .publishing import BranchPublisher, write_summary
 from .storage import DataStore
 
@@ -40,13 +42,15 @@ def load_config(path: Path | None) -> dict:
         installed = Path(sysconfig.get_path("data")) / "share" / "daily-exchange-rates" / "providers.json"
         path = source if source.is_file() else installed
     config = json.loads(path.read_bytes())
-    currencies = config.get("currencies")
-    if not isinstance(currencies, list) or len(currencies) < 2:
-        raise ValueError("Configure at least two currencies")
-    if any(not isinstance(item, str) or not re.fullmatch(r"[A-Z]{3}", item) for item in currencies):
-        raise ValueError("Currencies must be three-letter uppercase codes")
-    if len(currencies) != len(set(currencies)):
-        raise ValueError("Currencies must be unique")
+    if not isinstance(config, dict):
+        raise ValueError("Project configuration must be a JSON object")
+    archive = config.get("archive", {})
+    for name in ("retain_months", "volume_bytes"):
+        value = archive.get(name, 3 if name == "retain_months" else 1900 * 1024 ** 2)
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"archive.{name} must be a positive integer")
+    if archive.get("volume_bytes", 1900 * 1024 ** 2) > 1900 * 1024 ** 2:
+        raise ValueError("archive.volume_bytes exceeds the supported Release asset size")
     for provider in provider_ids():
         if not isinstance(config.get("providers", {}).get(provider), dict):
             raise ValueError(f"Missing provider configuration: {provider}")
@@ -63,10 +67,16 @@ def parser() -> argparse.ArgumentParser:
     collect.add_argument("--config", type=Path)
     archive = commands.add_parser("archive", help="Archive all due months and years")
     archive.add_argument("--as-of", default="", help=argparse.SUPPRESS)
+    archive.add_argument("--config", type=Path)
     verify = commands.add_parser("verify", help="Verify existing archive manifests and checksums")
+    download = commands.add_parser("download", help="Download a verified monthly or yearly Release archive")
+    download.add_argument("--repository", required=True)
+    download.add_argument("--period", required=True, help="YYYY-MM or YYYY")
+    download.add_argument("--output-dir", type=Path, required=True)
     for subcommand in (collect, archive, verify):
         subcommand.add_argument("--data-dir", type=Path, default=Path("rates-data"))
     for subcommand in (collect, archive):
+        subcommand.add_argument("--release-dir", type=Path, default=Path("release-output"))
         subcommand.add_argument("--publish", action="store_true")
         subcommand.add_argument("--remote", default="origin")
         subcommand.add_argument("--branch", default="data")
@@ -74,50 +84,59 @@ def parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> int:
-    publisher = None
-    interval = None
-    config = None
-    if args.command == "fetch":
-        interval = dates(args.start_date, args.end_date)
-        config = load_config(args.config)
-    as_of = parse_date(args.as_of) if args.command == "archive" and args.as_of else beijing_today()
-    if getattr(args, "publish", False):
-        publisher = BranchPublisher(Path.cwd(), args.data_dir, args.remote, args.branch)
-        publisher.prepare()
-    store = DataStore(args.data_dir)
+    if args.command == "download":
+        if args.output_dir.exists() and any(args.output_dir.iterdir()):
+            raise ValueError("Archive download requires an empty output directory")
+        backend = GitHubArchiveBackend(args.repository, os.environ.get("GITHUB_TOKEN", ""))
+        files = backend.materialize(args.period, args.output_dir)
+        if files is None:
+            raise ValueError(f"No published archive for {args.period}")
+        print(f"Downloaded and verified {len(files)} archive files to {args.output_dir}")
+        return 0
     if args.command == "verify":
-        count = store.verify_archives()
+        count = DataStore(args.data_dir).verify_archives()
         print(f"Verified {count} archive(s)")
         return 0
+    config = load_config(args.config)
+    interval = dates(args.start_date, args.end_date) if args.command == "fetch" else None
+    as_of = parse_date(args.as_of) if args.command == "archive" and args.as_of else beijing_today()
+    releases = (GitHubArchiveBackend.from_environment() if args.publish
+                else DirectoryArchiveBackend(args.release_dir))
+    publisher = None
+    if args.publish:
+        publisher = BranchPublisher(Path.cwd(), args.data_dir, args.remote, args.branch)
+        publisher.prepare()
+    store = DataStore(args.data_dir, releases, **config.get("archive", {}))
     if args.command == "archive":
         periods, snapshot = store.archive_due(as_of)
         if publisher is not None:
             publisher.publish(f"Archive due periods through {as_of.isoformat()}", snapshot=snapshot)
         details = ", ".join(periods) if periods else "none"
-        summary = f"Archived periods: {details}; annual snapshot: {snapshot}"
+        summary = f"Released archive periods: {details}; annual data snapshot: {snapshot}"
         print(summary)
         write_summary(summary)
         return 0
-    assert interval is not None and config is not None
+    assert interval is not None
     first, last = interval
-    pair_count = len(config["currencies"]) * (len(config["currencies"]) - 1)
-    count = (last - first).days + 1
-    requests_per_day = 1 if args.provider == "unionpay" else pair_count
-    print(f"Provider {args.provider}: {first} through {last}; {count * requests_per_day} base requests")
     successes, failures = [], []
-    http_config = config.get("http", {})
-    with HttpClient(**http_config) as client:
+    with HttpClient(**config.get("http", {})) as client:
+        catalog = prepare_catalog(args.provider, config["providers"][args.provider], client)
+        pair_count = catalog.pair_count if catalog is not None else 1
+        count = (last - first).days + 1
+        if catalog is not None:
+            print(f"Official catalog: {len(catalog.transaction)} transaction / "
+                  f"{len(catalog.billing)} billing currencies; {SHARD_COUNT} concurrent shards")
+        print(f"Provider {args.provider}: {first} through {last}; {count * pair_count} base requests")
         target = first
         while target <= last:
             client.records.clear()
             try:
-                result = fetch_day(args.provider, target, config["currencies"],
-                                   config["providers"][args.provider], client)
+                result = fetch_day(args.provider, target, catalog, config["providers"][args.provider], client)
             except Exception as exc:
-                # Fetch failures are per-day. A storage failure aborts publication entirely.
                 failures.append((target.isoformat(), str(exc)))
                 print(f"FAILED {target}: {exc}", file=sys.stderr)
             else:
+                # A storage or Release failure aborts data-branch publication entirely.
                 store.save_day(result)
                 successes.append(target.isoformat())
                 print(f"SAVED {target}")

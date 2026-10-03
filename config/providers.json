@@ -1,6 +1,6 @@
 {
-  "currencies": ["USD", "EUR", "JPY", "GBP", "CNY", "CHF", "CAD", "AUD", "NZD", "HKD", "SGD"],
   "http": {"timeout": 30, "retries": 3, "interval": 0.3},
+  "archive": {"retain_months": 3, "volume_bytes": 1992294400},
   "providers": {
     "unionpay": {
       "endpoint": "https://www.unionpayintl.com/upload/jfimg/{date}.json",
@@ -8,10 +8,12 @@
     },
     "visa": {
       "endpoint": "https://www.visa.co.in/cmsapi/fx/rates",
+      "currency_endpoint": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
       "referer": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
     },
     "mastercard": {
       "endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
+      "currency_endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies",
       "referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
     }
   }
