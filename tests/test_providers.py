@@ -1,8 +1,11 @@
 """Offline provider and HTTP contracts, including precision and atomic days."""
 
-from datetime import date
+from concurrent.futures import CancelledError
+from datetime import date, datetime
 from decimal import Decimal
+import hashlib
 from itertools import permutations
+from threading import Event, Lock
 from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
@@ -10,6 +13,7 @@ from unittest.mock import Mock, patch
 from curl_cffi import requests
 import simplejson
 
+from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.http import HttpClient, HttpError, JsonResponse, ResponseDecodeError
 from exchange_rates.models import DayResult, json_bytes
 from exchange_rates.providers import (
@@ -35,10 +39,24 @@ class FakeClient:
         self.mutate = mutate
         self.fail_at = fail_at
         self.calls = []
+        self.records = []
+        self.forks = []
+        self.lock = Lock()
+        self.failed = Event()
+
+    def fork(self, cancel_event=None):
+        child = FakeFork(self, cancel_event)
+        with self.lock:
+            self.forks.append(child)
+        return child
 
     def request_json(self, url, params=None, headers=None):
-        self.calls.append((url, dict(params or {}), dict(headers or {})))
-        if len(self.calls) == self.fail_at:
+        with self.lock:
+            self.calls.append((url, dict(params or {}), dict(headers or {})))
+            call_index = len(self.calls)
+            if call_index == self.fail_at:
+                self.failed.set()
+        if call_index == self.fail_at:
             raise HttpError("HTTP 503", 503)
         if self.provider == "visa":
             spend, home = params["toCurr"], params["fromCurr"]
@@ -62,6 +80,43 @@ class FakeClient:
         if self.mutate:
             self.mutate(data)
         return response(data, url, params, headers)
+
+
+class FakeFork:
+    def __init__(self, owner, cancel_event):
+        self.owner = owner
+        self.cancel_event = cancel_event
+        self.records = []
+        self.closed = False
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.closed = True
+
+    def request_json(self, *args, **kwargs):
+        # Keep peers in flight until the coordinator propagates the injected failure.
+        if isinstance(self.owner, FakeClient) and self.owner.failed.is_set():
+            if not self.cancel_event.wait(5):
+                raise AssertionError("Shard failure did not propagate cancellation")
+        if self.cancel_event is not None and self.cancel_event.is_set():
+            raise CancelledError()
+        result = self.owner.request_json(*args, **kwargs)
+        self.records.extend(result.records or [result.as_record()])
+        return result
+
+
+def forkable_mock():
+    client = Mock()
+    client.fork.side_effect = lambda cancelled: FakeFork(client, cancelled)
+    return client
+
+
+def call_pair(provider, params):
+    if provider == "visa":
+        return params["toCurr"], params["fromCurr"]
+    return params["transaction_currency"], params["cardholder_billing_currency"]
 
 
 class ProviderTests(unittest.TestCase):
@@ -92,8 +147,11 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(len(client.calls), 110)
                 self.assertEqual({(r["transCur"], r["baseCur"]) for r in rows},
                                  set(permutations(CURRENCIES, 2)))
-                for row, (_, params, headers) in zip(rows, client.calls):
+                calls = {call_pair(provider, params): (params, headers)
+                         for _, params, headers in client.calls}
+                for row in rows:
                     spend, home = row["transCur"], row["baseCur"]
+                    params, headers = calls[spend, home]
                     self.assertIn("Referer", headers)
                     if provider == "visa":
                         self.assertEqual(params, {
@@ -111,17 +169,24 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(forward, Decimal("1.23456789012345678901234567890123456789"))
                 self.assertEqual(reverse, Decimal("0.987654321098765432109876543210987654321"))
                 self.assertEqual(result.metadata["pair_count"], 110)
-                raw = simplejson.loads(result.raw, use_decimal=True)
-                self.assertEqual(len(raw["requests"]), 110)
-                self.assertEqual(raw["requests"][0]["response"]["body_text"],
-                                 response(client_response(provider)).body_text)
+                records = [record for name in sorted(result.raw_parts)
+                           for record in simplejson.loads(result.raw_parts[name])["requests"]]
+                self.assertEqual(len(records), 110)
+                self.assertEqual([call_pair(provider, r["request"]["params"]) for r in records],
+                                 [(r["transCur"], r["baseCur"]) for r in rows])
+                for record in records:
+                    expected = FakeClient(provider).request_json("ignored", record["request"]["params"])
+                    self.assertEqual(record["response"]["body_text"], expected.body_text)
 
     def test_one_failure_aborts_day(self):
         for provider in ("visa", "mastercard"):
             client = FakeClient(provider, fail_at=7)
             with self.subTest(provider=provider), self.assertRaises(HttpError):
                 fetch_day(provider, DAY, CURRENCIES, {}, client)
-            self.assertEqual(len(client.calls), 7)
+            self.assertGreaterEqual(len(client.calls), 7)
+            self.assertLess(len(client.calls), len(CURRENCIES) * (len(CURRENCIES) - 1))
+            self.assertTrue(all(child.closed for child in client.forks))
+            self.assertTrue(all(child.cancel_event.is_set() for child in client.forks))
 
     def test_missing_required_fields_fail(self):
         for provider, container, keys in (
@@ -133,6 +198,7 @@ class ProviderTests(unittest.TestCase):
                 with self.subTest(provider=provider, missing=key), self.assertRaises(ProviderError):
                     fetch_day(provider, DAY, CURRENCIES, {}, client)
                 self.assertEqual(len(client.calls), 1)
+                self.assertEqual(client.forks, [])
 
     def test_date_mismatch_and_invalid_date(self):
         for provider, container, field in (
@@ -144,6 +210,7 @@ class ProviderTests(unittest.TestCase):
                 with self.subTest(provider=provider, returned=returned), self.assertRaises(exception):
                     fetch_day(provider, DAY, CURRENCIES, {}, client)
                 self.assertEqual(len(client.calls), 1)
+                self.assertEqual(client.forks, [])
 
     def test_card_error_status_and_bill_mismatch(self):
         mutations = (
@@ -224,7 +291,7 @@ class ProviderTests(unittest.TestCase):
     def test_official_response_date_and_currency_fields(self):
         target = date(2026, 9, 30)
         for provider in provider_ids():
-            client = Mock()
+            client = forkable_mock()
             client.request_json.side_effect = lambda url, params=None, headers=None, p=provider: response(
                 official_data(p, params), url, params, headers,
             )
@@ -278,7 +345,7 @@ class ProviderTests(unittest.TestCase):
                 if provider != "unionpay":
                     data[container].update(currentDate="2026-10-02", publicationDate="2026-10-01")
                 return response(data, url, params, headers)
-            client = Mock()
+            client = forkable_mock()
             client.request_json.side_effect = actual_with_metadata
             result = fetch_day(provider, date(2026, 9, 30), ("USD", "CNY"), {}, client)
             self.assertEqual(result.requested_date, date(2026, 9, 30))
@@ -301,6 +368,84 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(client.calls[0][0], "https://local.test/fx")
         self.assertEqual(client.calls[0][2]["Referer"], "https://local.test/calc")
 
+    def test_directional_catalog_shards_and_raw_index(self):
+        catalog = CurrencyCatalog(CURRENCIES, ("USD", "SKK", "XXX"))
+        for provider in ("visa", "mastercard"):
+            with self.subTest(provider=provider):
+                client = FakeClient(provider)
+                result = fetch_day(provider, DAY, catalog, {}, client)
+                expected = list(catalog.pairs())
+                rows = simplejson.loads(result.normalized, use_decimal=True)["exchangeRateJson"]
+                pairs = [(row["transCur"], row["baseCur"]) for row in rows]
+                self.assertEqual(pairs, expected)
+                self.assertEqual(len(set(pairs)), catalog.pair_count)
+                self.assertEqual(len(client.calls), catalog.pair_count)
+                self.assertNotIn(("USD", "USD"), pairs)
+                self.assertIn(("CNY", "SKK"), pairs)
+                self.assertEqual(call_pair(provider, client.calls[0][1]), expected[0])
+                self.assertEqual(len(client.forks), 9)
+                self.assertEqual(len({id(child) for child in client.forks}), 9)
+                self.assertEqual(len({id(child.records) for child in client.forks}), 9)
+                self.assertTrue(all(child.closed for child in client.forks))
+                self.assertEqual(len({id(child.cancel_event) for child in client.forks}), 1)
+                self.assertEqual(result.metadata["shard_count"], 9)
+                self.assertEqual(result.metadata["transaction_currencies"], list(catalog.transaction))
+                self.assertEqual(result.metadata["billing_currencies"], list(catalog.billing))
+                names = [f"shard-{index:02d}.json" for index in range(1, 10)]
+                self.assertEqual(list(result.raw_parts), names)
+                index = simplejson.loads(result.raw)
+                self.assertNotIn("requests", index)
+                self.assertEqual(index["format"], "exchange-rates-raw-shards-v1")
+                self.assertEqual(index["parts"], [
+                    {"name": name, "size": len(result.raw_parts[name]),
+                     "sha256": hashlib.sha256(result.raw_parts[name]).hexdigest()}
+                    for name in names])
+                parts = [simplejson.loads(result.raw_parts[name]) for name in names]
+                lengths = [len(part["transaction_currencies"]) for part in parts]
+                self.assertLessEqual(max(lengths) - min(lengths), 1)
+                self.assertEqual([part["shard_index"] for part in parts], list(range(9)))
+                self.assertEqual([code for part in parts for code in part["transaction_currencies"]],
+                                 list(catalog.transaction))
+                for shard, part in zip(result.metadata["shards"], parts):
+                    actual = [call_pair(provider, r["request"]["params"]) for r in part["requests"]]
+                    self.assertEqual(actual, [(spend, home) for spend in part["transaction_currencies"]
+                                              for home in catalog.billing if spend != home])
+                    self.assertEqual(shard["pair_count"], len(actual))
+
+    def test_empty_shards_still_have_raw_files(self):
+        for provider in ("visa", "mastercard"):
+            result = fetch_day(provider, DAY, ("USD", "CNY"), {}, FakeClient(provider))
+            self.assertEqual(len(result.raw_parts), 9)
+            for index, name in enumerate(sorted(result.raw_parts)):
+                part = simplejson.loads(result.raw_parts[name])
+                self.assertEqual(part["shard_index"], index)
+                if index >= 2:
+                    self.assertEqual(part["transaction_currencies"], [])
+                    self.assertEqual(part["requests"], [])
+
+    def test_none_discovers_catalog_but_explicit_catalog_does_not(self):
+        for provider in ("visa", "mastercard"):
+            catalog = CurrencyCatalog(("USD", "SKK"), ("CNY",))
+            with patch("exchange_rates.providers.discover_currencies", return_value=catalog) as discover:
+                result = fetch_day(provider, DAY, None, {}, FakeClient(provider))
+                discover.assert_called_once()
+                self.assertEqual(result.metadata["pair_count"], 2)
+                discover.reset_mock()
+                fetch_day(provider, DAY, catalog, {}, FakeClient(provider))
+                discover.assert_not_called()
+
+    def test_target_requires_date_not_datetime(self):
+        client = FakeClient("visa")
+        with self.assertRaises(TypeError):
+            fetch_day("visa", datetime(2026, 3, 27), CURRENCIES, {}, client)
+        self.assertEqual(client.calls, [])
+
+    def test_raw_parts_default_is_not_shared(self):
+        first = DayResult("unionpay", DAY, b"", b"", {})
+        second = DayResult("unionpay", DAY, b"", b"", {})
+        first.raw_parts["part.json"] = b"{}"
+        self.assertEqual(second.raw_parts, {})
+
 
 def official_data(provider, params):
     if provider == "unionpay":
@@ -319,13 +464,6 @@ def official_data(provider, params):
         "errorCode": 0, "conversionRate": Decimal("6.707775687"),
         "crdhldBillAmt": Decimal("6707.775687"),
     }}
-
-
-def client_response(provider):
-    client = FakeClient(provider)
-    if provider == "visa":
-        return client.request_json("ignored", {"toCurr": "CNY", "fromCurr": "USD"}).data
-    return client.request_json("ignored", {"transaction_currency": "CNY", "cardholder_billing_currency": "USD"}).data
 
 
 def http_response(status=200, body=b'{"rate":1.234567890123456789012345678901}'):
@@ -389,6 +527,86 @@ class HttpTests(unittest.TestCase):
                 client.request_json("https://example.test/a")
                 client.request_json("https://example.test/b")
             self.assertAlmostEqual(sleep.call_args.args[0], 0.2)
+
+    def test_fork_inherits_configuration_but_owns_session_and_records(self):
+        sessions = [Mock(), Mock(), Mock()]
+        for session in sessions:
+            session.get.return_value = http_response()
+        cancelled = Event()
+        with patch("exchange_rates.http.requests.Session", side_effect=sessions) as factory:
+            with HttpClient(timeout=17, retries=2, interval=0.4) as parent:
+                child = parent.fork(cancelled)
+                sibling = parent.fork(Event())
+                self.assertEqual((child.timeout, child.retries, child.interval), (17, 2, 0.4))
+                self.assertIs(child.cancel_event, cancelled)
+                self.assertIsNone(child._session)
+                self.assertIsNone(child._last_started)
+                self.assertIsNot(child.records, parent.records)
+                self.assertIsNot(child.records, sibling.records)
+                with child, sibling:
+                    parent.request_json("https://example.test/parent")
+                    child.request_json("https://example.test/child")
+                    sibling.request_json("https://example.test/sibling")
+                    self.assertEqual(len({id(parent._session), id(child._session), id(sibling._session)}), 3)
+                sessions[0].close.assert_not_called()
+                self.assertEqual([len(client.records) for client in (parent, child, sibling)], [1, 1, 1])
+            self.assertEqual(factory.call_count, 3)
+            for session in sessions:
+                session.close.assert_called_once()
+                self.assertEqual(session.get.call_args.kwargs["timeout"], 17)
+
+    def test_text_response_is_complete_utf8_and_never_json_decoded(self):
+        body = '<dm-calculator content="&quot;人民币&quot;"></dm-calculator>'.encode("utf-8")
+        with patch("exchange_rates.http.requests.Session") as factory, patch("exchange_rates.http.simplejson.loads") as decode:
+            factory.return_value.get.return_value = http_response(body=body)
+            with HttpClient(interval=0) as client:
+                result = client.request_text("https://example.test/catalog", params={"all": "1"},
+                                             headers={"Accept": "text/html"})
+            decode.assert_not_called()
+            self.assertIsNone(result.data)
+            self.assertEqual(result.body, body)
+            self.assertEqual(result.body_text, body.decode("utf-8"))
+            self.assertEqual(result.records[0]["response"]["body_text"], body.decode("utf-8"))
+            self.assertEqual(result.records[0]["request"]["params"], {"all": "1"})
+            self.assertEqual(len(client.records), 1)
+
+    def test_already_cancelled_client_does_not_send_request(self):
+        cancelled = Event()
+        cancelled.set()
+        with patch("exchange_rates.http.requests.Session") as factory:
+            with HttpClient(interval=0, cancel_event=cancelled) as client, self.assertRaises(CancelledError):
+                client.request_json("https://example.test/rates")
+            factory.return_value.get.assert_not_called()
+            self.assertEqual(client.records, [])
+
+    def test_cancellation_interrupts_request_interval(self):
+        cancelled = Event()
+        def cancel_on_wait(seconds):
+            cancelled.set()
+            return True
+        with patch("exchange_rates.http.requests.Session") as factory, patch.object(cancelled, "wait", side_effect=cancel_on_wait) as wait, patch("exchange_rates.http.time.monotonic", return_value=10.1), patch("exchange_rates.http.time.sleep") as sleep:
+            with HttpClient(interval=0.3, cancel_event=cancelled) as client:
+                client._last_started = 10.0
+                with self.assertRaises(CancelledError):
+                    client.request_text("https://example.test/catalog")
+            self.assertAlmostEqual(wait.call_args.args[0], 0.2)
+            factory.return_value.get.assert_not_called()
+            sleep.assert_not_called()
+
+    def test_cancellation_interrupts_transport_and_status_retry_backoff(self):
+        for error in (requests.RequestsError("network"), http_response(429), http_response(503)):
+            cancelled = Event()
+            def cancel_on_wait(seconds):
+                cancelled.set()
+                return True
+            with self.subTest(error=error), patch("exchange_rates.http.requests.Session") as factory, patch.object(cancelled, "wait", side_effect=cancel_on_wait) as wait, patch("exchange_rates.http.time.sleep") as sleep:
+                factory.return_value.get.side_effect = [error, http_response()]
+                with HttpClient(interval=0, retries=3, cancel_event=cancelled) as client, self.assertRaises(CancelledError):
+                    client.request_json("https://example.test/rates")
+                self.assertEqual(factory.return_value.get.call_count, 1)
+                self.assertEqual(len(client.records), 1)
+                wait.assert_called_once_with(0.5)
+                sleep.assert_not_called()
 
 
 if __name__ == "__main__":
