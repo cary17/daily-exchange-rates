@@ -3,15 +3,18 @@
   "archive": {"retain_months": 3, "volume_bytes": 1992294400},
   "providers": {
     "unionpay": {
+      "recovery_rounds": 2,
       "endpoint": "https://www.unionpayintl.com/upload/jfimg/{date}.json",
       "referer": "https://www.unionpayintl.com/cn/rate/"
     },
     "visa": {
+      "recovery_rounds": 2,
       "endpoint": "https://www.visa.co.in/cmsapi/fx/rates",
       "currency_endpoint": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
       "referer": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
     },
     "mastercard": {
+      "recovery_rounds": 2,
       "endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
       "currency_endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies",
       "referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"

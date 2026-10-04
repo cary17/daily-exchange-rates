@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from exchange_rates.archive_backend import DirectoryArchiveBackend
 from exchange_rates.catalog import CurrencyCatalog
-from exchange_rates.cli import dates, main
+from exchange_rates.cli import dates, load_config, main
 from exchange_rates.models import DayResult, json_bytes
 
 
@@ -25,6 +25,20 @@ class FakeClient:
 
 
 class CliTests(unittest.TestCase):
+    def test_recovery_configuration_is_checked_before_collection(self):
+        config = load_config(None)
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "providers.json"
+            for value in (-1, True, "2", 1.5):
+                with self.subTest(value=value):
+                    config["providers"]["visa"]["recovery_rounds"] = value
+                    path.write_text(json.dumps(config))
+                    with self.assertRaisesRegex(ValueError, "recovery_rounds"):
+                        load_config(path)
+            config["providers"]["visa"]["recovery_rounds"] = 0
+            path.write_text(json.dumps(config))
+            self.assertEqual(load_config(path)["providers"]["visa"]["recovery_rounds"], 0)
+
     def test_blank_dates_use_beijing_today(self):
         with patch("exchange_rates.cli.beijing_today", return_value=date(2026, 10, 3)):
             self.assertEqual(dates("", ""), (date(2026, 10, 3), date(2026, 10, 3)))

@@ -54,6 +54,9 @@ def load_config(path: Path | None) -> dict:
     for provider in provider_ids():
         if not isinstance(config.get("providers", {}).get(provider), dict):
             raise ValueError(f"Missing provider configuration: {provider}")
+        rounds = config["providers"][provider].get("recovery_rounds", 2)
+        if type(rounds) is not int or rounds < 0:
+            raise ValueError(f"{provider}.recovery_rounds must be a non-negative integer")
     return config
 
 
@@ -71,7 +74,7 @@ def parser() -> argparse.ArgumentParser:
     verify = commands.add_parser("verify", help="Verify existing archive manifests and checksums")
     download = commands.add_parser("download", help="Download a verified monthly or yearly Release archive")
     download.add_argument("--repository", required=True)
-    download.add_argument("--period", required=True, help="YYYY-MM or YYYY")
+    download.add_argument("--period", required=True)
     download.add_argument("--output-dir", type=Path, required=True)
     for subcommand in (collect, archive, verify):
         subcommand.add_argument("--data-dir", type=Path, default=Path("rates-data"))
