@@ -128,5 +128,11 @@ class BranchPublisher:
 def write_summary(text: str) -> None:
     destination = os.environ.get("GITHUB_STEP_SUMMARY")
     if destination:
-        with Path(destination).open("a", encoding="utf-8") as stream:
-            stream.write(text + "\n")
+        path = Path(destination)
+        limit = 512 * 1024
+        marker = b"\n[Summary truncated; full details are in diagnostic report files.]\n"
+        previous = path.read_bytes() if path.exists() else b""
+        combined = previous + (text + "\n").encode("utf-8")
+        if len(combined) > limit:
+            combined = combined[:limit - len(marker)].decode("utf-8", errors="ignore").encode("utf-8") + marker
+        path.write_bytes(combined)

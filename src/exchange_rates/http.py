@@ -3,13 +3,14 @@
 from concurrent.futures import CancelledError
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-import math
 import time
 from threading import Event
 from typing import Any, Mapping
 
 from curl_cffi import requests
 import simplejson
+
+from .rate_control import GateBlockedError, RateGate, finite_seconds
 
 
 def utc_now() -> str:
@@ -58,19 +59,33 @@ class ResponseDecodeError(HttpError):
     pass
 
 
+class AccessBlockedError(HttpError):
+    def __init__(self, response: JsonResponse | None = None,
+                 records: list[dict[str, Any]] | None = None, *, request_sent: bool = False):
+        super().__init__("HTTP 403 circuit is open", 403, response,
+                         records if records is not None else
+                         (response.records if response is not None else []))
+        self.last_status = 403
+        self.request_sent = request_sent
+
+
 class HttpClient:
     def __init__(self, timeout: float = 30, retries: int = 3,
-                 interval: float = 0.3, cancel_event: Event | None = None):
-        if not math.isfinite(timeout) or timeout <= 0:
-            raise ValueError("timeout must be finite and positive")
+                 interval: float = 0.3, cancel_event: Event | None = None,
+                 global_interval: float = 0, forbidden_cooldown: float = 0,
+                 forbidden_threshold: int = 0):
+        finite_seconds("timeout", timeout, positive=True)
         if isinstance(retries, bool) or not isinstance(retries, int) or retries < 0:
             raise ValueError("retries must be a non-negative integer")
-        if not math.isfinite(interval) or interval < 0:
-            raise ValueError("interval must be finite and non-negative")
+        finite_seconds("interval", interval)
         self.timeout = timeout
         self.retries = retries
         self.interval = interval
         self.cancel_event = cancel_event
+        self.global_interval = global_interval
+        self.forbidden_cooldown = forbidden_cooldown
+        self.forbidden_threshold = forbidden_threshold
+        self._gate = RateGate(global_interval, forbidden_cooldown, forbidden_threshold)
         self._session: requests.Session | None = None
         self._last_started: float | None = None
         self.records: list[dict[str, Any]] = []
@@ -93,7 +108,11 @@ class HttpClient:
         return self._session
 
     def fork(self, cancel_event: Event | None = None) -> "HttpClient":
-        return HttpClient(self.timeout, self.retries, self.interval, cancel_event)
+        child = HttpClient(self.timeout, self.retries, self.interval, cancel_event,
+                           self.global_interval, self.forbidden_cooldown,
+                           self.forbidden_threshold)
+        child._gate = self._gate
+        return child
 
     def _check_cancelled(self) -> None:
         if self.cancel_event is not None and self.cancel_event.is_set():
@@ -128,6 +147,11 @@ class HttpClient:
         records: list[dict[str, Any]] = []
         for attempt in range(self.retries + 1):
             self._wait()
+            if self._gate.enabled:
+                try:
+                    self._gate.acquire(self.cancel_event)
+                except GateBlockedError as exc:
+                    raise AccessBlockedError(exc.response) from exc
             try:
                 response = session.get(
                     url, params=params, headers=headers, timeout=self.timeout,
@@ -160,6 +184,9 @@ class HttpClient:
                 self.records.append(record)
                 result.records = records
                 status = response.status_code
+                if self._gate.enabled:
+                    if self._gate.record_response(status, result) and status == 403:
+                        raise AccessBlockedError(result, records, request_sent=True)
                 if 200 <= status < 300:
                     if not decode_json:
                         return result
