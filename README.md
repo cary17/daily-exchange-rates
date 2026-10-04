@@ -2,7 +2,7 @@
 
 手动采集 Visa、Mastercard、银联官方汇率。源码在 `main`，当前数据在 `data`，月度和年度归档在 [Releases](https://github.com/cary17/daily-exchange-rates/releases)。
 
-Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种平均分成九组并发查询，每组查询全部账单币种；全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
+Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种平均分成九组；每组由独立 Actions job 串行查询全部账单币种，全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
 
 ## 使用 GitHub Actions
 
@@ -12,18 +12,21 @@ Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种�
 
 - `start_date`：`YYYY-MM-DD`，留空使用运行时北京时间当天。
 - `end_date`：包含结束日，留空仅抓起始日。
-- `interval`：每个会话的请求间隔，单位秒，默认 `0.5`；本次运行可填写 `0.8`、`1` 等非负数，九个分片不共享速率预算。
+- `interval`：每个会话的请求间隔，单位秒，默认 `0.3`；本次运行可填写 `0.5`、`1` 等非负数。
+- `shards`：并行分片 job 数，默认 `9`；每个 job 使用独立 runner 与独立出口地址。
 - 日期严格匹配，错误日期的响应计入待补抓项，不回退到其他日期。
-- 首轮九路查询结束后，集中补抓失败、缺失或校验未通过的币对；成功币对保留，不重复请求。默认最多补抓两轮，每轮只处理仍未成功的部分。
+- 每个分片在自身进程内串行查询，只补抓本分片失败、缺失或校验未通过的币对；成功币对保留，不重复请求。默认最多补抓两轮，每轮只处理仍未成功的部分。
 - 官方目录包含的历史币种同样查询；补抓耗尽仍有错漏时，该日不发布、不覆盖已有完整数据。摘要只列关键统计，完整错漏与响应证据保存在诊断 Artifact。长区间请分批运行，单次工作流最多 360 分钟。
 
 各机构的 `recovery_rounds` 在 `config/providers.json` 配置，默认 `2`，设为 `0` 关闭末尾补抓；它独立于 HTTP 传输重试。银联仅提供整份 JSON，校验失败时重新下载该日完整文件。原始记录保留失败与补抓请求，元数据记录补抓轮数和恢复数量。
 
-抓取没有定时任务。每个机构保留独立工作流；九路并发在采集进程内执行，各路使用独立会话，工作流之间串行发布。
+抓取没有定时任务。Visa 与 Mastercard 各自编排为 `prepare → shard × N → merge` 三个阶段：`prepare` 计算日期与分片矩阵，`shard` 每个 job 只抓一个分片并把结果上传为 Artifact，`merge` 汇总全部分片、校验币对完整性与目录一致性后一次性发布。银联仍是单 job 直接下载整份 JSON。工作流之间串行发布。
 
-默认每个会话的 `http.interval` 为 `0.5` 秒，三个抓取工作流的 `interval` 输入可在每次运行时修改；留空回退到 `0.5`，支持有限的非负数，`0` 表示关闭会话间隔。本地使用 `--interval 0.8` 临时覆盖机构与全局配置，不传参数则沿用配置。`http.global_interval` 保持 `0`，Visa 和 Mastercard 都不启用共享限速，九个分片各自按会话间隔发送请求。接口响应足够快时，默认全组理论上限约 18 次请求/秒，实际速度取决于网络和接口响应；会话间隔不代表全组请求间隔。
+默认每个会话的 `http.interval` 为 `0.3` 秒，三个抓取工作流的 `interval` 输入可在每次运行时修改；留空回退到默认值，支持有限的非负数，`0` 表示关闭会话间隔。本地使用 `--interval 0.8` 临时覆盖机构与全局配置，不传参数则沿用配置。`http.global_interval` 保持 `0`，不启用跨会话共享限速。
 
-收到 403 后暂停全组 60 秒，冷却结束只放行一个探测请求；HTTP 200 恢复正常并发并清零连续拒绝计数，连续 3 个拒绝批次则停止本次访问。同一批已在途的响应完整保留在诊断中，但不会重复累计拒绝次数或用迟到的成功响应误判恢复。403 不做即时传输重试，失败币对仍由末尾补抓处理；不会发布部分数据。冷却与阈值可在配置中调整。
+分片之间不共享出口地址，因此每个分片都是独立串行流。单分片实测约 3 次请求/秒，9 片并行时全长查询约 15 至 20 分钟；实际速度取决于接口响应。
+
+收到 403 后暂停该分片 60 秒，冷却结束只放行一个探测请求；HTTP 200 清零连续拒绝计数，连续 3 个拒绝批次则停止该分片。同一批已在途的响应完整保留在诊断中，但不会重复累计拒绝次数或用迟到的成功响应误判恢复。403 不做即时传输重试，失败币对仍由末尾补抓处理；不会发布部分数据。冷却与阈值可在配置中调整。
 
 每次运行均保存简短统计和诊断文件；失败时也通过 `actions/upload-artifact` 上传，保留 7 天，摘要提供下载链接。摘要累计最多 512 KiB，完整错误与原始分片不写入摘要。访问控制提前停止时保留已尝试记录，未查询的币对不会伪报为 HTTP 失败。
 
@@ -41,6 +44,17 @@ python -m exchange_rates fetch --provider mastercard --start-date 2026-09-29 --e
 ```
 
 本地归档导出到独立的 `release-output`；`--release-dir` 可指定其它目录。向 GitHub 发布时设置 `GITHUB_REPOSITORY`、`GITHUB_TOKEN` 和 Git 推送认证，追加 `--publish --remote origin --branch data`，并使用新的空 `--data-dir`。
+
+`fetch --provider visa|mastercard` 在单进程内并发抓取全部九个分片，适合本机快速验证；Actions 使用等价的 `fetch-shard` 与 `merge-shards`，把每个分片放到独立 runner：
+
+```sh
+python -m exchange_rates fetch-shard --provider mastercard --start-date 2026-10-03 \
+  --shard-index 0 --shard-count 9 --shard-dir ./shards
+python -m exchange_rates merge-shards --provider mastercard --start-date 2026-10-03 \
+  --shard-dir ./shards --data-dir ./rates-data
+```
+
+`fetch-shard` 只写 `--shard-dir/<provider>/<date>/shard-NN.json`，不写已发布数据；`merge-shards` 校验分片齐全、目录一致、币对无缺失与重复后写入 `--data-dir`。分片缺失或校验失败时该日不发布，其余日期不受影响。
 
 ## 数据读取
 

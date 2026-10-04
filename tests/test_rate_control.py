@@ -307,10 +307,10 @@ class RateControlTests(unittest.TestCase):
             client.request_json(URL)
         self.assertEqual(client._gate.consecutive_forbidden, 0)
 
-    def test_default_session_interval_is_half_second(self):
-        self.assertEqual(HttpClient().interval, 0.5)
+    def test_default_session_interval_is_point_three(self):
+        self.assertEqual(HttpClient().interval, 0.3)
 
-    def test_sessions_keep_independent_half_second_budgets(self):
+    def test_sessions_keep_independent_session_budgets(self):
         clock = FakeClock()
         parent = HttpClient(forbidden_cooldown=60)
         parent._gate = RateGate(forbidden_cooldown=60, clock=clock, wait=clock.wait)
@@ -326,7 +326,7 @@ class RateControlTests(unittest.TestCase):
                 self.enterContext(patch.object(child, "_sleep", side_effect=clock.advance))
             for child in children + children:
                 child.request_json(URL)
-        self.assertEqual(started, [10, 10, 10.5, 10.5])
+        self.assertEqual(started, [10, 10, 10.3, 10.3])
         self.assertEqual(parent.global_interval, 0)
 
     def test_cooldown_wait_does_not_erase_session_interval(self):
@@ -345,7 +345,7 @@ class RateControlTests(unittest.TestCase):
                 client.request_json(URL)
             client.request_json(URL)
             client.request_json(URL)
-        self.assertEqual(started, [10, 70, 70.5])
+        self.assertEqual(started, [10, 70, 70.3])
 
     def test_old_inflight_responses_do_not_release_active_probe(self):
         clock = FakeClock()

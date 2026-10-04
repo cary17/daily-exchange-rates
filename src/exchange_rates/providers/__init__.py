@@ -7,6 +7,8 @@ import hashlib
 import re
 from typing import Any, Callable, Mapping, Sequence
 
+import simplejson
+
 from ..catalog import CurrencyCatalog, discover_currencies
 from ..concurrency import SHARD_COUNT, balanced_shards, run_currency_shards
 from ..http import AccessBlockedError, HttpClient, HttpError, JsonResponse, utc_now
@@ -208,6 +210,304 @@ def _result(provider: str, target: date, normalized: bytes,
         "catalog_requests": [record for response in catalog.responses for record in _records(response)],
     })
     return DayResult(provider, target, normalized, raw, metadata, raw_parts)
+
+
+SHARD_FORMAT = "exchange-rates-shard-v1"
+
+
+def _code_sequence(value: Any, context: str) -> tuple[str, ...]:
+    if isinstance(value, (str, bytes)) or not isinstance(value, (list, tuple)):
+        raise ProviderError(f"{context}: expected a currency sequence")
+    codes = tuple(value)
+    if not codes or any(not isinstance(code, str) or not re.fullmatch(r"[A-Z]{3}", code)
+                        for code in codes) or len(set(codes)) != len(codes):
+        raise ProviderError(f"{context}: expected unique three-letter currency codes")
+    return codes
+
+
+def _shard_bounds(shard_index: int, shard_count: int) -> None:
+    if isinstance(shard_count, bool) or not isinstance(shard_count, int) or shard_count <= 0:
+        raise ValueError("shard_count must be a positive integer")
+    if (isinstance(shard_index, bool) or not isinstance(shard_index, int)
+            or not 0 <= shard_index < shard_count):
+        raise ValueError("shard_index must be within shard_count")
+
+
+def _date_fields(provider: str, body_text: str) -> dict[str, Any]:
+    try:
+        decoded = simplejson.loads(body_text, use_decimal=True, allow_nan=False)
+    except (ValueError, UnicodeError):
+        return {}
+    if not isinstance(decoded, Mapping):
+        return {}
+    fields: dict[str, Any] = {}
+    objects = [("", decoded)]
+    objects.extend((name + ".", decoded.get(name))
+                   for name in ("originalValues", "data"))
+    for prefix, obj in objects:
+        if not isinstance(obj, Mapping):
+            continue
+        for key, value in obj.items():
+            if key.lower().replace("_", "").replace("-", "") in _DATE_KEYS[provider]:
+                fields[prefix + key] = value
+    return fields
+
+
+def fetch_shard(provider: str, target: date, config: Mapping[str, Any],
+                client: HttpClient, shard_index: int,
+                shard_count: int = SHARD_COUNT) -> dict[str, Any]:
+    """Collect one currency shard in a single serial transport stream.
+
+    Each shard owns its own process and egress address, so one serial stream
+    per shard keeps every source address well below its burst limits.
+    """
+    if provider not in ("visa", "mastercard"):
+        raise ValueError(f"Sharding is unsupported for provider: {provider}")
+    if type(target) is not date:
+        raise TypeError("target must be datetime.date, not datetime.datetime")
+    if not isinstance(config, Mapping):
+        raise TypeError("config must be an institution mapping")
+    _shard_bounds(shard_index, shard_count)
+    catalog = discover_currencies(provider, config, client)
+    shards = balanced_shards(catalog.transaction, shard_count)
+    spends = shards[shard_index] if shard_index < len(shards) else ()
+    endpoint, headers = _settings(provider, config)
+    expected = [(spend, home) for spend in spends for home in catalog.billing
+                if spend != home]
+    raw_shard: dict[str, Any] = {
+        "provider": provider, "requested_date": target.isoformat(),
+        "shard_index": shard_index, "transaction_currencies": list(spends),
+        "requests": [], "attempts": [],
+    }
+    successful: dict[tuple[str, str], dict[str, Any]] = {}
+    errors: dict[tuple[str, str], str] = {}
+    dates: list[dict[str, Any]] = []
+    rounds = 0
+    initial_failed = 0
+    for round_index in range(_recovery_rounds(config) + 1):
+        pending = [pair for pair in expected if pair not in successful]
+        if not pending:
+            break
+        for spend, home in pending:
+            start = len(client.records)
+            fallback: list[dict[str, Any]] = []
+            error = None
+            recorded = False
+            try:
+                row, response = _query_pair(
+                    provider, target, spend, home, endpoint, headers, client)
+            except AccessBlockedError as exc:
+                # Record the denying exchange before wrapping, because finally
+                # runs only after this handler raises.
+                raw_shard["requests"].extend(client.records[start:])
+                recorded = True
+                raw_shard["attempts"].append({
+                    "pair": [spend, home], "round": round_index,
+                    "error": "AccessBlockedError: HTTP 403 circuit is open",
+                })
+                exc.raw_parts = {f"shard-{shard_index + 1:02d}.json":
+                                 json_bytes(raw_shard, compact=True)}
+                exc.context = {
+                    "provider": provider, "requested_date": target.isoformat(),
+                    "expected_pairs": len(expected),
+                    "successful_pairs": len(successful),
+                    "attempted_pairs": len(raw_shard["attempts"]),
+                    "round": round_index, "shard_index": shard_index,
+                    "stopped_for_access_control": True,
+                }
+                raise
+            except (HttpError, ProviderError) as exc:
+                error = f"{type(exc).__name__}: {exc}"
+                errors[(spend, home)] = error
+                if isinstance(exc, HttpError):
+                    fallback = exc.records or (
+                        _records(exc.response) if exc.response is not None else [])
+            else:
+                successful[(spend, home)] = row
+                errors.pop((spend, home), None)
+                fallback = _records(response)
+                fields = _date_fields(provider, response.body_text)
+                if fields:
+                    dates.append({"fields": fields})
+            finally:
+                if not recorded:
+                    raw_shard["requests"].extend(_merge_records(
+                        client.records[start:], fallback))
+            raw_shard["attempts"].append({
+                "pair": [spend, home], "round": round_index, "error": error,
+            })
+        if round_index == 0:
+            initial_failed = sum(1 for pair in expected if pair not in successful)
+        else:
+            rounds = round_index
+    missing = [pair for pair in expected if pair not in successful]
+    recovery = {"initial_failed": initial_failed, "rounds": rounds,
+                "repaired": initial_failed - len(missing)}
+    if missing:
+        raise RecoveryError(provider, missing, errors,
+                            {f"shard-{shard_index + 1:02d}.json":
+                             json_bytes(raw_shard, compact=True)}, recovery)
+    return {
+        "format": SHARD_FORMAT, "provider": provider,
+        "requested_date": target.isoformat(),
+        "shard_index": shard_index, "shard_count": shard_count,
+        "transaction_currencies": list(catalog.transaction),
+        "billing_currencies": list(catalog.billing),
+        "catalog_source_urls": [response.url for response in catalog.responses],
+        "catalog_requests": [record for response in catalog.responses
+                             for record in _records(response)],
+        "response_dates": dates,
+        "recovery": recovery,
+        "rows": [{"transCur": pair[0], "baseCur": pair[1],
+                  "rateData": str(successful[pair]["rateData"])} for pair in expected],
+        "raw": raw_shard,
+    }
+
+
+def _bundle_rows(bundle: Mapping[str, Any], provider: str,
+                 shard_index: int) -> list[dict[str, Any]]:
+    context = f"Shard {shard_index}"
+    if bundle.get("format") != SHARD_FORMAT:
+        raise ProviderError(f"{context}: unexpected shard format")
+    if bundle.get("provider") != provider:
+        raise ProviderError(f"{context}: provider mismatch")
+    rows = bundle.get("rows")
+    if not isinstance(rows, list):
+        raise ProviderError(f"{context}: missing rows")
+    normalized = []
+    for index, row in enumerate(rows):
+        values = _object(row, f"{context} row {index}")
+        spend, home = values.get("transCur"), values.get("baseCur")
+        if any(not isinstance(code, str) or not re.fullmatch(r"[A-Z]{3}", code)
+               for code in (spend, home)):
+            raise ProviderError(f"{context} row {index}: invalid currency code")
+        normalized.append({
+            "transCur": spend, "baseCur": home,
+            "rateData": _number(values.get("rateData"),
+                                f"{context} row {index} rateData", positive=True),
+        })
+    return normalized
+
+
+def merge_shards(provider: str, target: date,
+                 bundles: Sequence[Mapping[str, Any]]) -> DayResult:
+    """Verify complete, consistent shards and rebuild one atomic day result."""
+    if provider not in ("visa", "mastercard"):
+        raise ValueError(f"Sharding is unsupported for provider: {provider}")
+    if type(target) is not date:
+        raise TypeError("target must be datetime.date, not datetime.datetime")
+    if isinstance(bundles, (str, bytes)) or not isinstance(bundles, Sequence) or not bundles:
+        raise ProviderError("At least one shard bundle is required")
+    indexed: dict[int, Mapping[str, Any]] = {}
+    for bundle in bundles:
+        if not isinstance(bundle, Mapping):
+            raise ProviderError("Shard bundle must be a JSON object")
+        index = bundle.get("shard_index")
+        if isinstance(index, bool) or not isinstance(index, int):
+            raise ProviderError("Shard bundle has no integer shard_index")
+        if index in indexed:
+            raise ProviderError(f"Duplicate shard index {index}")
+        indexed[index] = bundle
+    count = indexed[next(iter(indexed))].get("shard_count")
+    if not isinstance(count, int) or isinstance(count, bool) or count <= 0:
+        raise ProviderError("Shard bundle has no valid shard_count")
+    if sorted(indexed) != list(range(count)):
+        raise ProviderError(f"Expected shards 0..{count - 1}, got {sorted(indexed)}")
+    first = indexed[0]
+    transaction = _code_sequence(first.get("transaction_currencies"),
+                                 "Shard catalog")
+    billing = _code_sequence(first.get("billing_currencies"), "Shard catalog")
+    catalog = CurrencyCatalog(transaction, billing)
+    submitted: dict[tuple[str, str], dict[str, Any]] = {}
+    raw_parts: dict[str, bytes] = {}
+    source_urls: list[str] = []
+    catalog_urls: list[str] = []
+    catalog_requests: list[Any] = []
+    dates: list[dict[str, Any]] = []
+    rounds = initial_failed = repaired = 0
+    for index in range(count):
+        bundle = indexed[index]
+        if bundle.get("requested_date") != target.isoformat():
+            raise ProviderError(
+                f"Shard {index}: requested_date={bundle.get('requested_date')!r}, "
+                f"expected {target.isoformat()}")
+        if tuple(bundle.get("transaction_currencies") or ()) != transaction:
+            raise ProviderError(f"Shard {index}: transaction catalog differs")
+        if tuple(bundle.get("billing_currencies") or ()) != billing:
+            raise ProviderError(f"Shard {index}: billing catalog differs")
+        for row in _bundle_rows(bundle, provider, index):
+            pair = (row["transCur"], row["baseCur"])
+            if pair in submitted:
+                raise ProviderError(f"Shard {index}: duplicate pair {pair[0]}/{pair[1]}")
+            if pair[0] == pair[1]:
+                raise ProviderError(f"Shard {index}: identity pair {pair[0]}/{pair[1]}")
+            submitted[pair] = row
+        recovery = bundle.get("recovery")
+        if isinstance(recovery, Mapping):
+            shard_rounds = recovery.get("rounds")
+            if isinstance(shard_rounds, int) and not isinstance(shard_rounds, bool):
+                rounds = max(rounds, shard_rounds)
+            shard_failed = recovery.get("initial_failed")
+            if isinstance(shard_failed, int) and not isinstance(shard_failed, bool):
+                initial_failed += shard_failed
+            shard_repaired = recovery.get("repaired")
+            if isinstance(shard_repaired, int) and not isinstance(shard_repaired, bool):
+                repaired += shard_repaired
+        raw = bundle.get("raw")
+        if not isinstance(raw, Mapping):
+            raise ProviderError(f"Shard {index}: missing raw records")
+        raw_parts[f"shard-{index + 1:02d}.json"] = json_bytes(raw, compact=True)
+        for record in raw.get("requests") or ():
+            if not isinstance(record, Mapping):
+                continue
+            response = record.get("response") or {}
+            # Published source URLs are the exact final request URLs, query included.
+            if isinstance(response, Mapping) and isinstance(response.get("url"), str):
+                source_urls.append(response["url"])
+        for url in bundle.get("catalog_source_urls") or ():
+            if isinstance(url, str):
+                catalog_urls.append(url)
+        for record in bundle.get("catalog_requests") or ():
+            catalog_requests.append(record)
+        for item in bundle.get("response_dates") or ():
+            if isinstance(item, Mapping) and isinstance(item.get("fields"), Mapping):
+                dates.append({"request_index": len(dates), "fields": dict(item["fields"])})
+    expected = list(catalog.pairs())
+    for pair in expected:
+        if pair not in submitted:
+            raise ProviderError(
+                f"Missing pair {pair[0]}/{pair[1]} after merging {count} shards")
+    rows = [submitted[pair] for pair in expected]
+    if len(rows) != catalog.pair_count:
+        raise ProviderError("Merged pairs do not match the catalog")
+    metadata: dict[str, Any] = {
+        "provider": provider, "requested_date": target.isoformat(),
+        "fetched_at_utc": utc_now(), "pair_count": len(rows),
+        "rate_direction": "base currency per one transaction currency",
+        "source_urls": list(dict.fromkeys(source_urls)),
+        "response_dates": dates,
+        "response_dates_index": "final_successful_responses",
+        "transaction_currencies": list(catalog.transaction),
+        "billing_currencies": list(catalog.billing),
+        "shard_count": count,
+        "shards": [{"index": index, "transaction_currencies": list(codes),
+                    "pair_count": sum(1 for spend in codes
+                                      for home in catalog.billing if spend != home)}
+                   for index, codes in enumerate(balanced_shards(catalog.transaction, count))],
+        "catalog_source_urls": list(dict.fromkeys(catalog_urls)),
+        "recovery": {"initial_failed": initial_failed, "rounds": rounds,
+                     "repaired": repaired},
+    }
+    raw = json_bytes({
+        "format": "exchange-rates-raw-shards-v1",
+        "provider": provider, "requested_date": target.isoformat(),
+        "parts": [{"name": name, "size": len(body),
+                   "sha256": hashlib.sha256(body).hexdigest()}
+                  for name, body in sorted(raw_parts.items())],
+        "catalog_requests": catalog_requests,
+    })
+    return DayResult(provider, target,
+                     json_bytes({"exchangeRateJson": rows}), raw, metadata, raw_parts)
 
 
 def _unionpay(target: date, currencies: Sequence[str],

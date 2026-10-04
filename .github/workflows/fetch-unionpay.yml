@@ -16,7 +16,7 @@ on:
       interval:
         description: 'Per-session request interval in seconds (finite, >= 0)'
         required: false
-        default: '0.5'
+        default: '0.3'
         type: string
 
 permissions:
@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           START_DATE: ${{ inputs.start_date }}
           END_DATE: ${{ inputs.end_date }}
-          REQUEST_INTERVAL: ${{ inputs.interval || '0.5' }}
+          REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}
         run: |
           python -m exchange_rates fetch \
             --provider unionpay \

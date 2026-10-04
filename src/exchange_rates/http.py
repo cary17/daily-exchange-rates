@@ -71,7 +71,7 @@ class AccessBlockedError(HttpError):
 
 class HttpClient:
     def __init__(self, timeout: float = 30, retries: int = 3,
-                 interval: float = 0.5, cancel_event: Event | None = None,
+                 interval: float = 0.3, cancel_event: Event | None = None,
                  global_interval: float = 0, forbidden_cooldown: float = 0,
                  forbidden_threshold: int = 0):
         finite_seconds("timeout", timeout, positive=True)

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import sysconfig
 from datetime import date, datetime, timedelta
@@ -13,10 +14,15 @@ from .archive_backend import DirectoryArchiveBackend, GitHubArchiveBackend
 from .concurrency import SHARD_COUNT
 from .diagnostics import Diagnostics
 from .http import HttpClient
-from .providers import fetch_day, prepare_catalog, provider_ids
+from .models import json_bytes
+from .providers import (
+    fetch_day, fetch_shard, merge_shards, prepare_catalog, provider_ids,
+)
 from .publishing import BranchPublisher, write_summary
 from .rate_control import finite_seconds
-from .storage import DataStore
+from .storage import DataStore, atomic_write
+
+SHARDABLE = ("visa", "mastercard")
 
 
 def beijing_today() -> date:
@@ -69,16 +75,66 @@ def non_negative_seconds(value: str) -> float:
         raise argparse.ArgumentTypeError(str(exc)) from exc
 
 
+def shard_bundle_path(root: Path, provider: str, target: date, index: int) -> Path:
+    return Path(root) / provider / target.isoformat() / f"shard-{index + 1:02d}.json"
+
+
+def load_shard_bundles(root: Path, provider: str, target: date) -> list[dict]:
+    """Read a contiguous shard set produced by parallel shard jobs."""
+    directory = Path(root) / provider / target.isoformat()
+    if not directory.is_dir():
+        raise ValueError(f"No shard directory for {provider} {target.isoformat()}")
+    indexed = []
+    for path in sorted(directory.glob("shard-*.json")):
+        match = re.fullmatch(r"shard-(\d{2})\.json", path.name)
+        if match is None:
+            raise ValueError(f"Unexpected shard file: {path.name}")
+        indexed.append((int(match.group(1)), path))
+    numbers = [number for number, _ in indexed]
+    if numbers != list(range(1, len(numbers) + 1)):
+        raise ValueError(f"Incomplete shard set for {target.isoformat()}: {numbers}")
+    bundles = []
+    for number, path in indexed:
+        try:
+            bundle = json.loads(path.read_bytes())
+        except (ValueError, UnicodeError, OSError) as exc:
+            raise ValueError(f"Unreadable shard {path.name}: {exc}") from exc
+        if not isinstance(bundle, dict):
+            raise ValueError(f"Shard {path.name} is not a JSON object")
+        bundles.append(bundle)
+    return bundles
+
+
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(description="Manual official exchange-rate collection")
     commands = command.add_subparsers(dest="command", required=True)
-    collect = commands.add_parser("fetch", help="Collect an inclusive date range")
+    collect = commands.add_parser("fetch", help="Collect an inclusive date range in one process")
     collect.add_argument("--provider", choices=provider_ids(), required=True)
     collect.add_argument("--start-date", default="")
     collect.add_argument("--end-date", default="")
     collect.add_argument("--config", type=Path)
     collect.add_argument("--interval", type=non_negative_seconds, default=None,
                          help="Per-session request interval in seconds; overrides configured interval")
+    shard = commands.add_parser(
+        "fetch-shard", help="Collect one currency shard of a date range")
+    shard.add_argument("--provider", choices=SHARDABLE, required=True)
+    shard.add_argument("--start-date", default="")
+    shard.add_argument("--end-date", default="")
+    shard.add_argument("--config", type=Path)
+    shard.add_argument("--interval", type=non_negative_seconds, default=None,
+                       help="Per-session request interval in seconds; overrides configured interval")
+    shard.add_argument("--shard-index", type=int, required=True)
+    shard.add_argument("--shard-count", type=int, default=SHARD_COUNT,
+                       help=f"Total disjoint shards (default {SHARD_COUNT})")
+    shard.add_argument("--shard-dir", type=Path, required=True,
+                       help="Directory shared by shard jobs and the merge job")
+    merge = commands.add_parser(
+        "merge-shards", help="Verify shard bundles and publish complete days")
+    merge.add_argument("--provider", choices=SHARDABLE, required=True)
+    merge.add_argument("--start-date", default="")
+    merge.add_argument("--end-date", default="")
+    merge.add_argument("--config", type=Path)
+    merge.add_argument("--shard-dir", type=Path, required=True)
     archive = commands.add_parser("archive", help="Archive all due months and years")
     archive.add_argument("--as-of", default="", help=argparse.SUPPRESS)
     archive.add_argument("--config", type=Path)
@@ -87,10 +143,11 @@ def parser() -> argparse.ArgumentParser:
     download.add_argument("--repository", required=True)
     download.add_argument("--period", required=True, help="YYYY-MM or YYYY")
     download.add_argument("--output-dir", type=Path, required=True)
-    for subcommand in (collect, archive, verify):
+    for subcommand in (collect, merge, archive, verify):
         subcommand.add_argument("--data-dir", type=Path, default=Path("rates-data"))
-    for subcommand in (collect, archive):
+    for subcommand in (collect, shard, merge, archive):
         subcommand.add_argument("--diagnostics-dir", type=Path, default=Path("diagnostics"))
+    for subcommand in (collect, merge, archive):
         subcommand.add_argument("--release-dir", type=Path, default=Path("release-output"))
         subcommand.add_argument("--publish", action="store_true")
         subcommand.add_argument("--remote", default="origin")
@@ -103,6 +160,89 @@ def _emit_summary(text: str) -> None:
         write_summary(text)
     except OSError:
         print("Step summary unavailable; consult diagnostic report files", file=sys.stderr)
+
+
+def http_settings(config: dict, args: argparse.Namespace) -> dict:
+    settings = {**config.get("http", {}),
+                **config["providers"][args.provider].get("http", {})}
+    if getattr(args, "interval", None) is not None:
+        settings["interval"] = args.interval
+    return settings
+
+
+def _run_shard(config: dict, args: argparse.Namespace, diagnostics: Diagnostics,
+               first: date, last: date, settings: dict) -> int:
+    provider, index, count = args.provider, args.shard_index, args.shard_count
+    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        raise ValueError("shard_count must be a positive integer")
+    if isinstance(index, bool) or not isinstance(index, int) or not 0 <= index < count:
+        raise ValueError("shard_index must be within shard_count")
+    failures, written = [], 0
+    with HttpClient(**settings) as client:
+        print(f"HTTP pacing: per-session interval={client.interval:g}s; "
+              f"global interval={client.global_interval:g}s")
+        diagnostics.records = client.records
+        print(f"Shard {index + 1}/{count} of {provider}: {first} through {last}")
+        target = first
+        while target <= last:
+            args._diagnostic_target = target.isoformat()
+            client.records.clear()
+            try:
+                bundle = fetch_shard(provider, target, config["providers"][provider],
+                                     client, index, count)
+            except Exception as exc:
+                entry = diagnostics.failure(provider, target.isoformat(), exc,
+                                            client.records)
+                failures.append(target.isoformat())
+                print(f"FAILED {target}: {entry['brief']}", file=sys.stderr)
+            else:
+                path = shard_bundle_path(args.shard_dir, provider, target, index)
+                atomic_write(path, json_bytes(bundle, compact=True))
+                written += 1
+                print(f"SHARD {target}: {len(bundle['rows'])} pairs -> {path}")
+            if target == last:
+                break
+            target += timedelta(days=1)
+    status = 1 if failures else 0
+    summary = diagnostics.finish("fetch-shard", provider, status,
+                                 f"shard {index + 1}/{count}; bundles written: {written}")
+    print(summary)
+    _emit_summary(summary)
+    return status
+
+
+def _run_merge(config: dict, args: argparse.Namespace, diagnostics: Diagnostics,
+               publisher: BranchPublisher | None, store: DataStore,
+               first: date, last: date) -> int:
+    provider = args.provider
+    successes, failures = [], []
+    print(f"Merging shards for {provider}: {first} through {last}")
+    target = first
+    while target <= last:
+        args._diagnostic_target = target.isoformat()
+        try:
+            bundles = load_shard_bundles(args.shard_dir, provider, target)
+            result = merge_shards(provider, target, bundles)
+        except Exception as exc:
+            entry = diagnostics.failure(provider, target.isoformat(), exc, [])
+            failures.append(target.isoformat())
+            print(f"FAILED {target}: {entry['brief']}", file=sys.stderr)
+        else:
+            # A storage or Release failure aborts data-branch publication entirely.
+            store.save_day(result)
+            successes.append(target.isoformat())
+            diagnostics.success(result)
+            print(f"SAVED {target}: {result.metadata['pair_count']} pairs")
+        if target == last:
+            break
+        target += timedelta(days=1)
+    if publisher is not None and successes:
+        publisher.publish(f"Fetch {provider}: {first} through {last}")
+    status = 1 if failures else 0
+    summary = diagnostics.finish("merge-shards", provider, status)
+    print(summary)
+    _emit_summary(summary)
+    return status
 
 
 def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) -> int:
@@ -122,8 +262,13 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
         print(f"Verified {count} archive(s)")
         return 0
     config = load_config(args.config)
-    interval = dates(args.start_date, args.end_date) if args.command == "fetch" else None
+    sharded = args.command in ("fetch", "fetch-shard", "merge-shards")
+    first, last = dates(args.start_date, args.end_date) if sharded else (None, None)
     as_of = parse_date(args.as_of) if args.command == "archive" and args.as_of else beijing_today()
+    if args.command == "fetch-shard":
+        # Shard jobs never write published data; they only stage bundle files.
+        return _run_shard(config, args, diagnostics, first, last,
+                          http_settings(config, args))
     releases = (GitHubArchiveBackend.from_environment() if args.publish
                 else DirectoryArchiveBackend(args.release_dir))
     publisher = None
@@ -141,13 +286,12 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
         print(summary)
         _emit_summary(summary)
         return 0
-    assert interval is not None
-    first, last = interval
+    if args.command == "merge-shards":
+        return _run_merge(config, args, diagnostics, publisher, store, first, last)
+    assert first is not None and last is not None
     successes, failures = [], []
-    http_settings = {**config.get("http", {}), **config["providers"][args.provider].get("http", {})}
-    if args.interval is not None:
-        http_settings["interval"] = args.interval
-    with HttpClient(**http_settings) as client:
+    settings = http_settings(config, args)
+    with HttpClient(**settings) as client:
         print(f"HTTP pacing: per-session interval={client.interval:g}s; "
               f"global interval={client.global_interval:g}s")
         diagnostics.records = client.records

@@ -5,20 +5,21 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
-from unittest.mock import patch
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 from exchange_rates.archive_backend import DirectoryArchiveBackend
 from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.cli import dates, load_config, main, parser
 from exchange_rates.diagnostics import Diagnostics
 from exchange_rates.models import DayResult, json_bytes
-from exchange_rates.providers import RecoveryError
+from exchange_rates.providers import ProviderError, RecoveryError
 
 
 class FakeClient:
     def __init__(self, **kwargs):
         self.records = []
-        self.interval = kwargs.get("interval", 0.5)
+        self.interval = kwargs.get("interval", 0.3)
         self.global_interval = kwargs.get("global_interval", 0)
 
     def __enter__(self):
@@ -126,7 +127,7 @@ class CliTests(unittest.TestCase):
 
     def test_default_pacing_is_per_session_without_shared_limit(self):
         config = load_config(None)
-        self.assertEqual(config["http"]["interval"], 0.5)
+        self.assertEqual(config["http"]["interval"], 0.3)
         self.assertEqual(config["http"]["global_interval"], 0)
         for provider in ("visa", "mastercard"):
             with self.subTest(provider=provider):
@@ -170,17 +171,222 @@ class CliTests(unittest.TestCase):
             self.assertIn(f"per-session interval={expected:g}s; global interval=0s", output.getvalue())
             self.assertEqual(config["providers"]["mastercard"]["http"]["interval"], 0.9)
 
-    def test_fetch_workflows_expose_interval_with_empty_input_fallback(self):
+    def test_unionpay_workflow_keeps_single_job_with_interval_default(self):
         workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
-        for provider in ("unionpay", "visa", "mastercard"):
+        text = (workflows / "fetch-unionpay.yml").read_text()
+        self.assertIn("      interval:\n", text)
+        self.assertIn("        default: '0.3'\n        type: string", text)
+        self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}", text)
+        self.assertIn('--interval "$REQUEST_INTERVAL"', text)
+        self.assertNotIn("fetch-shard", text)
+        self.assertNotIn("global_interval", text)
+
+    def test_sharded_workflows_split_jobs_then_merge_bundles(self):
+        workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
+        for provider in ("visa", "mastercard"):
             with self.subTest(provider=provider):
                 text = (workflows / f"fetch-{provider}.yml").read_text()
-                self.assertIn("      interval:\n", text)
-                self.assertIn("        default: '0.5'\n        type: string", text)
-                self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.5' }}", text)
-                self.assertIn('--interval "$REQUEST_INTERVAL"', text)
-                self.assertNotIn("      global_interval:\n", text)
-                self.assertNotIn("--global-interval", text)
+                # Defaults are the single source of truth for pacing.
+                self.assertIn("        default: '0.3'\n        type: string", text)
+                self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}", text)
+                self.assertIn("        default: '9'\n        type: string", text)
+                self.assertNotIn("global_interval", text)
+                # Three stages: plan, one job per shard, then verify and merge.
+                for job in ("  prepare:\n", "  shard:\n", "  merge:\n"):
+                    self.assertIn(job, text)
+                self.assertIn("matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}", text)
+                self.assertIn("fail-fast: false", text)
+                self.assertIn('python -m exchange_rates fetch-shard', text)
+                self.assertIn('python -m exchange_rates merge-shards', text)
+                self.assertIn('--shard-index "$SHARD_INDEX"', text)
+                self.assertIn('--shard-count "$SHARD_COUNT"', text)
+                self.assertIn('--shard-dir "$RUNNER_TEMP/shards"', text)
+                # Bundles must round-trip through artifacts without the diagnostics.
+                self.assertIn(f"          name: {provider}-shard-${{{{ matrix.shard }}}}", text)
+                self.assertIn(f"          pattern: {provider}-shard-*", text)
+                self.assertIn("          merge-multiple: true", text)
+                self.assertNotIn(f"{provider}-shard-${{{{ matrix.shard }}}}-diagnostics", text)
+
+    def test_fetch_shard_and_merge_shards_cli_contract(self):
+        plan = parser().parse_args([
+            "fetch-shard", "--provider", "mastercard", "--start-date", "2026-10-03",
+            "--end-date", "2026-10-03", "--shard-index", "4", "--shard-count", "9",
+            "--shard-dir", "/tmp/shards", "--interval", "0.3",
+        ])
+        self.assertEqual((plan.provider, plan.shard_index, plan.shard_count),
+                         ("mastercard", 4, 9))
+        self.assertEqual(plan.interval, 0.3)
+        # Shard jobs only stage bundles; they never touch published data.
+        self.assertFalse(hasattr(plan, "publish"))
+        self.assertEqual(parser().parse_args(
+            ["fetch-shard", "--provider", "visa", "--shard-index", "0",
+             "--shard-dir", "/tmp/s"]).shard_count, 9)
+        merge = parser().parse_args([
+            "merge-shards", "--provider", "visa", "--start-date", "2026-10-03",
+            "--shard-dir", "/tmp/shards",
+        ])
+        self.assertEqual(merge.command, "merge-shards")
+        self.assertFalse(merge.publish)
+        with self.assertRaises(SystemExit):
+            parser().parse_args(["fetch-shard", "--provider", "mastercard",
+                                 "--shard-dir", "/tmp/s"])
+        with self.assertRaises(SystemExit):
+            parser().parse_args(["fetch-shard", "--provider", "unionpay",
+                                 "--shard-index", "0", "--shard-dir", "/tmp/s"])
+        with self.assertRaises(SystemExit):
+            parser().parse_args(["merge-shards", "--provider", "visa",
+                                 "--shard-dir", "/tmp/s", "--interval", "0.3"])
+
+    def test_fetch_shard_writes_bundle_files(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            bundle = {"format": "exchange-rates-shard-v1", "provider": "mastercard",
+                      "requested_date": "2026-10-03", "shard_index": 2, "shard_count": 9,
+                      "rows": [{"transCur": "USD", "baseCur": "CNY", "rateData": "7.1"}]}
+            with patch("exchange_rates.cli.HttpClient", FakeClient), \
+                 patch("exchange_rates.cli.fetch_shard", return_value=bundle), \
+                 contextlib.redirect_stdout(io.StringIO()):
+                status = main(["fetch-shard", "--provider", "mastercard",
+                               "--start-date", "2026-10-03", "--end-date", "2026-10-03",
+                               "--shard-index", "2", "--shard-count", "9",
+                               "--shard-dir", str(root / "shards"),
+                               "--diagnostics-dir", str(root / "diag")])
+            self.assertEqual(status, 0)
+            path = root / "shards/mastercard/2026-10-03/shard-03.json"
+            self.assertEqual(json.loads(path.read_bytes())["rows"][0]["rateData"], "7.1")
+
+    def test_merge_shards_publishes_verified_day(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            shard_dir, data_dir = root / "shards", root / "data"
+            directory = shard_dir / "mastercard/2026-10-03"
+            directory.mkdir(parents=True)
+            rows_by_shard = {0: [("USD", "CNY", "7.1")], 1: [("CNY", "USD", "0.14")]}
+            for index in range(9):
+                bundle = {
+                    "format": "exchange-rates-shard-v1", "provider": "mastercard",
+                    "requested_date": "2026-10-03", "shard_index": index, "shard_count": 9,
+                    "transaction_currencies": ["USD", "CNY"],
+                    "billing_currencies": ["USD", "CNY"],
+                    "catalog_source_urls": [], "catalog_requests": [],
+                    "response_dates": [], "recovery": {"rounds": 0},
+                    "rows": [{"transCur": spend, "baseCur": home, "rateData": rate}
+                             for spend, home, rate in rows_by_shard.get(index, [])],
+                    "raw": {"provider": "mastercard", "requested_date": "2026-10-03",
+                            "shard_index": index, "transaction_currencies": [],
+                            "requests": [], "attempts": []},
+                }
+                (directory / f"shard-{index + 1:02d}.json").write_bytes(
+                    json_bytes(bundle, compact=True))
+            with patch("exchange_rates.cli.BranchPublisher") as publisher, \
+                 patch("exchange_rates.cli.GitHubArchiveBackend.from_environment",
+                       return_value=DirectoryArchiveBackend(root / "releases")), \
+                 contextlib.redirect_stdout(io.StringIO()), \
+                 contextlib.redirect_stderr(io.StringIO()):
+                status = main(["merge-shards", "--provider", "mastercard",
+                               "--start-date", "2026-10-03", "--end-date", "2026-10-03",
+                               "--shard-dir", str(shard_dir), "--data-dir", str(data_dir),
+                               "--diagnostics-dir", str(root / "diag"), "--publish"])
+            self.assertEqual(status, 0)
+            saved = json.loads(
+                (data_dir / "history/2026/10/mastercard/2026-10-03.json").read_bytes())
+            self.assertEqual([(row["transCur"], row["baseCur"])
+                              for row in saved["exchangeRateJson"]],
+                             [("USD", "CNY"), ("CNY", "USD")])
+            self.assertEqual(
+                json.loads((data_dir / "metadata/latest/mastercard.json").read_bytes())["pair_count"], 2)
+            self.assertTrue((data_dir / "raw/history/2026/10/mastercard/"
+                             "2026-10-03.parts/shard-09.json").is_file())
+            publisher.return_value.publish.assert_called_once()
+
+    def test_shard_denial_records_exchange_once_with_context(self):
+        from exchange_rates.http import AccessBlockedError, HttpClient
+        from exchange_rates.providers import fetch_shard
+        catalog = CurrencyCatalog(("USD", "CNY", "EUR"), ("USD", "CNY", "EUR"))
+        calls = []
+
+        def responder(status, body):
+            return SimpleNamespace(status_code=status, content=body,
+                                   text=body.decode(),
+                                   url="https://example.test/rates?x=1",
+                                   headers={"Content-Type": "application/json"})
+
+        def get(*args, **kwargs):
+            calls.append(1)
+            if len(calls) == 3:
+                return responder(403, b"<html>denied</html>")
+            return responder(200, json_bytes({"data": {
+                "errorCode": "0", "conversionRate": "1.5",
+                "crdhldBillAmt": "1500.00", "fxDate": "2026-10-03"}}))
+
+        session = Mock()
+        session.get.side_effect = get
+        with patch("exchange_rates.providers.discover_currencies", return_value=catalog), \
+             patch("exchange_rates.http.requests.Session", return_value=session):
+            client = HttpClient(retries=0, interval=0, forbidden_threshold=1)
+            with self.assertRaises(AccessBlockedError) as caught:
+                fetch_shard("mastercard", date(2026, 10, 3),
+                            {"recovery_rounds": 0}, client, 0, 1)
+        error = caught.exception
+        raw = json.loads(error.raw_parts["shard-01.json"])
+        self.assertEqual(len(raw["requests"]), len(calls))
+        self.assertEqual([record["response"]["status_code"] for record in raw["requests"]],
+                         [200, 200, 403])
+        self.assertEqual(len(raw["attempts"]), len(calls))
+        self.assertEqual(error.context["successful_pairs"], 2)
+        self.assertEqual(error.context["attempted_pairs"], 3)
+        self.assertTrue(error.context["stopped_for_access_control"])
+        self.assertEqual(error.context["shard_index"], 0)
+
+    def test_merge_shards_rejects_incomplete_or_duplicate_sets(self):
+        from exchange_rates.cli import load_shard_bundles
+        from exchange_rates.providers import merge_shards
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            directory = root / "mastercard/2026-10-03"
+            directory.mkdir(parents=True)
+            for index in (1, 3):
+                (directory / f"shard-{index:02d}.json").write_text("{}")
+            with self.assertRaisesRegex(ValueError, "Incomplete shard set"):
+                load_shard_bundles(root, "mastercard", date(2026, 10, 3))
+            with self.assertRaisesRegex(ValueError, "No shard directory"):
+                load_shard_bundles(root, "visa", date(2026, 10, 3))
+            good = {"format": "exchange-rates-shard-v1", "provider": "mastercard",
+                    "requested_date": "2026-10-03", "shard_count": 2,
+                    "transaction_currencies": ["USD", "CNY"],
+                    "billing_currencies": ["USD", "CNY"],
+                    "raw": {"requests": []}}
+            usd_cny = {"transCur": "USD", "baseCur": "CNY", "rateData": "7.1"}
+            cny_usd = {"transCur": "CNY", "baseCur": "USD", "rateData": "0.14"}
+            # Every bundle must carry an integer shard_index.
+            with self.assertRaisesRegex(ProviderError, "integer shard_index"):
+                merge_shards("mastercard", date(2026, 10, 3), [good, {**good}])
+            shard0 = {**good, "shard_index": 0, "rows": [usd_cny]}
+            empty = {**good, "shard_index": 1, "rows": []}
+            with self.assertRaisesRegex(ProviderError, "Missing pair"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0, empty])
+            with self.assertRaisesRegex(ProviderError, "Expected shards"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0])
+            duplicate = {**good, "shard_index": 1, "rows": [usd_cny]}
+            with self.assertRaisesRegex(ProviderError, "duplicate pair"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0, duplicate])
+            identity = {**good, "shard_index": 1,
+                        "rows": [cny_usd, {"transCur": "CNY", "baseCur": "CNY",
+                                           "rateData": "1"}]}
+            with self.assertRaisesRegex(ProviderError, "identity pair"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0, identity])
+            wrong_day = {**good, "shard_index": 1, "requested_date": "2026-10-02",
+                         "rows": [cny_usd]}
+            with self.assertRaisesRegex(ProviderError, "requested_date"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0, wrong_day])
+            differ = {**good, "shard_index": 1, "rows": [cny_usd],
+                      "billing_currencies": ["USD", "EUR"]}
+            with self.assertRaisesRegex(ProviderError, "billing catalog differs"):
+                merge_shards("mastercard", date(2026, 10, 3), [shard0, differ])
+            complete = {**good, "shard_index": 1, "rows": [cny_usd]}
+            merged = merge_shards("mastercard", date(2026, 10, 3), [shard0, complete])
+            self.assertEqual(merged.metadata["pair_count"], 2)
+            self.assertEqual(sorted(merged.raw_parts), ["shard-01.json", "shard-02.json"])
 
     def test_nine_megabyte_error_is_artifact_not_terminal_or_summary(self):
         with tempfile.TemporaryDirectory() as temporary:
