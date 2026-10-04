@@ -8,4 +8,5 @@ rates-data/
 .probe-data/
 .pytest_cache/
 release-output/
+diagnostics/
 .tools/

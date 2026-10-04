@@ -51,4 +51,20 @@ jobs:
             --start-date "$START_DATE" \
             --end-date "$END_DATE" \
             --data-dir "$RUNNER_TEMP/rates-data" \
+            --diagnostics-dir "$RUNNER_TEMP/exchange-rate-diagnostics" \
             --publish --remote origin --branch data
+      - name: Upload diagnostics
+        if: ${{ always() }}
+        id: diagnostics
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mastercard-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/exchange-rate-diagnostics
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Link diagnostics
+        if: ${{ always() && steps.diagnostics.outputs.artifact-url != '' }}
+        env:
+          ARTIFACT_URL: ${{ steps.diagnostics.outputs.artifact-url }}
+        run: |
+          printf '\n[Detailed diagnostics](%s)\n' "$ARTIFACT_URL" >> "$GITHUB_STEP_SUMMARY"
