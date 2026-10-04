@@ -9,7 +9,7 @@ from typing import Any, Callable, Mapping, Sequence
 
 from ..catalog import CurrencyCatalog, discover_currencies
 from ..concurrency import SHARD_COUNT, balanced_shards, run_currency_shards
-from ..http import HttpClient, HttpError, JsonResponse, utc_now
+from ..http import AccessBlockedError, HttpClient, HttpError, JsonResponse, utc_now
 from ..models import DayResult, json_bytes
 
 
@@ -335,6 +335,16 @@ def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[st
                                 provider, target, spend, home, endpoint, headers, shard_client)
                             results[pair] = (row, response)
                             fallback = _records(response)
+                        except AccessBlockedError as exc:
+                            if exc.request_sent:
+                                fallback = exc.records or (
+                                    _records(exc.response) if exc.response is not None else [])
+                            raw["attempts"].append({
+                                "pair": list(pair), "round": round_index,
+                                "error": f"{type(exc).__name__}: {exc}",
+                                "blocked_before_request": not exc.request_sent,
+                            })
+                            raise
                         except (HttpError, ProviderError) as exc:
                             error = f"{type(exc).__name__}: {exc}"
                             failures[pair] = error
@@ -351,7 +361,28 @@ def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[st
 
         # Expected failures stay inside workers; unexpected exceptions and
         # interrupts retain run_currency_shards' cancellation/propagation path.
-        batches = run_currency_shards(catalog.transaction, worker)
+        try:
+            batches = run_currency_shards(catalog.transaction, worker)
+        except AccessBlockedError as exc:
+            exc.raw_parts = {
+                f"shard-{index + 1:02d}.json": json_bytes(raw, compact=True)
+                for index, raw in enumerate(raw_shards)
+            }
+            attempted = sum(
+                not attempt.get("blocked_before_request", False)
+                for raw in raw_shards for attempt in raw["attempts"]
+            )
+            completed = sum(
+                attempt["error"] is None
+                for raw in raw_shards for attempt in raw["attempts"]
+            )
+            exc.context = {
+                "provider": provider, "requested_date": target.isoformat(),
+                "expected_pairs": catalog.pair_count, "successful_pairs": completed,
+                "attempted_pairs": attempted, "round": round_index,
+                "stopped_for_access_control": True,
+            }
+            raise
         for results, failures in batches:
             successful.update(results)
             errors.update(failures)
@@ -423,6 +454,10 @@ def fetch_day(provider: str, target: date, currencies: CurrencyCatalog | Sequenc
     for round_index in range(recovery_rounds + 1):
         try:
             result = _unionpay(target, currencies, config, client, records=records)
+        except AccessBlockedError as exc:
+            exc.records = records
+            exc.attempts = attempts
+            raise
         except (HttpError, ProviderError) as exc:
             attempts.append({"pair": None, "round": round_index,
                              "error": f"{type(exc).__name__}: {exc}"})
