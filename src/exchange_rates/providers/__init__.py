@@ -25,6 +25,40 @@ class DateMismatchError(ProviderError):
     pass
 
 
+class RecoveryError(ProviderError):
+    """Bounded recovery exhausted; retain exact omissions and HTTP evidence."""
+
+    def __init__(self, provider, missing_pairs, errors, raw_parts, recovery):
+        self.missing_pairs = list(missing_pairs)
+        self.errors = dict(errors)
+        self.raw_parts = raw_parts
+        self.recovery = recovery
+        details = "; ".join(f"{spend}/{home}: {errors[spend, home]}"
+                            for spend, home in missing_pairs)
+        super().__init__(f"{provider}: {len(missing_pairs)} missing pairs after "
+                         f"{recovery['rounds']} recovery rounds: {details}")
+
+
+def _recovery_rounds(config):
+    rounds = config.get("recovery_rounds", 2)
+    if isinstance(rounds, bool) or not isinstance(rounds, int) or rounds < 0:
+        raise ValueError("recovery_rounds must be a non-negative integer")
+    return rounds
+
+
+def _merge_records(primary, fallback):
+    # The two logs may overlap. Match occurrences, not unique values: identical
+    # transport attempts are distinct evidence and must remain distinct.
+    merged = list(primary)
+    unmatched = list(primary)
+    for record in fallback:
+        if record in unmatched:
+            unmatched.remove(record)
+        else:
+            merged.append(record)
+    return merged
+
+
 _DEFAULTS = {
     "unionpay": (
         "https://www.unionpayintl.com/upload/jfimg/{date}.json", None,
@@ -147,6 +181,7 @@ def _result(provider: str, target: date, normalized: bytes,
         if fields:
             returned_dates.append({"request_index": index, "fields": fields})
     metadata["response_dates"] = returned_dates
+    metadata["response_dates_index"] = "final_successful_responses"
     if currencies is not None:
         metadata["currencies"] = list(currencies)
     if raw_parts is None:
@@ -176,15 +211,24 @@ def _result(provider: str, target: date, normalized: bytes,
 
 
 def _unionpay(target: date, currencies: Sequence[str],
-              config: Mapping[str, Any], client: HttpClient) -> DayResult:
+              config: Mapping[str, Any], client: HttpClient, *,
+              records: list | None = None) -> DayResult:
     endpoint, headers = _settings("unionpay", config)
     url = endpoint.format(date=target.strftime("%Y%m%d"))
+    transport_records = client.records if isinstance(client.records, list) else []
+    start = len(transport_records)
+    fallback = []
     try:
         response = client.request_json(url, headers=headers)
+        fallback = _records(response)
     except HttpError as exc:
+        fallback = exc.records or (_records(exc.response) if exc.response is not None else [])
         if exc.status_code == 404:
             raise NoDataError(f"UnionPay has no data for {target.isoformat()}") from exc
         raise
+    finally:
+        if records is not None:
+            records.extend(_merge_records(transport_records[start:], fallback))
     data = _object(response.data, "UnionPay")
     _check_dates("unionpay", target, data)
     rows = data.get("exchangeRateJson")
@@ -261,43 +305,78 @@ def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[st
     else:
         catalog = CurrencyCatalog(currencies, currencies)
     endpoint, headers = _settings(provider, config)
-    # Fail an unavailable date before starting all nine workers; reuse this pair.
-    first_pair = next(catalog.pairs())
-    seed = _query_pair(provider, target, *first_pair, endpoint, headers, client)
+    expected = list(catalog.pairs())
+    successful, errors = {}, {}
+    raw_shards = [{
+        "provider": provider, "requested_date": target.isoformat(), "shard_index": index,
+        "transaction_currencies": list(spends), "requests": [], "attempts": [],
+    } for index, spends in enumerate(balanced_shards(catalog.transaction))]
+    initial_failed = 0
+    rounds = 0
+    for round_index in range(_recovery_rounds(config) + 1):
+        pending = set(expected) - successful.keys()
 
-    def worker(index, spends, cancelled):
-        rows, responses = [], []
-        if spends:
+        def worker(index, spends, cancelled):
+            results, failures = {}, {}
+            raw = raw_shards[index]
             with client.fork(cancelled) as shard_client:
                 for spend in spends:
                     for home in catalog.billing:
-                        if spend == home:
+                        pair = (spend, home)
+                        if pair not in pending:
                             continue
                         if cancelled.is_set():
-                            raise CancelledError("Another currency shard failed")
-                        if (spend, home) == first_pair:
-                            row, response = seed
-                        else:
-                            shard_client.records.clear()
-                            row, response = _query_pair(provider, target, spend, home, endpoint, headers, shard_client)
-                        rows.append(row)
-                        responses.append(response)
-        raw = json_bytes({
-            "provider": provider, "requested_date": target.isoformat(), "shard_index": index,
-            "transaction_currencies": list(spends),
-            "requests": [record for response in responses for record in _records(response)],
-        }, compact=True)
-        return rows, responses, raw
+                            raise CancelledError("Currency shard interrupted")
+                        start = len(shard_client.records)
+                        fallback = []
+                        error = None
+                        try:
+                            row, response = _query_pair(
+                                provider, target, spend, home, endpoint, headers, shard_client)
+                            results[pair] = (row, response)
+                            fallback = _records(response)
+                        except (HttpError, ProviderError) as exc:
+                            error = f"{type(exc).__name__}: {exc}"
+                            failures[pair] = error
+                            if isinstance(exc, HttpError):
+                                fallback = exc.records or (
+                                    _records(exc.response) if exc.response is not None else [])
+                        finally:
+                            raw["requests"].extend(_merge_records(
+                                shard_client.records[start:], fallback))
+                        raw["attempts"].append({
+                            "pair": list(pair), "round": round_index, "error": error,
+                        })
+            return results, failures
 
-    batches = run_currency_shards(catalog.transaction, worker)
-    rows = [row for batch in batches for row in batch[0]]
-    responses = [response for batch in batches for response in batch[1]]
-    received = [(row["transCur"], row["baseCur"]) for row in rows]
-    if received != list(catalog.pairs()) or len(received) != catalog.pair_count:
-        raise ProviderError("Currency shard merge contains missing, duplicate or out-of-order pairs")
-    parts = {f"shard-{index + 1:02d}.json": batch[2] for index, batch in enumerate(batches)}
-    return _result(provider, target, json_bytes({"exchangeRateJson": rows}), responses,
-                   len(rows), catalog=catalog, raw_parts=parts)
+        # Expected failures stay inside workers; unexpected exceptions and
+        # interrupts retain run_currency_shards' cancellation/propagation path.
+        batches = run_currency_shards(catalog.transaction, worker)
+        for results, failures in batches:
+            successful.update(results)
+            errors.update(failures)
+            for pair in results:
+                errors.pop(pair, None)
+        missing = [pair for pair in expected if pair not in successful]
+        if round_index == 0:
+            initial_failed = len(missing)
+        else:
+            rounds = round_index
+        if not missing:
+            break
+
+    recovery = {"initial_failed": initial_failed, "rounds": rounds,
+                "repaired": initial_failed - len(missing)}
+    parts = {f"shard-{index + 1:02d}.json": json_bytes(raw, compact=True)
+             for index, raw in enumerate(raw_shards)}
+    if missing:
+        raise RecoveryError(provider, missing, errors, parts, recovery)
+    rows = [successful[pair][0] for pair in expected]
+    responses = [successful[pair][1] for pair in expected]
+    result = _result(provider, target, json_bytes({"exchangeRateJson": rows}), responses,
+                     len(rows), catalog=catalog, raw_parts=parts)
+    result.metadata["recovery"] = recovery
+    return result
 
 
 def _visa(target: date, currencies: Sequence[str], config: Mapping[str, Any],
@@ -337,4 +416,28 @@ def fetch_day(provider: str, target: date, currencies: CurrencyCatalog | Sequenc
         handler = _REGISTRY[provider]
     except KeyError as exc:
         raise ValueError(f"Unknown provider: {provider}") from exc
-    return handler(target, currencies, config, client)
+    recovery_rounds = _recovery_rounds(config)
+    if provider != "unionpay":
+        return handler(target, currencies, config, client)
+    records, attempts = [], []
+    for round_index in range(recovery_rounds + 1):
+        try:
+            result = _unionpay(target, currencies, config, client, records=records)
+        except (HttpError, ProviderError) as exc:
+            attempts.append({"pair": None, "round": round_index,
+                             "error": f"{type(exc).__name__}: {exc}"})
+            if round_index == recovery_rounds:
+                exc.records = records
+                exc.attempts = attempts
+                raise
+        else:
+            attempts.append({"pair": None, "round": round_index, "error": None})
+            result.raw = json_bytes({
+                "provider": provider, "requested_date": target.isoformat(),
+                "requests": records, "attempts": attempts,
+            })
+            result.metadata["recovery"] = {
+                "initial_failed": int(round_index > 0), "rounds": round_index,
+                "repaired": int(round_index > 0), "unit": "file",
+            }
+            return result
