@@ -15,6 +15,7 @@ from .diagnostics import Diagnostics
 from .http import HttpClient
 from .providers import fetch_day, prepare_catalog, provider_ids
 from .publishing import BranchPublisher, write_summary
+from .rate_control import finite_seconds
 from .storage import DataStore
 
 
@@ -61,6 +62,13 @@ def load_config(path: Path | None) -> dict:
     return config
 
 
+def non_negative_seconds(value: str) -> float:
+    try:
+        return finite_seconds("request interval", float(value))
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
+
+
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(description="Manual official exchange-rate collection")
     commands = command.add_subparsers(dest="command", required=True)
@@ -69,6 +77,8 @@ def parser() -> argparse.ArgumentParser:
     collect.add_argument("--start-date", default="")
     collect.add_argument("--end-date", default="")
     collect.add_argument("--config", type=Path)
+    collect.add_argument("--interval", type=non_negative_seconds, default=None,
+                         help="Per-session request interval in seconds; overrides configured interval")
     archive = commands.add_parser("archive", help="Archive all due months and years")
     archive.add_argument("--as-of", default="", help=argparse.SUPPRESS)
     archive.add_argument("--config", type=Path)
@@ -135,7 +145,11 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
     first, last = interval
     successes, failures = [], []
     http_settings = {**config.get("http", {}), **config["providers"][args.provider].get("http", {})}
+    if args.interval is not None:
+        http_settings["interval"] = args.interval
     with HttpClient(**http_settings) as client:
+        print(f"HTTP pacing: per-session interval={client.interval:g}s; "
+              f"global interval={client.global_interval:g}s")
         diagnostics.records = client.records
         catalog = prepare_catalog(args.provider, config["providers"][args.provider], client)
         pair_count = catalog.pair_count if catalog is not None else 1

@@ -307,6 +307,168 @@ class RateControlTests(unittest.TestCase):
             client.request_json(URL)
         self.assertEqual(client._gate.consecutive_forbidden, 0)
 
+    def test_default_session_interval_is_half_second(self):
+        self.assertEqual(HttpClient().interval, 0.5)
+
+    def test_sessions_keep_independent_half_second_budgets(self):
+        clock = FakeClock()
+        parent = HttpClient(forbidden_cooldown=60)
+        parent._gate = RateGate(forbidden_cooldown=60, clock=clock, wait=clock.wait)
+        children = [parent.fork(), parent.fork()]
+        sessions = [Mock(), Mock()]
+        started = []
+        for session in sessions:
+            session.get.side_effect = lambda *args, **kwargs: (
+                started.append(clock()) or response())
+        with patch("exchange_rates.http.requests.Session", side_effect=sessions), patch(
+                "exchange_rates.http.time.monotonic", side_effect=clock):
+            for child in children:
+                self.enterContext(patch.object(child, "_sleep", side_effect=clock.advance))
+            for child in children + children:
+                child.request_json(URL)
+        self.assertEqual(started, [10, 10, 10.5, 10.5])
+        self.assertEqual(parent.global_interval, 0)
+
+    def test_cooldown_wait_does_not_erase_session_interval(self):
+        clock = FakeClock()
+        client = HttpClient(forbidden_cooldown=60)
+        client._gate = RateGate(forbidden_cooldown=60, clock=clock, wait=clock.wait)
+        started = []
+        outcomes = iter((response(403), response(), response()))
+        session = Mock()
+        session.get.side_effect = lambda *args, **kwargs: (
+            started.append(clock()) or next(outcomes))
+        with patch("exchange_rates.http.requests.Session", return_value=session), patch(
+                "exchange_rates.http.time.monotonic", side_effect=clock), patch.object(
+                client, "_sleep", side_effect=clock.advance):
+            with self.assertRaises(HttpError):
+                client.request_json(URL)
+            client.request_json(URL)
+            client.request_json(URL)
+        self.assertEqual(started, [10, 70, 70.5])
+
+    def test_old_inflight_responses_do_not_release_active_probe(self):
+        clock = FakeClock()
+        gate = RateGate(forbidden_cooldown=60, forbidden_threshold=3,
+                        clock=clock, wait=clock.wait)
+        old_epoch = gate.acquire()
+        gate.record_response(403, response(403), epoch=old_epoch)
+        probe_epoch = gate.acquire()
+        for status in (200, 403):
+            gate.record_response(status, response(status), epoch=old_epoch)
+            self.assertTrue(gate._probe_inflight)
+            self.assertTrue(gate._recovering)
+            self.assertEqual(gate.consecutive_forbidden, 1)
+        gate.record_response(200, response(), epoch=probe_epoch)
+        self.assertFalse(gate._recovering)
+
+    def test_one_denial_wave_counts_once_and_late_success_cannot_reset(self):
+        clock = FakeClock()
+        gate = RateGate(forbidden_cooldown=60, forbidden_threshold=3,
+                        clock=clock, wait=clock.wait)
+        epochs = [gate.acquire() for _ in range(9)]
+        evidence = response(403)
+        gate.record_response(403, evidence, epoch=epochs[0])
+        for epoch in epochs[1:]:
+            self.assertFalse(gate.record_response(403, response(403), epoch=epoch))
+            self.assertFalse(gate.record_response(200, response(), epoch=epoch))
+        self.assertEqual(gate.consecutive_forbidden, 1)
+        self.assertFalse(gate.broken)
+        self.assertIs(gate.last_response, evidence)
+        self.assertEqual(clock(), 10)
+        probe_epoch = gate.acquire()
+        self.assertEqual(clock(), 70)
+        self.assertNotEqual(probe_epoch, epochs[0])
+        gate.record_response(403, response(403), epoch=probe_epoch)
+        self.assertEqual(gate.consecutive_forbidden, 2)
+        probe_epoch = gate.acquire()
+        self.assertEqual(clock(), 130)
+        self.assertTrue(gate.record_response(403, response(403), epoch=probe_epoch))
+        self.assertTrue(gate.record_response(200, response(), epoch=epochs[0]))
+        with self.assertRaises(GateBlockedError):
+            gate.acquire()
+
+    def test_cooldown_zero_still_counts_each_inflight_denial(self):
+        gate = RateGate(forbidden_threshold=3)
+        epochs = [gate.acquire() for _ in range(9)]
+        for index, epoch in enumerate(epochs[:3]):
+            self.assertEqual(gate.record_response(403, response(403), epoch=epoch),
+                             index == 2)
+        self.assertEqual(gate.consecutive_forbidden, 3)
+
+    def test_half_open_releases_after_transport_or_other_status_failure(self):
+        for outcome in (requests.RequestsError("probe failed"), response(429),
+                        response(503), response(204, b""), response(301)):
+            clock = FakeClock()
+            client = controlled_client(clock, retries=0, forbidden_cooldown=60,
+                                       forbidden_threshold=3)
+            session = Mock()
+            session.get.side_effect = [response(403), outcome, response()]
+            with self.subTest(outcome=outcome), patch(
+                    "exchange_rates.http.requests.Session", return_value=session):
+                with self.assertRaises(HttpError):
+                    client.request_json(URL)
+                with self.assertRaises(HttpError):
+                    client.request_json(URL)
+                self.assertFalse(client._gate._probe_inflight)
+                self.assertTrue(client._gate._recovering)
+                self.assertEqual(client._gate.consecutive_forbidden, 1)
+                client.request_json(URL)
+            self.assertFalse(client._gate._recovering)
+            self.assertEqual(client._gate.consecutive_forbidden, 0)
+            self.assertEqual(clock(), 70)
+
+    def test_half_open_releases_after_unexpected_transport_exception(self):
+        clock = FakeClock()
+        client = controlled_client(clock, retries=0, forbidden_cooldown=60)
+        session = Mock()
+        session.get.side_effect = [response(403), CancelledError("probe cancelled"), response()]
+        with patch("exchange_rates.http.requests.Session", return_value=session):
+            with self.assertRaises(HttpError):
+                client.request_json(URL)
+            with self.assertRaises(CancelledError):
+                client.request_json(URL)
+            self.assertFalse(client._gate._probe_inflight)
+            client.request_json(URL)
+        self.assertFalse(client._gate._recovering)
+
+    def test_half_open_allows_only_one_probe_until_success(self):
+        clock = FakeClock()
+        gate = RateGate(forbidden_cooldown=60, forbidden_threshold=3, clock=clock)
+        old_epoch = gate.acquire()
+        gate.record_response(403, response(403), epoch=old_epoch)
+        clock.advance(60)
+        started, waiting, release = Event(), Event(), Event()
+        probes = []
+        lock = Lock()
+
+        def wait(seconds, cancelled):
+            waiting.set()
+            self.assertTrue(release.wait(2))
+
+        def acquire():
+            epoch = gate.acquire()
+            with lock:
+                probes.append(epoch)
+            started.set()
+            return epoch
+
+        gate._wait = wait
+        with ThreadPoolExecutor(max_workers=9) as pool:
+            futures = [pool.submit(acquire) for _ in range(9)]
+            try:
+                self.assertTrue(started.wait(2))
+                self.assertTrue(waiting.wait(2))
+                self.assertEqual(len(probes), 1)
+                gate.record_response(200, response(), epoch=probes[0])
+            finally:
+                release.set()
+            for future in futures:
+                self.assertEqual(future.result(timeout=2), 1)
+        self.assertEqual(len(probes), 9)
+        self.assertFalse(gate._recovering)
+        self.assertFalse(gate._probe_inflight)
+
     def test_threaded_gate_waits_do_not_hold_shared_lock(self):
         clock = FakeClock()
         waiting, release = Event(), Event()

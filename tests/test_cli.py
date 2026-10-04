@@ -18,6 +18,8 @@ from exchange_rates.providers import RecoveryError
 class FakeClient:
     def __init__(self, **kwargs):
         self.records = []
+        self.interval = kwargs.get("interval", 0.5)
+        self.global_interval = kwargs.get("global_interval", 0)
 
     def __enter__(self):
         return self
@@ -121,6 +123,64 @@ class CliTests(unittest.TestCase):
         self.assertEqual(status, 1)
         factory.assert_called_once_with(timeout=5, global_interval=0.5)
         self.assertTrue((self.default_diagnostics / "mastercard/run-error/report.json").is_file())
+
+    def test_default_pacing_is_per_session_without_shared_limit(self):
+        config = load_config(None)
+        self.assertEqual(config["http"]["interval"], 0.5)
+        self.assertEqual(config["http"]["global_interval"], 0)
+        for provider in ("visa", "mastercard"):
+            with self.subTest(provider=provider):
+                self.assertNotIn("global_interval", config["providers"][provider].get("http", {}))
+
+    def test_interval_parser_defaults_and_explicit_values(self):
+        self.assertIsNone(parser().parse_args(["fetch", "--provider", "visa"]).interval)
+        for text, expected in (("0", 0.0), ("0.75", 0.75)):
+            with self.subTest(value=text):
+                args = parser().parse_args(["fetch", "--provider", "visa", "--interval", text])
+                self.assertEqual(args.interval, expected)
+
+    def test_invalid_interval_exits_before_client_or_diagnostics(self):
+        for value in ("-0.1", "nan", "inf", "-inf", "1e309", "invalid"):
+            with self.subTest(value=value), \
+                 patch("exchange_rates.cli.HttpClient") as client, \
+                 patch("exchange_rates.cli.Diagnostics") as diagnostics, \
+                 contextlib.redirect_stderr(io.StringIO()), \
+                 self.assertRaises(SystemExit) as caught:
+                main(["fetch", "--provider", "visa", f"--interval={value}"])
+            self.assertEqual(caught.exception.code, 2)
+            client.assert_not_called()
+            diagnostics.assert_not_called()
+
+    def test_interval_cli_overrides_provider_but_omission_preserves_config(self):
+        config = load_config(None)
+        config["http"] = {"interval": 0.5, "global_interval": 0}
+        config["providers"]["mastercard"]["http"] = {"interval": 0.9}
+        for arguments, expected in (([], 0.9), (["--interval", "0"], 0.0),
+                                    (["--interval", "0.75"], 0.75)):
+            output = io.StringIO()
+            with self.subTest(arguments=arguments), tempfile.TemporaryDirectory() as temporary, \
+                 patch("exchange_rates.cli.load_config", return_value=config), \
+                 patch("exchange_rates.cli.HttpClient", side_effect=FakeClient) as factory, \
+                 patch("exchange_rates.cli.prepare_catalog", side_effect=RuntimeError("catalog fixture")), \
+                 contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
+                status = main(["fetch", "--provider", "mastercard", "--data-dir", temporary,
+                               *arguments])
+            self.assertEqual(status, 1)
+            factory.assert_called_once_with(interval=expected, global_interval=0)
+            self.assertIn(f"per-session interval={expected:g}s; global interval=0s", output.getvalue())
+            self.assertEqual(config["providers"]["mastercard"]["http"]["interval"], 0.9)
+
+    def test_fetch_workflows_expose_interval_with_empty_input_fallback(self):
+        workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
+        for provider in ("unionpay", "visa", "mastercard"):
+            with self.subTest(provider=provider):
+                text = (workflows / f"fetch-{provider}.yml").read_text()
+                self.assertIn("      interval:\n", text)
+                self.assertIn("        default: '0.5'\n        type: string", text)
+                self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.5' }}", text)
+                self.assertIn('--interval "$REQUEST_INTERVAL"', text)
+                self.assertNotIn("      global_interval:\n", text)
+                self.assertNotIn("--global-interval", text)
 
     def test_nine_megabyte_error_is_artifact_not_terminal_or_summary(self):
         with tempfile.TemporaryDirectory() as temporary:

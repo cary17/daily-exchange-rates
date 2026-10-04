@@ -53,8 +53,11 @@ class RateGate:
         self.consecutive_forbidden = 0
         self.broken = False
         self.last_response: Any = None
+        self._epoch = 0
+        self._recovering = False
+        self._probe_inflight = False
 
-    def acquire(self, cancel_event: Event | None = None) -> None:
+    def acquire(self, cancel_event: Event | None = None) -> int:
         while True:
             if cancel_event is not None and cancel_event.is_set():
                 raise CancelledError("Currency shard cancelled after another shard failed")
@@ -63,22 +66,34 @@ class RateGate:
                     raise GateBlockedError(self.last_response)
                 now = self._clock()
                 remaining = max(self._next_started, self._cooldown_until) - now
+                if self._recovering and self._probe_inflight:
+                    remaining = max(remaining, self.WAIT_SLICE)
                 if remaining <= 0:
                     self._next_started = now + self.global_interval
-                    return
+                    if self._recovering:
+                        self._probe_inflight = True
+                    return self._epoch
             # No future reservations: every wake rechecks cooldown and broken.
             self._wait(min(remaining, self.WAIT_SLICE), cancel_event)
 
-    def record_response(self, status: int, response: Any) -> bool:
+    def record_response(self, status: int | None, response: Any, *,
+                        epoch: int | None = None) -> bool:
         with self._lock:
             if self.broken:
                 return True
+            # Responses already in flight before a denial cannot judge recovery.
+            if epoch is not None and epoch != self._epoch:
+                return False
+            self._probe_inflight = False
             if status == 200:
                 self.consecutive_forbidden = 0
+                self._recovering = False
             elif status == 403:
                 self.last_response = response
                 self.consecutive_forbidden += 1
                 if self.forbidden_cooldown:
+                    self._epoch += 1
+                    self._recovering = True
                     self._cooldown_until = max(
                         self._cooldown_until, self._clock() + self.forbidden_cooldown,
                     )

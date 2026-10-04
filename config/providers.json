@@ -2,7 +2,7 @@
   "http": {
     "timeout": 30,
     "retries": 3,
-    "interval": 0.3,
+    "interval": 0.5,
     "global_interval": 0,
     "forbidden_cooldown": 60,
     "forbidden_threshold": 3

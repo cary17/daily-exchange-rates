@@ -13,6 +13,11 @@ on:
         required: false
         default: ''
         type: string
+      interval:
+        description: 'Per-session request interval in seconds (finite, >= 0)'
+        required: false
+        default: '0.5'
+        type: string
 
 permissions:
   contents: write
@@ -45,11 +50,13 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           START_DATE: ${{ inputs.start_date }}
           END_DATE: ${{ inputs.end_date }}
+          REQUEST_INTERVAL: ${{ inputs.interval || '0.5' }}
         run: |
           python -m exchange_rates fetch \
             --provider unionpay \
             --start-date "$START_DATE" \
             --end-date "$END_DATE" \
+            --interval "$REQUEST_INTERVAL" \
             --data-dir "$RUNNER_TEMP/rates-data" \
             --diagnostics-dir "$RUNNER_TEMP/exchange-rate-diagnostics" \
             --publish --remote origin --branch data

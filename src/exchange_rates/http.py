@@ -71,7 +71,7 @@ class AccessBlockedError(HttpError):
 
 class HttpClient:
     def __init__(self, timeout: float = 30, retries: int = 3,
-                 interval: float = 0.3, cancel_event: Event | None = None,
+                 interval: float = 0.5, cancel_event: Event | None = None,
                  global_interval: float = 0, forbidden_cooldown: float = 0,
                  forbidden_threshold: int = 0):
         finite_seconds("timeout", timeout, positive=True)
@@ -131,7 +131,6 @@ class HttpClient:
             remaining = self.interval - (time.monotonic() - self._last_started)
             if remaining > 0:
                 self._sleep(remaining)
-        self._last_started = time.monotonic()
 
     def request_json(self, url: str, params: Mapping[str, Any] | None = None,
                      headers: Mapping[str, str] | None = None) -> JsonResponse:
@@ -147,12 +146,15 @@ class HttpClient:
         records: list[dict[str, Any]] = []
         for attempt in range(self.retries + 1):
             self._wait()
+            epoch = None
             if self._gate.enabled:
                 try:
-                    self._gate.acquire(self.cancel_event)
+                    epoch = self._gate.acquire(self.cancel_event)
                 except GateBlockedError as exc:
                     raise AccessBlockedError(exc.response) from exc
+            response_recorded = False
             try:
+                self._last_started = time.monotonic()
                 response = session.get(
                     url, params=params, headers=headers, timeout=self.timeout,
                 )
@@ -185,7 +187,9 @@ class HttpClient:
                 result.records = records
                 status = response.status_code
                 if self._gate.enabled:
-                    if self._gate.record_response(status, result) and status == 403:
+                    blocked = self._gate.record_response(status, result, epoch=epoch)
+                    response_recorded = True
+                    if blocked and status == 403:
                         raise AccessBlockedError(result, records, request_sent=True)
                 if 200 <= status < 300:
                     if not decode_json:
@@ -206,5 +210,8 @@ class HttpClient:
                 if attempt == self.retries:
                     raise HttpError(f"HTTP {status} for {url} after retries",
                                     status, result, records)
+            finally:
+                if self._gate.enabled and not response_recorded:
+                    self._gate.record_response(None, None, epoch=epoch)
             self._sleep(max(self.interval, 0.5) * (2 ** attempt))
         raise AssertionError("unreachable retry state")
