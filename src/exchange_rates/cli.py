@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 
 from .archive_backend import DirectoryArchiveBackend, GitHubArchiveBackend
 from .concurrency import SHARD_COUNT
+from .diagnostics import Diagnostics
 from .http import HttpClient
 from .providers import fetch_day, prepare_catalog, provider_ids
 from .publishing import BranchPublisher, write_summary
@@ -79,6 +80,7 @@ def parser() -> argparse.ArgumentParser:
     for subcommand in (collect, archive, verify):
         subcommand.add_argument("--data-dir", type=Path, default=Path("rates-data"))
     for subcommand in (collect, archive):
+        subcommand.add_argument("--diagnostics-dir", type=Path, default=Path("diagnostics"))
         subcommand.add_argument("--release-dir", type=Path, default=Path("release-output"))
         subcommand.add_argument("--publish", action="store_true")
         subcommand.add_argument("--remote", default="origin")
@@ -86,7 +88,16 @@ def parser() -> argparse.ArgumentParser:
     return command
 
 
-def execute(args: argparse.Namespace) -> int:
+def _emit_summary(text: str) -> None:
+    try:
+        write_summary(text)
+    except OSError:
+        print("Step summary unavailable; consult diagnostic report files", file=sys.stderr)
+
+
+def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) -> int:
+    diagnostics = diagnostics or Diagnostics(getattr(args, "diagnostics_dir", Path("diagnostics")),
+                                             getattr(args, "data_dir", None))
     if args.command == "download":
         if args.output_dir.exists() and any(args.output_dir.iterdir()):
             raise ValueError("Archive download requires an empty output directory")
@@ -116,13 +127,16 @@ def execute(args: argparse.Namespace) -> int:
             publisher.publish(f"Archive due periods through {as_of.isoformat()}", snapshot=snapshot)
         details = ", ".join(periods) if periods else "none"
         summary = f"Released archive periods: {details}; annual data snapshot: {snapshot}"
+        summary = diagnostics.finish(args.command, "", 0, summary)
         print(summary)
-        write_summary(summary)
+        _emit_summary(summary)
         return 0
     assert interval is not None
     first, last = interval
     successes, failures = [], []
-    with HttpClient(**config.get("http", {})) as client:
+    http_settings = {**config.get("http", {}), **config["providers"][args.provider].get("http", {})}
+    with HttpClient(**http_settings) as client:
+        diagnostics.records = client.records
         catalog = prepare_catalog(args.provider, config["providers"][args.provider], client)
         pair_count = catalog.pair_count if catalog is not None else 1
         count = (last - first).days + 1
@@ -132,34 +146,47 @@ def execute(args: argparse.Namespace) -> int:
         print(f"Provider {args.provider}: {first} through {last}; {count * pair_count} base requests")
         target = first
         while target <= last:
+            args._diagnostic_target = target.isoformat()
             client.records.clear()
             try:
                 result = fetch_day(args.provider, target, catalog, config["providers"][args.provider], client)
             except Exception as exc:
-                failures.append((target.isoformat(), str(exc)))
-                print(f"FAILED {target}: {exc}", file=sys.stderr)
+                entry = diagnostics.failure(args.provider, target.isoformat(), exc, client.records)
+                failures.append(target.isoformat())
+                print(f"FAILED {target}: {entry['brief']}", file=sys.stderr)
             else:
                 # A storage or Release failure aborts data-branch publication entirely.
                 store.save_day(result)
                 successes.append(target.isoformat())
+                diagnostics.success(result)
                 print(f"SAVED {target}")
             if target == last:
                 break
             target += timedelta(days=1)
     if publisher is not None and successes:
         publisher.publish(f"Fetch {args.provider}: {first} through {last}")
-    summary = f"Provider: {args.provider}\n\nSaved: {', '.join(successes) or 'none'}"
-    if failures:
-        summary += "\n\nFailed dates:\n" + "\n".join(f"- {day}: {message}" for day, message in failures)
+    status = 1 if failures else 0
+    summary = diagnostics.finish(args.command, args.provider, status)
     print(summary)
-    write_summary(summary)
-    return 1 if failures else 0
+    _emit_summary(summary)
+    return status
 
 
 def main(argv: list[str] | None = None) -> int:
+    args = None
+    diagnostics = None
     try:
-        return execute(parser().parse_args(argv))
+        args = parser().parse_args(argv)
+        diagnostics = Diagnostics(getattr(args, "diagnostics_dir", Path("diagnostics")),
+                                  getattr(args, "data_dir", None))
+        return execute(args, diagnostics)
     except (Exception, KeyboardInterrupt) as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        write_summary(f"Task failed: {exc}")
+        diagnostics = diagnostics or Diagnostics(Path("diagnostics"))
+        entry = diagnostics.failure(getattr(args, "provider", ""),
+                                    getattr(args, "_diagnostic_target", None), exc,
+                                    diagnostics.records, fatal=True)
+        print(f"ERROR: {entry['brief']}", file=sys.stderr)
+        summary = diagnostics.finish(getattr(args, "command", "task"),
+                                     getattr(args, "provider", ""), 1)
+        _emit_summary(summary)
         return 1
