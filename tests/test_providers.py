@@ -17,7 +17,7 @@ from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.http import HttpClient, HttpError, JsonResponse, ResponseDecodeError
 from exchange_rates.models import DayResult, json_bytes
 from exchange_rates.providers import (
-    DateMismatchError, NoDataError, ProviderError, fetch_day, provider_ids,
+    DateMismatchError, NoDataError, ProviderError, RecoveryError, fetch_day, provider_ids,
 )
 
 
@@ -96,10 +96,6 @@ class FakeFork:
         self.closed = True
 
     def request_json(self, *args, **kwargs):
-        # Keep peers in flight until the coordinator propagates the injected failure.
-        if isinstance(self.owner, FakeClient) and self.owner.failed.is_set():
-            if not self.cancel_event.wait(5):
-                raise AssertionError("Shard failure did not propagate cancellation")
         if self.cancel_event is not None and self.cancel_event.is_set():
             raise CancelledError()
         result = self.owner.request_json(*args, **kwargs)
@@ -178,15 +174,16 @@ class ProviderTests(unittest.TestCase):
                     expected = FakeClient(provider).request_json("ignored", record["request"]["params"])
                     self.assertEqual(record["response"]["body_text"], expected.body_text)
 
-    def test_one_failure_aborts_day(self):
+    def test_one_failure_recovers_after_complete_scan(self):
         for provider in ("visa", "mastercard"):
             client = FakeClient(provider, fail_at=7)
-            with self.subTest(provider=provider), self.assertRaises(HttpError):
-                fetch_day(provider, DAY, CURRENCIES, {}, client)
-            self.assertGreaterEqual(len(client.calls), 7)
-            self.assertLess(len(client.calls), len(CURRENCIES) * (len(CURRENCIES) - 1))
+            with self.subTest(provider=provider):
+                result = fetch_day(provider, DAY, CURRENCIES, {}, client)
+            self.assertEqual(len(client.calls), 111)
+            self.assertEqual(result.metadata["recovery"],
+                             {"initial_failed": 1, "rounds": 1, "repaired": 1})
             self.assertTrue(all(child.closed for child in client.forks))
-            self.assertTrue(all(child.cancel_event.is_set() for child in client.forks))
+            self.assertTrue(all(not child.cancel_event.is_set() for child in client.forks))
 
     def test_missing_required_fields_fail(self):
         for provider, container, keys in (
@@ -197,20 +194,20 @@ class ProviderTests(unittest.TestCase):
                 client = FakeClient(provider, mutate=lambda obj, c=container, k=key: obj[c].pop(k))
                 with self.subTest(provider=provider, missing=key), self.assertRaises(ProviderError):
                     fetch_day(provider, DAY, CURRENCIES, {}, client)
-                self.assertEqual(len(client.calls), 1)
-                self.assertEqual(client.forks, [])
+                self.assertEqual(len(client.calls), 330)
+                self.assertEqual(len(client.forks), 27)
 
     def test_date_mismatch_and_invalid_date(self):
         for provider, container, field in (
             ("visa", "originalValues", "exchangedate"),
             ("mastercard", "data", "exchange_date"),
         ):
-            for returned, exception in (("2026-03-26", DateMismatchError), ("not-a-date", ProviderError)):
+            for returned, exception in (("2026-03-26", RecoveryError), ("not-a-date", RecoveryError)):
                 client = FakeClient(provider, mutate=lambda obj, c=container, f=field, v=returned: obj[c].update({f: v}))
                 with self.subTest(provider=provider, returned=returned), self.assertRaises(exception):
                     fetch_day(provider, DAY, CURRENCIES, {}, client)
-                self.assertEqual(len(client.calls), 1)
-                self.assertEqual(client.forks, [])
+                self.assertEqual(len(client.calls), 330)
+                self.assertEqual(len(client.forks), 27)
 
     def test_card_error_status_and_bill_mismatch(self):
         mutations = (
@@ -223,7 +220,7 @@ class ProviderTests(unittest.TestCase):
             client = FakeClient(provider, mutate=mutate)
             with self.subTest(provider=provider), self.assertRaises(ProviderError):
                 fetch_day(provider, DAY, CURRENCIES, {}, client)
-            self.assertEqual(len(client.calls), 1)
+            self.assertEqual(len(client.calls), 330)
 
     def test_rounding_is_allowed(self):
         for provider, container, field in (
@@ -314,11 +311,12 @@ class ProviderTests(unittest.TestCase):
                 data = official_data(provider, params)
                 (data[container] if container else data)[field] = wrong
                 return response(data, url, params, headers)
-            client = Mock()
+            client = forkable_mock()
             client.request_json.side_effect = altered
-            with self.subTest(provider=provider, field=field), self.assertRaises(DateMismatchError):
+            expected_error = DateMismatchError if provider == "unionpay" else RecoveryError
+            with self.subTest(provider=provider, field=field), self.assertRaises(expected_error):
                 fetch_day(provider, date(2026, 9, 30), ("USD", "CNY"), {}, client)
-            self.assertEqual(client.request_json.call_count, 1)
+            self.assertEqual(client.request_json.call_count, 3 if provider == "unionpay" else 6)
 
     def test_official_returned_currency_direction_must_match(self):
         for provider, container, fields in (
@@ -330,11 +328,11 @@ class ProviderTests(unittest.TestCase):
                     data = official_data(provider, params)
                     data[container][field] = "EUR"
                     return response(data, url, params, headers)
-                client = Mock()
+                client = forkable_mock()
                 client.request_json.side_effect = altered
                 with self.subTest(provider=provider, field=field), self.assertRaises(ProviderError):
                     fetch_day(provider, date(2026, 9, 30), ("USD", "CNY"), {}, client)
-                self.assertEqual(client.request_json.call_count, 1)
+                self.assertEqual(client.request_json.call_count, 6)
 
     def test_publication_and_current_dates_are_not_rate_dates(self):
         for provider in provider_ids():
@@ -356,7 +354,7 @@ class ProviderTests(unittest.TestCase):
                 data = official_data("visa", params)
                 data["originalValues"]["asOfDate"] = timestamp
                 return response(data, url, params, headers)
-            client = Mock()
+            client = forkable_mock()
             client.request_json.side_effect = altered
             with self.subTest(timestamp=timestamp), self.assertRaises(ProviderError):
                 fetch_day("visa", date(2026, 9, 30), ("USD", "CNY"), {}, client)
@@ -382,7 +380,7 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(len(client.calls), catalog.pair_count)
                 self.assertNotIn(("USD", "USD"), pairs)
                 self.assertIn(("CNY", "SKK"), pairs)
-                self.assertEqual(call_pair(provider, client.calls[0][1]), expected[0])
+                self.assertIn(call_pair(provider, client.calls[0][1]), expected)
                 self.assertEqual(len(client.forks), 9)
                 self.assertEqual(len({id(child) for child in client.forks}), 9)
                 self.assertEqual(len({id(child.records) for child in client.forks}), 9)
