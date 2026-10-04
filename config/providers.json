@@ -3,7 +3,7 @@
     "timeout": 30,
     "retries": 3,
     "interval": 0.3,
-    "global_interval": 0.1,
+    "global_interval": 0,
     "forbidden_cooldown": 60,
     "forbidden_threshold": 3
   },
@@ -22,7 +22,6 @@
     },
     "mastercard": {
       "recovery_rounds": 2,
-      "http": {"global_interval": 0.5},
       "endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
       "currency_endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies",
       "referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
