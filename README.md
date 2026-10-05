@@ -20,7 +20,7 @@ Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种�
 
 各机构的 `recovery_rounds` 在 `config/providers.json` 配置，默认 `2`，设为 `0` 关闭末尾补抓；它独立于 HTTP 传输重试。银联仅提供整份 JSON，校验失败时重新下载该日完整文件。原始记录保留失败与补抓请求，元数据记录补抓轮数和恢复数量。
 
-抓取没有定时任务。Visa 与 Mastercard 各自编排为 `prepare → shard × N → merge` 三个阶段：`prepare` 计算日期与分片矩阵，`shard` 每个 job 只抓一个分片并把结果上传为 Artifact，`merge` 汇总全部分片、校验币对完整性与目录一致性后一次性发布。银联仍是单 job 直接下载整份 JSON。工作流之间串行发布。
+抓取没有定时任务。Visa 与 Mastercard 各自编排为 `prepare → shard × N → plan-retry → retry × 失败分片数 → merge`：`prepare` 计算日期与分片矩阵，`shard` 每个 job 只抓一个分片并把结果上传为 Artifact；首轮全部结束后，`plan-retry` 仅按结果文件是否存在找出缺失分片及日期，不重复读取大响应或执行完整校验。没有缺片时跳过 `retry`，否则用新 runner 补跑一轮，成功分片及已成功的日期不重复采集。`merge` 先下载首轮结果，再覆盖补跑结果，校验币对完整性与目录一致性后一次性发布；补跑仍有缺片时该日不发布部分数据。银联仍是单 job 直接下载整份 JSON。工作流之间串行发布。
 
 默认每个会话的 `http.interval` 为 `0.3` 秒，三个抓取工作流的 `interval` 输入可在每次运行时修改；留空回退到默认值，支持有限的非负数，`0` 表示关闭会话间隔。本地使用 `--interval 0.8` 临时覆盖机构与全局配置，不传参数则沿用配置。`http.global_interval` 保持 `0`，不启用跨会话共享限速。
 
