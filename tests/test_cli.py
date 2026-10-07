@@ -171,7 +171,7 @@ class CliTests(unittest.TestCase):
             self.assertIn(f"per-session interval={expected:g}s; global interval=0s", output.getvalue())
             self.assertEqual(config["providers"]["mastercard"]["http"]["interval"], 0.9)
 
-    def test_unionpay_workflow_keeps_single_job_with_interval_default(self):
+    def test_unionpay_workflow_keeps_single_fetch_job_with_separate_publish(self):
         workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
         text = (workflows / "fetch-unionpay.yml").read_text()
         self.assertIn("      interval:\n", text)
@@ -426,8 +426,7 @@ class CliTests(unittest.TestCase):
                  patch("exchange_rates.cli.prepare_catalog", side_effect=error), \
                  patch.dict("os.environ", {"GITHUB_STEP_SUMMARY": str(summary)}), \
                  contextlib.redirect_stderr(stderr):
-                status = main(["fetch", "--provider", "visa", "--data-dir", str(root / "data"),
-                               "--diagnostics-dir", str(root / "diagnostics")])
+                status = main(["fetch", "--provider", "visa", "--data-dir", str(root / "data")])
             self.assertEqual(status, 1)
             report = json.loads((root / "diagnostics/visa/run-error/report.json").read_bytes())
             self.assertEqual(report["error"], str(error))
@@ -473,8 +472,8 @@ class CliTests(unittest.TestCase):
              contextlib.redirect_stdout(io.StringIO()):
             output = Path(temporary) / "download"
             factory.return_value.materialize.return_value = {"2026-09.tar.gz": output / "2026-09.tar.gz"}
-            status = main(["download", "--repository", "cary17/daily-exchange-rates",
-                           "--period", "2026-09", "--output-dir", str(output)])
+            status = main(["download", "--repository", "cary17/daily-exchange-rates", "--period", "2026-09",
+                           "--output-dir", str(output)])
             self.assertEqual(status, 0)
             factory.assert_called_once_with("cary17/daily-exchange-rates", "fixture-token")
             factory.return_value.materialize.assert_called_once_with("2026-09", output)
@@ -486,8 +485,8 @@ class CliTests(unittest.TestCase):
             output = Path(temporary)
             marker = output / "keep.txt"
             marker.write_text("keep")
-            self.assertEqual(main(["download", "--repository", "cary17/daily-exchange-rates",
-                                   "--period", "2026-09", "--output-dir", str(output)]), 1)
+            self.assertEqual(main(["download", "--repository", "cary17/daily-exchange-rates", "--period", "2026-09",
+                                   "--output-dir", str(output)]), 1)
             factory.assert_not_called()
             self.assertEqual(marker.read_text(), "keep")
 
