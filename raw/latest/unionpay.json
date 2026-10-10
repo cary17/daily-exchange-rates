@@ -11,7 +11,7 @@
   "requests": [
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T03:10:54.747526Z",
+      "fetched_at_utc": "2026-10-10T08:40:51.865250Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -27,13 +27,13 @@
           "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
           "content-encoding": "br",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 03:10:54 GMT",
+          "date": "Sat, 10 Oct 2026 08:40:51 GMT",
           "eo-cache-status": "MISS",
-          "eo-log-uuid": "4385078114541769816",
-          "etag": "W/\"6ac9ac97-216bd\"",
-          "last-modified": "Sat, 10 Oct 2026 03:10:15 GMT",
+          "eo-log-uuid": "1497616931955056009",
+          "etag": "W/\"6ac9f9ef-216bd\"",
+          "last-modified": "Sat, 10 Oct 2026 08:40:15 GMT",
           "server": "TencentEdgeOne",
-          "set-cookie": "tgw_l7_route=4463820afa6e1a580b8a21989312f26d; Expires=Sat, 10-Oct-2026 03:40:54 GMT; Path=/"
+          "set-cookie": "tgw_l7_route=4463820afa6e1a580b8a21989312f26d; Expires=Sat, 10-Oct-2026 09:10:51 GMT; Path=/"
         },
         "status_code": 200,
         "url": "https://www.unionpayintl.com/upload/jfimg/20261010.json"
