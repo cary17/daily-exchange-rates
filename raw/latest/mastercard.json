@@ -2,7 +2,7 @@
   "catalog_requests": [
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:22.519148Z",
+      "fetched_at_utc": "2026-10-11T21:51:21.269225Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -18,16 +18,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:22 GMT",
-          "set-cookie": "_abck=C0CB3BECC916BD02294B9B55C3B9C4CA~-1~YAAQUskLF/ZCg/egAQAAlJnMJxDa9Af3h1Nc3KSAhUPS+/lic5ZB1QtMdIMG8JgBwJmJgEV9reH6bOcgi0Dr1ve8r2h1Wi1XxPtU1U0GIgKhtwzOGVaI9oSriaM4ItzGXV2yf23gLBnSUXH2Gnok6buFu4tXOH3GvaCkRsyTP6i5Cj0bwgt7QeUKejI1zzjFvaKZpMgXM+eEFJzT567v7iBDqN0AHKd424+IAlHFKeobmXVvR9+qMK42kUNg6KM8E+DLYuVN+2l0lMZ0/wQtwME03a1MLbEe7dpLekDb+8b/xCZFYUHVtgvNmpYDgzuE3rf9+jVX6OPwKUP+0GDm6Ay4BEBIwFCxTIbgyeKBrbSZu1k6xXhO3wLSHujepmtis5V5pclvuJnxgCmy2Q2VuBf5xiNIehhll5DQimU/6lfnBI+ECIhBxGsxdyKghlrizDboKXSzk/B1pz1h~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:22 GMT; Max-Age=31536000; Secure, ak_bmsc=0408664ED2312AE917F2B699E80E5638~000000000000000000000000000000~YAAQUskLF/dCg/egAQAAlJnMJwEBmqKUZC2F2ldAdcEyWEM7lR5iCRucsDOH99o1S4gVoBENHwWEZ/hwCaYfIs5EHbgY194yDpbNFkpPbId3nKS5OApHeJgn7iMr5wzXr8jbhkw6W5vknMiu4fqyOVbjakR/9LR1W0wx1GBoQfkNnHhJmyTNEWgvYl5BJdQLDA691VRJmMDGj8TNpdH8OqICqikID6hkG7BSaOUk1BxH4fgISEkrqbojSfMtEuRO8OxaAz91lv+D+looTny9iFM0R/YfAiert+EEsyspf14CEG58kA6CL6QVA6b3BQCsgcu9MgPA8TcLPk0z3PTHjvtzt8n3Yj0IlmVZDbqbM0Aebkpsu17H5SWuehRan+/s3UDAbNpq7DSD1LzmwOU9yVo=; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:22 GMT; Max-Age=7200; HttpOnly, bm_sz=76F8C8E9FD67A2EF03191DA974F343B5~YAAQUskLF/hCg/egAQAAlJnMJwGhYAQ7Xaj4+XqEPnZbq8LbFPK6EKbLnWBn1oQrc88URw0rgokTuUiQHNx7hl58QEh760T7vng4hfIRdJO+NRv8336DHSliK/D521MiJ78nie5SHVtjCsp2DroLbtKYkajv7KGOFYYfb3lhQ4tadCnGabzXU6jRyevbzoI0pm4NS3l3Pvv+1ucGYAq93qZ82v/4ezC+VSojIfHteoEIAfOB57WMO0I4Y/DU6Vg2WM2qWz6M6ivfZiC9Gxt2VDvAg85pO5n7obqRTAGJIHxefoml+e4RIMhBIMPQFV08jKh7+UdPd5N1fwUrs3235p7CWZy/BbfSnhpILVXfJcllJ3Ydjqz9itm6DIpsuxXOD0ANLMMnnOHl0UcmTSnqk1Dorg==~4340035~3552055; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:22 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:21 GMT",
+          "set-cookie": "_abck=381A684A04F3F4C649E0B3D7E37EADB0~-1~YAAQMVHbF6U3Dx6hAQAAo/DyLBA0+Xs4BXNC4OwHg94AwPuUyTsiB/WL4SDEsTMNODY/oprC/XITaj9CvRuvacztUPWE5DQ5QUbTyxXQxcb5+l+tOeiSpdpMLt94dEgqjSrx3PeFXlivexuEMipKW40eKglhHIAhEWBT6KEeyhnDR+bBn77exV/jlckAo2MTSsneeUWXA6cKMP2W31U0xSWwIXMlQtuxgDyTlfeZOCCNpWNVBc/S+Df0bxBTs57gXi7CrZA7rI3eWAuVEmeMzZYlXEz1YXlA8/DpaU861lTPcbd4CTuvx/rKDTZFu3m5zk+9qPGbupO+bcSGv/CLrpqkD+SLJKXFm7Y+lLKrc5EAAnLuHdNyr3ujgd2HsXS+qaUhFf8Pk4ntB2hOzlQRxt4CpvBL7T5T79pMtOrENIudRDqs7LCYWPvA4DivLenYd6c+O38OsLo18eD5~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=A6E7C0252E790F2B0FC6D1B1E3D984B9~000000000000000000000000000000~YAAQMVHbF6Y3Dx6hAQAApPDyLAGSj69PQYNvq+YKd1TINnbSwvZgNhLnvcht2NGIt4GqVkhxqhCM2x1UeI4llyvOpt6K3Zq3/e3k0xDrRZIst593ex1cmKFwCGmNEEJtUcHuJodpUVhsxLxEgVvwdv0p8dOyp2dk3g5sYsf/aXZaOkzG1sQA6OTAOPlV2/aqq5JsDT46rkAN73EypNrnJZ+8nyyK3KnB8Kl41UhAXM07W6yP6jvYQcUx/lLPeJNWc6ycUQMylg6TI5eD2vHT6VeuqKaivshGp8K3wVIZDDXaRfn8IFjpAYlk1Pmt+SOEsF/X4eZZi5HrWIR0c6F8NzzIKqUtr3CEBwPJVf8O5/nRkcW+LJrNFIFMwuqoDpz4M14y2u1xl+T1UIsQsA0YvhU=; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=B2C48F277A0CFDB150BD0F25DA349E60~YAAQMVHbF6c3Dx6hAQAApPDyLAELQnbtFiIHxbDMJFUj4p5becabnQI1jPHs2ka6IwuOO3O6xtXq3RevxUiCLArgldh6kUXidAiDH2ujpzal0HsbBHaEy79Njfvwmao16v2Rb90M3Krmd4ILqaRsF9XEqCNe0kYgoc1+adbg8n7+uc2ncyvDFylUiKsWIXpYhAUKaERIw4ipI70wqcs+r0NJeZzCpcwLtdMJJnrsXYV/VbHZcGAR7i18PHZV2/+Xfio7QJZ7nWTrbqMrcua7rSh7J8N9gOvpNoBOT3e3EVJXP8FrrRS8IiV8iUxqdirNFEKGJlLUtrhLjoanlf4HHhYVS+eqI6D6zj8SVm129Wjz5yBXE8E7U8smMdkBh7tjHWkkzJ0I32vME1hBtySGzIeh~3422515~3359545; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:21 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-f9352f7d8ef3251a2bed46100a41344b-18b3a7a1ed3892bb-01",
+          "traceresponse": "00-b5ff2b33e98924d6fb01d6d8f956bd10-b3d4791720001545-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "9f22c343befcfd413884098c0abb4d73",
-          "x-vcap-request-id": "d9b87363-7693-4cf2-7fb3-58b803167a44",
+          "x-mc-correlation-id": "ba4deb41eb76f6af04f007984862e5be",
+          "x-vcap-request-id": "4641d917-9b10-47bf-5f55-f88cf3f7d1d4",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -36,7 +36,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:22.727156Z",
+      "fetched_at_utc": "2026-10-11T21:51:21.951021Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -52,16 +52,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:22 GMT",
-          "set-cookie": "_abck=C688F4DD37359E433B7EA80A9F437895~-1~YAAQxgbSF+F2uB2hAQAAXprMJxBNQ4k3LyjhbkyOcSIqKwSjC1czXkvyACvOy5YjhZ236XutDaYNYjiu/uveXH31HQ70stcV2pHZrmiLyY5B0TnlhDrEDB5A/fG4/LB270RCFU+3vOvFaROWhN/rh88tTxafAYRMQEUDNL7JIauwUgsZ1CwFaNLXavprssgvfxG/SwZMGnR/IqQNFx3Elc76r7vc3idLtCuPGyt8A3lduS3Rdzg6Cg4CsZC+Nvb9AicKDqiGeVxNtU2Ihnbf+REy4Syg4dnbsZx3LYLiNWXJwlQqG9XjGrXktFZE7BlclY7fj65uuBGV5DmsCvdNaQDGDsndfDGgcdxYKgbPZpREXJPFqI2ZmnCn0tcTiPvE2oUoikmNjJLzYMBl9aLZ6gGCd+I2wtEJSWpDtiH9AbVTjVqQo5RRR8tfNdDpvGq7+vUp8k8uM8t4KxaE~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:22 GMT; Max-Age=31536000; Secure, ak_bmsc=4964F012F3AB75A50E4494C520AA13AE~000000000000000000000000000000~YAAQxgbSF+J2uB2hAQAAXprMJwFJuzjgkcJq6iFual2SvJHINnteTMt8ShAjYp9HHugGEEJkTdv+9dVw/KeSIHuGM/IGf8eM0uj4rP0T06EXg5HvgYAazjVV1IHfqpzAf+7CKdVMCLRyFYdRXOzFEZwC/bp3713W38mTMmT6dJ1DzNMHymlGDmJgQZfZqggrNiT2R9H3aHrHW/EOcECPlPm3av6tqjH1MOvWyuF04svtR+16tVL3c5ovwiZTUWJoT4ctKxkUml5a+vHe/P0uD7hmlKFtrGRw9YwyEWQRqo6HMWucZIrZgfwJjZmpU1Zz3rcFzrVxU+H5cGUcxFcsHGm/Qy7eUNf1fP0Qp/NoATOM1EIf032/X3IudddIsgnIxwBFiCCAqKu4erY+4g==; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:22 GMT; Max-Age=7200; HttpOnly, bm_sz=7A73A0DE9E84231F7B2465A02D2F4E0F~YAAQxgbSF+N2uB2hAQAAXprMJwGtrkPuIZs0gF9MkNXhF3jv1lgO3Q/uy1b4wYfZJsCf1YjMChB+Sxx9h02Pp5Z6vNaHLXdB9g2SfhoWRx8aDAbKqPU3TkVnsyB/POo5C4KjJ1KASPFwV8a/F5rTPCdN4xuenePgvlUgGtE4ALMORhjU/Ab+s4td/IrMjt6/KdTmvGIWzh7nUtlKS183MVSRV8Ls1nNJIyhbhuI3IToNvM1xevcivM1PttQxeXw5wjeiDgyk4JgbKEa02xb5G+MV3A2f+6boeVAY9fCmC8AIswvLjzhdZCNM8fLPIb5eXn0PDvFGiyik3y7FaAmLvb9XHjPQY9O7dIkufW4o8E4+hKRvCH2gJn4ALxLZAh5pQl1v9P+F5Xwy/qytDGp3~4340035~3552055; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:22 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:21 GMT",
+          "set-cookie": "_abck=693FB531B7058044572AB7F1130F2C33~-1~YAAQYskLF/rhLx2hAQAAXfPyLBAH4zWUj+1gy7rWMeNYugwjegs+TozDDaXgzW3ImrXfCQnAD5MK1McE04M98qR8JXbSKvHGMCtI/obsV7tzmFFlL+xc4ggJtzHwkHyhBHrCQokNqQs29hi7FQQr+LbjczMUDCp+ziW/QuuDqzpqLgVcVYlEZD+V6GLjh/1IDdk8b27SWK9FChXIaPDv2Ut8JZOOZu63g6/u/29OBt7KqVi86WOi/diKyqxQbPe6q6xgPd5N0vwBt1GQxAgSUFOF877V0vkTeQaycCiLEz1Sg4R4MeuarYMLWgkulWrTMKdhmTP/eFDEzGPbSk0tWOjVqVuqXZpaGFsVuRpCjnKSWJEjmSjvhmQ/vEdCeH9PmSLmcqmRcEc2sZOGA8Jq3zkNJ0PwSbE571lXbAcdXG5E2fAeP0Ty+3qICHJL0BG8Ite06een22sDMLX0~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=8CFD6587DAAA8903FA35CD18EB208043~000000000000000000000000000000~YAAQYskLF/vhLx2hAQAAXfPyLAEV3aGTliYwhdr0TtJTBHe15KFGUhyOERsjW03XA5ZdCrwo3MxE13kTh9tjfTAQFuvvPusYv630VLI27uW1itlAYYjH/gdSbw4+/rjTui9uOO7tGo5hu2c8gCBuakaCnbnyV59Q7R3orG2NtzOecVx8uS1C5na9iotvlnoq8S29xs66Sq6WjtnYyJonX2N7CDSOgdxbvYkZmtMqpxyfjaFI2L71CAcrqiE5Ii6/QUe4R+cMEuo+/RxCRJPY+/R/CIZ3zsoLAgE7buEVXItUqOSENLv0ucuPmXHX1EQh5YI04aKr2NTbAh9iQ6JSdijnGbTd5pnFzcHxjC7Ywu3Tcgfscj2sz3H5+QPPe8fvZ23WKqzijDjZcRl4H00zuoo=; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=3A6027142766875CE5594CF5207301F2~YAAQYskLF/zhLx2hAQAAXfPyLAHBlzuZ+9BJtK3vT9P/hgURA/++xhfvW5cxdMto8q0YSBXPBIqvfFH/wIBPao2agoG4Fqq2G5XbHUMh+Z7eiXY8qEmC6TrbwIp34uBbjEHq4FHFNklYpdTb0F1HBhsHGCfm8Qk44FnNwJbLxgQ4+wTOxuZs7CDmFrEKNGUQEU2xuawY8jOBLqu8uYlIw+kvGWfuEK9CV5QTzwwlj18qOSakeXXTyd/lrAR7y9ioXe76dyJ8CHRXIBjbJcBmhYU4U4rMUnuGSOZOexkNqItkJ9evDU7oQf827ccFscJTNkS2g7CMwRETYbmP+29sagKwb5l328lIbP7ldzeTj70lf2VRNn1SRNryINoaOnwYmqL/DZ7XKNdhBerEPCiOKL/E1Q==~3422515~3359545; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:21 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-066817b471c033f9b3d76f9aa6f958b1-8f41f8d6b196cbb1-01",
+          "traceresponse": "00-5e39e4b91877eb600b14e0c35237608d-04a8a525f94ed070-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8a1f55337c2af7cdd0280767cd1926d6",
-          "x-vcap-request-id": "abec45a6-43e7-4c0c-60e0-b652d2f7e705",
+          "x-mc-correlation-id": "30ce97ea2af3463f8e3b2ebc9d69d1e9",
+          "x-vcap-request-id": "6b8740ec-94d8-4c6e-517b-5f3b15ce81f0",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -70,7 +70,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:20.139526Z",
+      "fetched_at_utc": "2026-10-11T21:51:26.202639Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -86,16 +86,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:20 GMT",
-          "set-cookie": "_abck=17E2DAD2824D95A7E7FF7EACE7A98407~-1~YAAQxwbSF3pzgvigAQAAQ5DMJxDrxG3ekLhhLbc6pDtgEke0RWrXUbyyRpMBlCyxPfdsZ52tc/SMUtqmSF+AkPeAnaoFS5e+nYq/cbmq9IjMeBztPCjEHjcbUiYy3LLTECXoRsTPy1WTX25z5RVT3dO7NXOysSLGqbqpkTPZUednSi5uYRkyNODQNfiOsuo1HmfhFlKbhrP/oDL0IVAtZCmAeskMRDvrw0YCa6/gbYQHhOCZ2DGw6CVftvw+VwP2/7cKlP5ksAzkNvTNxcvCd0YALAcjQfseWz4EeY82A0J4XuMiI5qQDkJUHh6eJ2BZWthig1SvUbSk8QOZYU6OM0wSooINlLSMsLjv960fWBwd7EvJwMrsbHZ83ohb3TK+IIT5xubwy3mviqywSnfU9dRe1bhyOXdoMkcCrOieCKDNlVip8atTe/WFJlaNVOFUAkJgNtkiyHo2Qtk0~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:20 GMT; Max-Age=31536000; Secure, ak_bmsc=7F2852D80F5C836FAFA0470BC7B58A3C~000000000000000000000000000000~YAAQxwbSF3tzgvigAQAAQ5DMJwErqPNSmR5Up/7nKlcA09dnJS/jR9MsHr3a5CBcszRhRbeaIWuHnc6cwKHB17wXd6FmGTrzi2FEZrlmQ1nfWEz1qlAybTAMf1ueIyN3/r42wbyYCcBDb7hBDustMVH/rK4EwSfVTd5hlSkfUmNH2kNNskS/+7wfHf5OcoYRYX2pPDg8WfR9+2M3/nu7zEXBlCG72CE9SJO2+m/vGbpg64ruVWOGk5h7POMTXJ5J6qDuDk74AA9shqfC3JGZeJoB6TxTd2SRgfRNVaBElhbJX/dR06HpIpuV34UnPrwX1GRAKAWfU3zAsDk5OlV2aigIMnQNKeTHNVV3d2ivwsoheLTQOJDbYatwEibpmmnFw1pyulxHU+CzY5pYruYjThUz; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:20 GMT; Max-Age=7200; HttpOnly, bm_sz=5533753135DA46949E3FA44F16795D05~YAAQxwbSF3xzgvigAQAAQ5DMJwE2A/l1xhscD7mam+YHGlnxNi8nOqA6Oe/8lx/Gbbpb2Rzs/RIBnKSqcsJOz6YAjG/KOZASyajoKKUKNzHCFimk3Ev42ja0MiK9gQiVAY5lbndvu2kD6wGyntQV3+Vtd4dxZ2Bt0mZNtjWOMzgcFg/QYn7llRzkI+s7JHrqzMd7bd2gsKPhtFGjncgvTsk4bl810W4PM3lUEvaiPWTdRGdCq+1cMwL6YHQzhhgv+8zRJeho7DhhjP5OSPlgsWrbOEHc7jnkbazEhp6aDnROLlqqqzINOoRh3bSpZFhjoLN0FSaIVbEpKLeOo9e9bksQV9jT9US1zP/UpqhPM/KxbYT1NgEK9BHIVovRQcFcatW/+8VCYvjo9jh3Sqjm9B4FEsE=~4408898~4343092; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:20 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:26 GMT",
+          "set-cookie": "_abck=AC235C9458AE5AB18FB740DC87167BA7~-1~YAAQxwbSF7nCFfqgAQAA1wPzLBCDsWDwRJy0AdCCtmgaIpLA6OlAkGXgXJVwPfbFZ/ZJhZsn5UfBWL2+X/IMOXC62q82x9ontDW7dYg3oEn4fljmIBzItmWq5QsvwvW/eIGw1Qk1UJJZ4tcVprLOPVIQxheOce+lgdDgDcx+5YpJk+MI2rModxbdR1ABT7sloerUMXriWcMcTVWH6iYaLiPh01tjQ+wQf3ubXak70TtVpvaDftaGbCcktHA2IA7vi1uzIdFAIR32eBqO2DZY6yashHqRF0c2FBDT46ldLYdYMtPaq0r5K03Dianr9JHC4yEnOCqFJ3PDf8XKsaOR8khqbo293vZhRx6ycoY2mrSqtAJ3U/FIHSf7Od2mGd/mN02eCGQVXA4m2IOqwYdIOrFtFvmiBPuBwq1BwsYENOIFob5w57UZNH2ZD5hBwnFmQmq/HhGAWEXc/Q8N~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:26 GMT; Max-Age=31536000; Secure, ak_bmsc=C54A2C911C11BEB6C8C5DE22BE11C126~000000000000000000000000000000~YAAQxwbSF7rCFfqgAQAA1wPzLAEqy6l7ElxY3/iwhrlLB4XTmsYZxSEfEzrFH7Xwl+nsIHDFh8Ptkk2JvGn52n3+08PX39+tpF9Zc3Ex/8vWgBak9Z+oKBCrjR3n1pu7lk9mcxkhqt8jTk0KlcyXCUGT7DbvD/i0Omvxk7ow6XFzdSXXl9piRS49gitE3m29/2/lDuGHPqugcOiLFz6S8VxWB3HLYE/S0+5alyMDEyjtYapjfBL8+OrEzfaketaoQjFRZDs2pSsxR1nJ7LWJm+ae7bOTqFodb953YMQIaESviSXSdGHhH6Zi2wVUqnmbqckU/yZm0tP5TrsaozpdKo89qVX1ExPtHjnDDnj2oYkkd/HOUWwCp4g2z7MLkY4b/tPQ6W6HT5s2++X5Uywzt74=; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:26 GMT; Max-Age=7200; HttpOnly, bm_sz=F7531E3138A93F51FC443BBEEF41F973~YAAQxwbSF7vCFfqgAQAA1wPzLAHR4OzjmJCopBBOsG9Z+1A0/LcM72oDpQyWDlms+roqknPbxDyQBOi6XGuaxpYLkAcQHEHD2Eoqv8lhnHTvefJsKrMFyj0jWsQeUH9oKoXvXnGVCTh8Ryo2lYBDmGuq8wdQVEAX8Wa/iDsDzEk3Y6Ylp2Mvqdj/v3WLA/LxaMuoTQP7pEyGHMJ2oSFR3r4IznkG6oL6OoYejHaKkIRw8MIWz4eIvzyPvzYV8UXXfl7OJTrB3IFM/12bJNultahS03Z2wyJ+HJTgkXd2twGGgqnXi6xQOYOV7XLwhq10IwI1dxwKGw+lgEyQTT7lvJknNme/wve8MIhX9R4yGpVrOQgVP9P3sYWvlQ5+RiamLJtOMvnswl8kXysB8KMJ7uTCtQ==~3687730~3159345; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:26 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-066817b471c033f9b3d76f9aa6f958b1-8f41f8d6b196cbb1-01",
+          "traceresponse": "00-b5ff2b33e98924d6fb01d6d8f956bd10-b3d4791720001545-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8a1f55337c2af7cdd0280767cd1926d6",
-          "x-vcap-request-id": "abec45a6-43e7-4c0c-60e0-b652d2f7e705",
+          "x-mc-correlation-id": "ba4deb41eb76f6af04f007984862e5be",
+          "x-vcap-request-id": "4641d917-9b10-47bf-5f55-f88cf3f7d1d4",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -104,7 +104,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:22.310798Z",
+      "fetched_at_utc": "2026-10-11T21:51:26.784153Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -120,16 +120,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:22 GMT",
-          "set-cookie": "_abck=CA677778306FC5FE77F7F0B77C939F26~-1~YAAQim0+F9wg9hehAQAAxJjMJxC8nPyxrChppsaf1t0vyQdXexlYlD9kfOPLyi5+E2PB+MsqkTFZVHsA8CEI/Pp/r4HgD2r+JsJyYJg1Zzo5Any+ve5PLK0cSIFyoGBKCCJUn/qgschENBNxEBiDI1e8YLPeuf5dK0yJRm4trdA9SHyukCgsLeo3bN7QHOm7QeiZnOiwWvh8+d2Fliy8Pam+ckSu0tV2/m960JplW6cWuXyeE1F/ufSXdZVP4xAmTylkyYGRHzKtWUVGaAC2/iNWzYoDn+oKHZ1LZuR4tBGhGs7kjRF0nBmASUtNXtzL6UHEG8PV0D5zXUSZ/hyni8pPwljl9RJRaIsoK60dNbcT/pO5Kotg1zUWur3nNpII5b9ylYUZnVTznABJ4NPMhiYHE3NpCn22IngO2Rbg77uLzBho6S+KW0yz73jDuz9sc2QHcd6mZIJ0RK2c~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:22 GMT; Max-Age=31536000; Secure, ak_bmsc=FF747A66C74689FD2F10118D3B116E85~000000000000000000000000000000~YAAQim0+F90g9hehAQAAxJjMJwG3RMy+qJDRPGJdwndSh+dUHkdo3UxZb5dCIjj3R7KidfBY9W6VVnL5CbCsgAJI5gmD8lECcVfQJLzfZTKC+4Iwz0hOP6b0mN01fzPDvGokM/qqavfVoXH+YMVzlMcZfCFs56fO5jGHSpYK1v412N5Yl01tDIyXKWj+R6XAu4cPmQQ9LcwO3TubWaKrNNurH5Ljy/yzUJoFB83w8G5HeG9Bp0ByHIL1Z41hTowLghyeqNApoYZLsCZDdE2eLFasmfpOgoWoVTndFXjL8eWQJvCIuTqLex3PFlMN9SbyFyaF15papWUdf7sRTy1Wy408Nf7bzj0g5hw1Y95Ocv8w70KaFwL7FkhJMAXDRf4n8LaZD5Thz+x8Tuwi74+iAyLh; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:22 GMT; Max-Age=7200; HttpOnly, bm_sz=49DB083136190717B2CE9F512F9D3EAD~YAAQim0+F94g9hehAQAAxJjMJwG2WPvxTnETV7P69ZZsaEw9AqaVb7O2EqeZIz+YnxwCsdAONLJy1s972NuGE5o9t6IVRmdT01A/HOMbKDPeF10CyJ8hfN2hpTxTJF6E0EpjEnyeYIKWnHEGtscwfahvM6K4sJH7W0i5ZMWLEkcGzF2Slp0GDBlTAWgI3zbuJlgjNznTRUc0p8SiO7DySK5RxpPVCnr2bSba0SsU5G9Cll1DXbQVj/od08BlB5Ub451MhgutQnjNyqP1ww+r323Cuk4JIdfNdUhuyhvetxgaYXHDe2VWlkGNCHSuQlnMZlsTGlWqK3DleGCkHzF4X+8/OXRcwN0+AijVT+mu4yOoYVQ31s3/SLLfVaQ4boWRr6dTcSOsbOWsRgMPl7sQgRRhm6w=~4340035~3552055; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:22 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:26 GMT",
+          "set-cookie": "_abck=C49248D2ED3FA7C3467451F2AB724F66~-1~YAAQDBkhF7vwKPqgAQAAOQbzLBDTOw8d/6VMZANZ6H2K6IolLT13/vsvc6ufrhoVoL/mIKEfL53nfSE//ertoK58D/APyOTrCTPbmxiykd2GASYzlcMpMY6r/poxINaxNOGlIXsZBDOdp8lM9VWUagVBzI93XPXgjELCWeAFvaxW/L9JyWaI/0hqqfYnTz+PZJCqU2LA6WXlfzMwWKSTqJ+8buQ+C8hs3h5+k50eVnSkhTA3GI+nbm1Y/DYRs2VMEjfmy7e9mtKHvAOci7coYvJdb4Y2gjHjNs54EtF2ULjM+7RgiKiKq80gHb6Z9ulpwN/wZZ1KOR5f6EkwlppsxhF8L7GYTBGibuR4qFDnVPWwfyfi13rvbIZlufN2LxTzojbmBNuiDQ65M5514dj5sykeqxYrNKAEJtRfqG/auBgn233Dq04nlkOW1Wl/y2JqqsJLLj9FAV20VeVU~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:26 GMT; Max-Age=31536000; Secure, ak_bmsc=48EDA344B54FE78E00A9856B203F633C~000000000000000000000000000000~YAAQDBkhF7zwKPqgAQAAOQbzLAGWJZaJjrZwoF6osaLhMLM9YlrNrs9j4TgsjagH7yQZOYQDx2g6slUcuFUxEPiJn3x8NIoZPwasq0BoG4zGCqrrogMacWGqANn0Cl4drpTaCyzY59e67Pe8Tndu5q8ci0QEhKRMbydIiG+/W+jY2a4Czmsz/HQ0paVrpxenrjbsXCySu88fYGkmMfV0sXGf1HbEw1Ovus9a8MqtjCjYVi0LLR0dJML8RJo2RHaXdNYglAD7qF5e68IgGdayD25efKcyeRrcSnoAjci8n6xDw6/61wJnjt3GIOOBtSI1eMBJYgf0dTMGpo95FWSG2FpG5bzFI4K+W8RwB8pS0+MhwREqMPCsNncxyn0qh5MTYIclxyu8NZ8xHGxcaTQs/A==; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:26 GMT; Max-Age=7200; HttpOnly, bm_sz=2EF419EC9CC8679476F4C64F443E80F6~YAAQDBkhF73wKPqgAQAAOQbzLAHd8wN/Y0WNIgJJ/OaOJkqeGYmElC4NxvxzgKLLl2pg9olpD464YyWN/35jUbQwSbaHyWRyW9scA45vf7GhFCB+KHVfY8d4sT77WKaKIBBDH5RmPnO2y59erQcolNfXSt1gfyS+YRKUaBrjMOHUhWC1w20cSDjqcAL3Pp8qgPkcbmRrIHpcM+/93gfurL6EYEevFgKWmnFloMFHXe+nmHDf5KTgsXN3VFe7fuWRT03DC8VpzeX+aJ/7rtdWcRgOMfFpP9V1NT07AIT7BFGTsNx1rHg4CMCaCX1wE86TVljWVPyIYt+M1CyfMBPngaAJ7opqCDj/B/pAZ5VddPKOLLsdcJVFEizz27pQ0qInj49kcFI/15UWdA0dPoj8gj9F~3687730~3159345; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:26 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-57ac4455c06a810d17b58a34782a7c28-cdf2b321bceb5a5e-01",
+          "traceresponse": "00-5791d97963804a587b2ab1a8a7581112-1b9e1253bb243ecb-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8da642bb0aa2d1a4987bf846cdda4578",
-          "x-vcap-request-id": "d8a22935-c73e-4077-79b2-c4a809128e45",
+          "x-mc-correlation-id": "cef35d78555213b1fc48746391215519",
+          "x-vcap-request-id": "fa51a709-4f5c-4263-4d2c-a56c188dcafc",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -138,7 +138,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:21.518631Z",
+      "fetched_at_utc": "2026-10-11T21:51:22.292300Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -154,16 +154,17 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:21 GMT",
-          "set-cookie": "_abck=CD7164D2FFB31448E5701DBCC3C26323~-1~YAAQkvkpF0WF0gmhAQAApJXMJxDqkdvA70WpTDwGph1aNFQm+AVv3dVhzbLqVVzB9WY0OWeiCxH/Lj2as7C5zDaGcnioITHvXvIMJPfPLKxPYfLR83icQ2/iD9vf34CdL3OVK6Q55/ro9+rn0tkkI1hIrVUVY+kB5ZnVoGlDB62PkwtsQ1uQZZyDLKrm1Jdgvku2A1NMhWmcZbo4aODsQbKUuUckaPoMh2uiVzaUV49YqL8KFhSAUAe6J0AhScwdm65Xv3INmCp5ZQTtzO6oMci4aH409oWJiEpaiZQEio/huAeIO86J62VoIX7+wHWE15GYIjzrPWOQfoO/YMrXtmh6Jw9S0ec2FzM8HtUA1+5z+epk4qOKeQUms7u6A4GDITU+ZbM9n5UEdpn/bnTu8c6hw2JOnNj9TKv9uQQvvQiQcL89j9syJPBuajAr/6DDkteD4gGlj68lbljO~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=A61181AC992701BD066F0D659DBC9935~000000000000000000000000000000~YAAQkvkpF0aF0gmhAQAApJXMJwGoaPhuMMuagypHuo+oNvufJdeZTIv1WE+eiHhBifEA4iJExVqOtlsfn40dgcsEBWXwCdNnqUWiXrwNvp/c9GmhWP03VnHlbggWZMhibdiz2vpims7MK4qYCaO68MnNF26niIf3/+CMoDVOjST2WQAwr8msET22CHas06iOxHCQqIeOYbf4xaapMCCySMNOj5sGR1ae8A9T1ui1Fw2szXKnCNiz/GgfcRLu3L1Ewsk20yrY4xkExuh2/lRg2d5geAq3iU3PN5AN6lAKByDEr7JWjlncYltNFowcwS4ZTqKty0Dxx4qGrQJfkh8cMfP/+rLdmrIjTRbFTGT7dfg7mvtFcZ7qV9Xtflhqp2y1dMDUu5XK3JWD3jT5RL+P0g==; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=4CA28159A8820DFEBA8CA2981855CB50~YAAQkvkpF0eF0gmhAQAApJXMJwFPT6bHreXmg9n/WPYnCgwLM7u8uR824hZAzXNxMhtaQKxRQacJe1Vfwx7SFNwrOhLu/PRwMPrxbI8n28I53VLecXIQ+QqCy4bOCxTC2BHISr5fPCbU8lJDego60lypZLUpm3+uwmfjzOOygmGT5Y24X84qbDfH+XATdQmp03J/Vz7XXefyzXSimIufMsRTsMJYhj43ju9EnA0HovowT127M6Pu2bUszsv9iiLFZbb15D69DH2H6x7+rafzIukvxjV8CXrECDdzz/7oOehQt4opXhee9QWZH/DWTotNy9HR2SwQYSOg8rCFnc4E+70SRvHIAwbmS0Ot5xOhlZk08rYHKwJD1zfjE9fe4x6moeLPnIPOcItnYW/eM7vztRXX~3360057~4342834; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:21 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:22 GMT",
+          "set-cookie": "_abck=D302B7DE03B59ACB6609DE265AD07757~-1~YAAQqonMF0r3UR6hAQAAsfTyLBD8PD/a1QHL0eZY4XZXg7QkCe3xt8VcHcq54c8D/tHPoG+5yu1IYcaL2/+EoayN48cx2m4xHwtyZg2XM9q+SWNxKXK7xmg0enHyHobY1jNiZ6mryG/zyZVG19q265rUoMDvY5mySvq03ghY8tGMdsD9dpWw/ngadhpIy/ABCFGVf/HmVpZyz5ZKnJIejGXZ+OVAGr/C/x9b8Z37ria0+iHkKKtA2hU5CTqEw104zVumxvQB34+QQCj0FPgawS8WZqQk3xlCQsdiSIa2StuEdWyhQDU+xWZGozVcoxFOteFRMDfNZb5dgaFyAGgNilep3YT2RyVcI2G9axPHZR8ay2Nm6jwPgS3jQWPqTAJ9i/XkvG0xU8jg1Nc3MuGzbWRG0/Mut+Vx4oGx8QYl0RCN3AQCq/cTpFPUKfWaw8SVpwugBbEOX+DiQiYL~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:22 GMT; Max-Age=31536000; Secure, ak_bmsc=273E93AF6EA35E50F64640FC0B71A8AC~000000000000000000000000000000~YAAQqonMF0v3UR6hAQAAsfTyLAF/pCjjJkv5oObYnT2dagd2ioG9hv+X48RAYrW/O2+AhjQYdkcrzfwpEoFdVKvInx6yeQWHngCYGijJChoZxVEI9gCBySgYL5KOZri8A4MPKfPzm02/g3KEgxFtUhStCCvqpFyP5h+9O+cboOUvash3tuDYijuBkjWcTfOjQCfcBOrJJf02T00YRBc90gISNnVO7aAlmnwwBZFPiIj5eqK3lKL7bb46/i2EUK1hoeewVhhhXlW3iwsZRZeN+Ux8Tjn9WMJbW3/FQ/9QEFlwD3y+0fXX5MeQ8KJwenP8+xvBUExRfJD5kdWMJUD7jkDrh/9ICckyfluULd3nJfL56wDd/NlcXpCmG3UPQKvK4olKmk6ZpRPEAiTybxZ6dQ==; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:22 GMT; Max-Age=7200; HttpOnly, bm_sz=EFDBB034432A4BBA60CDA0BCC956E928~YAAQqonMF0z3UR6hAQAAsfTyLAH6xhwfTg9+MNIX+IzoerJXMWYEPwm0hxGDwekI4cLoU55ZswBObCEbDa/QihmjBq/OnHtUpBbIDmFqi03oR82itfVqkoYT514cn0rcdlobo5HUflpetAHX3ZbBj4xKbL2X3WrRrzo+7yw5xG1z8eFaz6buGjpC4GFPU6ah/34Rz2BYmA+v+dNVZ2QTGLasc7Qws6uurpTLJ94SPUnXZir+W/YCmSxpkdvKS1TCQm3UquobY9unqLqT7fPMUkphHpcFJ3hF8CfTWiivACFEC8T2LLgwwlL+G9WX6E37gXByHwPXGwPa4pGHLHFHqzYp3CYSk4aMy7pN1wfCwqse7QtXgBInZL8kqI8XDrLjxmWp23J5vFwX1S6SlGxRaecG~3425329~4538673; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:22 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-066817b471c033f9b3d76f9aa6f958b1-8f41f8d6b196cbb1-01",
+          "traceresponse": "00-389fed6ae5935525aca3a8e5575a003d-7af0b9e4c3daef4c-01",
           "vary": "Accept-Encoding",
+          "x-cnection": "close",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8a1f55337c2af7cdd0280767cd1926d6",
-          "x-vcap-request-id": "abec45a6-43e7-4c0c-60e0-b652d2f7e705",
+          "x-mc-correlation-id": "e61842e2b235c4576d234f58a1dc0fd0",
+          "x-vcap-request-id": "1f8d64f0-38d2-49e7-6cad-924c1bb092f3",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -172,7 +173,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:23.918017Z",
+      "fetched_at_utc": "2026-10-11T21:51:21.355731Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -188,16 +189,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:23 GMT",
-          "set-cookie": "_abck=DC097A25C53FF9C1E4C2BC9B8737C088~-1~YAAQkvkpF8qK0gmhAQAABJ/MJxCQcMBEvTKAkT5inRYymyc6HCTksBfpRfnF64cJri8EWgub3eWohGnEdCVIX/9MkdcHoD3W631GEnZOA3ZynT++xfUXiFw3dLWwF0Z/BpKk9q55tvU5nxnonO2BntZXB/eeeoIz0YoD6NzOh47hopH2OUbMoiwLCEprhFpy6Xz5Wg1GL0lC3srPBIUrIbES0gNvgI3ZVXJXUKh0uOF7xwTHwaIUzI3X1hglqcFhFLkKXvJWt0T5iZJgteYR/B0aMbZ5s6wT2ZAWf9Rq22eOpwJzDhEQLU+/PYGrv1r/DCDtNP8hbzgTPpdlpUMxCutLrVbYQclDb0z9uCqYX5KJ5SH4nK4KawMQb6fJbLjdApZuiXOj52bSpgai5A9Y6+71cO2jc26BH77jvVykdrjcuB5LFyZfhD0TLyDFE+935c1SO0QXX+8TPVMF~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:23 GMT; Max-Age=31536000; Secure, ak_bmsc=790C879E578CE7D4211F16027C944B01~000000000000000000000000000000~YAAQkvkpF8uK0gmhAQAABJ/MJwFmnpeKN1+kH3T4YlIAF+NV13y0jJF48oi5DF69he1tmEYlLROs/vUow2lX7aDtY1yfjypoGOKys/6ifDb/EwOnBm/0217dCZed2PNfoKRAJJsARmMzdzvLVQt35cfaAHB89gEnpHe+pvRcFloMzE9N0/pmiP9CosRsLK5XsC+1NCUwqTzrUCWfCQTGPPf8c8ziBRzJcS5IOzyPCpTlMncPKS77YivsT/kEGQkk33nZoY6EgukHiV9LsK6m8rQUe9Z7DEGfxYJh8s6Bq9RvY4xH9mBRFvxNE2M3U1TKIv0IB+mwNjlaRPFB0dcM8LATag953gzNYVitwz7NSTABqrF18kcdExFNbamepFWISWEH8W6vQy/Kn+nKxUPM; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:23 GMT; Max-Age=7200; HttpOnly, bm_sz=64285FBD53C60FFF84C0702DDFB57496~YAAQkvkpF8yK0gmhAQAABJ/MJwE78JuvcMqt5G6NsIVO7ZuGKbAdt9cFXRPnj2gr1RVcKgEteDytzS9f2NATazqPh7OrM0WSm8tlszUP5pKpBm1dIQAEzTG0kpGA8y3+cF1yLI/DzpgjkBOCiksts9wYt6JTeeYS4qdwXOmIiBoXudfPQnWtbAWHgdUzQwo1T5N9jphgosmha9x1AWtolUAqlAREXF6Qkj/wx4ktZD1yU56WJ8NJkCCQR2DBAaX9Sqk1Xg+7JKq2HG5oaecUKzso4Rqe0QH5US2gb4dZH0BRA9rF49qJUyq1KFe+HJpZpCY5I89UcIXD+TdR3dwfxqDZhE7GgHkjTTtJSRCcO7Tv41D91cMx21mMI2fEzNG0L0aUajO1zW95EAkCXQsI0ao=~4536386~3487024; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:23 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:21 GMT",
+          "set-cookie": "_abck=6FA1E7023DC650F9BFBD605CA9A2CE6F~-1~YAAQhm0+FwwILe6gAQAACfHyLBBn9hQTsrFd+hXIm0e0+/HLVqyIIviMzdxD7kCQNGTbimqCWWwR4gFGG5hf0CYVzJciWkQpklDOi976Qip4z2+uyspS5NXumtndLQAbPhH3tAYSjtZGiD7PYcos4acqshHqSt/h22tcVAaTyiJDN7LgzcEBL5lYm+GEC9GpoDBMyLE0EzTVXk1oM6YPuxJ/1FGzBWuHpS8ii0p00KY7QzhsDjDKALxJ+WBsjUqcAdrQ2Vui+CCInS7hoO9chyn6QJiM2LQpMCw7f4S1dFKoQSOnZWPWnTPY9a+rsSDQNLs7O3MQXS7EEjNSmpXoBHw/Jk2O8SAXYODhzRHWOkbkNpGJT+jxsv//0w1J7u8djGEYLaGyJSH2d6aWUnCU6yDL0E/3R81HM0P3o2v9HBFbWCOgd2JKnjbOOimQmQ5PQZKJUiEiPhoGyg6v~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=62AC4E6493E4058088933CCBB1DEA3BC~000000000000000000000000000000~YAAQhm0+Fw0ILe6gAQAACfHyLAFADIuTbOzCHJ4ECMXyMPEyiW222UBVnEzJ0i9Wi12Cc4ClDnrpl7be1q7GE/YDOMKl2SfOjYkvAH/28v60p41ed7Lqs7nFBKHjVXZ/UvZoqUzMojPkPzLtZmU2GRjtcZVDTs/xY1cr+2O9uL0UDNjob/ngZnKl2WZWp/cs5qa6qGkwMh1bRlroMB0Mq3NJMstw8PztJmEAv02vIfKMmAVLVLqxGvGte684DymUR1nRmJ7qXz2y2bMVeJnmiBhbWyj97GXIbwIdUwTKjR/J8YlD7wq+SCE1i4u0IwAbzSCLYmgGU/PCP9uIfMn2/otMccSx9Hr3o0JpFY2nAU6Oagxeii1RcDIaanwR14RfduaHlQ7KTJ9LHX1pbbTIe1Pw; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=11EC4535D025ADCF2E7A68C0560C6F02~YAAQhm0+Fw4ILe6gAQAACfHyLAEZ5rPA8aDGJPiif6/Cmbh0JNc10yYiU0mT/yXMYI7DNhZL81XErCnsLtEpB401WKH7343jlh7VoNb3Vlzy6jAW/NopSh7lZ4uN74KfLtaAHQCDRE9WGWDTHPgbCVTV2Cl7vLalXwGKExayhA9mhp6m/EC7WITEB1MpgQHrG/qPelFSGmqX7w7IinU+JSjBWbHglRPZzAjlWti9jb40JD1/P1DuCjLkjS2CXAgFUevn68MaGsQRSsGPRzuwMpA8alvyQ5HKdxi0L8GU91i/50wLBF/R5mOTsI6u8Cb0nleIyyukmZ/cWlM/Fd+idKGWmWFwEeF/oM9muKh+1HDqj48xUxIxTDbY6TYocfZBthO3QisxbXSkRZwdHD+srh8DXqM=~3422515~3359545; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:21 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-066817b471c033f9b3d76f9aa6f958b1-8f41f8d6b196cbb1-01",
+          "traceresponse": "00-b512013abc01c5e4126628197837516e-ee8de1b8e619226b-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8a1f55337c2af7cdd0280767cd1926d6",
-          "x-vcap-request-id": "abec45a6-43e7-4c0c-60e0-b652d2f7e705",
+          "x-mc-correlation-id": "89e7c94bbd6eac5e21b7fa03410ef76e",
+          "x-vcap-request-id": "591383d8-418d-4065-44d8-1488bd72454c",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -206,7 +207,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:25.300419Z",
+      "fetched_at_utc": "2026-10-11T21:51:26.064218Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -222,16 +223,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:25 GMT",
-          "set-cookie": "_abck=E70D2626693ED76A4C56D36530A7C0EB~-1~YAAQxwbSFzR+gvigAQAAbaTMJxCs4j1CeGB7lHpqBl1wxQKaZX14eXJ+7moMt/b6Y/QPHPQDvemaIImpFc/hWuI/b5TkK8eyIOLY0Em1JS0T/2avWf95cnJMOOSXXDRjjzWfISEKypeQwP8dlRG6igj2QJRV8FIduuJ2z3wWMqEKeNhkRtFw+nWDsS8a1GnfZOmDGJXInaMstVAcpZzDYLgtzmK9LPQRPpoY/q/OsgxjPAUtq0Ieymv7R+RsaGpOU06XDa6VQNkjnfi1v5NMXYLEFFSsJ1qBYrIp6DBIVOyUw8fN8QTpWOnPGVUSJlkyofgA50znOsJnh5nu5wJntNGoS2THEeMnEp9RwPUt2spVf6LnR3rS3PUvJgFH9LKeNrsPmWhXlLtffnRZ/zF0nI1AJtszx6Ma3zPCu/lREVTL1TX5nkqO0m/5ENTa0FgLx9Q9qLMbCk2PrOr2~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:25 GMT; Max-Age=31536000; Secure, ak_bmsc=49D2D7CCF39E327EB2858B8BCE825D9E~000000000000000000000000000000~YAAQxwbSFzV+gvigAQAAbaTMJwGd2j8ulj+t7HUSeLW2ShBdBCvvJvuxXYfcsAWBmyIbDEiXHIOj1Nu5PGUNcg/R5xLmQ+/Ia8lRqC128bcBCxnSM/1TGCr2FGGDhq0YpfvPE49davtnw2GjSGxc139VOd5I8IBRAghCiVzo8NEYBa4vxi5BbfrYmvijCQC+i/rJt8TTzrKTmbkoIjgA962Q9Zz2dE2TxYHffEjjXT/rJzZ78ghSfbLCiTI9kyKMM7PLPdmkwfEWFjkcYAFhU/7rgHNaGObF3t1kTjD+cwDB255vr8z7XJosYDFkVGnGl/5Sc6oOwSyh9Yu4uPyJvYgRexp2/UL5t6pAHNOI3r0rvXlusZz9i5c3NDP+MYgl93K10URXK/iMCZYeERNPSWs=; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:25 GMT; Max-Age=7200; HttpOnly, bm_sz=8F953A02282B06B17F3329AB2219A591~YAAQxwbSFzZ+gvigAQAAbaTMJwGnidgjo+fxQ6ECKwug1KST4XkkHdhYCwLncX7d1lg+O1/5pbK6JGR5C3MZeI3r2Lg5dNewHmNEiLmnAEfikdV0lO5Peeeqq42gJ6evLFZYcACcxtrUotZOHzI+bzCBqeyr41Ex1QMsl7b1hFgWViwnSTIcoRjCr4smpmiRkK9K9AH9Q2uapiI8jkw6xPxLKW2V5c4xl48WiJPVYqwj7NRd9Arcx2lIHh5CCrsV/vLhoxm2/yWEkSmv61oee1rr/3IK/4lbz5tacP6nJhwUPOxU4xn+7pcMOYSex5qLRoomCfrdsTsEBwZVSj6xCx0NwPaZ7vinQYTd4ZhV5v5fJZ9z3IaYCa6vY7ZAxd/qk8XQBjFo8iBI+9+SVghAflfOnw==~4337970~3553592; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:25 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:26 GMT",
+          "set-cookie": "_abck=F23DE6AE477589C48E66D146B9474AD3~-1~YAAQYskLF17jLx2hAQAAbQPzLBCpN+288QWtbbP8Xv+7yIDXIs3cQmEy6fzQPqryVUrl8h8NNF1rPalmP3kvFMiN+VPlI8MV1cI+VOCd7hGa5omiZeDtckHImADi6P/4EPF9w3zsECaM0enJbR6KlvF/F45wgh2f3FwfG+oO7iH76LvzzVcFekxwRiRzs8xSAZanwo03z6GR4CdbBPwSyvPEK3+jRzWKRavfwZMVIRNgGU9PGG08gpl2/U9MbgrLxPHHp69KprbNht7pcfbSkuAO+Lkednm29ujEgJplxJO9GEbmUEDWy3RmylNvB+NwLLivE2faAnIMnDWRR76hP8J1FFSYo5JW2kY0H1Tza58RXU1C5eQcb2sr++MaXjqGXqZxYWHj49FGDKAu//Ix0oltEhIlL0ZQJvdcDBZIQtVtDFDXX/TDX5gxJWNM3U5A+WPsa1fnmyANeGff~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:26 GMT; Max-Age=31536000; Secure, ak_bmsc=44228B1B719F12ABB2B104406C7EC713~000000000000000000000000000000~YAAQYskLF1/jLx2hAQAAbQPzLAE+0VPvLksTar8NiEPIp5v3F+sI5wk1V+dq1b+ocU3zrNrkn0vec9hvrw7gdSKuf/B+wsTYGK1fGboeKx4Ycb9x8UcqIg/p3XfG7JFTBTsaHZ76/eBYoStSMPBWSyw1uRablMXiG+PRoN1b8qELIpntAXWs0J90QKnAnKumEWw8joEXfeq2rnv4YBWKDqwxBFpS13boU+vtG/I2cBUmvnbGPfOa3lrJnWQwW5pt8IflEMliSsvuLYjIuD0Zmt2TxcZxNilevEm+AXh1+8ppWRRXxG4l09adbSpP48jOl7+sTKll6O6bmHGmY9UdrdgNHPhfoznn9A+zqvR9zGyGdGNg1nmkU0qKC2FzZ6fa650758/5gQ9bFIgbUnkSFio=; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:26 GMT; Max-Age=7200; HttpOnly, bm_sz=80701CB057D91B3327566EDEDA710AAE~YAAQYskLF2DjLx2hAQAAbQPzLAGEACozuGNuisXiL/zYZ/JNXVNu7aWm6rjk2MU9p93RQI94wNjhzgL0lhnPsfiHtnHWL84hZxPp4cFIxGTuz8L7AfH2tycRsRyzBGDGYXLeyY9P2reEbAqIoS6nytoPT0lXxHRpLGHj7Rwmx1tQjMr8stS+NlYK8E2e6enpcle2KJSaq0yJURN6oHlGR0kQWpOd/VB9F7TTYEK4NefbIsLDnGMcqGaag0FTx3CtEigQKGuGcsGo8nKzj5MBleXl/bzEMmqmx6mhIzA9i6fd0rfSU3r8jfff6QDyEo+K9jZzNvmF02DcTNrHrhim+fShKXTsO0TjtggxwSwFHvK6eIxqG3XUdL+tnrKlzCk2VNp4Kic3671dYbhXgxmHTnP8JA==~3687730~3159345; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:26 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-066817b471c033f9b3d76f9aa6f958b1-8f41f8d6b196cbb1-01",
+          "traceresponse": "00-5e39e4b91877eb600b14e0c35237608d-04a8a525f94ed070-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8a1f55337c2af7cdd0280767cd1926d6",
-          "x-vcap-request-id": "abec45a6-43e7-4c0c-60e0-b652d2f7e705",
+          "x-mc-correlation-id": "30ce97ea2af3463f8e3b2ebc9d69d1e9",
+          "x-vcap-request-id": "6b8740ec-94d8-4c6e-517b-5f3b15ce81f0",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -240,7 +241,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:21.077080Z",
+      "fetched_at_utc": "2026-10-11T21:51:20.564459Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -256,16 +257,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:21 GMT",
-          "set-cookie": "_abck=7C39525D9BB5B201EA9444845574E038~-1~YAAQq4nMF6rELeCgAQAA75PMJxDSX43GE6/k9KHIz3qZG5ykpDt/4GT+KEGUXSaM9ZEFOIukJuWpHq9tigknmbexLehgIxpaJf0eH/q/IID4COw8uqy9u0zMaOd/1ApkJTPvRI6ktLgZqay1dIoRmGzmDGMEBU+dVxdaWXGFGLuXFXmStwHT3ZFljiYEKL/57zs/v5ngnZlptOc7FnDRczcZh8RIs4vjbaPOT4pfj64XD/R8kED4M60hbJkNFkKsejo78ZB3vDG0q64sxfLDAwwx2oGZFzFrZREIxY2J7ruShg4DZOixrEAas0fTZ/ceNlQZr4JmTPAk+4wsoDu3sTR+dhDyPvao/XJ9E34OVLL/pOZKMtOKJxrsv5EHPJ9imqUhL60oTs5rrYqqrTypA5U9PXDF4m7t9n1HeEXxjyzt5mBUxZH8FN14EdDVMWOeLbysFiytgiWVWYL7~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=D23160E3FA112EAA7DFC8A7F80F98F7B~000000000000000000000000000000~YAAQq4nMF6vELeCgAQAA75PMJwFA0HQfpQfBGdDwOoZRe8Q/C5+kgIs8SOoiAfLdoYEo6dD3I52RGZeXThIl8qNDSvcWr4+b+F5Nt/d+84gOkMGHu8L9S1mmDJh5gCqZLht1oCIp5vaiPYSVG7aY60dt86FELn1UCKYJgCcNyhUNqE7eiXqU7wmxyp4wqyP2aWQmzDsIluuY4ZZwjsUxAZeLjh1Pof81kcj5Wd31Bb71la/7VSNR7RM0whWgS6tNYBVt7zxE7PP7ZdJ/s2/y0zXgUJK4Bh6R9HVsVO6+p0d46GTbCZbZAzAyFXeu8bS0FW+EpXY7z4CmbGjTwRoPNp3RH0B/7A8qfrPJYuwAJziR4zeM/Jup/cNsHXkBpd4smrSpmL7RRa7DrhKDh00/Jw==; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=983C2C256C1065368BAC19F3085DB707~YAAQq4nMF6zELeCgAQAA75PMJwEB/v+emoMsEfiquTtQNYG1eeLPwvQRtFojR8ixJOfCmSKLeGJhDrOXzLFnrs6ZZZ58DqT3oKIXFOOhtuxd8oBQKjto51c3L1xt9x37H+CSnHD60cQVuZrX0kzGESCSaIQKa7n2UOyP11QLLkolhCsvYGGzLpLrMwsIi0U5SUzSFfM1FoPf7z0g3fF/blgpUnOwmQXryylp8PgNYbGtWAT7ZQ/BjcP/RRzDWljeUxH7sreCnHhdT6LlN29T/TxSQxSflw0qySf8nkUi/cy1ouq7gAImohuwbHV0Mg0bbH8eivvIumdMeVoMlmwHlDKhu/rYEUj18GO9daOOHeUYWnMaa5ohzO2rOYxQaDk5bH2y6OsvZv8ngbnh1WgC3n9Q~3360057~4342834; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:21 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:20 GMT",
+          "set-cookie": "_abck=4EC771A7CEAE6C2F874E93DD0AC6658B~-1~YAAQDBkhF+PuKPqgAQAA7O3yLBDwO/7IZ+r4194ng6j1KL5VS+YJuJyfhDWFLELQ/9D5HTG8TtzO1ZtI3uo8h11fS0orpziAQUzx+OQepSCOFMdKcPa6Q/gWCQYUUoiahK4f7d1z2QrI+ApnStRH0VVrxdOnolK/TM+OX3HGyjxsnboayT8NoRy4u1nhYAOQKjRLrgmfSBYQH+iBnxsT32yX1Qpd6tFw0R5yr7/n9PneC48B7zJ4SzbcSGukpIBjJom4Rz5dmRrKoKZdGeRs0kCzIekgB1k0Q/i/+2PRA4Rl/WL9byIq9O0+6KOBNNl41mzr/lWQiQO7AcwP08PknQf9mufLfIJeYtck8u4Ixykp8VFbtA6a+ZOTfNA1OVU64rPsCbOmlMrigJEYUCYyhtMEsC0YmKz7Qb1QPcPAstCMLVqUhEFSjPQZSXmSSTk7mIu3+yhyxf0UzKUD~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:20 GMT; Max-Age=31536000; Secure, ak_bmsc=6C25C964A9F8840ECB2FAD35B29AD448~000000000000000000000000000000~YAAQDBkhF+TuKPqgAQAA7O3yLAGi49f8n3CrSBZ+/L7hclUbnQOxE6uGmOSeUxtO9d/OJGfg+wGsV/Y31815V05CnlVgs/ePaXyJYLlkYkPIe0YAAVMpn++cnLn+IxYkU09Yu/BGgJ7GJb8p3jxrIOwbDqCB2NRm4zxmrJZShBVGxIvj//LhxpW8UgBD9st0yNtARh/8sDwj4fg6kQntehp0t7ATSTS8rmcqyFp/JS5WL+ncS9YWaDMmvjAz+F3U0Hy7+mcCPv1/iuTvRw8DJCFux2H0N0PHu5SCrN9hqfzsnOk5YDwaOyyePh/QVMD9oJluEHjP8dBvWD8CUSVY8bCMIubAFDH4ZY5tBYBDMkWGP6GsY5AB5gPOGZ0Xrb2tFqA4CNj+1rCzz1/xMY6uQQ==; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:20 GMT; Max-Age=7200; HttpOnly, bm_sz=2F20F389D8C95B4BBD466B5559426D4C~YAAQDBkhF+XuKPqgAQAA7O3yLAExgSH4c2xQj/1y1h50gIFDJf59DnHDapBNctvwxtVWO04oeISOSLtZ25nR8PjttHWA6UwyPyk4Ujr6XAk8CtMIc0m3gFe35P5tePX82gwDg81ohZsDP+GAoeL+HlLxkP2JY9HiLBY2eIGJT37hjNLxL/mOTv3XZwT+FPsjLXnf+yyoPwB/4Q9ZBJEfW3lPB+iVjaV7Wu8euMQgRbwMrWDcuj7HkmXZFrhTxDMfBKUfBlqB/11K47eFQs+gmPBPplzhYnk7a3tPUZYVcpONWkOpq+ivrKFl9AE3a5bzOtrphbyiJRW+kx7Ax5kUKgMkOCuqCyqJoBh3OIWdztAxv5ZC+Yme2oB9FMym6O2FS3QstIMRjijBz1e0ZXbvDegt~3683650~3748919; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:20 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-d5e05a3e460a896444690603ecc8b60e-5c69cd7adb84542e-00",
+          "traceresponse": "00-5791d97963804a587b2ab1a8a7581112-1b9e1253bb243ecb-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "3b37364ca37c6395c60ff187ebb326f0",
-          "x-vcap-request-id": "3518ec48-1a54-4649-7f87-394d56cd527a",
+          "x-mc-correlation-id": "cef35d78555213b1fc48746391215519",
+          "x-vcap-request-id": "fa51a709-4f5c-4263-4d2c-a56c188dcafc",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -274,7 +275,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-10T21:51:21.134897Z",
+      "fetched_at_utc": "2026-10-11T21:51:21.446735Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -290,16 +291,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Sat, 10 Oct 2026 21:51:21 GMT",
-          "set-cookie": "_abck=4F15AB2956247F7D7AD4745F8ADADAE3~-1~YAAQhm0+FwnDze2gAQAALJTMJxAm+F3bFMEsRtMZKHop35iYQ4aLKGFNivaArVyhcCrrAsnszVTzO1WecQ+T5TKkt0MC1ddH/UBghMnq4NlL6gniWhl562d4NyyS3BklwA4I0n+o8ju4jQwZ9o/MKtekwce7rKgprCCC0X5ZzxrLWSXm8KU7PgA8TY/J/oM/UC0xePZmfcq2I+Lpl2DQhw5/64eHRKTh/rYNTf4WoxHiQqS5/72hWmEUV6p8DIx6gOxNSB8UFp0Ngam3J7VmJgM1WAnQ5iUCF7H6wIO6N+/q++Jy5ljBidN2GPi39XDq473FJm16xpax97Ise3GCXPratna8FWjlzHsuRDLnaXFfXpM78Vvv9FUDjQOx5r20fYndySNRmSWx19msXEtAyI8SisexRhK5qTovzp/K3TlyRrUBoi8u48aPlIpjgfJNnjbyCxYnOrn4VhG8~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sun, 10 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=15730985086D111E5C916015B4FA07B9~000000000000000000000000000000~YAAQhm0+FwrDze2gAQAALJTMJwGgseEIyRno/TzQXhc4TtbbjIaC/V55PIQzxp7kOC9+osLgDfZgvAim3t5hQFOy/V+j6c2SA0+UCzVPmjry2CaTgX4OrqN84LBfesnm9/YiiW6h5eDqTUNfthDLpOYjj4n3Av/KlLGPt0zBUEIx97Ca9KI0kwFN7C+EyTtZkta6hqH8XRK/ZPOFJTaeVvo5PCfOPGCio6nu9S4pwnlUq5WrFQ+UNLJJztwrqb6yMmnhOJbYNmHiHc5T7z5vIzDHtjkTuj+F4j8uab9oyw26ncsMKYhI/Jh/wo/QfVIGNSMbUL0lAuY5MMrZ8u+D23otsxHIqdap2d+tZhFjdLE+K9PgyGoDY995Ee7YpLcOQ15eC1QElQ1da8XckBBv5A==; Domain=.mastercard.com; Path=/; Expires=Sat, 10 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=86A43666851CFC73B97F1652D02510E1~YAAQhm0+FwvDze2gAQAALJTMJwE3Gh+TqjkQwaQ/UQ0+ezy3TttQrgE4tWbDPd1YxJ1wvX6/GXw3quAWXv2zH3UbmhgvKm/uRaUNy/j8xT36+JNCFzw3EOncpnJW8klrXBSVUhqg2TvY1MR4/UVr5y6vDOBd+qsK1dXc1jknm37oJM1jK2Z4xrzg+qT5Z19m+tYS6e1wKkehzlzQ5V1CO95qF6cfTjLw6c+jj0jVv0C/09r7ObiPFq6+a/b0jiWTH1GDvyZbMEo7Xb4xeL1ArXSMP4dGQ1/uVesILciGDvZ191jn/8YgtBMlmF5ZnHqxr0ODBRyItkyx1gU+NewV8K0U3JoiD5++SWrK32Y+BCCkuJmkdOBqsNH2MEHBNYCpr/xd+p4ROn+N+ncXMucQfks/~3360057~4342834; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 01:51:21 GMT; Max-Age=14400",
+          "date": "Sun, 11 Oct 2026 21:51:21 GMT",
+          "set-cookie": "_abck=57B98358AE62D77FCA05EC8233F3F442~-1~YAAQzAwDF9JGRumgAQAAV/HyLBCSJYrBDGGYvmkoEv612kmBZWG5VHE6/04Gc+zC1dhWTSVRvbQMvJVUEjueHxr+dh1AH2byq5SAjESwl9jM7Jx6rwjPL4sBdrRzmcMfG5qDAiUGDRpGM3Cfp3jFB/7fr1Qwb768G2rJrGPHJfKaijNN1ak9w+8EyunoGPlgwNbrhvbPkNUCQtPXM2FwrrFmpQ2BrNhLn1grjquPd1wcPhjZrCdBfuczMIIqaaqTaHXhhN/Kn3G/2g0Cmy5YHBQWLCU3XVeCS96g0KnBjnLUukKSKHX7xaPedwEKSR90xJSdtX28KWzVEUk7B5CchZVVB6cGmlD4ocmeErxZyH3z4yQTCjNpdpTC0IMfMTjJ82vo1CGoQ5XGwgtkY6F1Cf1tjDdMgla4D0o4sBmepO13aEG5tVUgrX1Dg06060ODYJ314yT1qAv9TCrJ~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Mon, 11 Oct 2027 21:51:21 GMT; Max-Age=31536000; Secure, ak_bmsc=9A9214FA60040070ED70FF0F477AA643~000000000000000000000000000000~YAAQzAwDF9NGRumgAQAAV/HyLAEzNp9GjHgGl4yQ/0m6NSzUymVUx26vK6FtY/RnbIoe9y/Kw4Nezjz9kqRV8UjwvyQ+qKs6rpehYR5NmT7Nx5O0ZviSWkFZovUvV5o4wjP/iTnb3wSFenFRgrbouhEmhhqLNjBZ+OPMpC2a8v9P0iORWU8ARw/yy0+NQQiRrB7SBfvdMIqLhhngd5NgsCllhUBMiJ29uFMvYx/8cPt/NV1IkuH6zzjgtuuyJNwHqjDDJAJzbMZUnr9tgytueeYIEebNNOc5bNBcce147XBNMiilndwgR3bCqrQhJ4sNgajZU7FZJ6K1/QM7rQzRpWKF0CiMJakAJ8ySnWGyBMuZYnaoiS4TFdkfrGRwFBIXm5wVxv6pleeMvUeC+tDIXg==; Domain=.mastercard.com; Path=/; Expires=Sun, 11 Oct 2026 23:51:21 GMT; Max-Age=7200; HttpOnly, bm_sz=2C110C60CF5D962E6C7E9776B4AD1E02~YAAQzAwDF9RGRumgAQAAV/HyLAGs9ztlaVyf8lRO19SeL3lcpSkEyJ7y5QxAKXr8p40nucHwniRuD7iLreH1xoy4yeIFCJ18HP+Wz3QZtxe62fMUzE9FJsCcWoSojqLWSqQW1/+g9sjaPsE2JSGZUNYllRfqWGDe27qOAM43kWqxtOLoNFwD2Q5SOkLX/10tLLyluCroEI8CkuUbYxdW+zPEyL3O75hecJrWFReJq46fJfY9zmTTr6UH81WOkPkdn025poNvM36I5fDLsR04sQT9rs8od+79m3msno+kab/BQsH+KHiyPMS2cbE8hg4dHGsr7bHUxGbGJrkBe1EY/wSvrrbOY63NmRRp4PViydEUo+avVOFIoc27sncPEpx8baVSJVzq/iIAA56liY57FE0w~3422515~3359545; Domain=.mastercard.com; Path=/; Expires=Mon, 12 Oct 2026 01:51:21 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-57ac4455c06a810d17b58a34782a7c28-cdf2b321bceb5a5e-01",
+          "traceresponse": "00-91607970968983984da500dc76f09c4c-fe2ffc87de1c5855-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "8da642bb0aa2d1a4987bf846cdda4578",
-          "x-vcap-request-id": "d8a22935-c73e-4077-79b2-c4a809128e45",
+          "x-mc-correlation-id": "58a388547f70a4993fc62612c6ca993b",
+          "x-vcap-request-id": "f1147f7b-36ef-4d4d-7124-7934cd410605",
           "x-xss-protection": "1; mode=block"
         },
         "status_code": 200,
@@ -311,51 +312,51 @@
   "parts": [
     {
       "name": "shard-01.json",
-      "sha256": "6c1db1f44e9519bb1bc4858bbaf50434a45f82d80536b8b6674c9772b29647fc",
-      "size": 10643594
+      "sha256": "41246f5fa4bfd66454f530bad61d45b09079277ef99dd36434b62a661a5843e2",
+      "size": 10635013
     },
     {
       "name": "shard-02.json",
-      "sha256": "581e7a4cf73ed9be9d20ff6732b924fd82d6f3c57551eeb801cb643283b98b83",
-      "size": 10623717
+      "sha256": "71c87cf1df5dfc220abfb0e64068dbaae382097caec33e65e7bd9c5ea66df289",
+      "size": 10642512
     },
     {
       "name": "shard-03.json",
-      "sha256": "dea215128000b1d25378ab381c6b1a3fa4019478718ee68bf0ff893cc867d149",
-      "size": 10645099
+      "sha256": "baf79522d70e54197c31040508e6f0ca7a79e3a6ebc4444d92284dd19db44c85",
+      "size": 10643978
     },
     {
       "name": "shard-04.json",
-      "sha256": "597f6c9a0177c67c6deadeda3e5fa5d91a6b3b59f4f48b06a1a120b60036bc1f",
-      "size": 10641330
+      "sha256": "64c1bbc2397641e92d066738fe36ed6ead78e1cbc32dad7cce726fea963c0e0c",
+      "size": 10632562
     },
     {
       "name": "shard-05.json",
-      "sha256": "0dbb8ccd93c92f8878adcae34eaf24bfbee1fdecad80f2d94b721993b224bae8",
-      "size": 10631854
+      "sha256": "d73ffcfbeaff93995b6e0141f5cf7b876031b712d82f6cd46958ffbdfccf3761",
+      "size": 10631258
     },
     {
       "name": "shard-06.json",
-      "sha256": "720ba412bcb520cc9e6b6bf48b4a7b8d6efc84383cd72d1aee80cd426fd61815",
-      "size": 10623610
+      "sha256": "c5e1c5e96b3984e5d12dc8f7a1c91e1dca839cba8df43c50942a7f4550e79594",
+      "size": 10643802
     },
     {
       "name": "shard-07.json",
-      "sha256": "2555709978611a065ccd8ebb4662efbf6ccd711398950de9bc72e0bd594f12dd",
-      "size": 10016567
+      "sha256": "be25491214798dd043734e2933ac2fd40db2f91f045f2ba63edca5de6c120cf4",
+      "size": 10016394
     },
     {
       "name": "shard-08.json",
-      "sha256": "e5f16f5ea26ffdedbd582dae8b03a15aec4e241903f13a71e7dff8b24569a4f2",
-      "size": 10008075
+      "sha256": "2cc7ef17a1f56626efd968064af36d35a0d86ce2e907b66bfdc3af1db2c537bd",
+      "size": 10007566
     },
     {
       "name": "shard-09.json",
-      "sha256": "a1a1c0982c5acc75ee28e0cfab68ed8f95548111b1d623fdef72e244d5a59cb6",
-      "size": 10005993
+      "sha256": "5649bd4bca8949fff93938543d81267a594ff9f2bb3492c1505b5de2aff70c77",
+      "size": 9996722
     }
   ],
   "parts_directory": "mastercard.parts",
   "provider": "mastercard",
-  "requested_date": "2026-10-10"
+  "requested_date": "2026-10-11"
 }
