@@ -422,8 +422,8 @@ class CliTests(unittest.TestCase):
              contextlib.redirect_stdout(io.StringIO()):
             output = Path(temporary) / "download"
             factory.return_value.materialize.return_value = {"2026-09.tar.gz": output / "2026-09.tar.gz"}
-            status = main(["download", "--repository", "cary17/daily-exchange-rates",
-                           "--period", "2026-09", "--output-dir", str(output)])
+            status = main(["download", "--repository", "cary17/daily-exchange-rates", "--period", "2026-09",
+                           "--output-dir", str(output)])
             self.assertEqual(status, 0)
             factory.assert_called_once_with("cary17/daily-exchange-rates", "fixture-token")
             factory.return_value.materialize.assert_called_once_with("2026-09", output)
@@ -435,8 +435,8 @@ class CliTests(unittest.TestCase):
             output = Path(temporary)
             marker = output / "keep.txt"
             marker.write_text("keep")
-            self.assertEqual(main(["download", "--repository", "cary17/daily-exchange-rates",
-                                   "--period", "2026-09", "--output-dir", str(output)]), 1)
+            self.assertEqual(main(["download", "--repository", "cary17/daily-exchange-rates", "--period", "2026-09",
+                                   "--output-dir", str(output)]), 1)
             factory.assert_not_called()
             self.assertEqual(marker.read_text(), "keep")
 
