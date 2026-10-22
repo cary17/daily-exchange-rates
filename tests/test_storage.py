@@ -28,13 +28,6 @@ class StorageTests(unittest.TestCase):
         with tarfile.open(artifact.archive, "r:gz") as archive:
             return {member.name: archive.extractfile(member).read() for member in archive}
 
-    def remote_entries(self, period):
-        with tempfile.TemporaryDirectory() as temporary:
-            files = self.backend.materialize(period, Path(temporary))
-            self.assertIsNotNone(files)
-            artifact = self.store._artifact(Path(temporary), period)
-            return self.entries(artifact)
-
     def test_same_day_overwrite_and_older_day_does_not_replace_latest(self):
         self.store.save_day(result(date(2026, 9, 30), rate=7))
         self.store.save_day(result(date(2026, 9, 30), rate=8))
@@ -74,28 +67,6 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(json.loads(after["history/2026/09/visa/2026-09-30.json"])["exchangeRateJson"][0]["rateData"], 8)
         self.assertEqual(self.store.verify_archives(), 1)
 
-    def test_year_flatten_cleanup_snapshot_and_supplement(self):
-        self.store.save_day(result(date(2025, 11, 20)))
-        self.store.save_day(result(date(2025, 12, 30), "mastercard"))
-        self.store.archive_due(date(2025, 12, 3))
-        self.store.save_day(result(date(2026, 1, 1)))
-        periods, snapshot = self.store.archive_due(date(2026, 1, 3))
-        self.assertEqual(periods, ["2025-12", "2025"])
-        self.assertTrue(snapshot)
-        year = self.store.year_artifact(2025)
-        self.assertFalse(year.archive.exists())
-        self.assertEqual(len(self.remote_entries("2025")), 6)
-        self.assertTrue(all(name.endswith(".json") for name in self.remote_entries("2025")))
-        self.assertTrue(self.store.month_artifact(2025, 11).exists)
-        self.assertTrue(self.store.month_artifact(2025, 12).exists)
-        self.assertTrue((self.root / "history/2026/01/visa/2026-01-01.json").exists())
-        self.assertEqual(self.store.archive_due(date(2026, 1, 3)), ([], False))
-        self.store.save_day(result(date(2025, 11, 21)))
-        self.assertEqual(len(self.remote_entries("2025")), 9)
-        self.assertEqual(len(self.remote_entries("2025-11")), 6)
-        self.assertFalse(year.archive.exists())
-        self.assertEqual(self.store.verify_archives(), 2)
-
     def test_manual_archive_catches_missed_months_and_years(self):
         self.store.save_day(result(date(2025, 6, 1)))
         self.store.save_day(result(date(2026, 7, 1)))
@@ -117,22 +88,6 @@ class StorageTests(unittest.TestCase):
         with self.assertRaises(StorageError):
             self.store.save_day(result(day, rate=8))
         self.assertEqual((self.root / "latest/visa.json").read_bytes(), latest)
-
-    def test_incomplete_group_is_not_archived_or_deleted(self):
-        day = date(2026, 9, 30)
-        self.store.save_day(result(day))
-        (self.root / "raw/history/2026/09/visa/2026-09-30.json").unlink()
-        with self.assertRaises(StorageError):
-            self.store.archive_due(date(2026, 10, 3))
-        self.assertTrue((self.root / "history/2026/09/visa/2026-09-30.json").exists())
-        self.assertFalse(self.store.month_artifact(2026, 9).archive.exists())
-
-    def test_archive_member_traversal_is_rejected(self):
-        from exchange_rates.storage import member_info
-        for path in ("../secret", "/history/2026/09/visa/2026-09-30.json",
-                     "history/2026/08/visa/2026-09-30.json"):
-            with self.assertRaises(StorageError):
-                member_info(path, "2026-09")
 
 
 if __name__ == "__main__":

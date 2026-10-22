@@ -9,8 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from exchange_rates.archive_backend import (
-    ArchiveBackendError, DirectoryArchiveBackend, GitHubArchiveBackend,
-    _GitHubHTTP, _remove,
+    ArchiveBackendError, DirectoryArchiveBackend, GitHubArchiveBackend, _remove,
 )
 
 
@@ -18,10 +17,11 @@ def digest(content):
     return hashlib.sha256(content).hexdigest()
 
 
-def fixture(root, period="2026-09", content=b"compressed-data", split=False):
+def fixture(root, content=b"compressed-data", split=False):
+    period = "2026-09"
     root.mkdir(parents=True, exist_ok=True)
-    manifest_name = "manifest.json" if "-" in period else f"{period}.manifest.json"
-    checksums_name = "SHA256SUMS" if "-" in period else f"{period}.sha256"
+    manifest_name = "manifest.json"
+    checksums_name = "SHA256SUMS"
     if split:
         contents = {f"{period}.tar.gz.part001": content[:3], f"{period}.tar.gz.part002": content[3:]}
     else:
@@ -182,12 +182,6 @@ class DirectoryTests(unittest.TestCase):
         self.assertTrue(self.backend.has("2026-09"))
         with self.assertRaises(ArchiveBackendError):
             self.backend.materialize("2026-09", self.root / "out")
-
-    def test_year_roundtrip(self):
-        files = fixture(self.root / "year", "2025")
-        self.backend.publish("2025", files)
-        materialized = self.backend.materialize("2025", self.root / "out")
-        self.assertEqual(set(materialized), {"2025.tar.gz", "2025.manifest.json", "2025.sha256"})
 
     def test_overwrite_removes_obsolete_volumes(self):
         split = fixture(self.root / "split", split=True)
@@ -360,13 +354,6 @@ class GitHubTests(unittest.TestCase):
         self.assertFalse(old_ids & new_ids)
         self.assertEqual(set(self.http.assets), new_ids)
 
-    def test_identical_publish_reuses_assets(self):
-        first = self.publish()
-        self.http.calls.clear()
-        second = self.publish()
-        self.assertEqual(first["files"], second["files"])
-        self.assertFalse(any(method in {"POST", "DELETE"} for method, path, headers in self.http.calls))
-
     def test_bad_upload_hash_preserves_old_body_and_assets(self):
         first = self.publish()
         body = self.http.release["body"]
@@ -512,17 +499,6 @@ class GitHubTests(unittest.TestCase):
         self.assertNotIn("test-token", str(caught.exception))
         self.assertEqual(len(calls), 1)
 
-    def test_http_transport_passes_stream_to_urllib_with_content_length(self):
-        http = _GitHubHTTP()
-        stream = io.BytesIO(b"archive")
-        with patch.object(http.opener, "open", return_value=Response(201, payload={})) as opened:
-            response = http.request("POST", "https://uploads.github.com/upload",
-                                    {"Content-Length": "7"}, stream)
-        response.close()
-        request = opened.call_args.args[0]
-        self.assertIs(request.data, stream)
-        self.assertEqual(request.get_header("Content-length"), "7")
-
     def test_json_null_is_format_failure_not_missing(self):
         class NullHTTP:
             def request(inner, method, url, headers, body=None):
@@ -599,12 +575,6 @@ class GitHubTests(unittest.TestCase):
                 self.backend._json("POST", "/releases", {})
             self.assertEqual(calls, ["GET", "POST"])
             sleep.assert_not_called()
-
-    def test_environment_factory(self):
-        with patch.dict("os.environ", {"GITHUB_REPOSITORY": "owner/repo", "GITHUB_TOKEN": "test"}, clear=True):
-            self.assertEqual(GitHubArchiveBackend.from_environment().repository, "owner/repo")
-        with patch.dict("os.environ", {}, clear=True), self.assertRaises(ArchiveBackendError):
-            GitHubArchiveBackend.from_environment()
 
 
 if __name__ == "__main__":

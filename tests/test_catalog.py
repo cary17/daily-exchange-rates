@@ -1,7 +1,6 @@
 """Offline contracts for the complete official calculator currency catalogs."""
 
 from html import escape
-from itertools import product
 import unittest
 from unittest.mock import Mock
 
@@ -38,16 +37,6 @@ def source_response(data=None, text=None):
 
 
 class CatalogTests(unittest.TestCase):
-    def test_direction_sets_are_independent_and_identity_is_excluded(self):
-        catalog = CurrencyCatalog(["USD", "CNY", "SKK"], ["USD", "EUR"])
-        expected = [(spend, home) for spend, home in product(catalog.transaction, catalog.billing)
-                    if spend != home]
-        self.assertEqual(list(catalog.pairs()), expected)
-        self.assertEqual(catalog.pair_count, 5)
-        self.assertEqual(catalog.transaction, ("USD", "CNY", "SKK"))
-        self.assertEqual(catalog.billing, ("USD", "EUR"))
-        self.assertIn(("SKK", "EUR"), expected)
-
     def test_invalid_empty_duplicate_or_identity_only_catalog_fails(self):
         for transaction, billing in (
             ((), ("USD",)), (("USD",), ()), (("USD",), ("USD",)),

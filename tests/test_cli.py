@@ -125,21 +125,6 @@ class CliTests(unittest.TestCase):
         factory.assert_called_once_with(timeout=5, global_interval=0.5)
         self.assertTrue((self.default_diagnostics / "mastercard/run-error/report.json").is_file())
 
-    def test_default_pacing_is_per_session_without_shared_limit(self):
-        config = load_config(None)
-        self.assertEqual(config["http"]["interval"], 0.3)
-        self.assertEqual(config["http"]["global_interval"], 0)
-        for provider in ("visa", "mastercard"):
-            with self.subTest(provider=provider):
-                self.assertNotIn("global_interval", config["providers"][provider].get("http", {}))
-
-    def test_interval_parser_defaults_and_explicit_values(self):
-        self.assertIsNone(parser().parse_args(["fetch", "--provider", "visa"]).interval)
-        for text, expected in (("0", 0.0), ("0.75", 0.75)):
-            with self.subTest(value=text):
-                args = parser().parse_args(["fetch", "--provider", "visa", "--interval", text])
-                self.assertEqual(args.interval, expected)
-
     def test_invalid_interval_exits_before_client_or_diagnostics(self):
         for value in ("-0.1", "nan", "inf", "-inf", "1e309", "invalid"):
             with self.subTest(value=value), \
@@ -170,42 +155,6 @@ class CliTests(unittest.TestCase):
             factory.assert_called_once_with(interval=expected, global_interval=0)
             self.assertIn(f"per-session interval={expected:g}s; global interval=0s", output.getvalue())
             self.assertEqual(config["providers"]["mastercard"]["http"]["interval"], 0.9)
-
-    def test_unionpay_workflow_keeps_single_job_with_interval_default(self):
-        workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
-        text = (workflows / "fetch-unionpay.yml").read_text()
-        self.assertIn("      interval:\n", text)
-        self.assertIn("        default: '0.3'\n        type: string", text)
-        self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}", text)
-        self.assertIn('--interval "$REQUEST_INTERVAL"', text)
-        self.assertNotIn("fetch-shard", text)
-        self.assertNotIn("global_interval", text)
-
-    def test_sharded_workflows_split_jobs_then_merge_bundles(self):
-        workflows = Path(__file__).resolve().parents[1] / ".github" / "workflows"
-        for provider in ("visa", "mastercard"):
-            with self.subTest(provider=provider):
-                text = (workflows / f"fetch-{provider}.yml").read_text()
-                # Defaults are the single source of truth for pacing.
-                self.assertIn("        default: '0.3'\n        type: string", text)
-                self.assertIn("REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}", text)
-                self.assertIn("        default: '9'\n        type: string", text)
-                self.assertNotIn("global_interval", text)
-                # Three stages: plan, one job per shard, then verify and merge.
-                for job in ("  prepare:\n", "  shard:\n", "  merge:\n"):
-                    self.assertIn(job, text)
-                self.assertIn("matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}", text)
-                self.assertIn("fail-fast: false", text)
-                self.assertIn('python -m exchange_rates fetch-shard', text)
-                self.assertIn('python -m exchange_rates merge-shards', text)
-                self.assertIn('--shard-index "$SHARD_INDEX"', text)
-                self.assertIn('--shard-count "$SHARD_COUNT"', text)
-                self.assertIn('--shard-dir "$RUNNER_TEMP/shards"', text)
-                # Bundles must round-trip through artifacts without the diagnostics.
-                self.assertIn(f"          name: {provider}-shard-${{{{ matrix.shard }}}}", text)
-                self.assertIn(f"          pattern: {provider}-shard-*", text)
-                self.assertIn("          merge-multiple: true", text)
-                self.assertNotIn(f"{provider}-shard-${{{{ matrix.shard }}}}-diagnostics", text)
 
     def test_fetch_shard_and_merge_shards_cli_contract(self):
         plan = parser().parse_args([

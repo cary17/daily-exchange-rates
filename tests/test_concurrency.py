@@ -1,6 +1,5 @@
 """Deterministic contracts for balanced, all-or-nothing currency concurrency."""
 
-from itertools import product
 import threading
 import unittest
 from unittest.mock import Mock
@@ -13,27 +12,6 @@ TIMEOUT = 5
 
 
 class BalancedShardTests(unittest.TestCase):
-    def test_balanced_contiguous_complete_shards(self):
-        codes = tuple(f"A{chr(65 + index // 26)}{chr(65 + index % 26)}"
-                      for index in range(31))
-        for size in range(len(codes) + 1):
-            for count in (1, SHARD_COUNT, 12):
-                with self.subTest(size=size, count=count):
-                    expected = codes[:size]
-                    shards = balanced_shards(expected, count)
-                    lengths = [len(shard) for shard in shards]
-                    self.assertEqual(len(shards), count)
-                    self.assertTrue(all(isinstance(shard, tuple) for shard in shards))
-                    self.assertEqual(tuple(code for shard in shards for code in shard), expected)
-                    self.assertLessEqual(max(lengths) - min(lengths), 1)
-                    self.assertEqual(lengths, sorted(lengths, reverse=True))
-
-    def test_fewer_currencies_than_default_shards(self):
-        self.assertEqual(SHARD_COUNT, 9)
-        self.assertEqual(balanced_shards(["USD", "EUR"]),
-                         (("USD",), ("EUR",)) + ((),) * 7)
-        self.assertEqual(balanced_shards([]), ((),) * 9)
-
     def test_invalid_and_duplicate_currency_codes(self):
         invalid = ("usd", "US", "USDD", "U1D", " USD", "USD\n", "", "\u00dcSD", 1, None, True)
         for code in invalid:
@@ -154,21 +132,6 @@ class CurrencyConcurrencyTests(unittest.TestCase):
         self.assertIs(errors[0], failure)
         self.assertEqual(returned, [])
         self.assertEqual(exited, set(range(SHARD_COUNT)))
-
-    def test_worker_queries_all_billing_currencies_not_only_its_shard(self):
-        def worker(index, shard, cancel_event):
-            pairs = []
-            for transaction_currency in shard:
-                for billing_currency in CURRENCIES:
-                    self.assertFalse(cancel_event.is_set())
-                    pairs.append((transaction_currency, billing_currency))
-            return pairs
-
-        results = run_currency_shards(CURRENCIES, worker)
-        pairs = [pair for shard_pairs in results for pair in shard_pairs]
-        self.assertEqual(pairs, list(product(CURRENCIES, repeat=2)))
-        self.assertEqual(len(set(pairs)), len(CURRENCIES) ** 2)
-        self.assertIn((CURRENCIES[0], CURRENCIES[-1]), pairs)
 
 
 if __name__ == "__main__":

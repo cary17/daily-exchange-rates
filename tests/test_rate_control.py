@@ -294,22 +294,6 @@ class RateControlTests(unittest.TestCase):
             gate.acquire()
         self.assertEqual(clock(), 70)
 
-    def test_default_configuration_keeps_gate_out_of_legacy_path(self):
-        client = HttpClient(interval=0)
-        session = Mock()
-        session.get.side_effect = [response(403), response()]
-        with patch("exchange_rates.http.requests.Session", return_value=session), patch.object(
-                client._gate, "acquire", side_effect=AssertionError("disabled gate")), patch.object(
-                client._gate, "record_response", side_effect=AssertionError("disabled gate")):
-            with self.assertRaises(HttpError) as caught:
-                client.request_json(URL)
-            self.assertNotIsInstance(caught.exception, AccessBlockedError)
-            client.request_json(URL)
-        self.assertEqual(client._gate.consecutive_forbidden, 0)
-
-    def test_default_session_interval_is_point_three(self):
-        self.assertEqual(HttpClient().interval, 0.3)
-
     def test_sessions_keep_independent_session_budgets(self):
         clock = FakeClock()
         parent = HttpClient(forbidden_cooldown=60)

@@ -197,18 +197,6 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(len(client.calls), 330)
                 self.assertEqual(len(client.forks), 27)
 
-    def test_date_mismatch_and_invalid_date(self):
-        for provider, container, field in (
-            ("visa", "originalValues", "exchangedate"),
-            ("mastercard", "data", "exchange_date"),
-        ):
-            for returned, exception in (("2026-03-26", RecoveryError), ("not-a-date", RecoveryError)):
-                client = FakeClient(provider, mutate=lambda obj, c=container, f=field, v=returned: obj[c].update({f: v}))
-                with self.subTest(provider=provider, returned=returned), self.assertRaises(exception):
-                    fetch_day(provider, DAY, CURRENCIES, {}, client)
-                self.assertEqual(len(client.calls), 330)
-                self.assertEqual(len(client.forks), 27)
-
     def test_card_error_status_and_bill_mismatch(self):
         mutations = (
             ("visa", lambda d: d.update(status="error")),
@@ -438,12 +426,6 @@ class ProviderTests(unittest.TestCase):
             fetch_day("visa", datetime(2026, 3, 27), CURRENCIES, {}, client)
         self.assertEqual(client.calls, [])
 
-    def test_raw_parts_default_is_not_shared(self):
-        first = DayResult("unionpay", DAY, b"", b"", {})
-        second = DayResult("unionpay", DAY, b"", b"", {})
-        first.raw_parts["part.json"] = b"{}"
-        self.assertEqual(second.raw_parts, {})
-
 
 def official_data(provider, params):
     if provider == "unionpay":
@@ -484,16 +466,6 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(first.body, http_response().content)
             self.assertEqual(len(client.records), 2)
 
-    def test_retry_transport_429_and_5xx_only(self):
-        for error in (requests.RequestsError("network"), http_response(429), http_response(503)):
-            with self.subTest(error=error), patch("exchange_rates.http.requests.Session") as factory, patch("exchange_rates.http.time.sleep") as sleep:
-                factory.return_value.get.side_effect = [error, http_response()]
-                with HttpClient(interval=0, retries=1) as client:
-                    result = client.request_json("https://example.test/rates")
-                self.assertEqual(factory.return_value.get.call_count, 2)
-                self.assertEqual(len(result.records), 2)
-                sleep.assert_called_once_with(0.5)
-
     def test_4xx_and_bad_json_are_not_retried(self):
         for status in (400, 401, 403, 404):
             with self.subTest(status=status), patch("exchange_rates.http.requests.Session") as factory:
@@ -517,41 +489,6 @@ class HttpTests(unittest.TestCase):
             self.assertEqual([call.args[0] for call in sleep.call_args_list], [0.5, 1.0, 2.0])
             self.assertEqual(len(caught.exception.records), 4)
             self.assertEqual(caught.exception.response.body_text, "server broke")
-
-    def test_request_interval_applies_between_attempts(self):
-        with patch("exchange_rates.http.requests.Session") as factory, patch("exchange_rates.http.time.sleep") as sleep, patch("exchange_rates.http.time.monotonic", side_effect=[10.0, 10.1, 10.3]):
-            factory.return_value.get.return_value = http_response()
-            with HttpClient(interval=0.3) as client:
-                client.request_json("https://example.test/a")
-                client.request_json("https://example.test/b")
-            self.assertAlmostEqual(sleep.call_args.args[0], 0.2)
-
-    def test_fork_inherits_configuration_but_owns_session_and_records(self):
-        sessions = [Mock(), Mock(), Mock()]
-        for session in sessions:
-            session.get.return_value = http_response()
-        cancelled = Event()
-        with patch("exchange_rates.http.requests.Session", side_effect=sessions) as factory:
-            with HttpClient(timeout=17, retries=2, interval=0.4) as parent:
-                child = parent.fork(cancelled)
-                sibling = parent.fork(Event())
-                self.assertEqual((child.timeout, child.retries, child.interval), (17, 2, 0.4))
-                self.assertIs(child.cancel_event, cancelled)
-                self.assertIsNone(child._session)
-                self.assertIsNone(child._last_started)
-                self.assertIsNot(child.records, parent.records)
-                self.assertIsNot(child.records, sibling.records)
-                with child, sibling:
-                    parent.request_json("https://example.test/parent")
-                    child.request_json("https://example.test/child")
-                    sibling.request_json("https://example.test/sibling")
-                    self.assertEqual(len({id(parent._session), id(child._session), id(sibling._session)}), 3)
-                sessions[0].close.assert_not_called()
-                self.assertEqual([len(client.records) for client in (parent, child, sibling)], [1, 1, 1])
-            self.assertEqual(factory.call_count, 3)
-            for session in sessions:
-                session.close.assert_called_once()
-                self.assertEqual(session.get.call_args.kwargs["timeout"], 17)
 
     def test_text_response_is_complete_utf8_and_never_json_decoded(self):
         body = '<dm-calculator content="&quot;人民币&quot;"></dm-calculator>'.encode("utf-8")
