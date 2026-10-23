@@ -1,0 +1,25 @@
+{
+  "fetched_at_utc": "2026-10-23T12:00:37.572191Z",
+  "pair_count": 2400,
+  "provider": "unionpay",
+  "rate_direction": "base currency per one transaction currency",
+  "recovery": {
+    "initial_failed": 0,
+    "repaired": 0,
+    "rounds": 0,
+    "unit": "file"
+  },
+  "requested_date": "2026-10-22",
+  "response_dates": [
+    {
+      "fields": {
+        "curDate": "2026-10-22"
+      },
+      "request_index": 0
+    }
+  ],
+  "response_dates_index": "final_successful_responses",
+  "source_urls": [
+    "https://www.unionpayintl.com/upload/jfimg/20261022.json"
+  ]
+}
