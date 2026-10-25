@@ -154,7 +154,7 @@
   "catalog_source_urls": [
     "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
   ],
-  "fetched_at_utc": "2026-10-25T14:09:27.757347Z",
+  "fetched_at_utc": "2026-10-25T14:28:52.646764Z",
   "pair_count": 22350,
   "provider": "mastercard",
   "rate_direction": "base currency per one transaction currency",
