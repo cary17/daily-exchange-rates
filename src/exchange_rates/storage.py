@@ -20,10 +20,10 @@ from .models import DayResult, json_bytes
 _MEMBER = re.compile(
     r"(?P<role>history|raw/history|metadata/history)/(?P<year>\d{4})/"
     r"(?P<month>\d{2})/(?P<provider>[a-z][a-z0-9_-]*)/"
-    r"(?P<day>\d{4}-\d{2}-\d{2})(?:\.json|\.parts/(?P<part>shard-0[1-9]\.json))\Z"
+    r"(?P<day>\d{4}-\d{2}-\d{2})(?:\.json|\.parts/"
+    r"(?P<part>shard-(?:0[1-9]|[1-9][0-9])\.json))\Z"
 )
 _ROLES = {"history", "raw/history", "metadata/history"}
-_PARTS = {f"shard-{index:02d}.json" for index in range(1, 10)}
 _CHUNK = 1024 * 1024
 _INDEX_LIMIT = 8 * _CHUNK
 
@@ -230,12 +230,13 @@ def _validate_groups(entries: dict[str, dict], indices: dict[str, dict], period:
                 or index.get("parts_directory") != f"{day}.parts"):
             raise StorageError(f"Raw index identity/path mismatch: {pair}")
         parts = index.get("parts")
-        if not isinstance(parts, list) or len(parts) != 9:
-            raise StorageError(f"Raw index must reference nine parts: {pair}")
+        if not isinstance(parts, list) or not 1 <= len(parts) <= 99:
+            raise StorageError(f"Raw index must reference 1 to 99 parts: {pair}")
+        expected = {f"shard-{index:02d}.json" for index in range(1, len(parts) + 1)}
         names = set()
         for part in parts:
             if (not isinstance(part, dict) or not isinstance(part.get("name"), str)
-                    or part["name"] not in _PARTS or part["name"] in names):
+                    or part["name"] not in expected or part["name"] in names):
                 raise StorageError(f"Invalid/duplicate raw part name: {pair}")
             names.add(part["name"])
             path = index_name[:-5] + ".parts/" + part["name"]
@@ -243,7 +244,7 @@ def _validate_groups(entries: dict[str, dict], indices: dict[str, dict], period:
             if (entry is None or type(part.get("size")) is not int or part["size"] != entry["size"]
                     or part.get("sha256") != entry["sha256"]):
                 raise StorageError(f"Raw part size/hash mismatch: {path}")
-        if names != _PARTS or shards.get(pair, set()) != names:
+        if names != expected or shards.get(pair, set()) != names:
             raise StorageError(f"Missing/orphan raw part: {pair}")
 
 
@@ -511,8 +512,6 @@ class DataStore:
         content = {f"history/{suffix}.json": result.normalized,
                    f"metadata/history/{suffix}.json": json_bytes(metadata)}
         if parts:
-            if set(parts) != _PARTS:
-                raise StorageError("Raw response must contain exactly nine named parts")
             index = _raw_index(raw)
             if index is None:
                 raise StorageError("Raw parts require shard index")

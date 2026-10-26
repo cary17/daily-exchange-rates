@@ -19,9 +19,9 @@ on:
         default: '0.3'
         type: string
       shards:
-        description: 'Parallel shard jobs; each job uses its own runner and egress address'
+        description: 'Parallel shard jobs; each job uses a separate GitHub-hosted runner'
         required: false
-        default: '9'
+        default: '10'
         type: string
 
 permissions:
@@ -58,7 +58,7 @@ jobs:
         env:
           START_INPUT: ${{ inputs.start_date }}
           END_INPUT: ${{ inputs.end_date }}
-          SHARDS: ${{ inputs.shards || '9' }}
+          SHARDS: ${{ inputs.shards || '10' }}
         run: |
           python - <<'PY'
           import json
@@ -68,7 +68,7 @@ jobs:
 
           first, last = dates(os.environ.get("START_INPUT", ""),
                               os.environ.get("END_INPUT", ""))
-          count = int(os.environ.get("SHARDS", "9"))
+          count = int(os.environ.get("SHARDS", "10"))
           if not 1 <= count <= 32:
               raise SystemExit("shards must be between 1 and 32")
           matrix = {"include": [{"shard": index} for index in range(count)]}
@@ -106,7 +106,7 @@ jobs:
           END_DATE: ${{ needs.prepare.outputs.end }}
           REQUEST_INTERVAL: ${{ inputs.interval || '0.3' }}
           SHARD_INDEX: ${{ matrix.shard }}
-          SHARD_COUNT: ${{ inputs.shards || '9' }}
+          SHARD_COUNT: ${{ inputs.shards || '10' }}
         run: |
           python -m exchange_rates fetch-shard \
             --provider visa \
@@ -158,7 +158,7 @@ jobs:
         env:
           START_DATE: ${{ needs.prepare.outputs.start }}
           END_DATE: ${{ needs.prepare.outputs.end }}
-          SHARD_COUNT: ${{ inputs.shards || '9' }}
+          SHARD_COUNT: ${{ inputs.shards || '10' }}
         run: |
           python .github/scripts/plan-shard-retries.py \
             --provider visa \
@@ -174,7 +174,7 @@ jobs:
     with:
       provider: visa
       matrix: ${{ needs.plan-retry.outputs.matrix }}
-      shards: ${{ inputs.shards || '9' }}
+      shards: ${{ inputs.shards || '10' }}
       interval: ${{ inputs.interval || '0.3' }}
 
   merge:

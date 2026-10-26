@@ -211,10 +211,10 @@ class CliTests(unittest.TestCase):
             directory = shard_dir / "mastercard/2026-10-03"
             directory.mkdir(parents=True)
             rows_by_shard = {0: [("USD", "CNY", "7.1")], 1: [("CNY", "USD", "0.14")]}
-            for index in range(9):
+            for index in range(10):
                 bundle = {
                     "format": "exchange-rates-shard-v1", "provider": "mastercard",
-                    "requested_date": "2026-10-03", "shard_index": index, "shard_count": 9,
+                    "requested_date": "2026-10-03", "shard_index": index, "shard_count": 10,
                     "transaction_currencies": ["USD", "CNY"],
                     "billing_currencies": ["USD", "CNY"],
                     "catalog_source_urls": [], "catalog_requests": [],
@@ -245,8 +245,12 @@ class CliTests(unittest.TestCase):
             self.assertEqual(
                 json.loads((data_dir / "metadata/latest/mastercard.json").read_bytes())["pair_count"], 2)
             self.assertTrue((data_dir / "raw/history/2026/10/mastercard/"
-                             "2026-10-03.parts/shard-09.json").is_file())
+                             "2026-10-03.parts/shard-10.json").is_file())
             publisher.return_value.publish.assert_called_once()
+            from exchange_rates.storage import DataStore
+            store = DataStore(data_dir, DirectoryArchiveBackend(root / "releases"))
+            self.assertEqual(store.archive_due(date(2026, 11, 3)), (["2026-10"], False))
+            self.assertEqual(store.verify_archives(), 1)
 
     def test_shard_denial_records_exchange_once_with_context(self):
         from exchange_rates.http import AccessBlockedError, HttpClient

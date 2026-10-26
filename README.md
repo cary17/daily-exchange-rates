@@ -2,7 +2,7 @@
 
 手动采集 Visa、Mastercard、银联官方汇率。源码在 `main`，当前数据在 `data`，月度和年度归档在 [Releases](https://github.com/cary17/daily-exchange-rates/releases)。
 
-Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种平均分成九组；每组由独立 Actions job 串行查询全部账单币种，全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
+Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种按 `shards` 参数平均分组；每组由独立 Actions job 串行查询全部账单币种，全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
 
 ## 使用 GitHub Actions
 
@@ -13,7 +13,7 @@ Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种�
 - `start_date`：`YYYY-MM-DD`，留空使用运行时北京时间当天。
 - `end_date`：包含结束日，留空仅抓起始日。
 - `interval`：每个会话的请求间隔，单位秒，默认 `0.3`；本次运行可填写 `0.5`、`1` 等非负数。
-- `shards`：并行分片 job 数，默认 `9`；每个 job 使用独立 runner 与独立出口地址。
+- `shards`：并行分片 job 数，默认 `10`，可填 `1` 至 `32`；每个 job 使用独立的 GitHub 托管 runner。
 - 日期严格匹配，错误日期的响应计入待补抓项，不回退到其他日期。
 - 每个分片在自身进程内串行查询，只补抓本分片失败、缺失或校验未通过的币对；成功币对保留，不重复请求。默认最多补抓两轮，每轮只处理仍未成功的部分。
 - 官方目录包含的历史币种同样查询；补抓耗尽仍有错漏时，该日不发布、不覆盖已有完整数据。摘要只列关键统计，完整错漏与响应证据保存在诊断 Artifact。长区间请分批运行，单次工作流最多 360 分钟。
@@ -24,7 +24,7 @@ Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种�
 
 默认每个会话的 `http.interval` 为 `0.3` 秒，三个抓取工作流的 `interval` 输入可在每次运行时修改；留空回退到默认值，支持有限的非负数，`0` 表示关闭会话间隔。本地使用 `--interval 0.8` 临时覆盖机构与全局配置，不传参数则沿用配置。`http.global_interval` 保持 `0`，不启用跨会话共享限速。
 
-分片之间不共享出口地址，因此每个分片都是独立串行流。单分片实测约 3 次请求/秒，9 片并行时全长查询约 15 至 20 分钟；实际速度取决于接口响应。
+单分片实测约 3 次请求/秒，此前 9 片并行时全长查询约 15 至 20 分钟；实际速度取决于接口响应。
 
 收到 403 后暂停该分片 60 秒，冷却结束只放行一个探测请求；HTTP 200 清零连续拒绝计数，连续 3 个拒绝批次则停止该分片。同一批已在途的响应完整保留在诊断中，但不会重复累计拒绝次数或用迟到的成功响应误判恢复。403 不做即时传输重试，失败币对仍由末尾补抓处理；不会发布部分数据。冷却与阈值可在配置中调整。
 
@@ -49,7 +49,7 @@ python -m exchange_rates fetch --provider mastercard --start-date 2026-09-29 --e
 
 ```sh
 python -m exchange_rates fetch-shard --provider mastercard --start-date 2026-10-03 \
-  --shard-index 0 --shard-count 9 --shard-dir ./shards
+  --shard-index 0 --shard-count 10 --shard-dir ./shards
 python -m exchange_rates merge-shards --provider mastercard --start-date 2026-10-03 \
   --shard-dir ./shards --data-dir ./rates-data
 ```
@@ -62,15 +62,15 @@ python -m exchange_rates merge-shards --provider mastercard --start-date 2026-10
 | --- | --- |
 | 最新统一汇率 | `latest/provider.json` |
 | 最新原始响应或索引 | `raw/latest/provider.json` |
-| 最新原始响应分片 | `raw/latest/provider.parts/shard-01.json` 至 `shard-09.json` |
+| 最新原始响应分片 | `raw/latest/provider.parts/shard-01.json` 至 `shard-NN.json` |
 | 最新采集元数据 | `metadata/latest/provider.json` |
 | 未归档每日汇率 | `history/YYYY/MM/provider/YYYY-MM-DD.json` |
 | 每日原始响应或索引 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 每日原始响应分片 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.parts/shard-01.json` 至 `shard-09.json` |
+| 每日原始响应分片 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.parts/shard-01.json` 至 `shard-NN.json` |
 | 每日元数据 | `metadata/history/YYYY/MM/provider/YYYY-MM-DD.json` |
 | 最近三个月的月包 | `history/YYYY/MM/YYYY-MM.tar.gz`，大包可能分卷 |
 
-`provider` 为 `visa`、`mastercard` 或 `unionpay`。银联原始记录仍为单文件，无分片。Visa、Mastercard 原始索引包含相对分片目录、文件大小和 SHA256；每片保留请求及完整响应原文。元数据记录目录范围、分片覆盖和接口返回日期。
+`provider` 为 `visa`、`mastercard` 或 `unionpay`。银联原始记录仍为单文件，无分片。Visa、Mastercard 的分片数量以原始索引的 `parts` 列表为准；索引包含相对分片目录、文件大小和 SHA256，每片保留请求及完整响应原文。元数据记录目录范围、分片覆盖和接口返回日期。
 
 统一数据使用 `exchangeRateJson`，`rateData` 表示 1 单位 `transCur` 可兑换的 `baseCur` 数量。例：
 
@@ -103,7 +103,7 @@ tar -xzf downloads/2026-09/2026-09.tar.gz
 git clone --single-branch --branch data https://github.com/cary17/daily-exchange-rates.git rates-data
 ```
 
-三个月留存指当前分支文件；Git/LFS 历史对象回收及配额由 GitHub 管理。机构配置见 `config/providers.json`；新增查询源可复用 `CurrencyCatalog` 和九分片并发接口，并增加独立工作流。
+三个月留存指当前分支文件；Git/LFS 历史对象回收及配额由 GitHub 管理。机构配置见 `config/providers.json`；新增查询源可复用 `CurrencyCatalog` 和分片并发接口，并增加独立工作流。
 
 ## 许可
 
