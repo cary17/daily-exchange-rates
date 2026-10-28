@@ -5,6 +5,7 @@ from datetime import date, datetime, timezone
 from decimal import Decimal, InvalidOperation, localcontext
 import hashlib
 import re
+import time
 from typing import Any, Callable, Mapping, Sequence
 
 import simplejson
@@ -295,7 +296,8 @@ def fetch_shard(provider: str, target: date, config: Mapping[str, Any],
             recorded = False
             try:
                 row, response = _query_pair(
-                    provider, target, spend, home, endpoint, headers, client)
+                    provider, target, spend, home, endpoint, headers, client,
+                    refresh=round_index > 0)
             except AccessBlockedError as exc:
                 # Record the denying exchange before wrapping, because finally
                 # runs only after this handler raises.
@@ -564,7 +566,8 @@ def _check_bill(rate: Decimal, value: Any, context: str) -> None:
 
 
 def _query_pair(provider: str, target: date, spend: str, home: str,
-                endpoint: str, headers: Mapping[str, str], client: HttpClient):
+                endpoint: str, headers: Mapping[str, str], client: HttpClient, *,
+                refresh: bool = False):
     if provider == "visa":
         day = target.strftime("%m/%d/%Y")
         params = {"amount": "1000", "fee": "0", "utcConvertedDate": day,
@@ -572,6 +575,8 @@ def _query_pair(provider: str, target: date, spend: str, home: str,
     else:
         params = {"exchange_date": target.isoformat(), "transaction_currency": spend,
                   "cardholder_billing_currency": home, "bank_fee": "0", "transaction_amount": "1000"}
+        if refresh:
+            params["_"] = str(time.time_ns())
     response = client.request_json(endpoint, params=params, headers=headers)
     data = _object(response.data, f"{provider} {spend}/{home}")
     _check_dates(provider, target, data)
@@ -632,7 +637,8 @@ def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[st
                         error = None
                         try:
                             row, response = _query_pair(
-                                provider, target, spend, home, endpoint, headers, shard_client)
+                                provider, target, spend, home, endpoint, headers, shard_client,
+                                refresh=round_index > 0)
                             results[pair] = (row, response)
                             fallback = _records(response)
                         except AccessBlockedError as exc:

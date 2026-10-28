@@ -10,7 +10,7 @@ import simplejson
 from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.http import HttpClient, HttpError
 from exchange_rates.models import json_bytes
-from exchange_rates.providers import RecoveryError, fetch_day
+from exchange_rates.providers import RecoveryError, fetch_day, fetch_shard
 from tests.test_providers import (
     CURRENCIES, DAY, FakeClient, call_pair, http_response, response,
 )
@@ -40,6 +40,45 @@ class RecoveryTests(unittest.TestCase):
                     rows = simplejson.loads(result.normalized)["exchangeRateJson"]
                     self.assertEqual([(r["transCur"], r["baseCur"]) for r in rows],
                                      list(CurrencyCatalog(CURRENCIES, CURRENCIES).pairs()))
+
+    def test_mastercard_recovery_refreshes_stale_cache_in_each_round(self):
+        catalog = CurrencyCatalog(("USD",), ("CNY", "EUR"))
+        stale_pair = ("USD", "CNY")
+        for sharded in (False, True):
+            with self.subTest(sharded=sharded):
+                client = FakeClient("mastercard")
+                original = client.request_json
+                fresh_keys = set()
+
+                def cached(url, params=None, headers=None):
+                    result = original(url, params, headers)
+                    if call_pair("mastercard", params) == stale_pair:
+                        key = params.get("_")
+                        if key is not None:
+                            fresh_keys.add(key)
+                        if key is None or len(fresh_keys) < 2:
+                            result.data["data"]["exchange_date"] = "2026-03-26"
+                    return response(result.data, url, params, headers)
+
+                client.request_json = cached
+                with patch("exchange_rates.providers.discover_currencies", return_value=catalog):
+                    if sharded:
+                        result = fetch_shard("mastercard", DAY, {}, client, 0, 1)
+                        recovery = result["recovery"]
+                    else:
+                        result = fetch_day("mastercard", DAY, catalog, {}, client)
+                        recovery = result.metadata["recovery"]
+                params = [p for _, p, _ in client.calls]
+                self.assertEqual(len(params), 4)
+                self.assertTrue(all("_" not in p for p in params[:2]))
+                retries = params[2:]
+                self.assertEqual([call_pair("mastercard", p) for p in retries],
+                                 [stale_pair, stale_pair])
+                self.assertEqual(len({p["_"] for p in retries}), 2)
+                initial = next(p for p in params[:2] if call_pair("mastercard", p) == stale_pair)
+                for p in retries:
+                    self.assertEqual({k: v for k, v in p.items() if k != "_"}, initial)
+                self.assertEqual(recovery, {"initial_failed": 1, "rounds": 2, "repaired": 1})
 
     def test_persistent_precise_missing_pairs_and_no_result(self):
         client = FakeClient("visa")
