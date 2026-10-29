@@ -296,7 +296,7 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
               f"global interval={client.global_interval:g}s")
         diagnostics.records = client.records
         catalog = prepare_catalog(args.provider, config["providers"][args.provider], client)
-        pair_count = catalog.pair_count if catalog is not None else 1
+        pair_count = catalog.pair_count if catalog is not None else (2 if args.provider == "jcb" else 1)
         count = (last - first).days + 1
         if catalog is not None:
             print(f"Official catalog: {len(catalog.transaction)} transaction / "
@@ -314,10 +314,12 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
                 print(f"FAILED {target}: {entry['brief']}", file=sys.stderr)
             else:
                 # A storage or Release failure aborts data-branch publication entirely.
-                store.save_day(result)
+                results = result if isinstance(result, tuple) else (result,)
+                for item in results:
+                    store.save_day(item)
+                    diagnostics.success(item)
                 successes.append(target.isoformat())
-                diagnostics.success(result)
-                print(f"SAVED {target}")
+                print(f"SAVED {target}: {', '.join(item.provider for item in results)}")
             if target == last:
                 break
             target += timedelta(days=1)

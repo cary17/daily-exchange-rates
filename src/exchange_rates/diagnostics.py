@@ -198,8 +198,8 @@ class Diagnostics:
         return entry
 
     def finish(self, command: str, provider: str, status: int, note: str = "") -> str:
-        saved = sum(day["status"] == "saved" for day in self.days)
-        failed = len(self.days) - saved
+        saved = len({day["target"] for day in self.days if day["status"] == "saved"})
+        failed = len({day["target"] for day in self.days if day["status"] == "failed"})
         lines = [f"Command: {command}; provider: {provider or 'none'}; exit: {status}",
                  f"Saved dates: {saved}; failed dates: {failed}"]
         if note:
@@ -207,7 +207,8 @@ class Diagnostics:
         for day in self.days:
             if day["status"] == "saved":
                 recovery = day["metadata"].get("recovery", {})
-                lines.append(f"- {day['target']}: saved {day['pair_count']} pairs; recovery: {short_text(recovery)}")
+                lines.append(f"- {day['target']} {day['provider']}: saved {day['pair_count']} pairs; "
+                             f"recovery: {short_text(recovery)}")
                 if day.get("diagnostic_error"):
                     lines.append(f"Diagnostics unavailable: {day['diagnostic_error']}")
             else:

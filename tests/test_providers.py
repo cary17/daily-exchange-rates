@@ -124,7 +124,7 @@ def call_pair(provider, params):
 
 class ProviderTests(unittest.TestCase):
     def test_registry(self):
-        self.assertEqual(provider_ids(), ("unionpay", "visa", "mastercard"))
+        self.assertEqual(provider_ids(), ("unionpay", "visa", "mastercard", "jcb"))
         with self.assertRaises(ValueError):
             fetch_day("unknown", DAY, CURRENCIES, {}, FakeClient("visa"))
 
@@ -282,7 +282,7 @@ class ProviderTests(unittest.TestCase):
 
     def test_official_response_date_and_currency_fields(self):
         target = date(2026, 9, 30)
-        for provider in provider_ids():
+        for provider in ("unionpay", "visa", "mastercard"):
             client = forkable_mock()
             client.request_json.side_effect = lambda url, params=None, headers=None, p=provider: response(
                 official_data(p, params), url, params, headers,
@@ -330,7 +330,7 @@ class ProviderTests(unittest.TestCase):
                 self.assertEqual(client.request_json.call_count, 6)
 
     def test_publication_and_current_dates_are_not_rate_dates(self):
-        for provider in provider_ids():
+        for provider in ("unionpay", "visa", "mastercard"):
             def actual_with_metadata(url, params=None, headers=None):
                 data = official_data(provider, params)
                 data.update(currentDate="2026-10-02", publicationDate="2026-10-01")

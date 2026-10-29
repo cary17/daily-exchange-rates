@@ -1,8 +1,10 @@
-"""Daily provider adapters; every directional pair is fetched independently."""
+"""Daily provider adapters for currency queries and published files."""
 
 from concurrent.futures import CancelledError
 from datetime import date, datetime, timezone
-from decimal import Decimal, InvalidOperation, localcontext
+from decimal import Decimal, InvalidOperation, ROUND_DOWN, localcontext
+from fractions import Fraction
+from html.parser import HTMLParser
 import hashlib
 import re
 import time
@@ -69,6 +71,10 @@ _DEFAULTS = {
     "visa": (
         "https://www.visa.co.in/cmsapi/fx/rates",
         "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
+    ),
+    "jcb": (
+        "https://www.jcb.jp/rate/{file}",
+        "https://www.jcb.jp/rate/usd.html",
     ),
     "mastercard": (
         "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
@@ -554,6 +560,198 @@ def _unionpay(target: date, currencies: Sequence[str],
     return _result("unionpay", target, response.body, [response], len(rows))
 
 
+class _JcbTables(HTMLParser):
+    """Collect page text and table cells; cell text includes nested tags/entities."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.text: list[str] = []
+        self.tables: list[list[list[str]]] = []
+        self._table: list[list[str]] | None = None
+        self._row: list[str] | None = None
+        self._cell: list[str] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "table" and self._table is None:
+            self._table = []
+        elif tag == "tr" and self._table is not None:
+            self._row = []
+        elif tag in ("td", "th") and self._row is not None:
+            if self._cell is not None:
+                self._row.append("".join(self._cell).strip())
+            self._cell = []
+
+    def handle_data(self, data: str) -> None:
+        if self._cell is not None:
+            self._cell.append(data)
+        elif self._table is None:
+            self.text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in ("td", "th") and self._cell is not None:
+            if self._row is not None:
+                self._row.append("".join(self._cell).strip())
+            self._cell = None
+        elif tag == "tr" and self._row is not None and self._table is not None:
+            self._table.append(self._row)
+            self._row = None
+        elif tag == "table" and self._table is not None:
+            self.tables.append(self._table)
+            self._table = None
+
+
+def _jcb_tables(body_text: str, filename: str) -> tuple[list[list[str]], str]:
+    parser = _JcbTables()
+    parser.feed(body_text)
+    parser.close()
+    if len(parser.tables) != 1 or not parser.tables[0]:
+        raise ProviderError(f"JCB {filename}: expected exactly one non-empty rate table")
+    return parser.tables[0], "".join(parser.text)
+
+
+def _jcb_rate_date(text: str, filename: str) -> date:
+    if filename == "jpy.html":
+        pattern = r"(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日\s*換算日の基準レート"
+        order = (0, 1, 2)
+    else:
+        pattern = r"Base rate for\s+(\d{1,2})/(\d{1,2})/(\d{4})"
+        order = (2, 0, 1)
+    match = re.search(pattern, text)
+    if match is None:
+        raise ProviderError(f"JCB {filename}: missing rate date")
+    try:
+        return date(*(int(match.group(index + 1)) for index in order))
+    except ValueError as exc:
+        raise ProviderError(f"JCB {filename}: invalid rate date") from exc
+
+
+def _jcb_jpy_rows(rows: list[list[str]]) -> list[dict[str, Any]]:
+    parsed, seen = [], set()
+    for index, cells in enumerate(rows):
+        context = f"JCB JPY row {index}"
+        if len(cells) != 5:
+            raise ProviderError(f"{context}: expected 5 cells")
+        code, label, equals, value, quote = cells
+        # The live page uses the full-width equals sign.
+        if (not re.fullmatch(r"[A-Z]{3}", code) or not label or equals not in ("=", "＝")
+                or not re.match(r"JPY(?:\s|[（(]|$)", quote)):
+            raise ProviderError(f"{context}: malformed currency row")
+        if code in seen:
+            raise ProviderError(f"{context}: duplicate currency {code}")
+        seen.add(code)
+        parsed.append({"transCur": code, "baseCur": "JPY",
+                       "rateData": _number(value, f"{context} rateData")})
+    if not parsed:
+        raise ProviderError("JCB jpy.html: empty rate table")
+    return parsed
+
+
+_JCB_USD_COLUMNS = (("buy", "Buy"), ("mid", "Mid"), ("sell", "Sell"))
+
+
+def _jcb_usd_rows(rows: list[list[str]]) -> list[tuple[str, tuple[Decimal, ...]]]:
+    parsed, seen = [], set()
+    for index, cells in enumerate(rows):
+        if index == 0 and tuple(cells) == ("", "", "Buy", "Mid", "Sell", ""):
+            continue
+        context = f"JCB USD row {index}"
+        if len(cells) != 6 or cells[0] != "USD" or cells[1] != "=":
+            raise ProviderError(f"{context}: malformed currency row")
+        code = cells[5]
+        if not re.fullmatch(r"[A-Z]{3}", code):
+            raise ProviderError(f"{context}: invalid currency code {code!r}")
+        if code in seen:
+            raise ProviderError(f"{context}: duplicate currency {code}")
+        seen.add(code)
+        parsed.append((code, tuple(_number(cells[column_index],
+                                           f"{context} {label}")
+                                   for column_index, (_, label) in
+                                   enumerate(_JCB_USD_COLUMNS, start=2))))
+    if not parsed:
+        raise ProviderError("JCB usd.html: empty rate table")
+    return parsed
+
+
+def _jcb_reciprocal(value: Decimal) -> tuple[Decimal, int, int]:
+    with localcontext() as context:
+        context.prec = 100
+        context.rounding = ROUND_DOWN
+        rate = Decimal(1) / value
+    fraction = Fraction(1) / Fraction(value)
+    return rate, fraction.numerator, fraction.denominator
+
+
+def _jcb_result(provider: str, target: date, rows: list[dict[str, Any]],
+                response: JsonResponse, filename: str, fetched_at: str,
+                **policy: Any) -> DayResult:
+    normalized = json_bytes({"curDate": target.isoformat(), "exchangeRateJson": rows})
+    raw = json_bytes({
+        "provider": provider, "requested_date": target.isoformat(),
+        "requests": _records(response),
+    })
+    metadata = {
+        "provider": provider, "requested_date": target.isoformat(),
+        "fetched_at_utc": fetched_at, "source_urls": [response.url],
+        "response_dates": [{"file": filename, "date": target.isoformat()}],
+        "pair_count": len(rows), **policy,
+    }
+    return DayResult(provider, target, normalized, raw, metadata)
+
+
+def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
+         client: HttpClient) -> tuple[DayResult, DayResult, DayResult, DayResult]:
+    endpoint, headers = _settings("jcb", config)
+    headers["Accept"] = "text/html"
+    sources: dict[str, tuple[str, JsonResponse]] = {}
+    jpy_rows = None
+    usd_rows = None
+    for currency in ("jpy", "usd"):
+        filename = "jpy.html" if currency == "jpy" else f"usd{target:%m%d%Y}.html"
+        url = endpoint.format(file=filename)
+        try:
+            response = client.request_text(url, headers=headers)
+        except HttpError as exc:
+            if exc.status_code == 404:
+                raise NoDataError(f"JCB {filename} has no data for {target}") from exc
+            raise
+        rows, text = _jcb_tables(response.body_text, filename)
+        parsed = _jcb_jpy_rows(rows) if currency == "jpy" else _jcb_usd_rows(rows)
+        returned = _jcb_rate_date(text, filename)
+        if returned != target:
+            raise DateMismatchError(
+                f"JCB {filename}: requested {target}, response date={returned}")
+        sources[currency] = filename, response
+        if currency == "jpy":
+            jpy_rows = parsed
+        else:
+            usd_rows = parsed
+    assert jpy_rows is not None and usd_rows is not None
+    fetched_at = utc_now()
+    filename, response = sources["jpy"]
+    results = [_jcb_result(
+        "jcb-jpy", target, jpy_rows, response, filename, fetched_at,
+        rate_formula="published JPY per one transCur unit",
+        rate_data_policy="displayed decimal preserved exactly; no reciprocal or rounding",
+    )]
+    filename, response = sources["usd"]
+    for position, (_, label) in enumerate(_JCB_USD_COLUMNS):
+        rows = []
+        for code, values in usd_rows:
+            rate, numerator, denominator = _jcb_reciprocal(values[position])
+            rows.append({"transCur": code, "baseCur": "USD", "rateData": rate,
+                         "rateNumerator": numerator, "rateDenominator": denominator})
+        results.append(_jcb_result(
+            f"jcb-usd-{_JCB_USD_COLUMNS[position][0]}", target, rows, response,
+            filename, fetched_at, quote_column=label,
+            rate_formula=f"1 / displayed {label} quote",
+            rate_data_policy=("reciprocal truncated to 100 significant digits with "
+                              "ROUND_DOWN; the truncated value is not the exact reciprocal"),
+            rate_fraction_policy=("rateNumerator/rateDenominator is the exact reduced "
+                                  "rational reciprocal of the displayed decimal"),
+        ))
+    return results[0], results[1], results[2], results[3]
+
+
 def _check_bill(rate: Decimal, value: Any, context: str) -> None:
     bill = _number(value, context, positive=False)
     with localcontext() as ctx:
@@ -758,8 +956,9 @@ def _mastercard(target: date, currencies: Sequence[str], config: Mapping[str, An
     return _card("mastercard", target, currencies, config, client)
 
 
-_REGISTRY: dict[str, Callable[[date, Sequence[str], Mapping[str, Any], HttpClient], DayResult]] = {
-    "unionpay": _unionpay, "visa": _visa, "mastercard": _mastercard,
+_REGISTRY: dict[str, Callable[[date, Sequence[str], Mapping[str, Any], HttpClient],
+                              DayResult | tuple[DayResult, ...]]] = {
+    "unionpay": _unionpay, "visa": _visa, "mastercard": _mastercard, "jcb": _jcb,
 }
 
 
@@ -776,7 +975,8 @@ def prepare_catalog(provider: str, config: Mapping[str, Any], client: HttpClient
 
 
 def fetch_day(provider: str, target: date, currencies: CurrencyCatalog | Sequence[str] | None,
-              config: Mapping[str, Any], client: HttpClient) -> DayResult:
+              config: Mapping[str, Any], client: HttpClient
+              ) -> DayResult | tuple[DayResult, ...]:
     if type(target) is not date:
         raise TypeError("target must be datetime.date, not datetime.datetime")
     if not isinstance(config, Mapping):

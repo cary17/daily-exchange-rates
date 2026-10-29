@@ -20,6 +20,10 @@
       "currency_endpoint": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
       "referer": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
     },
+    "jcb": {
+      "endpoint": "https://www.jcb.jp/rate/{file}",
+      "referer": "https://www.jcb.jp/rate/usd.html"
+    },
     "mastercard": {
       "http": {
         "edge_dns_servers": ["168.95.1.1", "168.95.192.1", "168.126.63.1", "219.250.36.130"]
