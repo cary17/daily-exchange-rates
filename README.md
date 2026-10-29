@@ -1,112 +1,84 @@
 # Daily Exchange Rates
 
-手动采集 Visa、Mastercard、银联官方汇率。源码在 `main`，当前数据在 `data`，月度和年度归档在 [Releases](https://github.com/cary17/daily-exchange-rates/releases)。
+Visa、Mastercard、银联、JCB 官方参考汇率数据。最新数据和未归档明细位于 [`data` 分支](https://github.com/cary17/daily-exchange-rates/tree/data)，月度、年度归档位于 [Releases](https://github.com/cary17/daily-exchange-rates/releases)。
 
-Visa、Mastercard 自动读取各自官方支持的全部币种，交易币种按 `shards` 参数平均分组；每组由独立 Actions job 串行查询全部账单币种，全部成功后合并为每机构一份 JSON。银联继续直接下载完整 JSON。手续费为零，反向独立查询，不取倒数。
+## 汇率文件
 
-## 使用 GitHub Actions
-
-将 `main` 设为默认分支，允许 Actions 读写仓库；`data` 的分支规则需允许年度快照的强制推送，并确保账户有可用的 Git LFS 配额。
-
-在 [Actions](https://github.com/cary17/daily-exchange-rates/actions) 分别运行 **Fetch Visa**、**Fetch Mastercard** 或 **Fetch UnionPay**，选择 `main`：
-
-- `start_date`：`YYYY-MM-DD`，留空使用运行时北京时间当天。
-- `end_date`：包含结束日，留空仅抓起始日。
-- `interval`：每个会话的请求间隔，单位秒，默认 `0.3`；本次运行可填写 `0.5`、`1` 等非负数。
-- `shards`：并行分片 job 数，默认 `10`，可填 `1` 至 `32`；每个 job 使用独立的 GitHub 托管 runner。
-- 日期严格匹配，错误日期的响应计入待补抓项，不回退到其他日期。
-- 每个分片在自身进程内串行查询，只补抓本分片失败、缺失或校验未通过的币对；成功币对保留，不重复请求。默认最多补抓两轮，每轮只处理仍未成功的部分。
-- 官方目录包含的历史币种同样查询；补抓耗尽仍有错漏时，该日不发布、不覆盖已有完整数据。摘要只列关键统计，完整错漏与响应证据保存在诊断 Artifact。长区间请分批运行，单次工作流最多 360 分钟。
-
-各机构的 `recovery_rounds` 在 `config/providers.json` 配置，默认 `2`，设为 `0` 关闭末尾补抓；它独立于 HTTP 传输重试。银联仅提供整份 JSON，校验失败时重新下载该日完整文件。原始记录保留失败与补抓请求，元数据记录补抓轮数和恢复数量。
-
-Mastercard 默认使用机构 `http.edge_dns_servers` 中的四个递归 DNS（`168.95.1.1`、`168.95.192.1`、`168.126.63.1`、`219.250.36.130`）分别查询 A/AAAA，合并去重并按 TTL 刷新，进程内各分片共享解析缓存。请求保留 Chrome 指纹、原域名与 TLS 证书校验，通过独立会话直连候选 IP，不使用环境代理、不跟随重定向。日期不匹配时继续查询其他候选，任一节点通过完整校验即可接受；仅当 DNS 解析无错误且所有候选 IP 均返回不匹配日期，才判定为全部节点日期未更新。解析失败、Fake-IP/非公网地址、节点连接或响应错误记为验收未完成，不冒充“全部旧数据”，也不发布不合格数据；没有可用 IP 时不回退系统 DNS。原始记录保留 DNS 查询、指定/实际连接 IP 及各次完整响应；403 仍遵守冷却与熔断，不通过换节点绕行。DNS 选点不保证实际物理地区或更新速度。
-
-抓取没有定时任务。Visa 与 Mastercard 各自编排为 `prepare → shard × N → plan-retry → retry × 失败分片数 → merge`：`prepare` 计算日期与分片矩阵，`shard` 每个 job 只抓一个分片并把结果上传为 Artifact；首轮全部结束后，`plan-retry` 仅按结果文件是否存在找出缺失分片及日期，不重复读取大响应或执行完整校验。没有缺片时跳过 `retry`，否则用新 runner 补跑一轮，成功分片及已成功的日期不重复采集。`merge` 先下载首轮结果，再覆盖补跑结果，校验币对完整性与目录一致性后一次性发布；补跑仍有缺片时该日不发布部分数据。银联先下载整份 JSON 并上传采集结果，再由独立发布 job 写入数据，发布时不重复请求接口。不同卡组织的抓取任务可并发；同一卡组织的完整工作流（含补跑、发布）按队列串行，不取消旧任务。仅 `merge` / `publish` 与归档任务共用 `data-branch-writes` 队列，避免共享数据分支并发写入。
-
-默认每个会话的 `http.interval` 为 `0.3` 秒，三个抓取工作流的 `interval` 输入可在每次运行时修改；留空回退到默认值，支持有限的非负数，`0` 表示关闭会话间隔。本地使用 `--interval 0.8` 临时覆盖机构与全局配置，不传参数则沿用配置。`http.global_interval` 保持 `0`，不启用跨会话共享限速。
-
-单分片实测约 3 次请求/秒，此前 9 片并行时全长查询约 15 至 20 分钟；实际速度取决于接口响应。
-
-收到 403 后暂停该分片 60 秒，冷却结束只放行一个探测请求；HTTP 200 清零连续拒绝计数，连续 3 个拒绝批次则停止该分片。同一批已在途的响应完整保留在诊断中，但不会重复累计拒绝次数或用迟到的成功响应误判恢复。403 不做即时传输重试，失败币对仍由末尾补抓处理；不会发布部分数据。冷却与阈值可在配置中调整。
-
-每次运行均保存简短统计和诊断文件；失败时也通过 `actions/upload-artifact` 上传，保留 7 天，摘要提供下载链接。摘要累计最多 512 KiB，完整错误与原始分片不写入摘要。访问控制提前停止时保留已尝试记录，未查询的币对不会伪报为 HTTP 失败。
-
-## 本地使用
-
-需要 Python 3.13 和 `git-lfs`：
-
-```sh
-python3.13 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.lock
-python -m pip install --no-deps .
-python -m exchange_rates fetch --provider visa --data-dir ./rates-data
-python -m exchange_rates fetch --provider mastercard --start-date 2026-09-29 --end-date 2026-09-30 --data-dir ./rates-data
-```
-
-本地归档导出到独立的 `release-output`；`--release-dir` 可指定其它目录。向 GitHub 发布时设置 `GITHUB_REPOSITORY`、`GITHUB_TOKEN` 和 Git 推送认证，追加 `--publish --remote origin --branch data`，并使用新的空 `--data-dir`。
-
-`fetch --provider visa|mastercard` 在单进程内并发抓取全部九个分片，适合本机快速验证；Actions 使用等价的 `fetch-shard` 与 `merge-shards`，把每个分片放到独立 runner：
-
-```sh
-python -m exchange_rates fetch-shard --provider mastercard --start-date 2026-10-03 \
-  --shard-index 0 --shard-count 10 --shard-dir ./shards
-python -m exchange_rates merge-shards --provider mastercard --start-date 2026-10-03 \
-  --shard-dir ./shards --data-dir ./rates-data
-```
-
-`fetch-shard` 只写 `--shard-dir/<provider>/<date>/shard-NN.json`，不写已发布数据；`merge-shards` 校验分片齐全、目录一致、币对无缺失与重复后写入 `--data-dir`。分片缺失或校验失败时该日不发布，其余日期不受影响。
-
-## 数据读取
-
-| 内容 | `data` 分支路径 |
+| 内容 | 最新文件 |
 | --- | --- |
-| 最新统一汇率 | `latest/provider.json` |
-| 最新原始响应或索引 | `raw/latest/provider.json` |
-| 最新原始响应分片 | `raw/latest/provider.parts/shard-01.json` 至 `shard-NN.json` |
-| 最新采集元数据 | `metadata/latest/provider.json` |
-| 未归档每日汇率 | `history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 每日原始响应或索引 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.json` |
-| 每日原始响应分片 | `raw/history/YYYY/MM/provider/YYYY-MM-DD.parts/shard-01.json` 至 `shard-NN.json` |
-| 每日元数据 | `metadata/history/YYYY/MM/provider/YYYY-MM-DD.json` |
+| Visa | [visa.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/visa.json) |
+| Mastercard | [mastercard.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/mastercard.json) |
+| 银联 | [unionpay.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/unionpay.json) |
+| JCB · JPY | [jcb-jpy.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/jcb-jpy.json) |
+| JCB · USD Buy | [jcb-usd-buy.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/jcb-usd-buy.json) |
+| JCB · USD Mid | [jcb-usd-mid.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/jcb-usd-mid.json) |
+| JCB · USD Sell | [jcb-usd-sell.json](https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/jcb-usd-sell.json) |
+
+### 格式与精度
+
+汇率位于 `exchangeRateJson` 数组中，结构示例（数值仅作示意）：
+
+```json
+{
+  "exchangeRateJson": [
+    {"transCur": "USD", "baseCur": "CNY", "rateData": 7.1}
+  ]
+}
+```
+
+- `transCur`：交易币种；`baseCur`：换算后的币种。
+- `rateData`：**1 单位 `transCur` 可兑换的 `baseCur` 数量**；换算金额为交易金额乘以该值。
+- JCB JPY 直接保留官方显示值，`baseCur=JPY`。JCB USD 三份文件分别采用原表 Buy、Mid、Sell 列的倒数，`baseCur=USD`，由使用者选择参考口径。
+- JCB USD 的 `rateData` 最多保留 **100 位有效数字，向零截断，不四舍五入**；循环小数仍是近似值。每行另有整数 `rateNumerator`、`rateDenominator`，两者之比为原始报价倒数的精确约分值。需要精确值时请使用分子／分母，并采用任意精度整数、十进制或分数运算，避免普通浮点解析丢失精度。
+
+汇率日期及来源见对应元数据，不要把最新文件的下载日期当作汇率日期。文件不保证覆盖每个日历日，缺失不表示汇率为零，也不应自动沿用前一日数据。JCB 存在非发布日，JPY 历史数据也可能无法从当前页补回。数据用于参考，实际账单可能因处理日期、发卡行手续费等因素而不同。
+
+## 读取与下载
+
+最新文件可直接通过上表链接读取，例如：
+
+```sh
+curl -fL https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/visa.json -o visa.json
+```
+
+`data` 分支中的路径如下，`name` 为上表文件名去掉 `.json` 后的名称：
+
+| 内容 | 路径 |
+| --- | --- |
+| 最新汇率 | `latest/name.json` |
+| 每日汇率（未归档） | `history/YYYY/MM/name/YYYY-MM-DD.json` |
+| 最新原始响应或分片索引 | `raw/latest/name.json` |
+| 每日原始响应或分片索引 | `raw/history/YYYY/MM/name/YYYY-MM-DD.json` |
+| 最新元数据 | `metadata/latest/name.json` |
+| 每日元数据 | `metadata/history/YYYY/MM/name/YYYY-MM-DD.json` |
 | 最近三个月的月包 | `history/YYYY/MM/YYYY-MM.tar.gz`，大包可能分卷 |
 
-`provider` 为 `visa`、`mastercard` 或 `unionpay`。银联原始记录仍为单文件，无分片。Visa、Mastercard 的分片数量以原始索引的 `parts` 列表为准；索引包含相对分片目录、文件大小和 SHA256，每片保留请求及完整响应原文。元数据记录目录范围、分片覆盖和接口返回日期。
+Visa、Mastercard 的原始响应按索引中的 `parts_directory` 和 `parts` 读取分片，索引包含大小和 SHA256。银联、JCB 的原始响应为单文件 JSON 封装；JCB USD 三份原始记录均保留完整 USD 页面及其三列数据，JPY 原始记录保留 JPY 页面。
 
-统一数据使用 `exchangeRateJson`，`rateData` 表示 1 单位 `transCur` 可兑换的 `baseCur` 数量。例：
-
-```text
-https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/latest/visa.json
-```
-
-单文件超过 100 MiB 自动使用 Git LFS；网页原始链接可能返回 LFS 指针，使用安装了 Git LFS 的 Git 客户端读取完整文件。
-
-## 归档与下载
-
-**Archive** 于每月北京时间 3 日 00:00 运行，也可手动补跑；仅归档已有数据，不抓取汇率。月包发布成功并校验后清理对应明细；所有月包均保留在 Release，仓库只留最近三个已归档日历月的月包。年度包只在 Release，不入 `data`。
-
-一月先完成上年十二月归档，再从月包流式生成展平的年包，成功后重建一次 `data` 分支快照。大归档按 1900 MiB 分卷。封存日期可手动补录，相关月包及已存在的年包一起更新；部分发布失败需重跑原补录，避免月年内容不一致。
-
-Release 标签为 `rates-YYYY-MM` 或 `rates-YYYY`，附件采用内容哈希名称。用以下命令下载、恢复原文件名并验证 SHA256：
-
-```sh
-python -m exchange_rates download --repository cary17/daily-exchange-rates --period 2026-09 --output-dir downloads/2026-09
-# 单包直接解压；分卷先按编号合并，再解压
-if [ -f downloads/2026-09/2026-09.tar.gz.part001 ]; then
-  cat downloads/2026-09/2026-09.tar.gz.part* > downloads/2026-09/2026-09.tar.gz
-fi
-tar -xzf downloads/2026-09/2026-09.tar.gz
-```
-
-年度快照后本地 `data` 副本需重新同步，最直接是重新克隆：
+单文件超过 100 MiB 时使用 Git LFS，原始链接可能返回指针而非文件内容。需要完整数据副本时，先安装 Git LFS，再克隆 `data` 分支：
 
 ```sh
 git clone --single-branch --branch data https://github.com/cary17/daily-exchange-rates.git rates-data
 ```
 
-三个月留存指当前分支文件；Git/LFS 历史对象回收及配额由 GitHub 管理。机构配置见 `config/providers.json`；新增查询源可复用 `CurrencyCatalog` 和分片并发接口，并增加独立工作流。
+## 历史归档
+
+月包和年包均包含汇率、原始响应及元数据。已归档明细从 `data` 分支移除；该分支仅保留最近三个已归档日历月的月包，全部月包和年包从 [Releases](https://github.com/cary17/daily-exchange-rates/releases) 下载。
+
+- 月包标签：`rates-YYYY-MM`；年包标签：`rates-YYYY`。
+- Release 说明中的 JSON `files` 列表提供附件的 `asset_name`、原文件名 `filename`、大小和 SHA256。下载列出的附件，按 `filename` 恢复文件名后校验。
+- 单包为 `YYYY-MM.tar.gz` 或 `YYYY.tar.gz`；分卷为相同名称加 `.part001`、`.part002` 等，需按编号合并后解压到新的空目录。
+
+以已下载并恢复文件名的月包为例：
+
+```sh
+sha256sum -c SHA256SUMS
+if [ -f 2026-09.tar.gz.part001 ]; then
+  cat 2026-09.tar.gz.part* > 2026-09.tar.gz
+fi
+tar -xzf 2026-09.tar.gz
+```
 
 ## 许可
 
-代码采用 **AGPL-3.0-only**，完整文本见 [LICENSE](LICENSE)。机构原始响应及汇率数据不套用代码许可，使用条件以原始来源为准。
+代码采用 **AGPL-3.0-only**，全文见 [LICENSE](LICENSE)。卡组织原始响应及汇率数据不套用代码许可，使用、转载或再分发须遵守对应原始来源的使用条件。
