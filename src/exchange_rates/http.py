@@ -236,7 +236,9 @@ class HttpClient:
             except HttpError as exc:
                 records.extend(exc.records)
                 exc.records = records
-                if exc.status_code is not None or address == resolution.addresses[-1]:
+                if (address == resolution.addresses[-1]
+                        or (exc.status_code is not None
+                            and not 500 <= exc.status_code < 600)):
                     raise
             else:
                 result.records = records + result.records

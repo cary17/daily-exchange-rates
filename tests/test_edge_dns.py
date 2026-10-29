@@ -14,11 +14,12 @@ import dns.resolver
 import dns.rrset
 import simplejson
 
-from exchange_rates.catalog import CurrencyCatalog
+from exchange_rates.catalog import CurrencyCatalog, discover_currencies
 from exchange_rates.edge_dns import EdgeResolution, resolve_edges
 from exchange_rates.http import AccessBlockedError, HttpClient, HttpError
 from exchange_rates.models import json_bytes
 from exchange_rates.providers import RecoveryError, fetch_day, fetch_shard
+from tests.test_catalog import mc_data
 from tests.test_providers import DAY, FakeClient, http_response
 
 
@@ -222,6 +223,44 @@ class EdgeRecoveryTests(unittest.TestCase):
                 factory.return_value.get.return_value = good
                 with self.assertRaisesRegex(HttpError, "did not use the pinned edge IP"):
                     client.request_json(URL, edge_ip=IPS[1])
+
+    def test_catalog_5xx_rotates_after_retries_and_retains_all_evidence(self):
+        good = http_response(body=json_bytes(mc_data(("USD", "CNY"))))
+        good.primary_ip = IPS[1]
+        for status in (500, 503, 504):
+            with self.subTest(status=status), \
+                 patch("exchange_rates.http.resolve_edges", return_value=pool(IPS[:2])), \
+                 patch("exchange_rates.http.requests.Session") as factory, \
+                 patch("exchange_rates.http.time.sleep") as sleep:
+                factory.return_value.get.side_effect = [
+                    http_response(status, b"unavailable"),
+                    http_response(status, b"still unavailable"), good,
+                ]
+                with HttpClient(retries=1, interval=0, edge_dns_servers=SERVERS) as client:
+                    catalog = discover_currencies("mastercard", {}, client)
+                self.assertEqual(catalog.transaction, ("CNY", "USD"))
+                records = catalog.responses[0].records
+                self.assertEqual(records[0]["dns"]["addresses"], list(IPS[:2]))
+                exchanges = [r for r in records if "response" in r]
+                self.assertEqual([r["response"]["status_code"] for r in exchanges],
+                                 [status, status, 200])
+                self.assertEqual([r["request"]["edge_ip"] for r in exchanges],
+                                 [IPS[0], IPS[0], IPS[1]])
+                self.assertEqual([r["attempt"] for r in exchanges], [1, 2, 1])
+                self.assertEqual(factory.return_value.get.call_count, 3)
+                sleep.assert_called_once_with(0.5)
+
+    def test_catalog_4xx_does_not_rotate_to_another_edge(self):
+        for status in (400, 401, 403, 404, 429):
+            with self.subTest(status=status), \
+                 patch("exchange_rates.http.resolve_edges", return_value=pool(IPS[:2])), \
+                 patch("exchange_rates.http.requests.Session") as factory:
+                factory.return_value.get.side_effect = [http_response(status), http_response()]
+                with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS) as client:
+                    with self.assertRaises(HttpError) as caught:
+                        discover_currencies("mastercard", {}, client)
+                self.assertEqual(caught.exception.status_code, status)
+                self.assertEqual(factory.return_value.get.call_count, 1)
 
     def test_pinned_sessions_reuse_only_within_one_ip_and_preserve_hostname(self):
         with patch("exchange_rates.http.requests.Session") as factory:
