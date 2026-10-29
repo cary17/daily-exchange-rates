@@ -577,9 +577,41 @@ def _query_pair(provider: str, target: date, spend: str, home: str,
                   "cardholder_billing_currency": home, "bank_fee": "0", "transaction_amount": "1000"}
         if refresh:
             params["_"] = str(time.time_ns())
-    response = client.request_json(endpoint, params=params, headers=headers)
+    resolution = client.edge_candidates(endpoint) if provider == "mastercard" else None
+    if resolution is None:
+        response = client.request_json(endpoint, params=params, headers=headers)
+        return _pair_response(provider, target, spend, home, response)
+    if not resolution.addresses:
+        raise ProviderError("Mastercard regional DNS returned no public edge addresses")
+    stale, failures = [], {}
+    for address in resolution.addresses:
+        try:
+            response = client.request_json(endpoint, params=params, headers=headers,
+                                           edge_ip=address)
+            return _pair_response(provider, target, spend, home, response)
+        except DateMismatchError as exc:
+            stale.append(address)
+            failures[address] = f"DateMismatchError: {exc}"
+        except AccessBlockedError:
+            raise
+        except (HttpError, ProviderError) as exc:
+            if isinstance(exc, HttpError) and exc.status_code == 403:
+                raise
+            failures[address] = f"{type(exc).__name__}: {exc}"
+    details = "; ".join(f"{address}: {error}" for address, error in failures.items())
+    if resolution.complete and len(stale) == len(resolution.addresses):
+        raise DateMismatchError(
+            f"Mastercard {spend}/{home}: all {len(stale)} resolved edges returned "
+            f"non-matching rate dates; {details}")
+    raise ProviderError(
+        f"Mastercard {spend}/{home}: edge verification incomplete, "
+        f"{len(stale)}/{len(resolution.addresses)} non-matching rate dates; "
+        f"DNS complete={resolution.complete}; {details}")
+
+
+def _pair_response(provider: str, target: date, spend: str, home: str,
+                   response: JsonResponse):
     data = _object(response.data, f"{provider} {spend}/{home}")
-    _check_dates(provider, target, data)
     if provider == "visa":
         if data.get("status") != "success":
             raise ProviderError(f"Visa {spend}/{home}: status is not success: {data.get('status')!r}")
@@ -592,12 +624,12 @@ def _query_pair(provider: str, target: date, spend: str, home: str,
             raise ProviderError(f"Mastercard {spend}/{home}: errorCode={values['errorCode']!r}")
         rate = _number(values.get("conversionRate"), "Mastercard conversionRate")
         _check_bill(rate, values.get("crdhldBillAmt"), "Mastercard crdhldBillAmt")
-    _check_dates(provider, target, values)
     expected_currencies = ({"fromCurrency": spend, "toCurrency": home} if provider == "visa"
                            else {"transCurr": spend, "crdhldBillCurr": home})
     for field, expected in expected_currencies.items():
         if field in values and values[field] != expected:
             raise ProviderError(f"{provider} {spend}/{home}: response {field}={values[field]!r}, expected {expected}")
+    _check_dates(provider, target, data, values)
     return {"transCur": spend, "baseCur": home, "rateData": rate}, response
 
 

@@ -50,6 +50,9 @@ class FakeClient:
             self.forks.append(child)
         return child
 
+    def edge_candidates(self, url):
+        return None
+
     def request_json(self, url, params=None, headers=None):
         with self.lock:
             self.calls.append((url, dict(params or {}), dict(headers or {})))
@@ -95,6 +98,9 @@ class FakeFork:
     def __exit__(self, *args):
         self.closed = True
 
+    def edge_candidates(self, url):
+        return self.owner.edge_candidates(url)
+
     def request_json(self, *args, **kwargs):
         if self.cancel_event is not None and self.cancel_event.is_set():
             raise CancelledError()
@@ -105,6 +111,7 @@ class FakeFork:
 
 def forkable_mock():
     client = Mock()
+    client.edge_candidates.return_value = None
     client.fork.side_effect = lambda cancelled: FakeFork(client, cancelled)
     return client
 

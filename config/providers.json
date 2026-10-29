@@ -21,6 +21,9 @@
       "referer": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
     },
     "mastercard": {
+      "http": {
+        "edge_dns_servers": ["168.95.1.1", "168.95.192.1", "168.126.63.1", "219.250.36.130"]
+      },
       "recovery_rounds": 2,
       "endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
       "currency_endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies",

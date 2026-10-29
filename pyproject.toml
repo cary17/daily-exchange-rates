@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Manually collected official exchange rates with verified archives"
 requires-python = ">=3.11"
 license = "AGPL-3.0-only"
-dependencies = ["curl_cffi>=0.13,<0.16", "simplejson>=3.20,<4"]
+dependencies = ["curl_cffi>=0.13,<0.16", "dnspython>=2.8,<3", "simplejson>=3.20,<4"]
 
 [project.scripts]
 exchange-rates = "exchange_rates.cli:main"
