@@ -1,0 +1,1197 @@
+{
+  "catalog_requests": [
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999984979629517,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.99997067451477,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999988555908203,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999792575836,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.99998664855957,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99998331069946,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 16.999979257583618,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 296.99997663497925,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:03.696730Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:04.416459Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:04 GMT",
+          "set-cookie": "_abck=4D3A29A7E5F99CCDBC3D085FF20D02AF~-1~YAAQiz7cPe/eEGehAQAA8UrYhhB3yQ+OiU+X9qiZRJfvP7xtezf/yzIc0ilRBkrj+W1E9YvSXr8AIHBwekZgZqZ1HYmPNmj3RmbMsql8YI/E4r99dgZyLRxaZnYh4SFrODvHSTaTG8LQ2XAtz0cVCqUG3OkQyHpG9SoLfH89AR++37PhHX2lXaDOjN2Oep4ZfU8ScUtojIoUwxHatBaNtFsXO3/u5/ghc9AprejCOlV7aXWIIFcs0y2xO+LUF2DbsHEWyQcVJ3B+EsiQiTRjU+u6RnZ2YDNSkXbF9CqitdoQ+lp48MueieKMPYoVTxVcIasWhEHTRZAX1E1uUg17CcDN2U9xRqHYh231Q5880fQ18m7ziIk0ah3SqHrL+iiXXGv5mdSL3AknLYDobhTAvsezEX1AZLZErHcexfQkZPy01BC9/WuGwK4TvRZSZLaGHBpHmmRo8mxHfP+m~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:04 GMT; Max-Age=31536000; Secure, ak_bmsc=8432A98F86CD11B7BC0DCFB4DC365337~000000000000000000000000000000~YAAQiz7cPfDeEGehAQAA8UrYhgEYWrfjg9LiSM95DdPgWk1hMfcYcXH5mwWza7WRQh1OJbiWk8AJ9UKfi3WwhTrrNJmmrl2CSCh0VvStES1SjFQy7e4mChB/dzGt6WZJbXl7EfL2CKMAhyUWk6p7J/NKuz+63J/DXmxy2rGlkWrji9VIDFrV7tBKn1mKHQ5FpoPitutehAv3o7BJSpKVPNAFps+dSsfESrGJj44L2KBkt1w8yAMtqwGOvfpS24nRhfwHZ4bToNI9V0DfIJgBuEYpeLYbI++duzJEv4A4T1OEt8aAh2QXYS9v9LNB9gy/yEiU4ObmLxM767FpqCYRNDWdL3jAwo44Ao0zKxqtByeFhbqjMhwUoHVNaleoxy9IReRaXIg3g2c0vhUtdq5RoIeV; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:04 GMT; Max-Age=7200; HttpOnly, bm_sz=31B06C4AD684297A20F339E6647D1F88~YAAQiz7cPfHeEGehAQAA8UrYhgF4FbO5Gsyd5lc79j3obzF6e5RGe8lCRui06uNnVA2FHmw+BsXiSANVnCBErKasNd4SScL42JTNe80NFmXAWJ9jZp8leS68owxoaLvl7JEqf6QpxRqCLJdKMRSXY4CSb1gcuKKOjM8hBDyWj81PMMUOW9Mc2ebtsaVznN6c/cS9+3HBopikdtsZ+IZDTaIoux9Ea/+L4miLnK2fGPpSvSaBQ9VCUU2xJ8JUxgmbGB2gBKmLEGHKax2TDqSA0dLIvQJgDkDZngTRditTKre1tVVmm6RauJJXSjSMsItyhgQSw2hAQAZBLMvut1t2DXmwUGuiXinL3dUsRMQDEdN/WvOv06lQYVCC3T+D7NHkoNVMD+5sUr8mdulLtPsGVGJjsZE=~3228209~3555889; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:04 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999984979629517,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.9999837875366,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.99998378753662,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.99997663497925,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 17.9999783039093,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99998331069946,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 13.999988079071045,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 293.99997639656067,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:06.372207Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:06.953322Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:06 GMT",
+          "set-cookie": "_abck=7DA70F62AA91F9AA2EC44A830326C673~-1~YAAQiz7cPXvfEGehAQAA41TYhhDWCq6Jg8nagAw3aD5dxIlZ1LQ6KMntziLdRGWsDrKyN3417xFaMlCDR59FZzFfeWN2DEkM8stgqBhbTf7XFUdrpk/QU5qO1NG2LOnEI0xxU2UfDIwUEl58aVe2O1IckzgtOS0CnhA5/Du40Z9LGZx9a5Yi6PdR7najLXBGD7G6ZDhyLbWJbbePP5y7xDSiK35qR+c8M4KBhN8GFW185HeVmNvl+R3DD+L8TzxG4augSmCg3qSPgQ5p0ZaxCGE9Kq6UbOQbhBq8OGq0aZzSM3qT8pRkvC7WwLegJJMExS9Pgx/lE/KdIt3HLxS0OjtpdRlHfM/NaZq5rfZLuoeAvPk/D/R1sOP95RsY7sF+7hqAHW6ZO70SHprj8SRBr/fgpQUvome3BF0ZffQomMFbcplwHWzqyj0Ew2unYwiEn0g04r5RG8L4Wntn~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:06 GMT; Max-Age=31536000; Secure, ak_bmsc=5299DA1C4BC04E17CD6A5D540CDB034B~000000000000000000000000000000~YAAQiz7cPXzfEGehAQAA41TYhgF+8f7Glxa3AcPCIHI/ZaUczF5ohXW36jjHobh2vVQYFFuNQ4XmG+NeeGiT0PL2Gt32f2dxXSqoFdcfCJnOie7IgNPAWqJxKo58uGTjbbljjiCJ+YWlHcnApSIE59N2UWxHCzeHv5t5TWc2sfcBhw/EvVoKjo6EA6lLtQEerXOZ1yf9luh6iYuY+vU0WJdSwhrBaVBjVr/6rHpMhEoX8TYCFuAtGWzZcWGiwI6RjlhVOmbkME9kSnbhBW9HuxU/wZ0ZgC9q2FwRIWRhrwaGCjM2V/vnw9+ZhsKuYw1rESuM2rWklgx0pH9oOEAcsRDDKcXoBYPwwGHTZste/sWp23Vo1Z++UtJ+f1fgRKxe0DU/NWn7smMuf+I9712DMg==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:06 GMT; Max-Age=7200; HttpOnly, bm_sz=A05A5AA9D9B706E9844E4433516B9418~YAAQiz7cPX3fEGehAQAA41TYhgELtSl78mBWyvqw2rInFjXRH6QPFp+2oxOj/rnymqk/H9DCQrmyDLXN1bVKGDtJ6amdVucmfB+U8u1rMUiiz8vTIJdK1cBCUi59ObiPS8gRm/jvNfWf1cCau2Up8VrhEvAM+r0w5GR82g0q8GyRZq7VmdAJncjBPcgup97cuEfQOwFwVsWqfaqO5BN1/iB670DP1ZrQ7w298GvbuBxKQFVK3I3FMuoVqV7/DJMOqilNrsCMnGN/Wad/6qy4Zak7BpDJjTPhs+hu44vSeRXulJtqOAfpRB921lXmsGNDMEXFjfIpm9pwkKryjOFr/zBpMCJkgy6k9LwJBGSOTFxzReFsjjOjeh4wowiF/txYz32dGNHxYJu89MqiA00W+KYT~3420994~3421253; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:06 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.196.29.69",
+          "23.221.144.214"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999982118606567,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.99997639656067,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999982595443726,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999713897705,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999986171722412,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.9999771118164,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 19.99997878074646,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 299.9999842643738,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:47:59.641607Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:00.318518Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:00 GMT",
+          "set-cookie": "_abck=2790DE66E87AF2B0206747CAD209AA9A~-1~YAAQiz7cPSveEGehAQAA6zrYhhDfGzeFjpRWOvfuEIGC8UYRpIQ2mp3S1tf+RHDBUlDsvqZkjkoS1uTuPQzKPmZYaPtuRC8QAUFDiIqV1s334+qQQbfYMQDYllOcbocuExNEu7CGcqXMKxxY0MK06UraaS/CUj7iYNpxisixaca9eysSDQyz4gzyyND4AFK7kopFhTnE9pRNWV1+53A9E2SbAiLDzQxX4Yhjw2LJz11q3UdMaWwt5gXe6BY0BZUl9lccRWxxaSVF5CaK9LC5LEWp1pQZEos25Hzu60nhPveBc5S1bgJLNdcNkwdAZisnFP1NEM0e8+AhcsIKtXmZGv1eQzywhC9q1Sk+xBLF8wjTqj6/UJb2ZhVUcyyouIZ5lA2xqJ+6MOUYrcRxBQrUxt8W0nEJAZl93w+AKBh7+YpRLTPxZ44+np/ZvFpYXu5Sn9NewGi2FviB+hAH~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:00 GMT; Max-Age=31536000; Secure, ak_bmsc=F7D5D0FCCFCE956A48C967CB203AEB70~000000000000000000000000000000~YAAQiz7cPSzeEGehAQAA6zrYhgFOc6cJua4AAFgVexyOqq59kU3FpWtRhWInqZoB5cxnGMO1fh98uScVfsyLtSbDXN/UXkzYSLvz7pJkdgIMW16qQK/jzW+/qMdwZe+y1clKrhy+ZaxssCU4Qve4hJNzNVD19sYjyr7VCMKmQ/7+QKzMazYySq6xVYJIBqg+IG40G+8iJgDDBmAa1oRU1fDBnfu+RcUjA/a9bc54jlnbLEmftHf0I+Zx2EteLSW6GIVMp2oFyfVRk6CRUd/8qUWjszUI8Yr+IYz1woEGVXNcS4j7yICa9hGwNsu/HWHfQR3QtEjrUEsmPf1vHnHzW7rPTg7IG0RmtQCMkDRC8wfl5qdeZ843AMg+36vB/j40gUmTZ5vti/sAS59w49eEbw==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:00 GMT; Max-Age=7200; HttpOnly, bm_sz=4BAA4A7FC4A44F8A0EFA1B06DC92FD0D~YAAQiz7cPS3eEGehAQAA6zrYhgF2bqhMffGCeqVtdcg7OvyQC5CqHUu9LeBTpZVXBPmLuSyb1DVujiGJPh+bPlLvDa9047IRSe341uto2LOtGVczN5O72ltgZ2QxV5O0rdSdticHQUB/LU9zqcexl9/MYREfOtCQ2nw4Q9LrQ5c+j3oSNBDL96/kzZ2m+wdjK28p+MolUyHQ2hzmc+hQ8+xr86Ub2HwzFW3/1lWdpfAN43rQIrC49ZTkkNkHe4VUEoSa68efI2047APZMxtGV84Ml7Z8njD/1da+7MeT/Or8D23zO8hKYz7pnde0WW/8rFqx/lLTe75hnMcS2Sdyb3w9bz/eV8dllRzCkGbWmgiF97TP4a392zE7QAyFD+b9QbSvpPY/buzJkBSPFZmrRQbv~4601393~3228471; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:00 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.99996829032898,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.99996995925903,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999974012374878,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.99995017051697,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.99997901916504,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99997544288635,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 19.99998164176941,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 298.9999828338623,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:01.687757Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:02.368219Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:02 GMT",
+          "set-cookie": "_abck=EA09109B67CD543F662D7ADDC0B18E1D~-1~YAAQD1FFyzNBAHihAQAA7ULYhhBzS5PWFO2RpKdzBW+Mg93L2gQb/Q+nrQhfm2ZhZbuu5wTr6Du2tHCQlmcaBJSxCp/dHvXArxfhy+rrmwpU4FfdQJJDTrA60sLDdZvTy3qIH+vAV+jdzY0vnh5KBZZs+YlLN3qBKq3Tbe3ad4ln2vY2NOuj6rVA6e1gI3eAmyJxUAOkus5bNUCh+798jjpW0m8h7FzM7hS1WYvA9txTB5GcR2scAR2hElPCjStRtmrRbmu9zNtV6rJPCDukH/2tPe858XopbvB5r18lZDw1+gylC9Q9/Y5p/wRA8EWiv1r4zfP3MBaszwu7s5rJ+xaU69BzTEaL03xoXMPDGWji4IFlJqoTy2YNkTv0VpWzqUIvKEuGYl3eh71+VvTOgv5qbtmhWizeO7e+ZSEynUFaYcpVTl2KCn5r1w9LgGO2gz5jgGDBhGvwua0I~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:02 GMT; Max-Age=31536000; Secure, ak_bmsc=0BB07B1CF735C681F1CA23F68028BC2E~000000000000000000000000000000~YAAQD1FFyzRBAHihAQAA7ULYhgHxEzAdGhhVq4MhX+jJjwXUWvbfzhEdfwfiHz1Kde1wUi3EtbHLlb8nIdHj1NaEv07nzS4IxjASlWjr9kPFfTsR+RU+FvSagVeloa9lSPS+qlKlr58itl4LinH/7k3BRK4fqnKJkDKwv1G6BuMo19kJsIAEQTYWLAqHBGk7J2E2Y7thEWc2T47RpKznvpknTXfjCrsIv1ELPXEphH7h7lcjDRH72wlRmjvomXbgGgaSZivisWhGJe9Bi4jwXjGNv72qssip5yiG3Wq4fkxyeEmZevH9fK3VYowiRwn9rrdEJ1ZwQUb1ls5vpCrGW1rQ4TrnTHkU8gQBlQkbM7/wsLWqwVR1Nq30rdI9qQNiLNpXatQD6xP50XurcvL4ZA==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:02 GMT; Max-Age=7200; HttpOnly, bm_sz=F3580E5A4D187501B47762B1925003A6~YAAQD1FFyzVBAHihAQAA7ULYhgEEJhRNP2jws7gEkOqJGMKiJ9AXLw/q/b4Lka+RcLKsTJ2iydWOkvPlzS4KbxtXpbTnWrcdAJcJ93czyyPEpdhnFhs0kxkOdRvYKa9uB4WC2PSEFfZnEGHnpE5wECi6lWi2pPoiG9SsB03bdcf5zPndK/G2u4AJb0gFdyh34whM9tjj28O4uQG1gSHLTxI6tIDAOK7x+HoQALTjn8LYRWfb+zjfgOxMTplwSEaezDRyqJW1hPbE/OePoeaudGCA3OWjDfD8tqREly62/gMc9YEXxKsPVHzMuQ6romvaoTcnBLZP+t3/1PnngfEPVsZL+kYQKTRxBsYGzKMZIPhPEYg0K9RhqvNYr9Ht1ff4rlcRzGXjGIrYUFl5eYxnE3sI~3424817~3683888; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:02 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.99997901916504,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.99997115135193,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999982833862305,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999735355377,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999984741210938,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99997878074646,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 19.999976873397827,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 299.9999768733978,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:01.113250Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:02.198565Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:02 GMT",
+          "set-cookie": "_abck=5CA7031B41A01B76D62740F8643ED97A~-1~YAAQiz7cPXbeEGehAQAA7UHYhhArV5TgKM3Pnzuz36fThn3geoxmVcRCuKUh188PTZ2hQD92sQBYjm1Es5OQCjb+8YmLPH1Tkf3rQpimU1/4v5+bdBEVSMHQ7mc8wAqBCN4AnVWAVfnquAlP9VM2SWbs/KeWKv5tFVjmpWaMZLDWm1wO+h2jk0gTCmNPzJbdqZTaUsacIUzt4hAb55M6vXfjJ3vx3EOAl0K6lrCP2X6DFXU1ULyeAjgtETTQ2G/F9lwoS39xib8ch0kLaFG4HdydlhBv4SOH9horjO/Hme0+Tocjl2JVcUzQ99mwNeqP09Hau0v3bMCOLyFExgeruvtGgfE2/IogAJNFwzqv5V4kDxtK3ikaoWtECSNPn0SvI4o/fcqjaZFpTAf2mEYr7ix9E0EjCN3vlpJxPQDkNkY9Q/GT97kc8F9U/B8u/OChb+61+1QMYMfDQj9x~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:02 GMT; Max-Age=31536000; Secure, ak_bmsc=D886848DA6E1FC04896DD3FA8FF01D33~000000000000000000000000000000~YAAQiz7cPXfeEGehAQAA7UHYhgEaiqS7mQa3qFBfeF8BJcdm6SpVe31JOIyLn/E8wtoYy+B3TaIc8F9BnfRN8OsUVd29AKZXMq87AX6ec1hrWeEDdzKMJT9RDBxgRlABZossUzqwilz2l+20K+3YCCjMl9IiFfVBsJ+A1uziZCP38LxTF9PwSzI9O4PdyViiEhWYLzCqZh6cjmK5DVdx5yDu9jEJabV2T5D9fgAXKSCIe6vIHXQKYDQApiuJxr4ChMtyD0PfY9t5oxfk6zbWzy5lLqdsCnFRWKVtdbNeJsjmRaRE42DjNiM5bHMzEWMolW56Y/znT7DxcY/UT+d5W9Ee4UMX2P4xDNffeobX4k+2vXg0xUAkj3erJZinGeZZ9LJif3zR5TupYFvzZN0WxLpw; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:02 GMT; Max-Age=7200; HttpOnly, bm_sz=148232AB86E656EC20787C843EF356C5~YAAQiz7cPXjeEGehAQAA7UHYhgH0pmBi84DOS15LvHQdVaXcz6qaIsMCJZJA7IswVceI3xPsfTtElfi1I+KGIdp1W4ED7dCrEOi0bxg6nh7ubImD2CVPS+4L7F1F9CxbdrDoYBPXv5nu/oz2Ig7gDsXPsLGpq6Y+tc7NvaNK6BPfoxDIiasZbXuBbZfRREgcCebTNY27SQgycWm8mtR4mfrifcEKK9K+1BB6sI9EFq1KFeKlbEem4LVWXthf6+s8Nh6NVXIbnWybhKTraV4wsg8YQjI0NzLpsLyx01Gn/7hSFmgy2pdE/QWC3xlDW5ZgEvVy2z9W141ZSVKFx+QC+qGBf7KWyk5YYiZ+bwsdmSJ7dQ1P25IwfNpfZS+RbBke0CROQqpAfmalo6ETorxOggq8RmM=~3424817~3683888; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:02 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999980211257935,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.99997663497925,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999987602233887,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999794960022,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999983310699463,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99998211860657,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 15.999977827072144,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 145.9999806880951,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:04.566128Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:05.135031Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:05 GMT",
+          "set-cookie": "_abck=A3D549229212A5760A88748AC2E58F7A~-1~YAAQiz7cPRLfEGehAQAAyk3YhhDzyQH9oO1aVa6qQrEzK0heDlv/7IiZXS6JsAhfcdp6w51CXSWk/W96JKL63AYttokUB2W57sayhgFzAopLwBYUIZ/OUoeor2n54CTWPVHr86KoS3fWydcR6NC0rOocE0fLD5eywcy6lExj+HXAfGjHeIvOy95e7Bt+nWKIKUxxxIcfE0xG6/pTX3jndDcmqSSCOsn+sOoZ2Wc7B0/erdhXTD/T6RR3QvcDAIsOBLUoSFFuomY7Wq+sFOxMfYkmmuimkvTa5C63Rgh8eL5VDoMCvqIXCmw8799zdzgbCGXucVe2i1O2qf5YIaf6Zv0i8qqrgVQK71Z23bOFHdsur70rK7gW+z+UsnzApb/OuFnOUlWEqo2F+HHzofkaX8FLOeoI6rBdtHWJ5+HeD028ZdTb8cpD6gNdDazdloSJ5kzop9ytAlmmDr80~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:05 GMT; Max-Age=31536000; Secure, ak_bmsc=53D293032AA5576993BF970FDC2F260E~000000000000000000000000000000~YAAQiz7cPRPfEGehAQAAyk3YhgHuJGRaX2j0fLQ/5/3gOr3or0/3Q3QCizr57R/fgM84Xgbz/r+EMzFWUuEKINzOHM1QVwwer/hJwgLPvDaFkJlpZk4hcsudWH/xkAbsKVnNcpKrgw3nKdbe6Er/+jSuZA3TMD2waC1xhtk2KfOssN8FGBtBe4ovA4l3chNj7uJovmPhDMdGNkff9ad4GkGS0yF7pRK+y8Tz0WA8FNQ9BLD7AMJeHWP+msmydIHIz3wvTSJ5txVSDi/QD+JwvcAJ77b4sMUMno6xHelPuK+DEHDZZRxJ5azlyKcAMWwtzo+ja1Gu0Uywp9DHL3DDloe0k56givhMZciiqoeNi4qzQpDC/fu5xbw6op1qP8ZAnEWOoBe7sq1SQquIoDlYxbZk; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:05 GMT; Max-Age=7200; HttpOnly, bm_sz=B5DBDCD085B16CB14AB3EDA4A06E1602~YAAQiz7cPRTfEGehAQAAyk3YhgHnDzRhHO+lpgNA+YM/7fW9X6e8MEZaT0ayKieicH/pcVhC2wKCzFG+XKJyZlNtQhsoHcE5oiVsLiHtiOvessCzsGhqNK+2jYw5B5otpTFU0QS1oqefcMCTqybBktj0wcSqU8gBhE8vdaN7qdJbFbz2DuIE4+tx/mZ/6Zelx7QihL8tdGhv+ybY8LwS0mUIpZP+oUp9HCRYg2/pwg0kShVMXnE4Eow9JD3DLdXGJ4pIunO3YDrGAhuwfWWZoYQBlZUdMMvC2Eh7PY9sNtQUQW3zz0+XRzITGrOnQKuU912rF1990EdyAw+BSuv95Po6Vn8+DWSZb2TUm63Dmsk58ksSE7CfB80CVzxYtS1gcLq3is8AaGfYhYBhIUiaVbylOFM=~3356739~3228726; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:05 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999979496002197,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.9999759197235,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999944925308228,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999747276306,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999982595443726,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 297.9999735355377,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 17.99996542930603,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 297.9999794960022,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:02.935710Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:03.744523Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:03 GMT",
+          "set-cookie": "_abck=FAABA334F3F106B1E3E1194BA4D80125~-1~YAAQD1FFy0FBAHihAQAAPUjYhhB+9Ljy3qLlESNJgpI9cDxHDJ5KG+BJV2G4+HqmYIBUjrSCj6L98iov8Jcoo7ooIiapr+gq4zxm0PYaCblBv6mXo28V1APFRdB2vUvUXccGWqyNb1lkYcg286d+wPz5VFtB2Wm1TA9ZH7WnC68yX3O5rCXrjOBnUq3jYStFyUPo0dq01SZFVAbXI86vVYxenlwn1MCOBx0izRHHPWXAFvr68/ODnw1YGtywl2zGacRLoChDZbMUvC4CHANfdn4EF6YQC/iLo+4surISzJ9nSbWBDCj2y9RtLP9kpTCb4ySGF79kHVZ2xjzxw+ailyoFlgQc/AIiAdc/yIqp5GoRYmnjFQ7Ym1W2FVlC55w5O5saz8AUx5y02qe4ZACw0XXJYgERhnlwtyQvDbzNBDq6yicK53l3NUHVwkECJPL3BmQ0SD3oFOoPYcTV~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:03 GMT; Max-Age=31536000; Secure, ak_bmsc=452D1CCF0C66FB2FE65B2CE6AC13D04B~000000000000000000000000000000~YAAQD1FFy0JBAHihAQAAPUjYhgEnCUt86A9ddz7LymXHFO3G7x2fdn0Bp4DkAtKXLC3VmLRdRjR5Zs7+yE3UFHdTbVxIVkWH5ut0kcDWtMV13N8gRx3a1IZaxsW/lsh+cUavAKFkTcAf6EMo0Xutrkhm3AotvbiVHmxjao2kMEGpYDQjFTlh9m/H9eUC0LWF28kqrPWjrEbmOOH6DNVLINp8vR0T3paDMmkloeWWTeGzHHcorNpMmkC5a53giNR4qDszpwlqyV0ZI4PhceNSPYZNXuQpPhpZcVQonA8D6VUqwiExdgBB6k+Mqc8ovEShsnm+c8IjvVTsweq3jDx7M2xnbmDWqIHGeFxIoGagrKhGflZptNjnL+8TsnhHdVTBRQWpxFhSOAlRB2mVDrLZbWw=; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:03 GMT; Max-Age=7200; HttpOnly, bm_sz=464B63CDB3046233B85124E43BB6B9C6~YAAQD1FFy0NBAHihAQAAPUjYhgFrCFhtJXe+/QpzM4DKllgKJANBcS+MNLat9oDsnbPFFKimH6TVXrZ/KSX15D7Hj384AtCGoNgYvRO+jnaIM4PfGKfTal1ifZMkYDNV+9ZdtJ6KLZkEMt0vMF7983rMCL2kv6fNCjTE91GRBGBvLN8zNVLOwOy7abOJSRJHh4f7lVpHwtpqDUIQaspzo7dm1I2ZkGMzwOcoCLxw9m27VgnNU8nts5+3uxMTv+kYL6j1R6ZkFbidiAE7ywPs4dXLv/TtY7s4S8tmZBqK8VEn3tAhrIXkOTS/K/JTvKWjRhNWTbkPvdVpkynNc1QVxv8jf3/7dV4IC6Y+vAXG63oIW8PnlHK+f2dBqnphgMoHrotK9zVleDD8ucilcEzAUFSfAQ==~4273475~4276530; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:03 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.99998164176941,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.9999690055847,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.999982118606567,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.99997758865356,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999986171722412,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 294.99998474121094,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 13.99997878074646,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 294.99997091293335,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:06.518605Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:07.131695Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:07 GMT",
+          "set-cookie": "_abck=CC01E388AACCAA49A300D0C5BA2348A8~-1~YAAQD1FFy4RBAHihAQAAlFXYhhAeh8yvhUhGGm7i56IVtHhqsE7hARytYsk8ui66a/cppvV9YRs9e5UJ5+KsqKJTmk4K8jDW59H8QkPxf3fPkFXjha/8tACyg05Ps0+Q6ZEHNM1NejSmhjGjTFeOTRplaajIoxhCSlwIWjxcenms78Dl8ODGdxKEno8RJV8SIFcrder8a7xSgZ3m1Ldg6c9dFZNXUoxxWyaZBwFXKsrzQ3DgEDQ8GyN8kw3hIL/gmV41BFnPXwqqHRfLOaCfwk6JOxvTSYboH1Ro6o40elvCbPxWyh7zH8JjddlyaLcTlaVn5jbIKv5fO5lHYQ83ohNAkmzFSp634295h5u4ROipyy+KhOjV2oGpJLcWb1wgj+1MPIx2e/LzivdSE1zWKA7SgSKA570ULyIfpcJE+ExP141TD06rVRlDcZDh4TwsxHttIiVPI9UhjQzA~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:07 GMT; Max-Age=31536000; Secure, ak_bmsc=AB4D03A9B183FA87EE992688765A8191~000000000000000000000000000000~YAAQD1FFy4VBAHihAQAAlFXYhgE1EBrgXURagQY/lgHyx/TbCCzG+2G/gpD2VNQCGX+e2DRXOg2LcowWRZA/hUwEzT1yn4+DeURfuSIyjgPUxYGzuVPkj1xWsWkPipMJHtnKNfHGKwlZ4TxBMd3qiWyOU/Y3SGmPHxavrm+XRyJIHPnh1GiWaUFuzm+3GZozvx4wwLmBYs7I+4Q+q4qdDMLnSdy++GgI42bD+O8r7L8IyLoDHQXPaMGZtf5SAQ/iwqplFHeEdoUqsNxeqtnehQkOkAWBzx5tBFUVVymFHSQ/Www47ky9ronpd3eoxoU0DBZpz052T9QNiXTP0IPSAod3g13Ht0xVC9jGrmz2ykWDGaJC4HUZ6A+15eKmZPlvQON6LTUGracB1Q7BbjFg; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:07 GMT; Max-Age=7200; HttpOnly, bm_sz=30BCAC5A0C9862F619E4BD50F234A6E2~YAAQD1FFy4ZBAHihAQAAlFXYhgHLNL8nch5oBE1uS8ChsEKylkfCnYhIIc2IRe+BnVWOmHLuE6tCLkLcad6hFXchUpJYQcmPGmHy0dYdgKgnQHJOMQKaliYGbQ9DM/aYyeAvH90n3suugiU0+hRV4AagltHKfrhg4NEA0aEXZ00JcRBt3wIyc/HmpDzftl6Nt0rAVbZDdqkTtf62W41H2ywG0pdQDJqPk/9iMKuTyZilY04SXykXQ5SWcYvibNjSM5S4apu8gpaEcdeydxfc1qoApbO/iS6DFK+iImQB4ieS2+Rn67r7lo+9bY8Xzii912D/x5UzmDAKxGR+3FJuV9w8n3YAdweV1Qdp2QlCH21LKkGUQwhMzzvDUzZrffMqiGa7+jhoTaq8D2ExA5vTtrI=~3682884~3621445; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:07 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214",
+          "23.196.29.69"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999984741210938,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.9999806880951,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.99998378753662,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.99998235702515,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999972820281982,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.99997901916504,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.196.29.69"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 19.99998688697815,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 47.99998211860657,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:00.649890Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:01.469919Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:01 GMT",
+          "set-cookie": "_abck=65F1D7137EB2A7C95A6BCB173DE5F64C~-1~YAAQD1FFyyVBAHihAQAAWD/YhhBaPhxEw5XSQVEo34S73TaXfxr/i42baJju3lCi/nglAg8Uz53zCE8okWxYcorCE1zwx7QvAvL0mO6ip7D9zs2Nuzh1V3uZOkT15N9+N/VEbbKZBEfWXhdIl/rRslSjNstQm3eLOjVrC4s9F5uJJIxh/1nGJk3mTd79J+c/xQhA2r+LJGdF0NZBES3YYkCmsPBHlKdd/VGeCzJgLbDx3z1f7X0jIAWLtor1+4xVi4tgmhO8XowYBhlNu9rwT3FhaKOZv8CfQiKwKslxxaeRz/iGIgqRwsAkj+iDkMgTr7plP39HvqzOHUWzRn8EMTTOLZf6DlsXrugmwfJCKxpPpFzwmXbXVoZzJqyE/oGKnbBlhkXOXkaBttkv4Bs4sqjiPbqwtIDkCxHjzapC85f6sMNgNcavVIVyd0CzeA6LjAU0LR2SbLzJxTsB~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:01 GMT; Max-Age=31536000; Secure, ak_bmsc=9885041B5E1720BD446885C3763B3F17~000000000000000000000000000000~YAAQD1FFyyZBAHihAQAAWD/YhgHrZWH06NS4Qz5g5j75mmYiIncxgu1JzPGZQ+naMJlzY4jojy9MQFghYTf6Q+0GfxdSi+nrQQk7G6emSzpiO7wfcQcJbSbJAHFDLVwFWaJfNV+mY6m3TM0kkMkvx9u/z2zDqqNDlkexsQaKfeOtCVk4uMN7W/Vpm+36Ho4Wm3zqEi8sWarOxUpaHczol5hZTdMz4qTMaBH1MVDkgJd6GEkssImJpWm3DUw5JGGTlS91nQcSijzfBSMkVKXO7paMWfPgh3QIsxh9uYGyTCDdOll4ucGcleJBtTKDzIJ9mJthYh5ZxiPlhxSKemou+cZ9Si+UiIpOlibRV8Y5xDI56dyxzVtsmA0eAVUoyro4YtuA0e+vGA5JBsYBQfz48w==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:01 GMT; Max-Age=7200; HttpOnly, bm_sz=4BDE0F9AC8155F1156C2C3E5841B7C89~YAAQD1FFyydBAHihAQAAWD/YhgH3vMh9wxZJSNYzmjhaeBgHi1RC335Gf4MHIuPrSMSEtbrHSxS8h8nbOKW3eGhoa7zM/4F3EBqQuXYROlol+a+rQGW3J9YBzr/5vTpUZktz8sGlDaVu0BzY7yVKirAMGjaV6G0AyVd3uNUs1d8l1AFVEY7GG7FhvvFURKjKLcS1CLlPsJKDsTCF+QT8XutqI+In5uMcHFKZBuqXQ7iULXuAgE3u1WNGp7Kvzz/zQWMhfwhgbeHlUVHaRe73Yg8FPNu/p6GOu32sWk0tRyMAQXOQbnTXnqsk/1dvPFq3Ija01tWlmAh8WlUmvY+FoS3hypbeWDvkV6XUZdVUILAnjPwZUHRN14qspRkUlZsR6trAQSduhNeCNDMQ9E4qN90=~3422261~3748150; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:01 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "dns": {
+        "addresses": [
+          "23.42.103.154",
+          "23.221.144.214"
+        ],
+        "complete": true,
+        "hostname": "www.mastercard.com",
+        "queries": [
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 19.999983310699463,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.1.1",
+            "ttl": 299.9999840259552,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.42.103.154"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 19.99998426437378,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.95.192.1",
+            "ttl": 299.9999840259552,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 19.999983310699463,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "168.126.63.1",
+            "ttl": 299.9999797344208,
+            "type": "AAAA"
+          },
+          {
+            "addresses": [
+              "23.221.144.214"
+            ],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 19.999977111816406,
+            "type": "A"
+          },
+          {
+            "addresses": [],
+            "canonical_name": "e5188.x.akamaiedge.net.",
+            "server": "219.250.36.130",
+            "ttl": 299.9999840259552,
+            "type": "AAAA"
+          }
+        ]
+      },
+      "fetched_at_utc": "2026-10-29T08:48:00.565703Z"
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-29T08:48:01.382668Z",
+      "request": {
+        "edge_ip": "23.42.103.154",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Thu, 29 Oct 2026 08:48:01 GMT",
+          "set-cookie": "_abck=B324A4E971554AE98E88E11AFA8A9CB3~-1~YAAQD1FFyyJBAHihAQAAAT/YhhAQEtSMsEPcyTxjat6nUELDBORWgktd30DwSj2+X8LA31re2mPwPp/cNBKsluSA2Pa4KCA2WCxcbOXoltfQ+ltyhr/l16RfzY8/X6taDgP+rKxAlHBCIaEKUZWw4diZ316bHkOflcG3tVrg6WiVHmbcDIn9PET2tK69T1qKzkXlBJXMY8ablcSjn/2pPUMYKsTfzkjau4ss3/UxCskIgt2KOtmJ4STIQb8n01NzMqpNcmBxkMCs27YJY81Bb09Ew7Jm14zK6482LEMXeFEVKevxQ1Hei6lEuHhFHjZU2PZGIVuehhA2b+WRPVXlRzOisUZ2OiGwJ6g7fF60bzWtFCsNZyIsfPheZKNTQ5Q9kEgs4o9Spl82XaW19IapG4nfYX9i/hiTkIM3zNVL3BFed6tNfWMwcQJnNdNZi/zUIIaP6Nd93bg0FvQc~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:01 GMT; Max-Age=31536000; Secure, ak_bmsc=F3E08E46842D477B348FD2D4BFB0FFE8~000000000000000000000000000000~YAAQD1FFyyNBAHihAQAAAT/YhgExy8+e2coPBnvpd+7jB3ApqT+xu3sDdgvSOrxYf195w8VQWfidhwBvw0TmBnsw17OiMDIolLJ9SRF2zfNf94TFOzaN5NrdsYE1d5J6agQM6bP9+Zn7inRwiZfdHVArHKuOPk5qvjMEFXiKFINnSTyyhVqx37ADeAR9b3VbV0TCZL67pv4acbSCRvfr03IOzigmeQg1056oqhDJCOciXB6rTkl22seZr1BbgLM2j0NKGdgHaWGbqxCiXpffSP8Mf/i0rpLG8rJMbgnlQk1n4Vcu2J5qyV88kNJVcJtI1Ssn4uor19UE3p2kCGX/n6aqmQEI/e2+Y5e+dgQ+xXld1z6KCoftXpjjP/TMqF7C5EP4150JWPjmQ7lA6dM2TtI=; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:01 GMT; Max-Age=7200; HttpOnly, bm_sz=EEAE025AA3EA3470F48D85EFDCAEAC8A~YAAQD1FFyyRBAHihAQAAAT/YhgHhv8CbGCdpG66MAltRSTO01jklMdba/mGIYo8CJG3GNBPqEPGSl80tsW72mhP9K5z+n2A/cbJ8VwWUXj3qVfry/2rYRpRGAXXN5qn3curfzVHmn8HsgTnWUzHCqXa8N+/ASHGz+7DpGhvztVBvY8Rj9KK/YXCF4J1IktYG89vbHXHXXyY+I0WteOvgJ51tYBLSvdzWe+ayjgyabxf+jFZAWdpZ3TcNaHw91/57Cse73c/dlpztFbNdqCmjtHSrbNEz6IJJXRhi5WJIVCDEIek9gRlsRpua38sk7R8JnaAPVTSkd/ouqpb8f3S8GPbKFSRNSuc8/j4dBIMcLATxelN4e9PhFj+wri3Eekn+02ac8MKOznBoW/Kr2pHdWyjFfQ==~3422261~3748150; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:01 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
+          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.42.103.154",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    }
+  ],
+  "format": "exchange-rates-raw-shards-v1",
+  "parts": [
+    {
+      "name": "shard-01.json",
+      "sha256": "b8aa7390a43215f3c2e1e95cc462b1b5a356c839cfe4f23695929feb1debd9d8",
+      "size": 9707653
+    },
+    {
+      "name": "shard-02.json",
+      "sha256": "c6714d26b14d199d93426da58140615cb5098aae5ead6a5f0a134fae08c5e6be",
+      "size": 9682858
+    },
+    {
+      "name": "shard-03.json",
+      "sha256": "4b167bfaaf32f69a493000c094b8662e24017adbbd88f69780ce6dd83e9ced23",
+      "size": 9691898
+    },
+    {
+      "name": "shard-04.json",
+      "sha256": "59017870efb945e1ca61dbf47232165568bb2a62ff8ec8e0202b0aeb9727cade",
+      "size": 9679503
+    },
+    {
+      "name": "shard-05.json",
+      "sha256": "c8bc42c7c92c62ca484f96602e9422ea18ed42513c3ba03c64132246e5b10518",
+      "size": 9728612
+    },
+    {
+      "name": "shard-06.json",
+      "sha256": "da79cf2015d4e00aaecc8486ef7656ad8068affa88ed5d3fad12d9f86ca3c232",
+      "size": 9697556
+    },
+    {
+      "name": "shard-07.json",
+      "sha256": "fe55c70b838c3009c7a71870de376d9295cf8508b49cf34068ca9e7193f43db3",
+      "size": 9711321
+    },
+    {
+      "name": "shard-08.json",
+      "sha256": "27361c0423a729a44d3ba9cccaea9ecf41c1abc114a595f4eda79d19cb0403ed",
+      "size": 9697493
+    },
+    {
+      "name": "shard-09.json",
+      "sha256": "96c305435386914b504ba7139c4c1e17891ba9b0113d5509f747ff6159d7cf46",
+      "size": 9702116
+    },
+    {
+      "name": "shard-10.json",
+      "sha256": "81cabf7a6b58d7622b184f0032826242373eb2f9fd5abe8aea9e63a613cbec09",
+      "size": 9638156
+    }
+  ],
+  "parts_directory": "2026-10-28.parts",
+  "provider": "mastercard",
+  "requested_date": "2026-10-28"
+}
