@@ -1,0 +1,24 @@
+{
+  "derived": true,
+  "fetched_at_utc": "2026-10-29T11:39:04.059860Z",
+  "original_source": {
+    "availability": "historical_source_unavailable",
+    "requested_date": "2026-10-05",
+    "response_date": "2026-10-29",
+    "source_url": "https://www.jcb.jp/rate/jpy.html"
+  },
+  "pair_count": 15,
+  "provider": "jcb-jpy",
+  "rate_data_policy": "same-day USD cross rate truncated to 3 decimal places using exact fractions",
+  "rate_formula": "floor(1000 * JPY Sell / transCur Buy) / 1000",
+  "requested_date": "2026-10-05",
+  "response_dates": [
+    {
+      "date": "2026-10-05",
+      "file": "usd10052026.html"
+    }
+  ],
+  "source_urls": [
+    "https://www.jcb.jp/rate/usd10052026.html"
+  ]
+}

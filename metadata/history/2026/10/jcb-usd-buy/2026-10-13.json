@@ -1,0 +1,19 @@
+{
+  "fetched_at_utc": "2026-10-29T11:39:09.648913Z",
+  "pair_count": 162,
+  "provider": "jcb-usd-buy",
+  "quote_column": "Buy",
+  "rate_data_policy": "reciprocal truncated to 100 significant digits with ROUND_DOWN; the truncated value is not the exact reciprocal",
+  "rate_formula": "1 / displayed Buy quote",
+  "rate_fraction_policy": "rateNumerator/rateDenominator is the exact reduced rational reciprocal of the displayed decimal",
+  "requested_date": "2026-10-13",
+  "response_dates": [
+    {
+      "date": "2026-10-13",
+      "file": "usd10132026.html"
+    }
+  ],
+  "source_urls": [
+    "https://www.jcb.jp/rate/usd10132026.html"
+  ]
+}
