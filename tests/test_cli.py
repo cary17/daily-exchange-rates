@@ -92,38 +92,51 @@ class CliTests(unittest.TestCase):
             self.assertEqual((root / "history/2026/10/visa/2026-10-02.json").read_bytes(), old_body)
             self.assertEqual(json.loads((root / "metadata/latest/visa.json").read_bytes())["requested_date"], "2026-10-03")
 
-    def test_jcb_fetch_saves_four_feeds_and_counts_one_date(self):
+    def test_jcb_fetch_saves_four_feeds_with_direct_or_reconstructed_jpy(self):
         names = ("jcb-jpy", "jcb-usd-buy", "jcb-usd-mid", "jcb-usd-sell")
-        html = (
-            "<html><p>2026年10月03日換算日の基準レート</p><table>"
-            "<tr><td>USD</td><td>米ドル</td><td>＝</td><td>150.123</td><td>JPY（日本円）</td></tr>"
-            "</table></html>",
-            "<html><p>Base rate for 10/03/2026</p><table>"
-            "<tr><td>USD</td><td>=</td><td>3</td><td>4</td><td>6</td><td>JPY</td></tr>"
-            "</table></html>",
-        )
         urls = ("https://www.jcb.jp/rate/jpy.html", "https://www.jcb.jp/rate/usd10032026.html")
-        responses = [SimpleNamespace(status_code=200, text=body, content=body.encode(), url=url,
-                                     headers={"content-type": "text/html"})
-                     for body, url in zip(html, urls)]
-        with tempfile.TemporaryDirectory() as temporary, \
-             patch("exchange_rates.http.requests.Session") as factory, \
-             contextlib.redirect_stdout(io.StringIO()):
-            factory.return_value.get.side_effect = responses
-            root = Path(temporary)
-            self.assertEqual(main(["fetch", "--provider", "jcb", "--start-date", "2026-10-03",
-                                   "--interval", "0", "--data-dir", str(root / "data"),
-                                   "--release-dir", str(root / "releases")]), 0)
-            self.assertEqual(factory.return_value.get.call_count, 2)
-            for index, name in enumerate(names):
-                normalized = json.loads((root / "data/latest" / f"{name}.json").read_bytes())
-                self.assertEqual(normalized["curDate"], "2026-10-03")
-                self.assertEqual(len(normalized["exchangeRateJson"]), 1)
-                raw = json.loads((root / "data/raw/latest" / f"{name}.json").read_bytes())
-                self.assertEqual(raw["requests"][0]["response"]["body_text"], html[int(index > 0)])
-            summary = json.loads((self.default_diagnostics / "summary.json").read_bytes())
-            self.assertEqual(summary["saved_dates"], 1)
-            self.assertEqual({day["provider"] for day in summary["days"]}, set(names))
+        usd_rows = "".join(f"<tr><td>USD</td><td>=</td><td>1</td><td>1</td><td>1</td><td>{code}</td></tr>"
+                           for code in "USD EUR GBP HKD CNY SGD AUD KRW THB TWD MYR IDR PHP VND CAD".split())
+        for jpy_day in (3, 29):
+            html = (
+                f"<html><p>2026年10月{jpy_day:02d}日換算日の基準レート</p><table>"
+                "<tr><td>USD</td><td>米ドル</td><td>＝</td><td>150.123</td><td>JPY（日本円）</td></tr>"
+                "</table></html>",
+                "<html><p>Base rate for 10/03/2026</p><table>" + usd_rows +
+                "<tr><td>USD</td><td>=</td><td>3</td><td>4</td><td>6</td><td>JPY</td></tr>"
+                "</table></html>",
+            )
+            responses = [SimpleNamespace(status_code=200, text=body, content=body.encode(), url=url,
+                                         headers={"content-type": "text/html"})
+                         for body, url in zip(html, urls)]
+            with self.subTest(jpy_day=jpy_day), tempfile.TemporaryDirectory() as temporary, \
+                 patch("exchange_rates.http.requests.Session") as factory, \
+                 contextlib.redirect_stdout(io.StringIO()) as output:
+                factory.return_value.get.side_effect = responses
+                root = Path(temporary)
+                self.assertEqual(main(["fetch", "--provider", "jcb", "--start-date", "2026-10-03",
+                                       "--interval", "0", "--data-dir", str(root / "data"),
+                                       "--release-dir", str(root / "releases")]), 0)
+                self.assertEqual(factory.return_value.get.call_count, 2)
+                for name in names:
+                    normalized = json.loads((root / "data/latest" / f"{name}.json").read_bytes())
+                    self.assertEqual(normalized["curDate"], "2026-10-03")
+                    self.assertEqual(len(normalized["exchangeRateJson"]),
+                                     (1 if jpy_day == 3 else 15) if name == "jcb-jpy" else 16)
+                    raw = json.loads((root / "data/raw/latest" / f"{name}.json").read_bytes())
+                    source = int(name != "jcb-jpy" or jpy_day != 3)
+                    self.assertEqual(raw["requests"][0]["response"]["body_text"], html[source])
+                jpy = json.loads((root / "data/latest/jcb-jpy.json").read_bytes())
+                self.assertEqual(jpy["exchangeRateJson"][0]["rateData"], 150.123 if jpy_day == 3 else 6)
+                metadata = json.loads((root / "data/metadata/latest/jcb-jpy.json").read_bytes())
+                self.assertEqual(metadata["derived"], jpy_day != 3)
+                summary = json.loads((self.default_diagnostics / "summary.json").read_bytes())
+                self.assertEqual(summary["saved_dates"], 1)
+                self.assertEqual(summary["failed_dates"], 0)
+                self.assertEqual({day["provider"] for day in summary["days"]}, set(names))
+                if jpy_day != 3:
+                    self.assertIn("Derived rate:", output.getvalue())
+                    self.assertEqual(metadata["original_source"]["response_date"], "2026-10-29")
 
     def test_jcb_unavailable_dates_are_skipped_not_counted_as_download_failures(self):
         for status in ("not_published", "historical_source_unavailable", "not_yet_published"):

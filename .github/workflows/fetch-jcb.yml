@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       start_date:
-        description: 'Rate date (YYYY-MM-DD); blank means today in Beijing; JPY must match its current page'
+        description: 'Rate date (YYYY-MM-DD); blank means today in Beijing; missing historical JPY is derived from same-day USD'
         required: false
         default: ''
         type: string

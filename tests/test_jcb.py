@@ -25,6 +25,31 @@ USD_ROWS = (
     ("BND", "1.280000000", "1.300000000", "1.320000000"),
     ("USD", "1.000000000", "1.000000000", "1.000000000"),
 )
+RECONSTRUCTION_USD_ROWS = (
+    ("USD", "1.000000000", "1.000000000", "1.000000000"),
+    ("EUR", "0.896224385", "0.896498367", "0.896772515"),
+    ("GBP", "0.750336713", "0.750421173", "0.750505653"),
+    ("HKD", "7.825254000", "7.844848000", "7.864441000"),
+    ("CNY", "6.632670000", "6.649385000", "6.666100000"),
+    ("SGD", "1.278891000", "1.281242000", "1.283594000"),
+    ("AUD", "1.416362384", "1.417382208", "1.418401489"),
+    ("KRW", "1334.295000000", "1337.747500000", "1341.200000000"),
+    ("THB", "33.555240000", "33.637620000", "33.720000000"),
+    ("TWD", "32.221085000", "32.317042500", "32.413000000"),
+    ("MYR", "4.058998000", "4.077093000", "4.095189000"),
+    ("IDR", "18120.475000000", "18152.737500000", "18185.000000000"),
+    ("PHP", "63.783178000", "63.904089000", "64.025000000"),
+    ("VND", "25852.000000000", "25856.500000000", "25861.000000000"),
+    ("CAD", "1.396955000", "1.398538000", "1.400122000"),
+    ("JPY", "157.604200000", "157.845000000", "158.085800000"),
+)
+RECONSTRUCTED_JPY = (
+    ("USD", "158.085"), ("EUR", "176.390"), ("GBP", "210.686"),
+    ("HKD", "20.202"), ("CNY", "23.834"), ("SGD", "123.611"),
+    ("AUD", "111.613"), ("KRW", "0.118"), ("THB", "4.711"),
+    ("TWD", "4.906"), ("MYR", "38.947"), ("IDR", "0.008"),
+    ("PHP", "2.478"), ("VND", "0.006"), ("CAD", "113.164"),
+)
 
 
 def jpy_body(day=DAY, rows=None):
@@ -110,6 +135,7 @@ class JcbTests(unittest.TestCase):
                                  reciprocal((buy, mid, sell)[column]))
         self.assertEqual(feeds["jcb-usd-buy"]["exchangeRateJson"][3]["rateData"], Decimal(1))
         self.assertEqual(results[0].metadata["pair_count"], 3)
+        self.assertFalse(results[0].metadata["derived"])
         self.assertEqual(results[1].metadata["pair_count"], len(USD_ROWS))
         for result, column in zip(results[1:], ("Buy", "Mid", "Sell")):
             self.assertEqual(result.metadata["quote_column"], column)
@@ -176,6 +202,8 @@ class JcbTests(unittest.TestCase):
     def test_both_page_dates_must_match_requested_day(self):
         cases = (
             (jpy_body(), usd_body(DAY - timedelta(days=1)), 2, DateMismatchError),
+            (jpy_body(DAY + timedelta(days=1)),
+             usd_body(DAY - timedelta(days=1), RECONSTRUCTION_USD_ROWS), 2, DateMismatchError),
             (jpy_body(), usd_body().replace("10/29/2026", "02/30/2026"), 2, ProviderError),
             (jpy_body().replace("2026年10月29日", ""), usd_body(), 1, ProviderError),
             (jpy_body(), usd_body().replace("Base rate for 10/29/2026", ""), 2, ProviderError),
@@ -202,32 +230,55 @@ class JcbTests(unittest.TestCase):
             fetch_day("jcb", DAY, None, {}, client)
         self.assertEqual(client.request_text.call_count, 1)
 
-    def test_official_index_distinguishes_unpublished_and_historical_sources(self):
-        first, last = date(2026, 10, 23), date(2026, 10, 30)
+    def test_missing_jpy_is_reconstructed_from_same_day_usd(self):
         cases = (
-            (date(2026, 10, 24), DAY, (first, DAY, last), "not_published"),
-            (date(2026, 10, 28), DAY, (first, DAY, last), "not_published"),
-            (date(2026, 10, 28), DAY, (first, date(2026, 10, 28), last), "historical_source_unavailable"),
-            (DAY, DAY - timedelta(days=1), (first, DAY, last), "not_yet_published"),
-            (date(2026, 1, 1), DAY, (first, DAY, last), "historical_source_unavailable"),
+            (DAY + timedelta(days=1), "historical_source_unavailable"),
+            (DAY - timedelta(days=1), "not_yet_published"),
         )
-        for target, current, published, expected in cases:
-            with self.subTest(target=target, expected=expected):
-                html = jpy_body(current)
-                index = "<html>" + "".join(f'<a href="usd{day:%m%d%Y}.html">{day}</a>'
-                                           for day in published) + "</html>"
-                client = Mock(spec=HttpClient)
-                client.request_text.side_effect = [
-                    JsonResponse(None, html, html.encode(), JPY_URL),
-                    JsonResponse(None, index, index.encode(), "https://www.jcb.jp/rate/usd.html"),
-                ]
-                with self.assertRaises(JcbUnavailableError) as caught:
-                    fetch_day("jcb", target, None, {}, client)
-                self.assertEqual(caught.exception.availability, expected)
-                self.assertEqual(caught.exception.context["availability"], expected)
-                self.assertEqual(caught.exception.context["index_first_date"], str(first))
-                self.assertEqual(client.request_text.call_args.args[0], "https://www.jcb.jp/rate/usd.html")
+        usd = usd_body(rows=RECONSTRUCTION_USD_ROWS)
+        for current, expected in cases:
+            with self.subTest(current=current):
+                results, client = collected(jpy=jpy_body(current), usd=usd)
+                self.assertEqual([result.provider for result in results],
+                                 ["jcb-jpy", "jcb-usd-buy", "jcb-usd-mid", "jcb-usd-sell"])
+                jpy = rows_by_provider(results)["jcb-jpy"]["exchangeRateJson"]
+                self.assertEqual(jpy, [
+                    {"transCur": code, "baseCur": "JPY", "rateData": Decimal(value)}
+                    for code, value in RECONSTRUCTED_JPY
+                ])
+                self.assertTrue(results[0].metadata["derived"])
+                self.assertEqual(results[0].metadata["original_source"], {
+                    "availability": expected, "requested_date": str(DAY),
+                    "response_date": str(current), "source_url": JPY_URL,
+                })
+                self.assertIn("JPY Sell / transCur Buy", results[0].metadata["rate_formula"])
+                self.assertEqual(results[0].metadata["pair_count"], 15)
+                for result in results:
+                    self.assertEqual(result.requested_date, DAY)
+                    self.assertEqual(json.loads(result.normalized)["curDate"], str(DAY))
+                    self.assertEqual(result.metadata["source_urls"], [USD_URL])
+                    self.assertEqual(result.metadata["response_dates"],
+                                     [{"file": "usd10292026.html", "date": str(DAY)}])
+                    self.assertEqual(json.loads(result.raw)["requests"][0]["response"]["body_text"], usd)
                 self.assertEqual(client.request_text.call_count, 2)
+
+    def test_jpy_reconstruction_truncates_without_decimal_context_rounding(self):
+        rows = tuple((code, "1." + "0" * 120 + "1", "2", "3") if code == "EUR"
+                     else (code, "998", "999", "1000") if code == "JPY"
+                     else (code, buy, mid, sell)
+                     for code, buy, mid, sell in RECONSTRUCTION_USD_ROWS)
+        with localcontext() as context:
+            context.prec = 6
+            results, _ = collected(jpy=jpy_body(DAY + timedelta(days=1)), usd=usd_body(rows=rows))
+        jpy = rows_by_provider(results)["jcb-jpy"]["exchangeRateJson"]
+        self.assertEqual(next(row["rateData"] for row in jpy if row["transCur"] == "EUR"),
+                         Decimal("999.999"))
+
+    def test_jpy_reconstruction_requires_every_source_quote(self):
+        for missing in ("JPY", "EUR"):
+            rows = tuple(row for row in RECONSTRUCTION_USD_ROWS if row[0] != missing)
+            with self.subTest(missing=missing), self.assertRaisesRegex(ProviderError, missing):
+                collected(jpy=jpy_body(DAY + timedelta(days=1)), usd=usd_body(rows=rows))
 
     def test_usd_404_is_not_proof_that_official_data_was_unpublished(self):
         cases = (
@@ -272,7 +323,9 @@ class JcbTests(unittest.TestCase):
                 index = (bad if isinstance(bad, HttpError) else
                          JsonResponse(None, bad, bad.encode(), "https://www.jcb.jp/rate/usd.html"))
                 client = Mock(spec=HttpClient)
-                client.request_text.side_effect = [JsonResponse(None, html, html.encode(), JPY_URL), index]
+                client.request_text.side_effect = [
+                    JsonResponse(None, html, html.encode(), JPY_URL), HttpError("HTTP 404", 404), index,
+                ]
                 with self.assertRaises((HttpError, ProviderError)) as caught:
                     fetch_day("jcb", DAY, None, {}, client)
                 self.assertNotIsInstance(caught.exception, JcbUnavailableError)

@@ -87,6 +87,15 @@ class ProviderConcurrencyTests(unittest.TestCase):
                        in _archive_members(store._artifact(destination, period))}
             self.assertEqual(members, expected)
 
+    def test_jcb_usd_without_reconstructed_jpy_does_not_publish(self):
+        store = DataStore(self.collected, self.releases)
+        for name in PUBLISH.__globals__["JCB_PROVIDERS"][1:]:
+            store.save_day(day_result(name, date(2026, 10, 1), "0.00625"))
+        with self.assertRaisesRegex(ValueError, "Incomplete collected jcb"):
+            PUBLISH(self.collected, self.data_dir, "jcb")
+        self.publisher.prepare.assert_not_called()
+        self.publisher.publish.assert_not_called()
+
     def test_incomplete_jcb_day_does_not_prepare_or_publish(self):
         store = DataStore(self.collected, self.releases)
         for name in PUBLISH.__globals__["JCB_PROVIDERS"][:-1]:

@@ -664,6 +664,10 @@ def _jcb_jpy_rows(rows: list[list[str]]) -> list[dict[str, Any]]:
     return parsed
 
 
+_JCB_JPY_CURRENCIES = (
+    "USD", "EUR", "GBP", "HKD", "CNY", "SGD", "AUD", "KRW",
+    "THB", "TWD", "MYR", "IDR", "PHP", "VND", "CAD",
+)
 _JCB_USD_COLUMNS = (("buy", "Buy"), ("mid", "Mid"), ("sell", "Sell"))
 
 
@@ -688,6 +692,21 @@ def _jcb_usd_rows(rows: list[list[str]]) -> list[tuple[str, tuple[Decimal, ...]]
     if not parsed:
         raise ProviderError("JCB usd.html: empty rate table")
     return parsed
+
+
+def _jcb_reconstruct_jpy(rows: list[tuple[str, tuple[Decimal, ...]]]) -> list[dict[str, Any]]:
+    quotes = dict(rows)
+    missing = (set(_JCB_JPY_CURRENCIES) | {"JPY"}) - quotes.keys()
+    if missing:
+        raise ProviderError(f"JCB JPY reconstruction: missing USD quotes for {', '.join(sorted(missing))}")
+    jpy_sell = Fraction(quotes["JPY"][2])
+    reconstructed = []
+    for code in _JCB_JPY_CURRENCIES:
+        cross = jpy_sell / Fraction(quotes[code][0])
+        units = cross.numerator * 1000 // cross.denominator
+        rate = _number(f"{units // 1000}.{units % 1000:03d}", f"JCB reconstructed JPY {code}")
+        reconstructed.append({"transCur": code, "baseCur": "JPY", "rateData": rate})
+    return reconstructed
 
 
 def _jcb_reciprocal(value: Decimal) -> tuple[Decimal, int, int]:
@@ -717,8 +736,7 @@ def _jcb_result(provider: str, target: date, rows: list[dict[str, Any]],
 
 
 def _jcb_unavailable(target: date, filename: str, endpoint: str, headers: dict,
-                     client: HttpClient, *, response: JsonResponse | None = None,
-                     returned: date | None = None, failure: HttpError | None = None) -> None:
+                     client: HttpClient, *, failure: HttpError) -> None:
     index = client.request_text(endpoint.format(file="usd.html"), headers=headers)
     parser = _JcbTables()
     parser.feed(index.body_text)
@@ -743,30 +761,21 @@ def _jcb_unavailable(target: date, filename: str, endpoint: str, headers: dict,
                "index_last_date": last.isoformat(), "requested_date": target.isoformat(),
                "source_url": endpoint.format(file=filename),
                "usd_listed": target in published}
-    if returned is not None:
-        context["response_date"] = returned.isoformat()
     if target not in published and first <= target <= last:
         status = "not_published"
         message = f"JCB USD official index does not list {target} within {first} through {last}"
-    elif returned is not None and returned > target:
-        status = "historical_source_unavailable"
-        message = f"JCB JPY current page is {returned}; historical page for {target} cannot be retrieved"
-    elif returned is not None and target in published:
-        status = "not_yet_published"
-        message = f"JCB USD lists {target}, but JPY current page is still {returned}"
-    elif failure is not None and target in published:
+    elif target in published:
         failure.context = {**context, "availability": "download_failed"}
         raise failure
     else:
         error = PublicationUnknownError(
             f"JCB publication for {target} cannot be confirmed outside index window {first} through {last}")
         error.context = {**context, "availability": "unknown"}
-        error.records = list(failure.records if failure else []) + _records(index)
+        error.records = list(failure.records) + _records(index)
         raise error
     context["availability"] = status
-    records = (_records(response) if response is not None else list(failure.records if failure else []))
-    raise JcbUnavailableError(status, message, context, response or index,
-                              records + _records(index))
+    raise JcbUnavailableError(status, message, context, index,
+                              list(failure.records) + _records(index))
 
 
 def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
@@ -774,6 +783,7 @@ def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
     endpoint, headers = _settings("jcb", config)
     headers["Accept"] = "text/html"
     sources: dict[str, tuple[str, JsonResponse]] = {}
+    jpy_unavailable = {}
     jpy_rows = None
     usd_rows = None
     for currency in ("jpy", "usd"):
@@ -789,24 +799,39 @@ def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
         parsed = _jcb_jpy_rows(rows) if currency == "jpy" else _jcb_usd_rows(rows)
         returned = _jcb_rate_date(text, filename)
         if returned != target:
-            if currency == "jpy":
-                _jcb_unavailable(target, filename, endpoint, headers, client,
-                                 response=response, returned=returned)
-            raise DateMismatchError(
-                f"JCB {filename}: requested {target}, response date={returned}")
+            if currency == "usd":
+                raise DateMismatchError(
+                    f"JCB {filename}: requested {target}, response date={returned}")
+            jpy_unavailable = {
+                "availability": ("historical_source_unavailable" if returned > target
+                                 else "not_yet_published"),
+                "requested_date": target.isoformat(), "response_date": returned.isoformat(),
+                "source_url": response.url,
+            }
+            continue
         sources[currency] = filename, response
         if currency == "jpy":
             jpy_rows = parsed
         else:
             usd_rows = parsed
-    assert jpy_rows is not None and usd_rows is not None
+    assert usd_rows is not None
     fetched_at = utc_now()
-    filename, response = sources["jpy"]
-    results = [_jcb_result(
-        "jcb-jpy", target, jpy_rows, response, filename, fetched_at,
-        rate_formula="published JPY per one transCur unit",
-        rate_data_policy="displayed decimal preserved exactly; no reciprocal or rounding",
-    )]
+    if jpy_rows is None:
+        filename, response = sources["usd"]
+        jpy_rows = _jcb_reconstruct_jpy(usd_rows)
+        policy = {
+            "derived": True, "original_source": jpy_unavailable,
+            "rate_formula": "floor(1000 * JPY Sell / transCur Buy) / 1000",
+            "rate_data_policy": "same-day USD cross rate truncated to 3 decimal places using exact fractions",
+        }
+    else:
+        filename, response = sources["jpy"]
+        policy = {
+            "derived": False,
+            "rate_formula": "published JPY per one transCur unit",
+            "rate_data_policy": "displayed decimal preserved exactly; no reciprocal or rounding",
+        }
+    results = [_jcb_result("jcb-jpy", target, jpy_rows, response, filename, fetched_at, **policy)]
     filename, response = sources["usd"]
     for position, (_, label) in enumerate(_JCB_USD_COLUMNS):
         rows = []

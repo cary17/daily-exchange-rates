@@ -28,10 +28,11 @@ Visa、Mastercard、银联、JCB 官方参考汇率数据。最新数据和未�
 
 - `transCur`：交易币种；`baseCur`：换算后的币种。
 - `rateData`：**1 单位 `transCur` 可兑换的 `baseCur` 数量**；换算金额为交易金额乘以该值。
-- JCB JPY 直接保留官方显示值，`baseCur=JPY`。JCB USD 三份文件分别采用原表 Buy、Mid、Sell 列的倒数，`baseCur=USD`，由使用者选择参考口径。
+- JCB JPY 的 `baseCur=JPY`：优先保留同日 JPY 页面显示值；页面日期不匹配时，用同日 USD 原表的 `JPY Sell / 交易币种 Buy` 重建 15 个币种，精确截断至小数点后 **3 位**。元数据 `derived` 区分直接采集与重建，`rate_formula`、`source_urls` 记录公式和来源。
+- JCB USD 三份文件分别采用原表 Buy、Mid、Sell 列的倒数，`baseCur=USD`，由使用者选择参考口径。
 - JCB USD 的 `rateData` 最多保留 **100 位有效数字，向零截断，不四舍五入**；循环小数仍是近似值。每行另有整数 `rateNumerator`、`rateDenominator`，两者之比为原始报价倒数的精确约分值。需要精确值时请使用分子／分母，并采用任意精度整数、十进制或分数运算，避免普通浮点解析丢失精度。
 
-汇率日期及来源见对应元数据，不要把最新文件的下载日期当作汇率日期。文件不保证覆盖每个日历日，缺失不表示汇率为零，也不应自动沿用前一日数据。JCB 存在非发布日，JPY 历史数据也可能无法从当前页补回。数据用于参考，实际账单可能因处理日期、发卡行手续费等因素而不同。
+汇率日期及来源见对应元数据，不要把最新文件的下载日期当作汇率日期。文件不保证覆盖每个日历日，缺失不表示汇率为零，也不应自动沿用前一日数据。JCB 存在非发布日。数据用于参考，实际账单可能因处理日期、发卡行手续费等因素而不同。
 
 ## 读取与下载
 
@@ -53,7 +54,7 @@ curl -fL https://raw.githubusercontent.com/cary17/daily-exchange-rates/data/late
 | 每日元数据 | `metadata/history/YYYY/MM/name/YYYY-MM-DD.json` |
 | 最近三个月的月包 | `history/YYYY/MM/YYYY-MM.tar.gz`，大包可能分卷 |
 
-Visa、Mastercard 的原始响应按索引中的 `parts_directory` 和 `parts` 读取分片，索引包含大小和 SHA256。银联、JCB 的原始响应为单文件 JSON 封装；JCB USD 三份原始记录均保留完整 USD 页面及其三列数据，JPY 原始记录保留 JPY 页面。
+Visa、Mastercard 的原始响应按索引中的 `parts_directory` 和 `parts` 读取分片，索引包含大小和 SHA256。银联、JCB 的原始响应为单文件 JSON 封装；JCB USD 三份原始记录均保留完整 USD 页面及其三列数据；JPY 直接采集时保留 JPY 页面，重建时保留用于计算的 USD 页面。
 
 单文件超过 100 MiB 时使用 Git LFS，原始链接可能返回指针而非文件内容。需要完整数据副本时，先安装 Git LFS，再克隆 `data` 分支：
 

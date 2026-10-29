@@ -214,6 +214,8 @@ class Diagnostics:
                 recovery = day["metadata"].get("recovery", {})
                 lines.append(f"- {day['target']} {day['provider']}: saved {day['pair_count']} pairs; "
                              f"recovery: {short_text(recovery)}")
+                if day["metadata"].get("derived"):
+                    lines.append(f"Derived rate: {short_text(day['metadata']['rate_formula'])}")
                 if day.get("diagnostic_error"):
                     lines.append(f"Diagnostics unavailable: {day['diagnostic_error']}")
             else:
