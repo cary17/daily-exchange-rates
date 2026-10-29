@@ -131,7 +131,7 @@ class HttpClient:
             session.close()
         self._edge_sessions.clear()
 
-    def edge_candidates(self, url: str) -> EdgeResolution | None:
+    def edge_candidates(self, url: str, *, refresh: bool = False) -> EdgeResolution | None:
         if not self.edge_dns_servers:
             return None
         self._check_cancelled()
@@ -140,7 +140,8 @@ class HttpClient:
             raise ValueError("Regional DNS requires a URL hostname")
         with self._edge_lock:
             resolution = self._edge_cache.get(host)
-            if resolution is None or resolution.expires_at <= time.time():
+            # ponytail: run-scoped cache; refresh expired answers only after all edges fail.
+            if resolution is None or (refresh and resolution.expires_at <= time.time()):
                 resolution = resolve_edges(host, self.edge_dns_servers)
                 self._edge_cache[host] = resolution
                 self.records.append({"fetched_at_utc": utc_now(), "dns": {
@@ -157,6 +158,14 @@ class HttpClient:
         if preferred in addresses:
             addresses = (preferred,) + tuple(ip for ip in addresses if ip != preferred)
         return EdgeResolution(addresses, resolution.queries, resolution.expires_at)
+
+    def edge_rounds(self, url: str):
+        resolution = self.edge_candidates(url)
+        if resolution is None:
+            return
+        yield resolution
+        if resolution.expires_at <= time.time():
+            yield self.edge_candidates(url, refresh=True)
 
     def _get_session(self, url: str = "", edge_ip: str | None = None) -> requests.Session:
         if edge_ip is None:
@@ -210,8 +219,9 @@ class HttpClient:
 
     def request_json(self, url: str, params: Mapping[str, Any] | None = None,
                      headers: Mapping[str, str] | None = None, *,
-                     edge_ip: str | None = None) -> JsonResponse:
-        return self._request(url, params, headers, decode_json=True, edge_ip=edge_ip)
+                     edge_ip: str | None = None, edge_fallback: bool = True) -> JsonResponse:
+        return self._request(url, params, headers, decode_json=True, edge_ip=edge_ip,
+                             edge_fallback=edge_fallback)
 
     def request_text(self, url: str, params: Mapping[str, Any] | None = None,
                      headers: Mapping[str, str] | None = None) -> JsonResponse:
@@ -219,31 +229,37 @@ class HttpClient:
 
     def _request(self, url: str, params: Mapping[str, Any] | None,
                  headers: Mapping[str, str] | None, *, decode_json: bool,
-                 edge_ip: str | None = None) -> JsonResponse:
-        if edge_ip is not None or not self.edge_dns_servers:
+                 edge_ip: str | None = None, edge_fallback: bool = True) -> JsonResponse:
+        if edge_ip is not None or not self.edge_dns_servers or not edge_fallback:
             return self._request_at(url, params, headers, decode_json=decode_json,
                                     edge_ip=edge_ip)
         start = len(self.records)
-        resolution = self.edge_candidates(url)
-        records = list(self.records[start:])
-        if not resolution.addresses:
-            raise HttpError(f"Regional DNS returned no public edge addresses for {url}",
-                            records=records)
-        for address in resolution.addresses:
-            try:
-                result = self._request_at(url, params, headers, decode_json=decode_json,
-                                          edge_ip=address)
-            except HttpError as exc:
-                records.extend(exc.records)
-                exc.records = records
-                if (address == resolution.addresses[-1]
-                        or (exc.status_code is not None
-                            and not 500 <= exc.status_code < 600)):
-                    raise
-            else:
-                result.records = records + result.records
-                return result
-        raise AssertionError("unreachable edge state")
+        try:
+            return self._request_at(url, params, headers, decode_json=decode_json,
+                                    edge_ip=None)
+        except HttpError as exc:
+            if (exc.status_code is not None and not 500 <= exc.status_code < 600
+                    and not isinstance(exc, ResponseDecodeError)):
+                raise
+            error = exc
+        for resolution in self.edge_rounds(url):
+            if not resolution.addresses:
+                error = HttpError(f"Regional DNS returned no public edge addresses for {url}")
+            for address in resolution.addresses:
+                try:
+                    result = self._request_at(url, params, headers, decode_json=decode_json,
+                                              edge_ip=address)
+                except HttpError as exc:
+                    exc.records = list(self.records[start:])
+                    if (exc.status_code is not None and not 500 <= exc.status_code < 600
+                            and not isinstance(exc, ResponseDecodeError)):
+                        raise
+                    error = exc
+                else:
+                    result.records = list(self.records[start:])
+                    return result
+        error.records = list(self.records[start:])
+        raise error
 
     def _request_at(self, url: str, params: Mapping[str, Any] | None,
                     headers: Mapping[str, str] | None, *, decode_json: bool,

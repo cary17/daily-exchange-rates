@@ -118,7 +118,7 @@ class JcbTests(unittest.TestCase):
         feeds = rows_by_provider(results)
         for provider, feed in feeds.items():
             with self.subTest(provider=provider):
-                self.assertEqual(set(feed), {"curDate", "exchangeRateJson"})
+                self.assertEqual(list(feed), ["curDate", "exchangeRateJson"])
                 self.assertEqual(feed["curDate"], "2026-10-29")
         jpy = feeds["jcb-jpy"]["exchangeRateJson"]
         self.assertEqual([row["transCur"] for row in jpy], ["USD", "EUR", "KRW"])

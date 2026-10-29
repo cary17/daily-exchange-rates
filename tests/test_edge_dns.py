@@ -90,7 +90,7 @@ class EdgeDnsTests(unittest.TestCase):
         self.assertTrue(healthy.complete)
         self.assertAlmostEqual(healthy.expires_at, time.time() + 20, delta=1)
 
-    def test_dns_cache_shared_by_forks_and_refreshed_after_ttl(self):
+    def test_dns_cache_shared_by_forks_ignores_ttl_until_explicit_refresh(self):
         first, second = pool(), pool((IPS[-1],))
         first.expires_at = 20
         second.expires_at = 40
@@ -99,10 +99,12 @@ class EdgeDnsTests(unittest.TestCase):
             parent = HttpClient(edge_dns_servers=SERVERS)
             child = parent.fork(Event())
             self.assertEqual(parent.edge_candidates(URL).addresses, IPS)
-            self.assertEqual(child.edge_candidates(URL).addresses, IPS)
+            self.assertEqual(child.edge_candidates(URL, refresh=True).addresses, IPS)
             self.assertEqual(resolve.call_count, 1)
             clock.return_value = 21
-            self.assertEqual(child.edge_candidates(URL).addresses, (IPS[-1],))
+            self.assertEqual(child.edge_candidates(URL).addresses, IPS)
+            self.assertEqual(resolve.call_count, 1)
+            self.assertEqual(child.edge_candidates(URL, refresh=True).addresses, (IPS[-1],))
             self.assertEqual(parent.edge_candidates(URL).addresses, (IPS[-1],))
             self.assertEqual(resolve.call_count, 2)
             self.assertIs(parent._gate, child._gate)
@@ -110,7 +112,8 @@ class EdgeDnsTests(unittest.TestCase):
 
 
 class EdgeRecoveryTests(unittest.TestCase):
-    def collect(self, states, *, sharded=False, complete=True, addresses=IPS):
+    def collect(self, states, *, sharded=False, complete=True, addresses=IPS,
+                resolutions=None):
         calls, sessions, options = [], [], []
         fixture = FakeClient("mastercard")
         catalog = CurrencyCatalog(("USD",), ("CNY",))
@@ -124,7 +127,7 @@ class EdgeRecoveryTests(unittest.TestCase):
 
             def get(url, params=None, headers=None, **kwargs):
                 calls.append(ip)
-                state = states[ip]
+                state = states.get(ip, "old")
                 if state == "transport":
                     raise requests.RequestsError("edge unavailable")
                 if state == "403":
@@ -142,16 +145,17 @@ class EdgeRecoveryTests(unittest.TestCase):
             session.get.side_effect = get
             return session
 
-        with patch("exchange_rates.http.resolve_edges", return_value=pool(addresses, complete)), \
+        with patch("exchange_rates.http.resolve_edges", return_value=pool(addresses, complete),
+                   side_effect=resolutions), \
              patch("exchange_rates.http.requests.Session", side_effect=make_session), \
              patch("exchange_rates.providers.discover_currencies", return_value=catalog):
             with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS,
                             forbidden_threshold=1) as client:
                 try:
                     if sharded:
-                        result = fetch_shard("mastercard", DAY, {"recovery_rounds": 0}, client, 0, 1)
+                        result = fetch_shard("mastercard", DAY, {"recovery_rounds": 1}, client, 0, 1)
                     else:
-                        result = fetch_day("mastercard", DAY, catalog, {"recovery_rounds": 0}, client)
+                        result = fetch_day("mastercard", DAY, catalog, {"recovery_rounds": 1}, client)
                 except (RecoveryError, AccessBlockedError) as exc:
                     result = exc
         self.assertTrue(all(session.close.called for session in sessions))
@@ -161,26 +165,127 @@ class EdgeRecoveryTests(unittest.TestCase):
                 self.assertEqual(option["curl_options"][CurlOpt.PROXY], "")
         return result, calls
 
+    def test_regional_recovery_waits_for_full_default_pass_and_resolves_lazily(self):
+        catalog = CurrencyCatalog(("USD",), ("CNY", "EUR", "JPY", "GBP"))
+        default_calls = [(None, code) for code in catalog.billing]
+        for sharded, rounds in ((False, 0), (False, 1), (True, 0), (True, 1)):
+            events = []
+            fixture = FakeClient("mastercard")
+
+            def make_session(**options):
+                session = Mock()
+                mapping = options.get("curl_options", {}).get(CurlOpt.RESOLVE)
+                ip = mapping[0].split(":443:", 1)[1] if mapping else None
+
+                def get(url, params=None, headers=None, **kwargs):
+                    home = params["cardholder_billing_currency"]
+                    events.append((ip, home))
+                    if ip is None and home == "EUR":
+                        return http_response(503, b"default unavailable")
+                    data = fixture.request_json(url, params, headers).data
+                    if ip is None and home == "CNY":
+                        data["data"]["exchange_date"] = "2026-03-26"
+                    if ip is not None:
+                        self.assertIn("_", params)
+                    result = http_response(body=json_bytes(data))
+                    result.primary_ip = ip
+                    return result
+
+                session.get.side_effect = get
+                return session
+
+            def resolve(*args):
+                self.assertEqual(events, default_calls)
+                events.append(("dns", None))
+                return pool(IPS[:1])
+
+            with self.subTest(sharded=sharded, rounds=rounds), \
+                 patch("exchange_rates.http.resolve_edges", side_effect=resolve) as dns, \
+                 patch("exchange_rates.http.requests.Session", side_effect=make_session), \
+                 patch("exchange_rates.providers.discover_currencies", return_value=catalog):
+                with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS) as client:
+                    try:
+                        if sharded:
+                            result = fetch_shard("mastercard", DAY, {"recovery_rounds": rounds}, client, 0, 1)
+                        else:
+                            result = fetch_day("mastercard", DAY, catalog, {"recovery_rounds": rounds}, client)
+                    except RecoveryError as exc:
+                        result = exc
+                if rounds:
+                    self.assertNotIsInstance(result, Exception)
+                    self.assertEqual(events, default_calls + [("dns", None), (IPS[0], "CNY"), (IPS[0], "EUR")])
+                    self.assertEqual(dns.call_count, 1)
+                    recovery = result["recovery"] if sharded else result.metadata["recovery"]
+                    self.assertEqual(recovery, {"initial_failed": 2, "rounds": 1, "repaired": 2})
+                    raw = result["raw"] if sharded else simplejson.loads(result.raw_parts["shard-01.json"])
+                    self.assertEqual([attempt["round"] for attempt in raw["attempts"]], [0, 0, 0, 0, 1, 1])
+                else:
+                    self.assertIsInstance(result, RecoveryError)
+                    self.assertEqual(events, default_calls)
+                    dns.assert_not_called()
+
+    def test_default_success_skips_regional_dns_in_both_collection_paths(self):
+        for sharded in (False, True):
+            with self.subTest(sharded=sharded):
+                result, calls = self.collect({None: "fresh"}, sharded=sharded)
+                self.assertNotIsInstance(result, Exception)
+                self.assertEqual(calls, [None])
+                raw = result["raw"] if sharded else simplejson.loads(result.raw_parts["shard-01.json"])
+                self.assertEqual(len(raw["requests"]), 1)
+                self.assertNotIn("edge_ip", raw["requests"][0]["request"])
+        with patch("exchange_rates.http.resolve_edges") as resolve, \
+             patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.return_value = http_response(body=json_bytes(mc_data(("USD", "CNY"))))
+            with HttpClient(interval=0, edge_dns_servers=SERVERS) as client:
+                self.assertEqual(discover_currencies("mastercard", {}, client).pair_count, 2)
+            resolve.assert_not_called()
+            factory.assert_called_once_with(impersonate="chrome")
+
+    def test_expired_pool_refreshes_only_after_every_regional_pair_request_fails(self):
+        for sharded in (False, True):
+            with self.subTest(sharded=sharded):
+                expired = pool(IPS[:2])
+                expired.expires_at = time.time() - 1
+                result, calls = self.collect(
+                    dict(zip(IPS, ("old", "old", "fresh"))), sharded=sharded,
+                    resolutions=[expired, pool(IPS[2:])])
+                self.assertNotIsInstance(result, Exception)
+                self.assertEqual(calls, [None, *IPS])
+                raw = result["raw"] if sharded else simplejson.loads(result.raw_parts["shard-01.json"])
+                self.assertEqual(len([r for r in raw["requests"] if "dns" in r]), 2)
+                exchanges = [r for r in raw["requests"] if "response" in r]
+                self.assertEqual([r["request"].get("edge_ip") for r in exchanges], [None, *IPS])
+
+    def test_expired_pool_is_not_refreshed_when_a_regional_pair_request_succeeds(self):
+        expired = pool()
+        expired.expires_at = time.time() - 1
+        result, calls = self.collect(dict(zip(IPS, ("old", "old", "fresh"))),
+                                     resolutions=[expired])
+        self.assertNotIsInstance(result, Exception)
+        self.assertEqual(calls, [None, *IPS])
+        raw = simplejson.loads(result.raw_parts["shard-01.json"])
+        self.assertEqual(len([r for r in raw["requests"] if "dns" in r]), 1)
+
     def test_last_edge_repairs_stale_pair_in_both_collection_paths(self):
         for sharded in (False, True):
             with self.subTest(sharded=sharded):
                 result, calls = self.collect(dict(zip(IPS, ("old", "old", "fresh"))), sharded=sharded)
                 self.assertNotIsInstance(result, Exception)
-                self.assertEqual(calls, list(IPS))
+                self.assertEqual(calls, [None, *IPS])
                 raw = result["raw"] if sharded else simplejson.loads(result.raw_parts["shard-01.json"])
                 records = [r for r in raw["requests"] if "response" in r]
-                self.assertEqual([r["request"]["edge_ip"] for r in records], list(IPS))
-                self.assertEqual([r["response"]["primary_ip"] for r in records], list(IPS))
+                self.assertEqual([r["request"].get("edge_ip") for r in records], [None, *IPS])
+                self.assertEqual([r["response"].get("primary_ip") for r in records], [None, *IPS])
                 self.assertIn("2026-03-26", records[0]["response"]["body_text"])
                 self.assertNotIn("2026-03-26", records[-1]["response"]["body_text"])
         result, calls = self.collect({ip: "fresh" for ip in IPS})
         self.assertNotIsInstance(result, Exception)
-        self.assertEqual(calls, [IPS[0]])
+        self.assertEqual(calls, [None, IPS[0]])
 
     def test_all_old_requires_every_edge_and_complete_dns(self):
         result, calls = self.collect({ip: "old" for ip in IPS})
         self.assertIsInstance(result, RecoveryError)
-        self.assertEqual(calls, list(IPS))
+        self.assertEqual(calls, [None, *IPS])
         self.assertIn("all 3 resolved edges", str(result))
         self.assertIn("DateMismatchError", str(result))
         for complete, states in (
@@ -191,33 +296,39 @@ class EdgeRecoveryTests(unittest.TestCase):
             with self.subTest(complete=complete, states=states):
                 result, calls = self.collect(states, complete=complete)
                 self.assertIsInstance(result, RecoveryError)
-                self.assertEqual(calls, list(IPS))
+                self.assertEqual(calls, [None, *IPS])
                 self.assertIn("edge verification incomplete", str(result))
                 self.assertNotIn("all 3 resolved edges", str(result))
 
-    def test_no_public_answers_never_falls_back_to_system_dns(self):
+    def test_no_public_answers_retains_default_path_failure(self):
         result, calls = self.collect({}, addresses=(), complete=False)
         self.assertIsInstance(result, RecoveryError)
-        self.assertEqual(calls, [])
+        self.assertEqual(calls, [None])
         self.assertIn("no public edge addresses", str(result))
 
     def test_403_stops_without_rotating_to_another_edge(self):
         result, calls = self.collect(dict(zip(IPS, ("old", "403", "fresh"))))
         self.assertIsInstance(result, AccessBlockedError)
-        self.assertEqual(calls, list(IPS[:2]))
+        self.assertEqual(calls, [None, *IPS[:2]])
+        result, calls = self.collect({None: "403", **{ip: "fresh" for ip in IPS}})
+        self.assertIsInstance(result, AccessBlockedError)
+        self.assertEqual(calls, [None])
 
     def test_catalog_transport_fallback_preserves_dns_and_http_evidence(self):
         good = http_response()
         good.primary_ip = IPS[1]
         with patch("exchange_rates.http.resolve_edges", return_value=pool()), \
              patch("exchange_rates.http.requests.Session") as factory:
-            factory.return_value.get.side_effect = [requests.RequestsError("unreachable"), good]
+            factory.return_value.get.side_effect = [requests.RequestsError("default unavailable"),
+                                                    requests.RequestsError("edge unavailable"), good]
             with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS) as client:
                 result = client.request_json(URL)
-                self.assertEqual(result.records[0]["dns"]["addresses"], list(IPS))
-                self.assertEqual(result.records[1]["request"]["edge_ip"], IPS[0])
-                self.assertIn("transport_error", result.records[1])
-                self.assertEqual(result.records[2]["response"]["primary_ip"], IPS[1])
+                self.assertIn("transport_error", result.records[0])
+                self.assertNotIn("edge_ip", result.records[0]["request"])
+                self.assertEqual(result.records[1]["dns"]["addresses"], list(IPS))
+                self.assertEqual(result.records[2]["request"]["edge_ip"], IPS[0])
+                self.assertIn("transport_error", result.records[2])
+                self.assertEqual(result.records[3]["response"]["primary_ip"], IPS[1])
                 good.primary_ip = IPS[0]
                 factory.return_value.get.side_effect = None
                 factory.return_value.get.return_value = good
@@ -233,22 +344,66 @@ class EdgeRecoveryTests(unittest.TestCase):
                  patch("exchange_rates.http.requests.Session") as factory, \
                  patch("exchange_rates.http.time.sleep") as sleep:
                 factory.return_value.get.side_effect = [
-                    http_response(status, b"unavailable"),
-                    http_response(status, b"still unavailable"), good,
+                    http_response(status, b"default unavailable"),
+                    http_response(status, b"default still unavailable"),
+                    http_response(status, b"edge unavailable"),
+                    http_response(status, b"edge still unavailable"), good,
                 ]
                 with HttpClient(retries=1, interval=0, edge_dns_servers=SERVERS) as client:
                     catalog = discover_currencies("mastercard", {}, client)
                 self.assertEqual(catalog.transaction, ("CNY", "USD"))
                 records = catalog.responses[0].records
-                self.assertEqual(records[0]["dns"]["addresses"], list(IPS[:2]))
+                self.assertEqual(records[2]["dns"]["addresses"], list(IPS[:2]))
                 exchanges = [r for r in records if "response" in r]
                 self.assertEqual([r["response"]["status_code"] for r in exchanges],
-                                 [status, status, 200])
-                self.assertEqual([r["request"]["edge_ip"] for r in exchanges],
-                                 [IPS[0], IPS[0], IPS[1]])
-                self.assertEqual([r["attempt"] for r in exchanges], [1, 2, 1])
-                self.assertEqual(factory.return_value.get.call_count, 3)
-                sleep.assert_called_once_with(0.5)
+                                 [status, status, status, status, 200])
+                self.assertEqual([r["request"].get("edge_ip") for r in exchanges],
+                                 [None, None, IPS[0], IPS[0], IPS[1]])
+                self.assertEqual([r["attempt"] for r in exchanges], [1, 2, 1, 2, 1])
+                self.assertEqual(factory.return_value.get.call_count, 5)
+                self.assertEqual([call.args[0] for call in sleep.call_args_list], [0.5, 0.5])
+
+    def test_catalog_invalid_json_falls_back_without_losing_evidence(self):
+        good = http_response(body=json_bytes(mc_data(("USD", "CNY"))))
+        good.primary_ip = IPS[1]
+        with patch("exchange_rates.http.resolve_edges", return_value=pool()), \
+             patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = [http_response(body=b"not json"),
+                                                    http_response(body=b"bad edge json"), good]
+            with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS) as client:
+                records = discover_currencies("mastercard", {}, client).responses[0].records
+            exchanges = [r for r in records if "response" in r]
+            self.assertEqual([r["request"].get("edge_ip") for r in exchanges],
+                             [None, IPS[0], IPS[1]])
+            self.assertEqual([r["response"]["body_text"] for r in exchanges[:2]],
+                             ["not json", "bad edge json"])
+
+    def test_catalog_refreshes_failed_pool_once_only_if_ttl_expired(self):
+        for expired, recovered in ((False, False), (True, False), (True, True)):
+            first, second = pool(IPS[:2]), pool(IPS[2:])
+            first.expires_at = time.time() + (-60 if expired else 60)
+            second.expires_at = time.time() - 1
+            good = http_response(body=json_bytes(mc_data(("USD", "CNY"))))
+            good.primary_ip = IPS[2]
+            with self.subTest(expired=expired, recovered=recovered), \
+                 patch("exchange_rates.http.resolve_edges", side_effect=[first, second]) as resolve, \
+                 patch("exchange_rates.http.requests.Session") as factory:
+                factory.return_value.get.side_effect = [
+                    requests.RequestsError("default unavailable"),
+                    requests.RequestsError("first edge unavailable"),
+                    requests.RequestsError("second edge unavailable"),
+                    good if recovered else requests.RequestsError("refreshed edge unavailable"),
+                ]
+                with HttpClient(retries=0, interval=0, edge_dns_servers=SERVERS) as client:
+                    if recovered:
+                        catalog = discover_currencies("mastercard", {}, client)
+                        records = catalog.responses[0].records
+                        self.assertEqual(len([r for r in records if "dns" in r]), 2)
+                    else:
+                        with self.assertRaises(HttpError):
+                            discover_currencies("mastercard", {}, client)
+                self.assertEqual(resolve.call_count, 2 if expired else 1)
+                self.assertEqual(factory.return_value.get.call_count, 4 if expired else 3)
 
     def test_catalog_4xx_does_not_rotate_to_another_edge(self):
         for status in (400, 401, 403, 404, 429):

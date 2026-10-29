@@ -180,11 +180,12 @@ def _records(response: JsonResponse) -> list[dict[str, Any]]:
     return response.records or [response.as_record()]
 
 
-def _result(provider: str, target: date, normalized: bytes,
+def _result(provider: str, target: date, data: Mapping[str, Any],
             responses: list[JsonResponse], pair_count: int,
             currencies: Sequence[str] | None = None, *,
             catalog: CurrencyCatalog | None = None,
             raw_parts: dict[str, bytes] | None = None) -> DayResult:
+    normalized = json_bytes({**data, "curDate": target.isoformat()})
     metadata: dict[str, Any] = {
         "provider": provider, "requested_date": target.isoformat(),
         "fetched_at_utc": utc_now(), "pair_count": pair_count,
@@ -530,7 +531,8 @@ def merge_shards(provider: str, target: date,
         "catalog_requests": catalog_requests,
     })
     return DayResult(provider, target,
-                     json_bytes({"exchangeRateJson": rows}), raw, metadata, raw_parts)
+                     json_bytes({"curDate": target.isoformat(), "exchangeRateJson": rows}),
+                     raw, metadata, raw_parts)
 
 
 def _unionpay(target: date, currencies: Sequence[str],
@@ -572,7 +574,7 @@ def _unionpay(target: date, currencies: Sequence[str],
         _number(row.get("rateData"), f"UnionPay row {index} rateData",
                 allow_string=False)
         _check_dates("unionpay", target, row)
-    return _result("unionpay", target, response.body, [response], len(rows))
+    return _result("unionpay", target, data, [response], len(rows))
 
 
 class _JcbTables(HTMLParser):
@@ -874,27 +876,29 @@ def _query_pair(provider: str, target: date, spend: str, home: str,
                   "cardholder_billing_currency": home, "bank_fee": "0", "transaction_amount": "1000"}
         if refresh:
             params["_"] = str(time.time_ns())
-    resolution = client.edge_candidates(endpoint) if provider == "mastercard" else None
+    resolution = client.edge_candidates(endpoint) if provider == "mastercard" and refresh else None
     if resolution is None:
-        response = client.request_json(endpoint, params=params, headers=headers)
+        response = client.request_json(endpoint, params=params, headers=headers,
+                                       edge_fallback=provider != "mastercard")
         return _pair_response(provider, target, spend, home, response)
+    for resolution in client.edge_rounds(endpoint):
+        stale, failures = [], {}
+        for address in resolution.addresses:
+            try:
+                response = client.request_json(endpoint, params=params, headers=headers,
+                                               edge_ip=address)
+                return _pair_response(provider, target, spend, home, response)
+            except DateMismatchError as exc:
+                stale.append(address)
+                failures[address] = f"DateMismatchError: {exc}"
+            except AccessBlockedError:
+                raise
+            except (HttpError, ProviderError) as exc:
+                if isinstance(exc, HttpError) and exc.status_code == 403:
+                    raise
+                failures[address] = f"{type(exc).__name__}: {exc}"
     if not resolution.addresses:
         raise ProviderError("Mastercard regional DNS returned no public edge addresses")
-    stale, failures = [], {}
-    for address in resolution.addresses:
-        try:
-            response = client.request_json(endpoint, params=params, headers=headers,
-                                           edge_ip=address)
-            return _pair_response(provider, target, spend, home, response)
-        except DateMismatchError as exc:
-            stale.append(address)
-            failures[address] = f"DateMismatchError: {exc}"
-        except AccessBlockedError:
-            raise
-        except (HttpError, ProviderError) as exc:
-            if isinstance(exc, HttpError) and exc.status_code == 403:
-                raise
-            failures[address] = f"{type(exc).__name__}: {exc}"
     details = "; ".join(f"{address}: {error}" for address, error in failures.items())
     if resolution.complete and len(stale) == len(resolution.addresses):
         raise DateMismatchError(
@@ -1039,7 +1043,7 @@ def _card(provider: str, target: date, currencies: CurrencyCatalog | Sequence[st
         raise RecoveryError(provider, missing, errors, parts, recovery)
     rows = [successful[pair][0] for pair in expected]
     responses = [successful[pair][1] for pair in expected]
-    result = _result(provider, target, json_bytes({"exchangeRateJson": rows}), responses,
+    result = _result(provider, target, {"exchangeRateJson": rows}, responses,
                      len(rows), catalog=catalog, raw_parts=parts)
     result.metadata["recovery"] = recovery
     return result

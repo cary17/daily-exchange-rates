@@ -305,6 +305,9 @@ class CliTests(unittest.TestCase):
             self.assertEqual(status, 0)
             saved = json.loads(
                 (data_dir / "history/2026/10/mastercard/2026-10-03.json").read_bytes())
+            self.assertEqual(list(saved), ["curDate", "exchangeRateJson"])
+            self.assertEqual(saved["curDate"], "2026-10-03")
+            self.assertEqual(json.loads((data_dir / "latest/mastercard.json").read_bytes()), saved)
             self.assertEqual([(row["transCur"], row["baseCur"])
                               for row in saved["exchangeRateJson"]],
                              [("USD", "CNY"), ("CNY", "USD")])

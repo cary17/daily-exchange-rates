@@ -20,12 +20,14 @@ Visa、Mastercard、银联、JCB 官方参考汇率数据。最新数据和未�
 
 ```json
 {
+  "curDate": "2026-10-29",
   "exchangeRateJson": [
     {"transCur": "USD", "baseCur": "CNY", "rateData": 7.1}
   ]
 }
 ```
 
+- `curDate`：汇率日期（`YYYY-MM-DD`），位于文件首位。
 - `transCur`：交易币种；`baseCur`：换算后的币种。
 - `rateData`：**1 单位 `transCur` 可兑换的 `baseCur` 数量**；换算金额为交易金额乘以该值。
 - JCB JPY 的 `baseCur=JPY`：优先保留同日 JPY 页面显示值；页面日期不匹配时，用同日 USD 原表的 `JPY Sell / 交易币种 Buy` 重建 15 个币种，精确截断至小数点后 **3 位**。元数据 `derived` 区分直接采集与重建，`rate_formula`、`source_urls` 记录公式和来源。

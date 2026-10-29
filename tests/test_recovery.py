@@ -50,8 +50,8 @@ class RecoveryTests(unittest.TestCase):
                 original = client.request_json
                 fresh_keys = set()
 
-                def cached(url, params=None, headers=None):
-                    result = original(url, params, headers)
+                def cached(url, params=None, headers=None, **kwargs):
+                    result = original(url, params, headers, **kwargs)
                     if call_pair("mastercard", params) == stale_pair:
                         key = params.get("_")
                         if key is not None:
@@ -186,7 +186,7 @@ class RecoveryTests(unittest.TestCase):
         client = Mock(records=[])
         client.request_json.side_effect = [response(wrong), response(good)]
         result = fetch_day("unionpay", DAY, (), {}, client)
-        self.assertEqual(result.normalized, json_bytes(good))
+        self.assertEqual(result.normalized, json_bytes({**good, "curDate": DAY.isoformat()}))
         self.assertEqual(client.request_json.call_count, 2)
         self.assertEqual(len(simplejson.loads(result.raw)["requests"]), 2)
         self.assertEqual(result.metadata["recovery"],

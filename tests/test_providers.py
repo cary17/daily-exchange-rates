@@ -53,7 +53,7 @@ class FakeClient:
     def edge_candidates(self, url):
         return None
 
-    def request_json(self, url, params=None, headers=None):
+    def request_json(self, url, params=None, headers=None, *, edge_fallback=True):
         with self.lock:
             self.calls.append((url, dict(params or {}), dict(headers or {})))
             call_index = len(self.calls)
@@ -104,6 +104,7 @@ class FakeFork:
     def request_json(self, *args, **kwargs):
         if self.cancel_event is not None and self.cancel_event.is_set():
             raise CancelledError()
+        kwargs.pop("edge_fallback", None)
         result = self.owner.request_json(*args, **kwargs)
         self.records.extend(result.records or [result.as_record()])
         return result
@@ -130,7 +131,9 @@ class ProviderTests(unittest.TestCase):
 
     def test_decimal_json_is_number_and_exact(self):
         number = Decimal("0.123456789012345678901234567890123456789")
-        encoded = json_bytes({"rate": number, "label": "人民币"})
+        encoded = json_bytes({"rate": number, "label": "人民币", "aaa": 1,
+                              "curDate": DAY.isoformat()})
+        self.assertEqual(list(simplejson.loads(encoded)), ["curDate", "aaa", "label", "rate"])
         self.assertIn(str(number).encode(), encoded)
         self.assertNotIn(('"' + str(number) + '"').encode(), encoded)
         self.assertIn("人民币".encode(), encoded)
@@ -144,7 +147,8 @@ class ProviderTests(unittest.TestCase):
                 result = fetch_day(provider, DAY, CURRENCIES, {}, client)
                 self.assertIsInstance(result, DayResult)
                 data = simplejson.loads(result.normalized, use_decimal=True)
-                self.assertEqual(set(data), {"exchangeRateJson"})
+                self.assertEqual(list(data), ["curDate", "exchangeRateJson"])
+                self.assertEqual(data["curDate"], DAY.isoformat())
                 rows = data["exchangeRateJson"]
                 self.assertEqual(len(rows), 110)
                 self.assertEqual(len(client.calls), 110)
@@ -226,7 +230,7 @@ class ProviderTests(unittest.TestCase):
             result = fetch_day(provider, DAY, ("CNY", "USD"), {}, client)
             self.assertEqual(result.metadata["pair_count"], 2)
 
-    def test_unionpay_full_original_bytes_and_raw_envelope(self):
+    def test_unionpay_date_first_preserves_fields_precision_and_raw_bytes(self):
         body = (b'{ "date":"20260327", "extra":{"source":"complete"}, "exchangeRateJson":['
                 b'{"transCur":"USD","baseCur":"CNY","rateData":7.1234567890123456789012345678901},'
                 b'{"transCur":"EUR","baseCur":"JPY","rateData":161.987654321}]}\n')
@@ -234,7 +238,8 @@ class ProviderTests(unittest.TestCase):
         client = Mock()
         client.request_json.return_value = response(data, body=body)
         result = fetch_day("unionpay", DAY, ("USD", "CNY"), {}, client)
-        self.assertEqual(result.normalized, body)
+        self.assertEqual(result.normalized, json_bytes({**data, "curDate": DAY.isoformat()}))
+        self.assertEqual(next(iter(simplejson.loads(result.normalized))), "curDate")
         self.assertEqual(len(simplejson.loads(result.normalized)["exchangeRateJson"]), 2)
         client.request_json.assert_called_once_with(
             "https://www.unionpayintl.com/upload/jfimg/20260327.json",
@@ -289,10 +294,9 @@ class ProviderTests(unittest.TestCase):
             )
             result = fetch_day(provider, target, ("USD", "CNY"), {}, client)
             self.assertEqual(result.requested_date, target)
-            if provider != "unionpay":
-                self.assertEqual(set(simplejson.loads(result.normalized)), {"exchangeRateJson"})
-            else:
-                self.assertEqual(simplejson.loads(result.normalized)["curDate"], "2026-09-30")
+            normalized = simplejson.loads(result.normalized)
+            self.assertEqual(list(normalized), ["curDate", "exchangeRateJson"])
+            self.assertEqual(normalized["curDate"], "2026-09-30")
 
     def test_official_effective_dates_must_match(self):
         samples = (
