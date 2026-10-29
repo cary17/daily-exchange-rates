@@ -108,8 +108,9 @@ class Diagnostics:
         return self.directory / relative
 
     def failure(self, provider: str, target: str | None, error: BaseException,
-                records: list | None = None, *, fatal: bool = False) -> dict:
-        details = {"provider": provider, "target": target, **exception_details(error)}
+                records: list | None = None, *, fatal: bool = False,
+                status: str = "failed") -> dict:
+        details = {"provider": provider, "target": target, "status": status, **exception_details(error)}
         all_records = list(records or [])
         parts = {}
         current, seen = error, set()
@@ -155,7 +156,7 @@ class Diagnostics:
                 for pair, message in samples)
         elif not missing:
             brief += ": " + short_text(details["error"])
-        entry = {"provider": provider, "target": target, "status": "failed",
+        entry = {"provider": provider, "target": target, "status": status,
                  "type": type(error).__name__, "failed_pairs": len(missing) if not stopped else None,
                  "uncompleted_pairs": incomplete, "stopped_for_access_control": bool(stopped),
                  "http_counts": counts}
@@ -200,8 +201,12 @@ class Diagnostics:
     def finish(self, command: str, provider: str, status: int, note: str = "") -> str:
         saved = len({day["target"] for day in self.days if day["status"] == "saved"})
         failed = len({day["target"] for day in self.days if day["status"] == "failed"})
+        availability = Counter(day["status"] for day in self.days if day["status"] not in ("saved", "failed"))
+        skipped = sum(availability.values())
         lines = [f"Command: {command}; provider: {provider or 'none'}; exit: {status}",
-                 f"Saved dates: {saved}; failed dates: {failed}"]
+                 f"Saved dates: {saved}; failed dates: {failed}; skipped dates: {skipped}"]
+        if availability:
+            lines.append("Availability: " + ", ".join(f"{name}={count}" for name, count in sorted(availability.items())))
         if note:
             lines.append(short_text(note, 1200))
         for day in self.days:
@@ -216,7 +221,8 @@ class Diagnostics:
         if self.fatal:
             lines.append(f"Task failed: {self.fatal['brief']}")
         summary = {"command": command, "provider": provider, "exit_code": status,
-                   "saved_dates": saved, "failed_dates": failed, "days": self.days,
+                   "saved_dates": saved, "failed_dates": failed, "skipped_dates": skipped,
+                   "availability_counts": dict(availability), "days": self.days,
                    "fatal": self.fatal, "note": note}
         try:
             path = self._write(Path("summary.json"), json_bytes(summary))

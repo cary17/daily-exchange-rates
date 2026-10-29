@@ -16,7 +16,7 @@ from .diagnostics import Diagnostics
 from .http import HttpClient
 from .models import json_bytes
 from .providers import (
-    fetch_day, fetch_shard, merge_shards, prepare_catalog, provider_ids,
+    JcbUnavailableError, fetch_day, fetch_shard, merge_shards, prepare_catalog, provider_ids,
 )
 from .publishing import BranchPublisher, write_summary
 from .rate_control import finite_seconds
@@ -308,6 +308,10 @@ def execute(args: argparse.Namespace, diagnostics: Diagnostics | None = None) ->
             client.records.clear()
             try:
                 result = fetch_day(args.provider, target, catalog, config["providers"][args.provider], client)
+            except JcbUnavailableError as exc:
+                entry = diagnostics.failure(args.provider, target.isoformat(), exc, client.records,
+                                            status=exc.availability)
+                print(f"SKIPPED {target} ({exc.availability}): {entry['brief']}")
             except Exception as exc:
                 entry = diagnostics.failure(args.provider, target.isoformat(), exc, client.records)
                 failures.append(target.isoformat())

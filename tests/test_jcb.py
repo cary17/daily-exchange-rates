@@ -13,7 +13,7 @@ import simplejson
 from exchange_rates.http import HttpClient, HttpError, JsonResponse
 from exchange_rates.models import DayResult
 from exchange_rates.providers import (
-    DateMismatchError, NoDataError, ProviderError, fetch_day,
+    DateMismatchError, JcbUnavailableError, PublicationUnknownError, ProviderError, fetch_day,
 )
 
 DAY = date(2026, 10, 29)
@@ -175,7 +175,6 @@ class JcbTests(unittest.TestCase):
 
     def test_both_page_dates_must_match_requested_day(self):
         cases = (
-            (jpy_body(DAY - timedelta(days=1)), usd_body(), 1, DateMismatchError),
             (jpy_body(), usd_body(DAY - timedelta(days=1)), 2, DateMismatchError),
             (jpy_body(), usd_body().replace("10/29/2026", "02/30/2026"), 2, ProviderError),
             (jpy_body().replace("2026年10月29日", ""), usd_body(), 1, ProviderError),
@@ -195,13 +194,88 @@ class JcbTests(unittest.TestCase):
     def test_http_errors(self):
         client = Mock(spec=HttpClient)
         client.request_text.side_effect = HttpError("HTTP 404", 404)
-        with self.assertRaises(NoDataError):
+        with self.assertRaises(HttpError):
             fetch_day("jcb", DAY, None, {}, client)
         client.reset_mock()
         client.request_text.side_effect = HttpError("HTTP 503", 503)
         with self.assertRaises(HttpError):
             fetch_day("jcb", DAY, None, {}, client)
         self.assertEqual(client.request_text.call_count, 1)
+
+    def test_official_index_distinguishes_unpublished_and_historical_sources(self):
+        first, last = date(2026, 10, 23), date(2026, 10, 30)
+        cases = (
+            (date(2026, 10, 24), DAY, (first, DAY, last), "not_published"),
+            (date(2026, 10, 28), DAY, (first, DAY, last), "not_published"),
+            (date(2026, 10, 28), DAY, (first, date(2026, 10, 28), last), "historical_source_unavailable"),
+            (DAY, DAY - timedelta(days=1), (first, DAY, last), "not_yet_published"),
+            (date(2026, 1, 1), DAY, (first, DAY, last), "historical_source_unavailable"),
+        )
+        for target, current, published, expected in cases:
+            with self.subTest(target=target, expected=expected):
+                html = jpy_body(current)
+                index = "<html>" + "".join(f'<a href="usd{day:%m%d%Y}.html">{day}</a>'
+                                           for day in published) + "</html>"
+                client = Mock(spec=HttpClient)
+                client.request_text.side_effect = [
+                    JsonResponse(None, html, html.encode(), JPY_URL),
+                    JsonResponse(None, index, index.encode(), "https://www.jcb.jp/rate/usd.html"),
+                ]
+                with self.assertRaises(JcbUnavailableError) as caught:
+                    fetch_day("jcb", target, None, {}, client)
+                self.assertEqual(caught.exception.availability, expected)
+                self.assertEqual(caught.exception.context["availability"], expected)
+                self.assertEqual(caught.exception.context["index_first_date"], str(first))
+                self.assertEqual(client.request_text.call_args.args[0], "https://www.jcb.jp/rate/usd.html")
+                self.assertEqual(client.request_text.call_count, 2)
+
+    def test_usd_404_is_not_proof_that_official_data_was_unpublished(self):
+        cases = (
+            ((DAY - timedelta(days=1), DAY, DAY + timedelta(days=1)), HttpError, None),
+            ((DAY - timedelta(days=1), DAY + timedelta(days=1)), JcbUnavailableError, "not_published"),
+            ((DAY + timedelta(days=1), DAY + timedelta(days=2)), PublicationUnknownError, None),
+            ((DAY - timedelta(days=3), DAY - timedelta(days=2)), PublicationUnknownError, None),
+        )
+        for published, error, availability in cases:
+            with self.subTest(published=published, error=error):
+                index = "<html>" + "".join(f'<a href="usd{day:%m%d%Y}.html">{day}</a>'
+                                           for day in published) + "</html>"
+                html = jpy_body()
+                missing = HttpError("HTTP 404", 404)
+                client = Mock(spec=HttpClient)
+                client.request_text.side_effect = [
+                    JsonResponse(None, html, html.encode(), JPY_URL), missing,
+                    JsonResponse(None, index, index.encode(), "https://www.jcb.jp/rate/usd.html"),
+                ]
+                with self.assertRaises(error) as caught:
+                    fetch_day("jcb", DAY, None, {}, client)
+                if availability:
+                    self.assertEqual(caught.exception.availability, availability)
+                elif error is HttpError:
+                    self.assertIs(caught.exception, missing)
+                    self.assertEqual(missing.context["availability"], "download_failed")
+                else:
+                    self.assertEqual(caught.exception.context["availability"], "unknown")
+                self.assertEqual(client.request_text.call_count, 3)
+
+    def test_unreadable_or_untrusted_index_is_not_treated_as_unpublished(self):
+        bad_indices = (
+            HttpError("index unavailable", 503),
+            "<html>challenge page</html>",
+            '<a href="https://other.test/rate/usd10292026.html">date</a>',
+            '<a href="/other/usd10292026.html">date</a>',
+            '<a href="usd02302026.html">invalid date</a>',
+        )
+        for bad in bad_indices:
+            with self.subTest(index=bad):
+                html = jpy_body(DAY - timedelta(days=1))
+                index = (bad if isinstance(bad, HttpError) else
+                         JsonResponse(None, bad, bad.encode(), "https://www.jcb.jp/rate/usd.html"))
+                client = Mock(spec=HttpClient)
+                client.request_text.side_effect = [JsonResponse(None, html, html.encode(), JPY_URL), index]
+                with self.assertRaises((HttpError, ProviderError)) as caught:
+                    fetch_day("jcb", DAY, None, {}, client)
+                self.assertNotIsInstance(caught.exception, JcbUnavailableError)
 
     def test_jpy_malformed_rows_are_rejected(self):
         bad_rows = (

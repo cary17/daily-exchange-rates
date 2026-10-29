@@ -12,8 +12,9 @@ from exchange_rates.archive_backend import DirectoryArchiveBackend
 from exchange_rates.catalog import CurrencyCatalog
 from exchange_rates.cli import dates, load_config, main, parser
 from exchange_rates.diagnostics import Diagnostics
+from exchange_rates.http import JsonResponse
 from exchange_rates.models import DayResult, json_bytes
-from exchange_rates.providers import ProviderError, RecoveryError
+from exchange_rates.providers import JcbUnavailableError, ProviderError, RecoveryError
 
 
 class FakeClient:
@@ -123,6 +124,25 @@ class CliTests(unittest.TestCase):
             summary = json.loads((self.default_diagnostics / "summary.json").read_bytes())
             self.assertEqual(summary["saved_dates"], 1)
             self.assertEqual({day["provider"] for day in summary["days"]}, set(names))
+
+    def test_jcb_unavailable_dates_are_skipped_not_counted_as_download_failures(self):
+        for status in ("not_published", "historical_source_unavailable", "not_yet_published"):
+            error = JcbUnavailableError(status, "source unavailable", {"availability": status},
+                                        JsonResponse(None, "index", b"index", "https://example.test"), [])
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as temporary, \
+                 patch("exchange_rates.cli.HttpClient", FakeClient), \
+                 patch("exchange_rates.cli.fetch_day", side_effect=error), \
+                 contextlib.redirect_stdout(io.StringIO()):
+                root = Path(temporary)
+                self.assertEqual(main(["fetch", "--provider", "jcb", "--start-date", "2026-10-24",
+                                       "--data-dir", str(root / "data"),
+                                       "--release-dir", str(root / "releases")]), 0)
+                summary = json.loads((self.default_diagnostics / "summary.json").read_bytes())
+                self.assertEqual(summary["saved_dates"], 0)
+                self.assertEqual(summary["failed_dates"], 0)
+                self.assertEqual(summary["skipped_dates"], 1)
+                self.assertEqual(summary["availability_counts"], {status: 1})
+                self.assertFalse((root / "data/latest").exists())
 
     def test_storage_failure_aborts_instead_of_publishing_partial_state(self):
         value = DayResult("visa", date(2026, 10, 3), b"{}", b"{}", {})

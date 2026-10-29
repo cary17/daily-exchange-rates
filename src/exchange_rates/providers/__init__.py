@@ -9,6 +9,7 @@ import hashlib
 import re
 import time
 from typing import Any, Callable, Mapping, Sequence
+from urllib.parse import urljoin, urlsplit
 
 import simplejson
 
@@ -27,6 +28,20 @@ class NoDataError(ProviderError):
 
 
 class DateMismatchError(ProviderError):
+    pass
+
+
+class JcbUnavailableError(ProviderError):
+    def __init__(self, availability: str, message: str, context: dict,
+                 response: JsonResponse, records: list):
+        super().__init__(message)
+        self.availability = availability
+        self.context = context
+        self.response = response
+        self.records = records
+
+
+class PublicationUnknownError(ProviderError):
     pass
 
 
@@ -566,12 +581,15 @@ class _JcbTables(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.text: list[str] = []
+        self.links: list[str] = []
         self.tables: list[list[list[str]]] = []
         self._table: list[list[str]] | None = None
         self._row: list[str] | None = None
         self._cell: list[str] | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "a" and dict(attrs).get("href"):
+            self.links.append(dict(attrs)["href"])
         if tag == "table" and self._table is None:
             self._table = []
         elif tag == "tr" and self._table is not None:
@@ -698,6 +716,59 @@ def _jcb_result(provider: str, target: date, rows: list[dict[str, Any]],
     return DayResult(provider, target, normalized, raw, metadata)
 
 
+def _jcb_unavailable(target: date, filename: str, endpoint: str, headers: dict,
+                     client: HttpClient, *, response: JsonResponse | None = None,
+                     returned: date | None = None, failure: HttpError | None = None) -> None:
+    index = client.request_text(endpoint.format(file="usd.html"), headers=headers)
+    parser = _JcbTables()
+    parser.feed(index.body_text)
+    parser.close()
+    origin = urlsplit(index.url)
+    published = set()
+    for href in parser.links:
+        link = urlsplit(urljoin(index.url, href))
+        if (link.netloc != origin.netloc or link.scheme != origin.scheme
+                or link.path.rsplit("/", 1)[0] != origin.path.rsplit("/", 1)[0]):
+            continue
+        match = re.fullmatch(r"usd(\d{2})(\d{2})(\d{4})\.html", link.path.rsplit("/", 1)[-1])
+        if match:
+            try:
+                published.add(date(int(match[3]), int(match[1]), int(match[2])))
+            except ValueError as exc:
+                raise ProviderError("JCB USD index contains an invalid date link") from exc
+    if not published:
+        raise ProviderError("JCB USD index has no valid daily links; publication cannot be determined")
+    first, last = min(published), max(published)
+    context = {"index_url": index.url, "index_first_date": first.isoformat(),
+               "index_last_date": last.isoformat(), "requested_date": target.isoformat(),
+               "source_url": endpoint.format(file=filename),
+               "usd_listed": target in published}
+    if returned is not None:
+        context["response_date"] = returned.isoformat()
+    if target not in published and first <= target <= last:
+        status = "not_published"
+        message = f"JCB USD official index does not list {target} within {first} through {last}"
+    elif returned is not None and returned > target:
+        status = "historical_source_unavailable"
+        message = f"JCB JPY current page is {returned}; historical page for {target} cannot be retrieved"
+    elif returned is not None and target in published:
+        status = "not_yet_published"
+        message = f"JCB USD lists {target}, but JPY current page is still {returned}"
+    elif failure is not None and target in published:
+        failure.context = {**context, "availability": "download_failed"}
+        raise failure
+    else:
+        error = PublicationUnknownError(
+            f"JCB publication for {target} cannot be confirmed outside index window {first} through {last}")
+        error.context = {**context, "availability": "unknown"}
+        error.records = list(failure.records if failure else []) + _records(index)
+        raise error
+    context["availability"] = status
+    records = (_records(response) if response is not None else list(failure.records if failure else []))
+    raise JcbUnavailableError(status, message, context, response or index,
+                              records + _records(index))
+
+
 def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
          client: HttpClient) -> tuple[DayResult, DayResult, DayResult, DayResult]:
     endpoint, headers = _settings("jcb", config)
@@ -711,13 +782,16 @@ def _jcb(target: date, currencies: Sequence[str], config: Mapping[str, Any],
         try:
             response = client.request_text(url, headers=headers)
         except HttpError as exc:
-            if exc.status_code == 404:
-                raise NoDataError(f"JCB {filename} has no data for {target}") from exc
+            if currency == "usd" and exc.status_code == 404:
+                _jcb_unavailable(target, filename, endpoint, headers, client, failure=exc)
             raise
         rows, text = _jcb_tables(response.body_text, filename)
         parsed = _jcb_jpy_rows(rows) if currency == "jpy" else _jcb_usd_rows(rows)
         returned = _jcb_rate_date(text, filename)
         if returned != target:
+            if currency == "jpy":
+                _jcb_unavailable(target, filename, endpoint, headers, client,
+                                 response=response, returned=returned)
             raise DateMismatchError(
                 f"JCB {filename}: requested {target}, response date={returned}")
         sources[currency] = filename, response
