@@ -1,19 +1,19 @@
 {
-  "fetched_at_utc": "2026-10-29T11:45:39.002644Z",
+  "fetched_at_utc": "2026-10-30T12:04:16.782644Z",
   "pair_count": 162,
   "provider": "jcb-usd-mid",
   "quote_column": "Mid",
   "rate_data_policy": "reciprocal truncated to 100 significant digits with ROUND_DOWN; the truncated value is not the exact reciprocal",
   "rate_formula": "1 / displayed Mid quote",
   "rate_fraction_policy": "rateNumerator/rateDenominator is the exact reduced rational reciprocal of the displayed decimal",
-  "requested_date": "2026-10-29",
+  "requested_date": "2026-10-30",
   "response_dates": [
     {
-      "date": "2026-10-29",
-      "file": "usd10292026.html"
+      "date": "2026-10-30",
+      "file": "usd10302026.html"
     }
   ],
   "source_urls": [
-    "https://www.jcb.jp/rate/usd10292026.html"
+    "https://www.jcb.jp/rate/usd10302026.html"
   ]
 }

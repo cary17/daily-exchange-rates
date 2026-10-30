@@ -1,0 +1,42 @@
+{
+  "provider": "jcb-jpy",
+  "requested_date": "2026-10-30",
+  "requests": [
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-10-30T12:04:16.157428Z",
+      "request": {
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.jcb.jp/rate/usd.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.jcb.jp/rate/jpy.html"
+      },
+      "response": {
+        "body_text": "<!DOCTYPE HTML>\r\n<html lang=\"ja\">\r\n<head>\r\n<meta charset=\"utf-8\">\r\n<meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\r\n<title>海外でのお取り引きにおける基準レート | JCBブランド</title>\r\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\r\n<meta content=\"telephone=no\" name=\"format-detection\">\r\n<meta name=\"description\" content=\"海外でのお取り引きにおける基準レート\">\r\n<link rel=\"canonical\" href=\"https://www.jcb.jp/rate/jpy.html\">\r\n \r\n<link rel=\"stylesheet\" type=\"text/css\" href=\"/rate/common/css/global_common.css\" media=\"all\" />\r\n<script data-main=\"/rate/common/js/main\" type=\"text/javascript\" src=\"/rate/common/js/lib/require.js\"></script>\r\n\t<!--[if lt IE 9]>\r\n\t<script type=\"text/javascript\" src=\"/rate/common/js/lib/selectivizr.js\"></script>\r\n\t<![endif]-->\r\n<meta name=\"referrer\" content=\"unsafe-url\" />\r\n<link rel=\"icon\" href=\"/favicon.ico\" id=\"favicon\">\r\n</head>\r\n<body id=\"pageTop\" class=\"legacy\">\r\n\t\t<header id=\"header\">\r\n\t\t\t<div class=\"wrapper\">\r\n\t\t\t\t<div class=\"logo\">\r\n\t\t\t\t<a href=\"/\">\r\n\t\t\t\t\t<img class=\"pc\" src=\"/rate/common/images/jcb_emblem_logo_j.svg\" width=\"63px\">\r\n\t\t\t\t\t<img class=\"sp\" src=\"/rate/common/images/jcb_emblem.svg\" width=\"44px\">\r\n\t\t\t\t</a>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</header>\r\n\t\t<section id=\"section\">\r\n\t\t\t<div class=\"wrapper\">\r\n\t\t\t\t<div id=\"main\">\r\n\t\t\t\t\t<div class=\"page-title\">\r\n\t\t\t\t\t\t<h1>海外でのお取り引きにおける基準レート</h1>\r\n\t\t  \t\t\t</div>\r\n\t\t\t\t\t<section class=\"subsection\">\t\r\n\t\t\t\t\t\t<h2>基準レートについて</h2>\r\n\t\t\t\t\t\t<div class=\"text\">\r\n\t\t\t\t\t\t\t<p>日本で発行されたカード会員の方が海外加盟店でご利用の際、下の基準レートに一定の率を加えた換算レートで日本円に換算します。</p>\r\n\t\t\t\t\t\t\t<ul class=\"caution\">\r\n\t\t\t\t\t\t\t\t<li>実際に適用される換算レートは、カード裏面に記載のカード発行会社にお問い合わせください。</li>\r\n\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t<p>基準レートは、JCB International Co.,LTD. が海外の加盟店などに、ご利用代金の支払い処理を行った日を換算日とし、換算日の為替相場を基に決定します。実際のカードご利用日やお振替日ではありませんのでご注意ください。</p>\r\n<div class=\"rate2TableArea\">\r\n<p>2026年10月30日換算日の基準レート</p>\r\n<table>\r\n<tr><td>USD</td><td>（米ドル）</td><td>＝</td><td>158.062</td><td>JPY（日本円）</td></tr>\n<tr><td>EUR</td><td>（欧州ユーロ）</td><td>＝</td><td>176.828</td><td>JPY（日本円）</td></tr>\n<tr><td>GBP</td><td>（イギリスポンド）</td><td>＝</td><td>211.495</td><td>JPY（日本円）</td></tr>\n<tr><td>HKD</td><td>（香港ドル）</td><td>＝</td><td>20.202</td><td>JPY（日本円）</td></tr>\n<tr><td>CNY</td><td>（中国元）</td><td>＝</td><td>23.848</td><td>JPY（日本円）</td></tr>\n<tr><td>SGD</td><td>（シンガポールドル）</td><td>＝</td><td>123.753</td><td>JPY（日本円）</td></tr>\n<tr><td>AUD</td><td>（オーストラリアドル）</td><td>＝</td><td>111.137</td><td>JPY（日本円）</td></tr>\n<tr><td>KRW</td><td>（韓国ウォン）</td><td>＝</td><td>0.118</td><td>JPY（日本円）</td></tr>\n<tr><td>THB</td><td>（タイバーツ）</td><td>＝</td><td>4.709</td><td>JPY（日本円）</td></tr>\n<tr><td>TWD</td><td>（台湾ドル）</td><td>＝</td><td>4.877</td><td>JPY（日本円）</td></tr>\n<tr><td>MYR</td><td>（マレーシアリンギット）</td><td>＝</td><td>39.149</td><td>JPY（日本円）</td></tr>\n<tr><td>IDR</td><td>（インドネシアルピア）</td><td>＝</td><td>0.008</td><td>JPY（日本円）</td></tr>\n<tr><td>PHP</td><td>（フィリピンペソ）</td><td>＝</td><td>2.488</td><td>JPY（日本円）</td></tr>\n<tr><td>VND</td><td>（ベトナムドン）</td><td>＝</td><td>0.006</td><td>JPY（日本円）</td></tr>\n<tr><td>CAD</td><td>（カナダドル）</td><td>＝</td><td>113.155</td><td>JPY（日本円）</td></tr>\r\n</table>\r\n</div>\r\n\r\n\t\t\t\t\t\t\t<ul class=\"caution\">\r\n\t\t\t\t\t\t\t\t<li>上の基準レートは、小数点第3位以下を切り捨てて掲載していますので、あくまでも目安としてご利用ください。実際に適用される換算レートは、所属されるカード発行会社にお問い合わせください。<br>\r\n\t\t\t\t\t\t\t\t\t(韓国ウォン、インドネシアルピア、ベトナムドンについては、小数点第４位以下を切り捨てて掲載しています。）\r\n\t\t\t\t\t\t\t\t<li>上の基準レートは、日本円でお支払いになるカード会員の方に適用されます。</li>\r\n\t\t\t\t\t\t\t\t<li>各国および地域の金融規制等の事情により適正な市場レートが入手できず、お客様に不利益が生じる恐れがある場合、お客様に不利益が生じない範囲で、支払い処理を行った日とは異なる日のレートを適用することがあります。</li>\r\n\t\t\t\t\t\t\t\t<li>一部の海外加盟店でのカードご利用の際、日本円でのお支払いを選択いただける場合があります。日本円でのお支払いを選択された場合、お客様の同意された円額(レシート掲載）でのご請求になります。なお、当該日本円額は、JCBが定めるレートではなく、加盟店が独自に定めるレートで換算されています。</li>\r\n\t\t\t\t\t\t\t\t<li>税金の還付や売上の取消しなど、値がマイナスとなる取引には、同日の売上とは異なるレートが適用される場合があります。<br>\r\n\t\t\t\t\t\t\t\t\t（売上を取り消した場合、請求金額と返金金額が相殺されることがありますが、相殺がされない場合は、請求金額および返金金額それぞれにJCBが定める換算レートを適用します。）</li>\r\n\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</section>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</section>\r\n\t\t<footer id=\"footer\">\r\n\t\t\t<div class=\"footerwrapper\">\r\n\t\t\t\t<ul class=\"footer_menu\">\r\n\t\t\t\t\t<li><a href=\"/privacypolicy/\" target=\"_blank\">JCBプライバシーポリシー <img src=\"common/images/parts/other_win.svg\" width=\"20px\"></a></li>\r\n\t\t\t\t\t<li><a href=\"https://www.global.jcb/ja/policy/social-media/\" target=\"_blank\">JCBソーシャルメディアポリシー <img src=\"common/images/parts/other_win.svg\" width=\"20px\"></a></li>\r\n\t\t\t\t</ul>\r\n\t\t\t\t<hr>\r\n\t\t\t\t\t<p class=\"copyright\"> <img src=\"/rate/common/images/logo_mono.gif\" width=\"53px\">©JCB Co., Ltd. 2010</p>\r\n\t\t\t</div>\r\n\t\t</footer>\r\n</body>\r\n</html>",
+        "headers": {
+          "accept-ranges": "bytes",
+          "connection": "keep-alive",
+          "content-type": "text/html",
+          "date": "Fri, 30 Oct 2026 12:04:16 GMT",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "server": "Apache",
+          "strict-transport-security": "max-age=63072000; includeSubDomains",
+          "transfer-encoding": "chunked",
+          "via": "1.1 e37edb91bbf6b4d78a917647aaf7d0d0.cloudfront.net (CloudFront)",
+          "x-amz-cf-id": "Ps61pxk2BujHUkvmjpVglP2f36tGmXB8SpAJ8ouHiNTJXhefzNkjCA==",
+          "x-amz-cf-pop": "IAD55-P1",
+          "x-cache": "Miss from cloudfront",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "18.160.41.18",
+        "status_code": 200,
+        "url": "https://www.jcb.jp/rate/jpy.html"
+      }
+    }
+  ]
+}
