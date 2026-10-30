@@ -1,88 +1,9 @@
 {
   "catalog_requests": [
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999984979629517,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.99997067451477,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999988555908203,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999792575836,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.99998664855957,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99998331069946,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 16.999979257583618,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 296.99997663497925,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:03.696730Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:04.416459Z",
+      "fetched_at_utc": "2026-10-30T00:20:59.883302Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -97,106 +18,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:04 GMT",
-          "set-cookie": "_abck=4D3A29A7E5F99CCDBC3D085FF20D02AF~-1~YAAQiz7cPe/eEGehAQAA8UrYhhB3yQ+OiU+X9qiZRJfvP7xtezf/yzIc0ilRBkrj+W1E9YvSXr8AIHBwekZgZqZ1HYmPNmj3RmbMsql8YI/E4r99dgZyLRxaZnYh4SFrODvHSTaTG8LQ2XAtz0cVCqUG3OkQyHpG9SoLfH89AR++37PhHX2lXaDOjN2Oep4ZfU8ScUtojIoUwxHatBaNtFsXO3/u5/ghc9AprejCOlV7aXWIIFcs0y2xO+LUF2DbsHEWyQcVJ3B+EsiQiTRjU+u6RnZ2YDNSkXbF9CqitdoQ+lp48MueieKMPYoVTxVcIasWhEHTRZAX1E1uUg17CcDN2U9xRqHYh231Q5880fQ18m7ziIk0ah3SqHrL+iiXXGv5mdSL3AknLYDobhTAvsezEX1AZLZErHcexfQkZPy01BC9/WuGwK4TvRZSZLaGHBpHmmRo8mxHfP+m~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:04 GMT; Max-Age=31536000; Secure, ak_bmsc=8432A98F86CD11B7BC0DCFB4DC365337~000000000000000000000000000000~YAAQiz7cPfDeEGehAQAA8UrYhgEYWrfjg9LiSM95DdPgWk1hMfcYcXH5mwWza7WRQh1OJbiWk8AJ9UKfi3WwhTrrNJmmrl2CSCh0VvStES1SjFQy7e4mChB/dzGt6WZJbXl7EfL2CKMAhyUWk6p7J/NKuz+63J/DXmxy2rGlkWrji9VIDFrV7tBKn1mKHQ5FpoPitutehAv3o7BJSpKVPNAFps+dSsfESrGJj44L2KBkt1w8yAMtqwGOvfpS24nRhfwHZ4bToNI9V0DfIJgBuEYpeLYbI++duzJEv4A4T1OEt8aAh2QXYS9v9LNB9gy/yEiU4ObmLxM767FpqCYRNDWdL3jAwo44Ao0zKxqtByeFhbqjMhwUoHVNaleoxy9IReRaXIg3g2c0vhUtdq5RoIeV; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:04 GMT; Max-Age=7200; HttpOnly, bm_sz=31B06C4AD684297A20F339E6647D1F88~YAAQiz7cPfHeEGehAQAA8UrYhgF4FbO5Gsyd5lc79j3obzF6e5RGe8lCRui06uNnVA2FHmw+BsXiSANVnCBErKasNd4SScL42JTNe80NFmXAWJ9jZp8leS68owxoaLvl7JEqf6QpxRqCLJdKMRSXY4CSb1gcuKKOjM8hBDyWj81PMMUOW9Mc2ebtsaVznN6c/cS9+3HBopikdtsZ+IZDTaIoux9Ea/+L4miLnK2fGPpSvSaBQ9VCUU2xJ8JUxgmbGB2gBKmLEGHKax2TDqSA0dLIvQJgDkDZngTRditTKre1tVVmm6RauJJXSjSMsItyhgQSw2hAQAZBLMvut1t2DXmwUGuiXinL3dUsRMQDEdN/WvOv06lQYVCC3T+D7NHkoNVMD+5sUr8mdulLtPsGVGJjsZE=~3228209~3555889; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:04 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:20:59 GMT",
+          "set-cookie": "_abck=071F089B081F771CC4042F26E163ECF9~-1~YAAQKFHbF7DMG4WhAQAAYGkuihDYGC01tUyIgygvzrd9OKeu23vLTu7xBaWLWaAq9YhWl+omuosOluiUM6ADSi8lP9wTbsZyFNYmQ7ZtVkdvzMHI6BxSh+q7ue/nJaC6LyCQjCvLpySke6Ies4M7sUfHSzLZVT/dXDuh4YzNv/+ac7xZxOSpVyfClzq4NZnFj64wb2WcVgr3LkulC9APoHJYfZub5n5ZLYw5Fjs9MHMqz7TBjjiWC++MPBlBWwHkDo5YagA5vXrtvUDPpb8aPZwPqG8iEUjY9LquIRgnHEcQeTp/dZIqzf7QrKyW/HBqx3kGaWbXhkPaIPR9NKRsyFpDG3Uhif5IrPbirrS6ohuDyRZmYF67/ZC44bh18gX1Nu4l33b9TGhuU2ZbRWGYeCoPdoiT463JabHqBXKFoh42vTPhf8toJDw65KXZ9/IbGyq2pku8Tt1T1q1S~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:20:59 GMT; Max-Age=31536000; Secure, ak_bmsc=371358C4DFB86C14A9B91D74C9B87F3F~000000000000000000000000000000~YAAQKFHbF7HMG4WhAQAAYWkuigF/DQidLgOXTpyF4sx4W0PeAsKGUGw41ORh9/JUMz7ngitIrdc6QqAgSDmUpsn4qbdaqE6dHf93IkNdZJ2Yt/a2Dc/xRVHT45Pq62bZDrN/mH2jCeS7BcTRXbl5byJNklXwraDR6LVOOqrFsu5C5UbMs56cCDLEtBRFVEDf8DhS61m9BgbN8qDVPK21wsQBFfpqR+nvmH/BTpDUtXNzSB0xk1THuJ645bo2BK9TdXgcerb9CWaMR4vLDwYcYxE8bab53bciGSBXKSk3UCv0SJSW8IjD9o/COi3RyeXfM4Qo1zHZzTzMcsoFtk9kZ1/Q3NmGoJpJqTFH3ZIMq7LMM0t7LOQUDEzfwtukbb3czyqawO4gj3krYFJ9W/yhTg==; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:20:59 GMT; Max-Age=7200; HttpOnly, bm_sz=8FFC76960984C8911F59D19704A9E5C9~YAAQKFHbF7LMG4WhAQAAYWkuigHuLzq8pRb+gDdYCv+rd67/3lAcewi5j+SCVuWi5ozJcOk3LOR1nYNdJL8AJACI+4z7IujGBPpqpnx+v9dx0Aq0hz+5NR2flNIK1Q7LVcGXhLWHbSaAXLc1fCdqYCJfwVqX3AFxAjJe6fCfsLYi5XpOMaVy2AMPCAhvyZHlhB+wvAklXqkYLdhfIAn2VsywxYoi+MMIyZ7JUUEnoVfzvnKl8v90BiP1p0bG7NboVhrI/IuBbc+cKy4VyW/V4+2po0D4r0qCGhs//AZoc7LEX7nH2RInV0dfWDzIzBbrVFeAAxbiERbTTx4fR0ASRM/nbFhBU8Qc+b3a1yUR2PD+ERcB/QrwW8wPAT43dFGiUkZcOMHi6iVjVkORl/nvRPaN~3424836~4272440; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:20:59 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-59f7d0dd69f3b0073d3979a2df755264-df77bf8bee380644-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "f9d4e423d6099c08136af13a623f8c97",
+          "x-vcap-request-id": "3617475c-49a3-4fed-4879-d0eb3c54fbae",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "23.203.89.45",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999984979629517,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.9999837875366,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.99998378753662,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.99997663497925,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 17.9999783039093,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99998331069946,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 13.999988079071045,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 293.99997639656067,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:06.372207Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:06.953322Z",
+      "fetched_at_utc": "2026-10-30T00:21:02.587857Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -211,106 +53,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:06 GMT",
-          "set-cookie": "_abck=7DA70F62AA91F9AA2EC44A830326C673~-1~YAAQiz7cPXvfEGehAQAA41TYhhDWCq6Jg8nagAw3aD5dxIlZ1LQ6KMntziLdRGWsDrKyN3417xFaMlCDR59FZzFfeWN2DEkM8stgqBhbTf7XFUdrpk/QU5qO1NG2LOnEI0xxU2UfDIwUEl58aVe2O1IckzgtOS0CnhA5/Du40Z9LGZx9a5Yi6PdR7najLXBGD7G6ZDhyLbWJbbePP5y7xDSiK35qR+c8M4KBhN8GFW185HeVmNvl+R3DD+L8TzxG4augSmCg3qSPgQ5p0ZaxCGE9Kq6UbOQbhBq8OGq0aZzSM3qT8pRkvC7WwLegJJMExS9Pgx/lE/KdIt3HLxS0OjtpdRlHfM/NaZq5rfZLuoeAvPk/D/R1sOP95RsY7sF+7hqAHW6ZO70SHprj8SRBr/fgpQUvome3BF0ZffQomMFbcplwHWzqyj0Ew2unYwiEn0g04r5RG8L4Wntn~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:06 GMT; Max-Age=31536000; Secure, ak_bmsc=5299DA1C4BC04E17CD6A5D540CDB034B~000000000000000000000000000000~YAAQiz7cPXzfEGehAQAA41TYhgF+8f7Glxa3AcPCIHI/ZaUczF5ohXW36jjHobh2vVQYFFuNQ4XmG+NeeGiT0PL2Gt32f2dxXSqoFdcfCJnOie7IgNPAWqJxKo58uGTjbbljjiCJ+YWlHcnApSIE59N2UWxHCzeHv5t5TWc2sfcBhw/EvVoKjo6EA6lLtQEerXOZ1yf9luh6iYuY+vU0WJdSwhrBaVBjVr/6rHpMhEoX8TYCFuAtGWzZcWGiwI6RjlhVOmbkME9kSnbhBW9HuxU/wZ0ZgC9q2FwRIWRhrwaGCjM2V/vnw9+ZhsKuYw1rESuM2rWklgx0pH9oOEAcsRDDKcXoBYPwwGHTZste/sWp23Vo1Z++UtJ+f1fgRKxe0DU/NWn7smMuf+I9712DMg==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:06 GMT; Max-Age=7200; HttpOnly, bm_sz=A05A5AA9D9B706E9844E4433516B9418~YAAQiz7cPX3fEGehAQAA41TYhgELtSl78mBWyvqw2rInFjXRH6QPFp+2oxOj/rnymqk/H9DCQrmyDLXN1bVKGDtJ6amdVucmfB+U8u1rMUiiz8vTIJdK1cBCUi59ObiPS8gRm/jvNfWf1cCau2Up8VrhEvAM+r0w5GR82g0q8GyRZq7VmdAJncjBPcgup97cuEfQOwFwVsWqfaqO5BN1/iB670DP1ZrQ7w298GvbuBxKQFVK3I3FMuoVqV7/DJMOqilNrsCMnGN/Wad/6qy4Zak7BpDJjTPhs+hu44vSeRXulJtqOAfpRB921lXmsGNDMEXFjfIpm9pwkKryjOFr/zBpMCJkgy6k9LwJBGSOTFxzReFsjjOjeh4wowiF/txYz32dGNHxYJu89MqiA00W+KYT~3420994~3421253; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:06 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:02 GMT",
+          "set-cookie": "_abck=A4B6A8D74EA2CEAC27ADF813CB2AE9C7~-1~YAAQZGw4Fz30MH6hAQAA4HMuihCRhrHSW3sugC/q6/DW/wdNwlv5FDg8RZ3EQQa4AiTQEDHcegk5p5Qi41eKESpZPGuY0FklWzyov2qeid916E1ac4jkn7tZBeSVh+6flL5TvPD/VBZH1VIQ00f0YIGpTB+8+d+QtVFcYN7OXxnU2ogTgwX77oAmpDKGSR3Nh7cNgMvmqsSBkhewM/HxzaQ0G4L4+fYXHs/CTuMlmotE5sC+YcTApuQ/iErqdYWNPqW5nVwtpY35D2j/WE3a0z5aCxIiRGWIAAfM5LqjGMPKkVgR3YvnAdG6iVklinANyvk22od5JbRMSTZ2PF2brFd09uYK7TKWdmn6TKmk/Yb26af+U/wlKWWGoyibY72JJA53xmljjX+Jiavk/TM8Kdp/ng4zZtEwmdMPrmdbe9HW5K7nqCBYSrZe2dgQfsdQNEwZFkXVhSYLJmvy~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:02 GMT; Max-Age=31536000; Secure, ak_bmsc=1ACA7667EDC8D10D7E6CE77EC5FA95F0~000000000000000000000000000000~YAAQZGw4Fz70MH6hAQAA4HMuigHXDzvSvVznbhxPpz8Ww1VU3EszlwC+47WawfCLcE9yW1S0bTwEeLXlTc4AlGX6ndQBH38AUvw0C+ChuYPPAVQ57fPd5yw1fwEJ4Be9ayQPAoqmxwJ8IuXBj5c/9I/5I8nSH6Bc1fuT/4KO8BmMFM4cfg1MNRAVt76w+2vFlBe1igv6nt6eYKQUB6ITqFQsuWavG5cZQeXMZSS39c6FFVF14/z7j1OzKfO+wWfAKKuuiTJoslej1Wur7mG4SYQ5ZyXP1MMmCVzUWc0CuwhcpPiS1+kLYZQ1ONvT9O2U02GtoAUfRELMbYyJbaOzrEg8PQw0orAN8Bznq6fJQy/xZdtwqitfdgRAUZ9oYctfF1Bkhu9F/2Br/L25PSQ=; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:02 GMT; Max-Age=7200; HttpOnly, bm_sz=F2745851E37C873A8DF9BC069A47388A~YAAQZGw4Fz/0MH6hAQAA4HMuigHQbF+VjQWh2sLS3/RgtSImfSDcAvKXrzg6HvVEuX2GE/9a1LM+U7vissn0hruwTJk23MVnPwf3qVxvOujOQloqHIpnww/ngSCwUGpzOPWR3ED/i0S279dDXUdmZVslE/wQskoKZ5vMDkg48dva2BggMiqIHDcHfU4/DFS/q27e2PF73IP60pUlLwJdv11/xkJ5D22QjbuJecuzcIkdS0q2NSwXOSInPEMqNyUpzGOlFEZbzIq/ceJIx4lQb4lTOkqXm9Pq71uyuRsDiVx7IZYmfASYeimngl0qnEI4O2e8sAVtDgYqJvZs6NE6Qz0kNkc8vswFC4/35pLzj25RymL3uGSHWF/LDn6wBslHc1Rl/7tlfbRJoBLs9RxNHQ==~3293766~3748919; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:02 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-a1f1dfdacb04e79f5eee9578e4db64b2-750af7c3d7f7a897-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "69bfe77f79604870a1c57aa6ff7357e3",
+          "x-vcap-request-id": "b9ba68b6-5599-4aea-5662-dfc8d082cc87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "184.24.32.143",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.196.29.69",
-          "23.221.144.214"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999982118606567,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.99997639656067,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999982595443726,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999713897705,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999986171722412,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.9999771118164,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 19.99997878074646,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 299.9999842643738,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:47:59.641607Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:00.318518Z",
+      "fetched_at_utc": "2026-10-30T00:21:03.772721Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -325,105 +88,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:00 GMT",
-          "set-cookie": "_abck=2790DE66E87AF2B0206747CAD209AA9A~-1~YAAQiz7cPSveEGehAQAA6zrYhhDfGzeFjpRWOvfuEIGC8UYRpIQ2mp3S1tf+RHDBUlDsvqZkjkoS1uTuPQzKPmZYaPtuRC8QAUFDiIqV1s334+qQQbfYMQDYllOcbocuExNEu7CGcqXMKxxY0MK06UraaS/CUj7iYNpxisixaca9eysSDQyz4gzyyND4AFK7kopFhTnE9pRNWV1+53A9E2SbAiLDzQxX4Yhjw2LJz11q3UdMaWwt5gXe6BY0BZUl9lccRWxxaSVF5CaK9LC5LEWp1pQZEos25Hzu60nhPveBc5S1bgJLNdcNkwdAZisnFP1NEM0e8+AhcsIKtXmZGv1eQzywhC9q1Sk+xBLF8wjTqj6/UJb2ZhVUcyyouIZ5lA2xqJ+6MOUYrcRxBQrUxt8W0nEJAZl93w+AKBh7+YpRLTPxZ44+np/ZvFpYXu5Sn9NewGi2FviB+hAH~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:00 GMT; Max-Age=31536000; Secure, ak_bmsc=F7D5D0FCCFCE956A48C967CB203AEB70~000000000000000000000000000000~YAAQiz7cPSzeEGehAQAA6zrYhgFOc6cJua4AAFgVexyOqq59kU3FpWtRhWInqZoB5cxnGMO1fh98uScVfsyLtSbDXN/UXkzYSLvz7pJkdgIMW16qQK/jzW+/qMdwZe+y1clKrhy+ZaxssCU4Qve4hJNzNVD19sYjyr7VCMKmQ/7+QKzMazYySq6xVYJIBqg+IG40G+8iJgDDBmAa1oRU1fDBnfu+RcUjA/a9bc54jlnbLEmftHf0I+Zx2EteLSW6GIVMp2oFyfVRk6CRUd/8qUWjszUI8Yr+IYz1woEGVXNcS4j7yICa9hGwNsu/HWHfQR3QtEjrUEsmPf1vHnHzW7rPTg7IG0RmtQCMkDRC8wfl5qdeZ843AMg+36vB/j40gUmTZ5vti/sAS59w49eEbw==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:00 GMT; Max-Age=7200; HttpOnly, bm_sz=4BAA4A7FC4A44F8A0EFA1B06DC92FD0D~YAAQiz7cPS3eEGehAQAA6zrYhgF2bqhMffGCeqVtdcg7OvyQC5CqHUu9LeBTpZVXBPmLuSyb1DVujiGJPh+bPlLvDa9047IRSe341uto2LOtGVczN5O72ltgZ2QxV5O0rdSdticHQUB/LU9zqcexl9/MYREfOtCQ2nw4Q9LrQ5c+j3oSNBDL96/kzZ2m+wdjK28p+MolUyHQ2hzmc+hQ8+xr86Ub2HwzFW3/1lWdpfAN43rQIrC49ZTkkNkHe4VUEoSa68efI2047APZMxtGV84Ml7Z8njD/1da+7MeT/Or8D23zO8hKYz7pnde0WW/8rFqx/lLTe75hnMcS2Sdyb3w9bz/eV8dllRzCkGbWmgiF97TP4a392zE7QAyFD+b9QbSvpPY/buzJkBSPFZmrRQbv~4601393~3228471; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:00 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:03 GMT",
+          "set-cookie": "_abck=CA9FEA39A269B12E2D9836DF7B69EEF7~-1~YAAQxQwDF0lxnXqhAQAAlXguihDPMDKqipauM+ok2mayOwkQxBcx29pJelP12Mmu6cf09nAZHqnny2u5A288aq+lKHo+ex0zOEID25Q6u2XADUJOzQXyzjzGbxgrc1f4hca3hi2dK4OZGwdcSFzq57gRIeFHRyIh9T1H6UHQjIXZAn0K03jnhmbTAkLyhH/VLv2oylPfdmyCzN3jLCcbIQW7Omb08VD/QtKuasrpVm1egGRtUE/qLzPDrb6sCjnCoW+2Zi3TtZ4OjD6tFPMV9uzbB7fnbx/mRGz/+A8KBZFwB0p6xGn4/8DYYmuzcJ0pgqXnFwoVV3XOxyz1LYAxFdlWRrUV9BP7Z7wYUTfxr7Paiu6rSq8nAUTeA+lpRPzY/a7CeOloyxVV0hlB9erTFXUohmquhAbQZA/yn7MJR4r9whlHulgSCkeD317wNkqbS3ENhcwcGdA1uEBz~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:03 GMT; Max-Age=31536000; Secure, ak_bmsc=3EC6D7AE28B1EBCF5EFAD5DE0A3837F2~000000000000000000000000000000~YAAQxQwDF0pxnXqhAQAAlXguigFsAYpyqqXxckUFdKDe4f7+N8mek6G8Wty5dxisXQlgrRRiCCPM1Iwz3/Pd7igXMw6EO6wlJYDWhGJsb4IV3i/lqBBLLebwA1KAOceMTg9KzyUB82jqEdImgeVuqNZDDptFvLl90KyYWVyN91tGcQ54sIRGQhj+THcJ6IIzeTKEnBcUSYbcrZ8srXKKKsrjRHG33md7OtaG4cu3GuTodU9Qt9j+hfCBDWDOmFRW7TjHxz+ay/OWzYU8ig5kjVZ5k4ddwvwMn2jPmVN0Bn7BqNSO1pRacEAmvG7DySaHMF0RwIZEH1+vOHcUld8jlfJYaDiyvE7+L+GrtALc7FRz0AfwA++A8RmXfh91F5NoV0qSpqVzG6RVdSF9vnmlW0I=; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:03 GMT; Max-Age=7200; HttpOnly, bm_sz=6A9026161AEC6B0195E28F41E0488FAA~YAAQxQwDF0txnXqhAQAAlXguigE0Y2H170qf6uxx2mKgK8JaJfOiOxC3K3XR1QtX28oA7kPhHYcdQiYox85i4TtoXsCZocCR232c1YY2igsBjWWwPoaR5fyrrgfHa24c2wnf1E6smAyaFMpvbUys9GfEgkUNkfu1k7gNNMj4vzXnJyvtBbBR4479kvv2ENBvcUbbs9MvOCa9BgvYS3plydoLg7iDlxcdZ1itQxulAk5J/sHLcLpm4iVxOXytEAYXkQid+lAtLvPV5aLkQSZNhbK6BsbC0FSZmJsD1QYgfUxmMJc8tPTLBdkk2jeoZBqqok8K+jwTM7DZfYWwIvLGz/TV3lhjfbr6tME70/53TudaPT7XFIip1Nfi2j/mHXKZpqINa+ftWZa5KA7iJUKo1Wyr5w==~4468789~3622195; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:03 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-0fda8282d98e50b18f6314f1fe92056c-07c3e9e06d0d0b7c-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "e8a85af99bced09a63b23c4462b28158",
+          "x-vcap-request-id": "6690db0e-7c59-417d-5665-8d0df3912b87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "104.81.165.82",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.99996829032898,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.99996995925903,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999974012374878,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.99995017051697,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.99997901916504,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99997544288635,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 19.99998164176941,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 298.9999828338623,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:01.687757Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:02.368219Z",
+      "fetched_at_utc": "2026-10-30T00:21:02.550747Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -438,106 +123,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:02 GMT",
-          "set-cookie": "_abck=EA09109B67CD543F662D7ADDC0B18E1D~-1~YAAQD1FFyzNBAHihAQAA7ULYhhBzS5PWFO2RpKdzBW+Mg93L2gQb/Q+nrQhfm2ZhZbuu5wTr6Du2tHCQlmcaBJSxCp/dHvXArxfhy+rrmwpU4FfdQJJDTrA60sLDdZvTy3qIH+vAV+jdzY0vnh5KBZZs+YlLN3qBKq3Tbe3ad4ln2vY2NOuj6rVA6e1gI3eAmyJxUAOkus5bNUCh+798jjpW0m8h7FzM7hS1WYvA9txTB5GcR2scAR2hElPCjStRtmrRbmu9zNtV6rJPCDukH/2tPe858XopbvB5r18lZDw1+gylC9Q9/Y5p/wRA8EWiv1r4zfP3MBaszwu7s5rJ+xaU69BzTEaL03xoXMPDGWji4IFlJqoTy2YNkTv0VpWzqUIvKEuGYl3eh71+VvTOgv5qbtmhWizeO7e+ZSEynUFaYcpVTl2KCn5r1w9LgGO2gz5jgGDBhGvwua0I~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:02 GMT; Max-Age=31536000; Secure, ak_bmsc=0BB07B1CF735C681F1CA23F68028BC2E~000000000000000000000000000000~YAAQD1FFyzRBAHihAQAA7ULYhgHxEzAdGhhVq4MhX+jJjwXUWvbfzhEdfwfiHz1Kde1wUi3EtbHLlb8nIdHj1NaEv07nzS4IxjASlWjr9kPFfTsR+RU+FvSagVeloa9lSPS+qlKlr58itl4LinH/7k3BRK4fqnKJkDKwv1G6BuMo19kJsIAEQTYWLAqHBGk7J2E2Y7thEWc2T47RpKznvpknTXfjCrsIv1ELPXEphH7h7lcjDRH72wlRmjvomXbgGgaSZivisWhGJe9Bi4jwXjGNv72qssip5yiG3Wq4fkxyeEmZevH9fK3VYowiRwn9rrdEJ1ZwQUb1ls5vpCrGW1rQ4TrnTHkU8gQBlQkbM7/wsLWqwVR1Nq30rdI9qQNiLNpXatQD6xP50XurcvL4ZA==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:02 GMT; Max-Age=7200; HttpOnly, bm_sz=F3580E5A4D187501B47762B1925003A6~YAAQD1FFyzVBAHihAQAA7ULYhgEEJhRNP2jws7gEkOqJGMKiJ9AXLw/q/b4Lka+RcLKsTJ2iydWOkvPlzS4KbxtXpbTnWrcdAJcJ93czyyPEpdhnFhs0kxkOdRvYKa9uB4WC2PSEFfZnEGHnpE5wECi6lWi2pPoiG9SsB03bdcf5zPndK/G2u4AJb0gFdyh34whM9tjj28O4uQG1gSHLTxI6tIDAOK7x+HoQALTjn8LYRWfb+zjfgOxMTplwSEaezDRyqJW1hPbE/OePoeaudGCA3OWjDfD8tqREly62/gMc9YEXxKsPVHzMuQ6romvaoTcnBLZP+t3/1PnngfEPVsZL+kYQKTRxBsYGzKMZIPhPEYg0K9RhqvNYr9Ht1ff4rlcRzGXjGIrYUFl5eYxnE3sI~3424817~3683888; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:02 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:02 GMT",
+          "set-cookie": "_abck=E5E178B4F0D6AC917FDC99679F6D38E2~-1~YAAQzAwDF0F3nnuhAQAA1HMuihBWdSvTfs057F7CT29AKrx56wl4p3rpN+pQEas8qrsZVM26hmW+baRMv7hb6DeMIlq6MGfGsLbl/jlerNwEmwEdUo0gwNgv5ctrOSFSguP3uCSHGPKpenrJfuAm/EM/mxOsCKjDXp3b3oFIcWEvkv8BEECagIXx9Rem+EAV+mp5qONhLWql7i6VoIdqx3jjP98XVJk9u+YCo9h+mTxiwGe38YNAr7EJiwb4QIqmPBoZEiOHnL5s7/uCBOGwtZIVZWX0k8w4Zq7PnOtt/HcRtWuNEC5PGZCpGWyxfDJDN4APwRZ7AiKgYpmPQghqHTWv0MAGqD1kKksAPCpowumAQcIRqzqHwLS8tTwIsON94RuV3viUzGxlH8aMmuKn0nG2FqmbrCjuD6nDebNVz0hg6sZr2pwyhAVMDv8VJ364ppxCd3+RMn125vfD~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:02 GMT; Max-Age=31536000; Secure, ak_bmsc=1FE931C7084D590BE2D1A8A8114C6186~000000000000000000000000000000~YAAQzAwDF0J3nnuhAQAA1HMuigHxV4wtg4qIkxRtiMtUgAltTVm77ll5n/SK/HkRqSHliQv+j3qo5pj4Q9CauLBiwjwbKuGINuxgCx4IzgtQyi1k/Hv2/hzSrnjDD+sxOyEEM6zkB0f9dk2LoVdy4tV7qy/i9mf+mO+BVTmK5EdbzlMk8LfvuwmCLQyZoaVi0Km4GWuhuuE3J0fhoVWneTkocZ71J9ziRpCXOo+9OMo6uHBz+tzMVe7bpOsLWF93XVVBhkYCY8gO37ajv5WOptHQId/R/abWUpZsuI0SRDW9pqRLtCFuVIT5vFNmGOcHGeCJ2c2AjPIEZfFeHMucbQ5rzLmLl19skaOMWZJxQV2YWc6kZ+q2X1D9iuNumbGOmKQqDkfTUdBad0A7O750HKI=; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:02 GMT; Max-Age=7200; HttpOnly, bm_sz=7AA1265F26FCB5ABD2A8603FE3EBA5FD~YAAQzAwDF0N3nnuhAQAA1HMuigEdRjutV9jqce5nRyNv4ApcregsfUpYs4OC2c6IGIZMS6PNEa2NkG8sI3CBT7KuGPr96cijCFCJ1XrlWCFkV6Qe9hmgz0QrgHsxi73gEbclvroP1Be/4XXSJZImqfBt86fvP3BjN6lkw+JtTtqgssXHkb3P7eOpq5ssOkNcrKlH4lyHn6WgXeG5q2zPPx+f+qi703fY/jYFv+qmytTXTBV8XiWBinPXYClp/7e885qISmAkWi2IA5B86HLFkCp5ef0vx0jlYShcuAWoJDeRtk10G+NALzLrE+R+jm9sqpJWI2UWwYL7BoBhGjxSnxxQtfNXBm6PNvqaReHkLhaiw2b4b8iMw6+bBqIGPbHKKAyA26GvnzcAe+0VnBZdxdbDcw==~3293766~3748919; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:02 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-0fda8282d98e50b18f6314f1fe92056c-07c3e9e06d0d0b7c-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "e8a85af99bced09a63b23c4462b28158",
+          "x-vcap-request-id": "6690db0e-7c59-417d-5665-8d0df3912b87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "104.81.165.82",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.99997901916504,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.99997115135193,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999982833862305,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999735355377,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999984741210938,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99997878074646,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 19.999976873397827,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 299.9999768733978,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:01.113250Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:02.198565Z",
+      "fetched_at_utc": "2026-10-30T00:20:57.962072Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -552,106 +158,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:02 GMT",
-          "set-cookie": "_abck=5CA7031B41A01B76D62740F8643ED97A~-1~YAAQiz7cPXbeEGehAQAA7UHYhhArV5TgKM3Pnzuz36fThn3geoxmVcRCuKUh188PTZ2hQD92sQBYjm1Es5OQCjb+8YmLPH1Tkf3rQpimU1/4v5+bdBEVSMHQ7mc8wAqBCN4AnVWAVfnquAlP9VM2SWbs/KeWKv5tFVjmpWaMZLDWm1wO+h2jk0gTCmNPzJbdqZTaUsacIUzt4hAb55M6vXfjJ3vx3EOAl0K6lrCP2X6DFXU1ULyeAjgtETTQ2G/F9lwoS39xib8ch0kLaFG4HdydlhBv4SOH9horjO/Hme0+Tocjl2JVcUzQ99mwNeqP09Hau0v3bMCOLyFExgeruvtGgfE2/IogAJNFwzqv5V4kDxtK3ikaoWtECSNPn0SvI4o/fcqjaZFpTAf2mEYr7ix9E0EjCN3vlpJxPQDkNkY9Q/GT97kc8F9U/B8u/OChb+61+1QMYMfDQj9x~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:02 GMT; Max-Age=31536000; Secure, ak_bmsc=D886848DA6E1FC04896DD3FA8FF01D33~000000000000000000000000000000~YAAQiz7cPXfeEGehAQAA7UHYhgEaiqS7mQa3qFBfeF8BJcdm6SpVe31JOIyLn/E8wtoYy+B3TaIc8F9BnfRN8OsUVd29AKZXMq87AX6ec1hrWeEDdzKMJT9RDBxgRlABZossUzqwilz2l+20K+3YCCjMl9IiFfVBsJ+A1uziZCP38LxTF9PwSzI9O4PdyViiEhWYLzCqZh6cjmK5DVdx5yDu9jEJabV2T5D9fgAXKSCIe6vIHXQKYDQApiuJxr4ChMtyD0PfY9t5oxfk6zbWzy5lLqdsCnFRWKVtdbNeJsjmRaRE42DjNiM5bHMzEWMolW56Y/znT7DxcY/UT+d5W9Ee4UMX2P4xDNffeobX4k+2vXg0xUAkj3erJZinGeZZ9LJif3zR5TupYFvzZN0WxLpw; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:02 GMT; Max-Age=7200; HttpOnly, bm_sz=148232AB86E656EC20787C843EF356C5~YAAQiz7cPXjeEGehAQAA7UHYhgH0pmBi84DOS15LvHQdVaXcz6qaIsMCJZJA7IswVceI3xPsfTtElfi1I+KGIdp1W4ED7dCrEOi0bxg6nh7ubImD2CVPS+4L7F1F9CxbdrDoYBPXv5nu/oz2Ig7gDsXPsLGpq6Y+tc7NvaNK6BPfoxDIiasZbXuBbZfRREgcCebTNY27SQgycWm8mtR4mfrifcEKK9K+1BB6sI9EFq1KFeKlbEem4LVWXthf6+s8Nh6NVXIbnWybhKTraV4wsg8YQjI0NzLpsLyx01Gn/7hSFmgy2pdE/QWC3xlDW5ZgEvVy2z9W141ZSVKFx+QC+qGBf7KWyk5YYiZ+bwsdmSJ7dQ1P25IwfNpfZS+RbBke0CROQqpAfmalo6ETorxOggq8RmM=~3424817~3683888; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:02 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:20:57 GMT",
+          "set-cookie": "_abck=32A7D01926D83E7481A643C5E04103D5~-1~YAAQMVHbF+AKxYehAQAA5WEuihArxX33zp3a4I8rjAOJ472W4fUg5fafU5lu0rpf89ZBTLkxYCFQNBVkL0UZHiJ/cKC9J+XBXbRtoleh2K9DGhN5DafVCwojpn8QCLKdlQSVUNwxM6uVPZ+eFbXN1lmghJe8dHtsY3j6xFqH/Mm7QuEW0fB3x6kiKu6dryu6XnUxuwwP4wCvQ76inpZjZS9KvBZmPYPl4sWARjB9u59ZpgMC5B2evgkMWm77nHRnzQQA444Cp5Hj2fdKGPfQ2+t2SFfXzNPX02IkfntWZwHcC+DwOJRu1/gy3Bylr5afBNVITrQ4e0mQfZzpid+Z7lnEq1sp6FaJ7EvEKZSiXPa50dHN5xWsSJAYgVymMFpqf6SB6bKEETulS51nTx+LkmQG84P+1zvrk2wE44hqgsmxqDMftMyhNkqwWJbeeyaJqrjMcSZsUDOChriI~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:20:57 GMT; Max-Age=31536000; Secure, ak_bmsc=76F6F6BDA40DF53C7C7273E2FB2D69B2~000000000000000000000000000000~YAAQMVHbF+EKxYehAQAA5WEuigEQmKaiWrznrRkwtFoNCVohIEQZBPTq2XrRSjwM5g4zgpsnXpe2mi5k0a7yl6+jGX091EzvrCGsF+cKd/RoGic/FWo4n7uI3cUq3qpjjPxj4+S8tZRE3D54vQaSut99J0w2SZx+vdHgqqKCnw1YrMrAf2JrlRmMTGkpxSxRSm7WUikFmsy85BtmxhjbiIAriQ9Li1rlfHh/GEp9oZwKJd8Qe0S//KapVunlvWzTqMkTgrlvsIgryzkV07NnHwpdcTA2/woSFNwYpA3VbldtGyLqj4I+POrPrJCGKfyIc1dUzlZOFZx5e1srccbQxAEisrd9jLg6CuX0AbSh2+ExihnWsGMNaoeATU6GVZqHCc4gJ9qdfDFeeUnUVetjaZsq; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:20:57 GMT; Max-Age=7200; HttpOnly, bm_sz=3C33C93AD56E48217A254DBACE50DD23~YAAQMVHbF+IKxYehAQAA5WEuigFemDekkCo4TMYPy55n4gxNR3udyac/oicQkH3L30lXa2D6PQJG1MLQHpszB9DecEwuQ7iDcOO9tf8+YHJYVwrwdeVr2ah9g1DR361zIjO5G3t0Q8CmIBDtIgmog+Nq7kTx7RF/AcPMTlan/5GYK87508IP6KE0JLQl6mVYQnKmrPPqASxE871qb3HFiXXqpSmcW3KsrIdyCz2MF2xa+T6uQX9iI5/JrrCN7SBQl6bVkF1mxaG0Ftoi0l3TjKDXWy0GQ8NJE282CtD+4Rcst/ED7luXnk7iawtu4Pv3ohswujOj1vahueN9dfaiO9Z9hmWvuAmPsEexsVTHnzlJyD8JJyt/VXmS44h5o3ScVuVDO30pGIpw1jLi7qahJslCDxk=~4277827~3158835; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:20:57 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-59f7d0dd69f3b0073d3979a2df755264-df77bf8bee380644-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "f9d4e423d6099c08136af13a623f8c97",
+          "x-vcap-request-id": "3617475c-49a3-4fed-4879-d0eb3c54fbae",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "23.203.89.45",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999980211257935,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.99997663497925,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999987602233887,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999794960022,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999983310699463,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99998211860657,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 15.999977827072144,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 145.9999806880951,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:04.566128Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:05.135031Z",
+      "fetched_at_utc": "2026-10-30T00:20:58.780710Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -666,106 +193,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:05 GMT",
-          "set-cookie": "_abck=A3D549229212A5760A88748AC2E58F7A~-1~YAAQiz7cPRLfEGehAQAAyk3YhhDzyQH9oO1aVa6qQrEzK0heDlv/7IiZXS6JsAhfcdp6w51CXSWk/W96JKL63AYttokUB2W57sayhgFzAopLwBYUIZ/OUoeor2n54CTWPVHr86KoS3fWydcR6NC0rOocE0fLD5eywcy6lExj+HXAfGjHeIvOy95e7Bt+nWKIKUxxxIcfE0xG6/pTX3jndDcmqSSCOsn+sOoZ2Wc7B0/erdhXTD/T6RR3QvcDAIsOBLUoSFFuomY7Wq+sFOxMfYkmmuimkvTa5C63Rgh8eL5VDoMCvqIXCmw8799zdzgbCGXucVe2i1O2qf5YIaf6Zv0i8qqrgVQK71Z23bOFHdsur70rK7gW+z+UsnzApb/OuFnOUlWEqo2F+HHzofkaX8FLOeoI6rBdtHWJ5+HeD028ZdTb8cpD6gNdDazdloSJ5kzop9ytAlmmDr80~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:05 GMT; Max-Age=31536000; Secure, ak_bmsc=53D293032AA5576993BF970FDC2F260E~000000000000000000000000000000~YAAQiz7cPRPfEGehAQAAyk3YhgHuJGRaX2j0fLQ/5/3gOr3or0/3Q3QCizr57R/fgM84Xgbz/r+EMzFWUuEKINzOHM1QVwwer/hJwgLPvDaFkJlpZk4hcsudWH/xkAbsKVnNcpKrgw3nKdbe6Er/+jSuZA3TMD2waC1xhtk2KfOssN8FGBtBe4ovA4l3chNj7uJovmPhDMdGNkff9ad4GkGS0yF7pRK+y8Tz0WA8FNQ9BLD7AMJeHWP+msmydIHIz3wvTSJ5txVSDi/QD+JwvcAJ77b4sMUMno6xHelPuK+DEHDZZRxJ5azlyKcAMWwtzo+ja1Gu0Uywp9DHL3DDloe0k56givhMZciiqoeNi4qzQpDC/fu5xbw6op1qP8ZAnEWOoBe7sq1SQquIoDlYxbZk; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:05 GMT; Max-Age=7200; HttpOnly, bm_sz=B5DBDCD085B16CB14AB3EDA4A06E1602~YAAQiz7cPRTfEGehAQAAyk3YhgHnDzRhHO+lpgNA+YM/7fW9X6e8MEZaT0ayKieicH/pcVhC2wKCzFG+XKJyZlNtQhsoHcE5oiVsLiHtiOvessCzsGhqNK+2jYw5B5otpTFU0QS1oqefcMCTqybBktj0wcSqU8gBhE8vdaN7qdJbFbz2DuIE4+tx/mZ/6Zelx7QihL8tdGhv+ybY8LwS0mUIpZP+oUp9HCRYg2/pwg0kShVMXnE4Eow9JD3DLdXGJ4pIunO3YDrGAhuwfWWZoYQBlZUdMMvC2Eh7PY9sNtQUQW3zz0+XRzITGrOnQKuU912rF1990EdyAw+BSuv95Po6Vn8+DWSZb2TUm63Dmsk58ksSE7CfB80CVzxYtS1gcLq3is8AaGfYhYBhIUiaVbylOFM=~3356739~3228726; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:05 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:20:58 GMT",
+          "set-cookie": "_abck=CA3E7C200D994B4235CFE501E3A0DFC9~-1~YAAQMVHbF+4MxYehAQAAFGUuihCI1+vRqJLMiZ+kTVJO16lbDzV+YUXiYx3Nt4StvVIXZuggiUNCXIFWo4O6udfCivLuGfkkWNwg7+a4XmeH0LFG+XlR0kjPLUXOQFAXXHmk8rCl4aFdDlKCCJ+KgDpOOruPKNevDn8t0dL+PEHtrbpKs9nu+Qw1zO4xFz5CNDwuUQ/Z2GaMg41sKgIbIokw1V5uwct5WbzI9giNz9vyJuoo1TA39YAvDclTfeCFO/eJ23eJH6YEpdENDM9FSFekjRBjPQu9lMI89m/t6RlKtYhL8qheWwROULuEUI44V4/Z4DlKqEVr0bJcOmO2PIci4IaXzzxVbeV0D6F2at13VIAiQ8Iil36qhO6d1/mYzujxcFZlH33da617BPsaPqKIdrkyya//nzujnfQchIN6FVOKsmUnHuj71SFR4CAAH7syHq/0YWX0PfDz~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:20:58 GMT; Max-Age=31536000; Secure, ak_bmsc=84D240B3E8AA72CA9A233AE303D5E521~000000000000000000000000000000~YAAQMVHbF+8MxYehAQAAFGUuigEOe4RDOTdiMKKVLjZCgI9VnVL9vvSTiBiVJtD0uuQ02DjfzhYSMvA5KlQ4ZIZ/SBXgfMK5Anym35d2RdB6LB67BZlf2vmQMNejTAEA4iTZnl5/jZQdttxc8Cq12pXwW0qDUzwI3YHfow4LCNHgDq3nfnNSKl/vgo4a6WTgc30/Fz9fLk2BhAxxqOR8TyKbdZdVpv2kkMwAgxyBCFTyuAmiRz2qE0KGQyQrV473cxWlY9OQN+M+J7fHoXigYTF64nWz6c/nALjvtosr2oNN0B8aXn6Q+I+4ujvFMhaeA6VsJGcF15li/8Bq+zBsBuYc2lZbzHL/XRB3hTa+kT8gxSz+DOGTrMB9yUidFritNCxRqfW5ldl7bkK/H0NLVQ==; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:20:58 GMT; Max-Age=7200; HttpOnly, bm_sz=F36492CAA43CB5B7E00C4DD9E6023836~YAAQMVHbF/AMxYehAQAAFGUuigFhI5N1LNblJEODwrrurXUgPFreaXgTrCgE3PclXxXiwL4f/1kRdqVt8YTiDwUBa/KYbjoCurysT/w0qpqOa+PeJ2dL9JwHN/mfwf3l4rQ6Csc2hMQ0zKU0WqbZ1iNLgRJKwP4O+CWwCpw6j51Tzw+YJ0FZCNbdA4qZhs1zN4in8mG/wtiAiqAqS5W1LN+wnDi+lmYiJ33nFsJmRDj1daGFyAHvM8ZJkmL9X8qqS3HsezxnoXI8wa3Vvn8D0+dubJGDdY9cxTAfgnBFv306WdZ68pmX4U6clR2yu2f+fwizDTfKH1QnBosh7Rm5nvEArLvWTcH8kyNbOC6txrQ9wwFd6yYE0AbZ8ULsh/a0d81+9nQZdo3Ym0xEMC7t4UmO~4408889~4404294; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:20:58 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-59f7d0dd69f3b0073d3979a2df755264-df77bf8bee380644-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "f9d4e423d6099c08136af13a623f8c97",
+          "x-vcap-request-id": "3617475c-49a3-4fed-4879-d0eb3c54fbae",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "23.203.89.45",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999979496002197,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.9999759197235,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999944925308228,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999747276306,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999982595443726,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 297.9999735355377,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 17.99996542930603,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 297.9999794960022,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:02.935710Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:03.744523Z",
+      "fetched_at_utc": "2026-10-30T00:21:00.732214Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -780,105 +228,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:03 GMT",
-          "set-cookie": "_abck=FAABA334F3F106B1E3E1194BA4D80125~-1~YAAQD1FFy0FBAHihAQAAPUjYhhB+9Ljy3qLlESNJgpI9cDxHDJ5KG+BJV2G4+HqmYIBUjrSCj6L98iov8Jcoo7ooIiapr+gq4zxm0PYaCblBv6mXo28V1APFRdB2vUvUXccGWqyNb1lkYcg286d+wPz5VFtB2Wm1TA9ZH7WnC68yX3O5rCXrjOBnUq3jYStFyUPo0dq01SZFVAbXI86vVYxenlwn1MCOBx0izRHHPWXAFvr68/ODnw1YGtywl2zGacRLoChDZbMUvC4CHANfdn4EF6YQC/iLo+4surISzJ9nSbWBDCj2y9RtLP9kpTCb4ySGF79kHVZ2xjzxw+ailyoFlgQc/AIiAdc/yIqp5GoRYmnjFQ7Ym1W2FVlC55w5O5saz8AUx5y02qe4ZACw0XXJYgERhnlwtyQvDbzNBDq6yicK53l3NUHVwkECJPL3BmQ0SD3oFOoPYcTV~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:03 GMT; Max-Age=31536000; Secure, ak_bmsc=452D1CCF0C66FB2FE65B2CE6AC13D04B~000000000000000000000000000000~YAAQD1FFy0JBAHihAQAAPUjYhgEnCUt86A9ddz7LymXHFO3G7x2fdn0Bp4DkAtKXLC3VmLRdRjR5Zs7+yE3UFHdTbVxIVkWH5ut0kcDWtMV13N8gRx3a1IZaxsW/lsh+cUavAKFkTcAf6EMo0Xutrkhm3AotvbiVHmxjao2kMEGpYDQjFTlh9m/H9eUC0LWF28kqrPWjrEbmOOH6DNVLINp8vR0T3paDMmkloeWWTeGzHHcorNpMmkC5a53giNR4qDszpwlqyV0ZI4PhceNSPYZNXuQpPhpZcVQonA8D6VUqwiExdgBB6k+Mqc8ovEShsnm+c8IjvVTsweq3jDx7M2xnbmDWqIHGeFxIoGagrKhGflZptNjnL+8TsnhHdVTBRQWpxFhSOAlRB2mVDrLZbWw=; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:03 GMT; Max-Age=7200; HttpOnly, bm_sz=464B63CDB3046233B85124E43BB6B9C6~YAAQD1FFy0NBAHihAQAAPUjYhgFrCFhtJXe+/QpzM4DKllgKJANBcS+MNLat9oDsnbPFFKimH6TVXrZ/KSX15D7Hj384AtCGoNgYvRO+jnaIM4PfGKfTal1ifZMkYDNV+9ZdtJ6KLZkEMt0vMF7983rMCL2kv6fNCjTE91GRBGBvLN8zNVLOwOy7abOJSRJHh4f7lVpHwtpqDUIQaspzo7dm1I2ZkGMzwOcoCLxw9m27VgnNU8nts5+3uxMTv+kYL6j1R6ZkFbidiAE7ywPs4dXLv/TtY7s4S8tmZBqK8VEn3tAhrIXkOTS/K/JTvKWjRhNWTbkPvdVpkynNc1QVxv8jf3/7dV4IC6Y+vAXG63oIW8PnlHK+f2dBqnphgMoHrotK9zVleDD8ucilcEzAUFSfAQ==~4273475~4276530; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:03 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:00 GMT",
+          "set-cookie": "_abck=4DD74082884BC4BA36B964195543B921~-1~YAAQim0+Fwz8aYWhAQAAs2wuihDDkiBS21KSE0dCbzu6y/qEMjOOvedC+bT4YIDWklrfOAcvwpMJmj8RsxKcCaDY+joxNxjT2pXf+39pNG2koedfkuNbXg90vZYGj0NMZFLSMwTRHSjoA/47gVOaWtdXHYaLOA2fWKGSHNBaRnAG0npsMpMM/QSJ91Mv86JA01+NZ4MA3G6GGkZmgWZixmpUnuPh1Vw9iNsVL7JUMQw5bStFZcDGzbVgXOiayq/TmaDwIb8M2QlIQoEc41bVuxAFX1GnniNyVmzGKLtTjFg34jbUdrpRYIbbTI207/Lc9b3r/XF7MuwxrrHn8oeehCEt3cNSDEigF8loFEcYUsxPFjwqw5v4/wMkmqsV1Iueq0tu3M4hPDfnXFijpqNpNUZ5sAe1UtkstkPvG0+eZr4eH0vIJslZLojsu1Qo37SzDx+p/vqcnoh3pnKu~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:00 GMT; Max-Age=31536000; Secure, ak_bmsc=AA82217F2D74437F8B0E6DCE45AD1D3B~000000000000000000000000000000~YAAQim0+Fw38aYWhAQAAs2wuigFXM/nrP28To5GMtGefFEU94yWiDK6r+/r1P0jCEdkqn9pLz07onnpuEjbj/V7nXqJ5zSUJVgAq1yz2MZo5iUNCcjHzPvA/SEF/6bF0u25uWZEeQM2lisXbDFi4MzKeSDuIZCGfQ4P4jQwbegDOysmrHN0BKNsqEidZMK8bLl67sBu8K2bRaXoguAhSJcuWxitQuMAzRZ+2UE3YEsHI5aXhn2A4q2A0hcPhrDXrcpz4sl0xTPe+t8QDP51iOWArc2nfMCEifCF1HyLU1aKkY9orf0FemohCvHiyvCRhqFeh5bey8u269gbf2iRGXHCf3EBzwPpGb9qqaYRB+H5EjgKC3z+cK2JPbE+z1LXT3IvGYm70K06i3oI10jrgkQ==; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:00 GMT; Max-Age=7200; HttpOnly, bm_sz=9C1918166B96EC4335605ECA881BF3F7~YAAQim0+Fw78aYWhAQAAs2wuigFxUXMKVW8F93jU7aN/ZDQor+jEnJHGcehOVXAytjGhx5eMlQXYbN+CYnjsphrto/+tZrD8ERkZtogkIR0MD3jU0bFDxqld2T/TXYskBjeANiAv0OZUmGG3y7+M63PM8jwr5nUrGpVQT1ojtGHLDHyKeRMRcle8rz6CIw6JgVyPXHnrSvjWgLbDkBBeC+FEpw39Xffoxs51M/NP1kQtaqTp+/YJur51rhv389FDi15iGUMw6GrFlLrC4gaRA6TwypWt4wNRtgJ7N9jxqKacZmTAxycNm5kFRJeeQnHda6nuNgnTk56JzraRVcBhxjOj1Uso9yBjkvML5O2cAXRPbVefrKzE7WWCBxu7e8VipRfCoN+kgL6aN8Ko2FEJTCc=~3425332~4469826; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:00 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-a1f1dfdacb04e79f5eee9578e4db64b2-750af7c3d7f7a897-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "69bfe77f79604870a1c57aa6ff7357e3",
+          "x-vcap-request-id": "b9ba68b6-5599-4aea-5662-dfc8d082cc87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "2.19.146.88",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.99998164176941,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.9999690055847,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.999982118606567,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.99997758865356,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999986171722412,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 294.99998474121094,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 13.99997878074646,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 294.99997091293335,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:06.518605Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:07.131695Z",
+      "fetched_at_utc": "2026-10-30T00:20:57.619454Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -893,106 +263,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:07 GMT",
-          "set-cookie": "_abck=CC01E388AACCAA49A300D0C5BA2348A8~-1~YAAQD1FFy4RBAHihAQAAlFXYhhAeh8yvhUhGGm7i56IVtHhqsE7hARytYsk8ui66a/cppvV9YRs9e5UJ5+KsqKJTmk4K8jDW59H8QkPxf3fPkFXjha/8tACyg05Ps0+Q6ZEHNM1NejSmhjGjTFeOTRplaajIoxhCSlwIWjxcenms78Dl8ODGdxKEno8RJV8SIFcrder8a7xSgZ3m1Ldg6c9dFZNXUoxxWyaZBwFXKsrzQ3DgEDQ8GyN8kw3hIL/gmV41BFnPXwqqHRfLOaCfwk6JOxvTSYboH1Ro6o40elvCbPxWyh7zH8JjddlyaLcTlaVn5jbIKv5fO5lHYQ83ohNAkmzFSp634295h5u4ROipyy+KhOjV2oGpJLcWb1wgj+1MPIx2e/LzivdSE1zWKA7SgSKA570ULyIfpcJE+ExP141TD06rVRlDcZDh4TwsxHttIiVPI9UhjQzA~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:07 GMT; Max-Age=31536000; Secure, ak_bmsc=AB4D03A9B183FA87EE992688765A8191~000000000000000000000000000000~YAAQD1FFy4VBAHihAQAAlFXYhgE1EBrgXURagQY/lgHyx/TbCCzG+2G/gpD2VNQCGX+e2DRXOg2LcowWRZA/hUwEzT1yn4+DeURfuSIyjgPUxYGzuVPkj1xWsWkPipMJHtnKNfHGKwlZ4TxBMd3qiWyOU/Y3SGmPHxavrm+XRyJIHPnh1GiWaUFuzm+3GZozvx4wwLmBYs7I+4Q+q4qdDMLnSdy++GgI42bD+O8r7L8IyLoDHQXPaMGZtf5SAQ/iwqplFHeEdoUqsNxeqtnehQkOkAWBzx5tBFUVVymFHSQ/Www47ky9ronpd3eoxoU0DBZpz052T9QNiXTP0IPSAod3g13Ht0xVC9jGrmz2ykWDGaJC4HUZ6A+15eKmZPlvQON6LTUGracB1Q7BbjFg; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:07 GMT; Max-Age=7200; HttpOnly, bm_sz=30BCAC5A0C9862F619E4BD50F234A6E2~YAAQD1FFy4ZBAHihAQAAlFXYhgHLNL8nch5oBE1uS8ChsEKylkfCnYhIIc2IRe+BnVWOmHLuE6tCLkLcad6hFXchUpJYQcmPGmHy0dYdgKgnQHJOMQKaliYGbQ9DM/aYyeAvH90n3suugiU0+hRV4AagltHKfrhg4NEA0aEXZ00JcRBt3wIyc/HmpDzftl6Nt0rAVbZDdqkTtf62W41H2ywG0pdQDJqPk/9iMKuTyZilY04SXykXQ5SWcYvibNjSM5S4apu8gpaEcdeydxfc1qoApbO/iS6DFK+iImQB4ieS2+Rn67r7lo+9bY8Xzii912D/x5UzmDAKxGR+3FJuV9w8n3YAdweV1Qdp2QlCH21LKkGUQwhMzzvDUzZrffMqiGa7+jhoTaq8D2ExA5vTtrI=~3682884~3621445; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:07 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:20:57 GMT",
+          "set-cookie": "_abck=D471B5015B05DB821969BCBE406997A4~-1~YAAQKFHbF6jJG4WhAQAAiGAuihDn7T+loYJZUtK6AQQS5xtv9KT7btPm4mDFirH24PmnHK4kiIm5+o9XHZ6PcKedLgrZ6OjQH8dTVNPYCC+Hdnigme4bDojMr1GwOIXymJ8elVc7W03ipujR8obHsmyeRRWunZbcTx516iamKh4HppOI2KblzU665gcBBVkWaY9N9n76i2EiP2B9pPdM03f1ZfYLAmX5aPbmKJYzq+EaPkMC3DK7jMtciRE8yO++SEZorw3YwuHbwBfON39ejJiXhN60L0dspEdOBH8028gl8iTk/C+I6PeTt/k5lZQq8b20fsbNo9AK8MLSez5JzA+i4EzzV2ziyhjm6OWHZrrcX4RmEtBW2vGDIadiuQF07JpJrRJA3kaQSMXJcM3P+QIAj1LWqiEcc2eyVY+wJWuUvCg8r3b/woDppc+GC6CiDYjVEgEczYZ+JXhs~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:20:57 GMT; Max-Age=31536000; Secure, ak_bmsc=034C0EDFA66416D751BF7240AC06AE1A~000000000000000000000000000000~YAAQKFHbF6nJG4WhAQAAiGAuigHjHCMZZZds9zlqAAuTtnpMy+Olvk9ALE+gt4NWTMvJT+52kgMO9+c2xPtEJeYy7HQBH7Ci0FPjAQ+yCL+mTrGKDV60u5AXDKkeyvAU9k1bUxjx1z9wq/ux6zuwCqCHTxoKRrllF+V9PCgvdO0gjjOy6AP+wYHQU4nwgda9P6fEDKk2nSzgHWYrQLlI1YZkVNefcjR+sRAdwXGmYxIEAateM3r8bXTpz7X2Gb4uva+auRbV2g9ZvgDTcY1FG8MSCVh0ELiUNFHVGirJ3nkUU/UDsFv2mOqAcXKJqe4e8FNSr3C2adABnEZE+ilFAMjuVLWm0LgJsyopxuuE8m3XUargNq1BurSj+/dsfhvlqI02QbkPyFlv55vBcFO68vVt; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:20:57 GMT; Max-Age=7200; HttpOnly, bm_sz=EF1F268E9DF4F4C393C4FAA06754A2F5~YAAQKFHbF6rJG4WhAQAAiGAuigHTisbfd6+f1SsUf0eCmEsSlfE2GN4FH58rU1RY0nGfoIiT0EmyU/APnSIOfBAl3SDg6cGFTU6O+iW3PHFAsbjVQjtnA+F4DwkOLhIS8PoKDrwlaM3kQHXb4CS3BiSvcRXG0fjD968XkbfHSmPR2mxh1U/JMDEc/mV8VTqJTC51gCxtog3Z5wLVcgLVcDbV84Uym6sV9zL4aDFcFAwAjeZpyMXuCgWcURod52Gw7tO5F5w+4Ujie4hGXo8j8o72ioruGUJG5YIWcEjck32zZ3vdlpHgz3vVbk4x81KaTZhha1tEiALS0q9GZ/QlsRdenyfVFGblkLdwVQelM5rNPgnEjgpiu1Gy+BaRIvrlvhkFgVqx55LnJSfsNsz20YmF/Kw=~4277827~3158835; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:20:57 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-59f7d0dd69f3b0073d3979a2df755264-df77bf8bee380644-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "f9d4e423d6099c08136af13a623f8c97",
+          "x-vcap-request-id": "3617475c-49a3-4fed-4879-d0eb3c54fbae",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "23.203.89.45",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214",
-          "23.196.29.69"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999984741210938,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.9999806880951,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.99998378753662,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.99998235702515,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999972820281982,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.99997901916504,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.196.29.69"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 19.99998688697815,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 47.99998211860657,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:00.649890Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:01.469919Z",
+      "fetched_at_utc": "2026-10-30T00:21:03.517937Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -1007,105 +298,27 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:01 GMT",
-          "set-cookie": "_abck=65F1D7137EB2A7C95A6BCB173DE5F64C~-1~YAAQD1FFyyVBAHihAQAAWD/YhhBaPhxEw5XSQVEo34S73TaXfxr/i42baJju3lCi/nglAg8Uz53zCE8okWxYcorCE1zwx7QvAvL0mO6ip7D9zs2Nuzh1V3uZOkT15N9+N/VEbbKZBEfWXhdIl/rRslSjNstQm3eLOjVrC4s9F5uJJIxh/1nGJk3mTd79J+c/xQhA2r+LJGdF0NZBES3YYkCmsPBHlKdd/VGeCzJgLbDx3z1f7X0jIAWLtor1+4xVi4tgmhO8XowYBhlNu9rwT3FhaKOZv8CfQiKwKslxxaeRz/iGIgqRwsAkj+iDkMgTr7plP39HvqzOHUWzRn8EMTTOLZf6DlsXrugmwfJCKxpPpFzwmXbXVoZzJqyE/oGKnbBlhkXOXkaBttkv4Bs4sqjiPbqwtIDkCxHjzapC85f6sMNgNcavVIVyd0CzeA6LjAU0LR2SbLzJxTsB~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:01 GMT; Max-Age=31536000; Secure, ak_bmsc=9885041B5E1720BD446885C3763B3F17~000000000000000000000000000000~YAAQD1FFyyZBAHihAQAAWD/YhgHrZWH06NS4Qz5g5j75mmYiIncxgu1JzPGZQ+naMJlzY4jojy9MQFghYTf6Q+0GfxdSi+nrQQk7G6emSzpiO7wfcQcJbSbJAHFDLVwFWaJfNV+mY6m3TM0kkMkvx9u/z2zDqqNDlkexsQaKfeOtCVk4uMN7W/Vpm+36Ho4Wm3zqEi8sWarOxUpaHczol5hZTdMz4qTMaBH1MVDkgJd6GEkssImJpWm3DUw5JGGTlS91nQcSijzfBSMkVKXO7paMWfPgh3QIsxh9uYGyTCDdOll4ucGcleJBtTKDzIJ9mJthYh5ZxiPlhxSKemou+cZ9Si+UiIpOlibRV8Y5xDI56dyxzVtsmA0eAVUoyro4YtuA0e+vGA5JBsYBQfz48w==; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:01 GMT; Max-Age=7200; HttpOnly, bm_sz=4BDE0F9AC8155F1156C2C3E5841B7C89~YAAQD1FFyydBAHihAQAAWD/YhgH3vMh9wxZJSNYzmjhaeBgHi1RC335Gf4MHIuPrSMSEtbrHSxS8h8nbOKW3eGhoa7zM/4F3EBqQuXYROlol+a+rQGW3J9YBzr/5vTpUZktz8sGlDaVu0BzY7yVKirAMGjaV6G0AyVd3uNUs1d8l1AFVEY7GG7FhvvFURKjKLcS1CLlPsJKDsTCF+QT8XutqI+In5uMcHFKZBuqXQ7iULXuAgE3u1WNGp7Kvzz/zQWMhfwhgbeHlUVHaRe73Yg8FPNu/p6GOu32sWk0tRyMAQXOQbnTXnqsk/1dvPFq3Ija01tWlmAh8WlUmvY+FoS3hypbeWDvkV6XUZdVUILAnjPwZUHRN14qspRkUlZsR6trAQSduhNeCNDMQ9E4qN90=~3422261~3748150; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:01 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:03 GMT",
+          "set-cookie": "_abck=F0F56D31B2A5E1D8EED8ECB1506B16F9~-1~YAAQzAwDF/l3nnuhAQAAmncuihBGDbXhPvozYDQmwe2uaW7zCKc7giy8MEPockTBoeH3TaYdli9zlnWMq3Fa8oUO0Q2Lx0XC5tT7mmheHXgjz4dF7PK1rDuJLlGQ8lJlgONlD2Ltj22E2NMCSX3GWm4veeE00nrLCfvXdoLgD6rgsmnsSv1bfIwG3KKQENLRMRbcExoyXaU3W+CIqTLSZBMHdlZc03PuN61J3SSevMOAl6ojKHIFvM0uqX8kd5Ycfmv59SOOmBFeso0kB3AFfjZT90bpz3cm3NnU2VQ8AA45O+bV20uReMMV4ES0o/GXDgehvD2wbNI22bV2QdyJajpw+iYPkykGG4kGEONEYYGgb8mAZjPAEe0sf8GtKG9dClMasrC04CybvldqocFCmUwNBGwsgezAyFsson5PJSVlj4EVh3ufwYihhq5nMkDE+Y3FsdZ5WBuSwTik~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:03 GMT; Max-Age=31536000; Secure, ak_bmsc=A1E93EA798D9A28E5238537080D641AE~000000000000000000000000000000~YAAQzAwDF/p3nnuhAQAAmncuigHoSyWtuSKYk/WCRVUzdI9iGDuBTsPrpF/5DGp79rK88Dgyr4UcDyhjcD2STYBTo1zx/eanRmpJNfSmkefmMvtH2LC18vHMxI+IZhYrYL4ZOi3mdO/PEXns0YcZlr6is9g/WDm2XiWhvW6Uvk9fE9UoD9qBKha4SY+ShcA7LRgFERD5/T3ue8MhjkdMZUpB2rGKNXOKnXtq/hNVLGf20boBQGsBfClxSX4nW41njyUMzffqefliIzoJ3WFdmAQfHQugtFQLMdKalp97vk7qc0gjX97wmTCKFDRb2ws3o7KTnRzLILRi0Lo9z53g2e/vXs7fgq0l8LXxmJhBpksfV5hEVeF9SchSIXQqt996w18ZCJJC7T2J61Go0RnQ/OQ=; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:03 GMT; Max-Age=7200; HttpOnly, bm_sz=DA81E90BD949E8EF1D0C24E83371DE5A~YAAQzAwDF/t3nnuhAQAAmncuigGTe9ck0BDtbqAsgVaiuccuTdBJgpMXGePlfijKFQSA6EzbiFck1+yQmnGggyVGAFxUG/Zdp71doSY5PDuYtEE6FnkySda/MxY1K9SFC+YflGp2+ZXnrduc5Xrl0wBbviigBCdKzQHj7QicohuYwN7FDrWexJoBJfpJ4m7uZNdJw1r3iOJFhJz4LZ0EtlTD9MHOhdDeyixwuiNVW3AOKtv9sGCB0jnWPNz49oOrpEde9VpIpbFcRZ2jUi3tMoDCK+52r50dDEmSa1Vf8GEVXehJ8Hck9dS6Uhw6FPT7l/19LHFpM6wBK9vkwkZjBCQa3+xkzlXhheQ72g1qAIsg0eD01NBePhmFLgiltfas4dlsGlO1fZgfu1MRC6z9t+ErdA==~4468789~3622195; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:03 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-0fda8282d98e50b18f6314f1fe92056c-07c3e9e06d0d0b7c-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "e8a85af99bced09a63b23c4462b28158",
+          "x-vcap-request-id": "6690db0e-7c59-417d-5665-8d0df3912b87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "104.81.165.82",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
-      "dns": {
-        "addresses": [
-          "23.42.103.154",
-          "23.221.144.214"
-        ],
-        "complete": true,
-        "hostname": "www.mastercard.com",
-        "queries": [
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 19.999983310699463,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.1.1",
-            "ttl": 299.9999840259552,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.42.103.154"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 19.99998426437378,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.95.192.1",
-            "ttl": 299.9999840259552,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 19.999983310699463,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "168.126.63.1",
-            "ttl": 299.9999797344208,
-            "type": "AAAA"
-          },
-          {
-            "addresses": [
-              "23.221.144.214"
-            ],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 19.999977111816406,
-            "type": "A"
-          },
-          {
-            "addresses": [],
-            "canonical_name": "e5188.x.akamaiedge.net.",
-            "server": "219.250.36.130",
-            "ttl": 299.9999840259552,
-            "type": "AAAA"
-          }
-        ]
-      },
-      "fetched_at_utc": "2026-10-29T08:48:00.565703Z"
-    },
-    {
       "attempt": 1,
-      "fetched_at_utc": "2026-10-29T08:48:01.382668Z",
+      "fetched_at_utc": "2026-10-30T00:21:02.144498Z",
       "request": {
-        "edge_ip": "23.42.103.154",
         "headers": {
           "Accept": "application/json, text/plain, */*",
           "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
@@ -1120,19 +333,19 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Thu, 29 Oct 2026 08:48:01 GMT",
-          "set-cookie": "_abck=B324A4E971554AE98E88E11AFA8A9CB3~-1~YAAQD1FFyyJBAHihAQAAAT/YhhAQEtSMsEPcyTxjat6nUELDBORWgktd30DwSj2+X8LA31re2mPwPp/cNBKsluSA2Pa4KCA2WCxcbOXoltfQ+ltyhr/l16RfzY8/X6taDgP+rKxAlHBCIaEKUZWw4diZ316bHkOflcG3tVrg6WiVHmbcDIn9PET2tK69T1qKzkXlBJXMY8ablcSjn/2pPUMYKsTfzkjau4ss3/UxCskIgt2KOtmJ4STIQb8n01NzMqpNcmBxkMCs27YJY81Bb09Ew7Jm14zK6482LEMXeFEVKevxQ1Hei6lEuHhFHjZU2PZGIVuehhA2b+WRPVXlRzOisUZ2OiGwJ6g7fF60bzWtFCsNZyIsfPheZKNTQ5Q9kEgs4o9Spl82XaW19IapG4nfYX9i/hiTkIM3zNVL3BFed6tNfWMwcQJnNdNZi/zUIIaP6Nd93bg0FvQc~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Fri, 29 Oct 2027 08:48:01 GMT; Max-Age=31536000; Secure, ak_bmsc=F3E08E46842D477B348FD2D4BFB0FFE8~000000000000000000000000000000~YAAQD1FFyyNBAHihAQAAAT/YhgExy8+e2coPBnvpd+7jB3ApqT+xu3sDdgvSOrxYf195w8VQWfidhwBvw0TmBnsw17OiMDIolLJ9SRF2zfNf94TFOzaN5NrdsYE1d5J6agQM6bP9+Zn7inRwiZfdHVArHKuOPk5qvjMEFXiKFINnSTyyhVqx37ADeAR9b3VbV0TCZL67pv4acbSCRvfr03IOzigmeQg1056oqhDJCOciXB6rTkl22seZr1BbgLM2j0NKGdgHaWGbqxCiXpffSP8Mf/i0rpLG8rJMbgnlQk1n4Vcu2J5qyV88kNJVcJtI1Ssn4uor19UE3p2kCGX/n6aqmQEI/e2+Y5e+dgQ+xXld1z6KCoftXpjjP/TMqF7C5EP4150JWPjmQ7lA6dM2TtI=; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 10:48:01 GMT; Max-Age=7200; HttpOnly, bm_sz=EEAE025AA3EA3470F48D85EFDCAEAC8A~YAAQD1FFyyRBAHihAQAAAT/YhgHhv8CbGCdpG66MAltRSTO01jklMdba/mGIYo8CJG3GNBPqEPGSl80tsW72mhP9K5z+n2A/cbJ8VwWUXj3qVfry/2rYRpRGAXXN5qn3curfzVHmn8HsgTnWUzHCqXa8N+/ASHGz+7DpGhvztVBvY8Rj9KK/YXCF4J1IktYG89vbHXHXXyY+I0WteOvgJ51tYBLSvdzWe+ayjgyabxf+jFZAWdpZ3TcNaHw91/57Cse73c/dlpztFbNdqCmjtHSrbNEz6IJJXRhi5WJIVCDEIek9gRlsRpua38sk7R8JnaAPVTSkd/ouqpb8f3S8GPbKFSRNSuc8/j4dBIMcLATxelN4e9PhFj+wri3Eekn+02ac8MKOznBoW/Kr2pHdWyjFfQ==~3422261~3748150; Domain=.mastercard.com; Path=/; Expires=Thu, 29 Oct 2026 12:48:01 GMT; Max-Age=14400",
+          "date": "Fri, 30 Oct 2026 00:21:02 GMT",
+          "set-cookie": "_abck=7E3678C33354FD578307B67B77CE95DE~-1~YAAQzAwDFwl3nnuhAQAAPHIuihB2yfhjAD5l44PYd2y7bz+u5gbQ3XYctRDaTkJ5S654aCjZo8Yigd4UELNhyM2qCIsx7jKh+92UwQSswdagTtePciy9kvBIHBk1SMDKSEujnBiORzhudXhHll1CWoXapbAQrzLSCjx6sr7ZFLsfgrBo3uut+VBKNJsDra2C7u0LyuO9o8wpxw+461btfm4pLq9KfyE+b9iQf76A4Fiu5OGuNFmHTg0jtr1aw9VK0AkcwqSIRJY+Va9sb0Z/tvUf8LJRCLd4/Wb4iYI8UfEdn5oqVfT9KrYkf1wXU//zzM+E/u6DiOyRhZDC1fsrXY2ocWPqtee0/j1wiutgvOFXBVWvPZp6SAocs5i8qlIWiVEQ8PMIs+ATxCQU/aUKTN/EJjGnJqzmew+0mtO52nk1UET+wum4lJe9OzTc4aeOPjcpgsfc+WcCKYXS~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 30 Oct 2027 00:21:02 GMT; Max-Age=31536000; Secure, ak_bmsc=E086BC766D7D3D4C4572422888E39FEB~000000000000000000000000000000~YAAQzAwDFwp3nnuhAQAAPHIuigFtsVqKR3lN31Wdlgot3gm5FmKTcDf6rviP/DEnFP73ltdeWHUoUB9RDcDRHwgIx80SaRfZvdKYMDREAhvVqMd1hKxl6usPqdN5jixWyO6xW+fNNcFADYGBM+xCPT+P58AaZmlRG13Y8NCIORYHGnaL0siepQeKMUhMbdfSfBoYQiN3a+JJ0A1bPTGllvTzBZa46ZwM8507gMwOJhgRgeNmb7Y8580isE4lgPrQLBRU25xUL0D06mbnZuWaLII0YPhIGPR6h44Rshq8ap/2DIPrCGklPWJTD3E15Qq7/A+tYmz4k1BKGOs+DcvK0+tLRzo5BdjJDmtKQh+OfrTosgqM6ev3dxOIwEWxN6KPJ4NIbrVBUP0JuebAdN1kGeI=; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 02:21:02 GMT; Max-Age=7200; HttpOnly, bm_sz=BBAEE911E363B340E97C41A510E145CC~YAAQzAwDFwt3nnuhAQAAPHIuigG/2FMEDvRynraqtN0l5VhQRlSoPviQSY6FAdt06WA/IIlJ7nq8hz9z9zLNJuVPcZQOdQNc7cp+zQCIH4LdO8qXfkbJyzrBGymp8OOf3ipryw5bY3UArJw0yekSnIz/Zg5ok91G1C+KC+oAxX9MYl29MxwPdJYcMGyxTlfsMFNAqwcbalEMHR/qzRTMBOlRXlzGxpjOmAkuY38lg8Dvr3eav2tR/OZaJtRJQ/QknLA5RlsfyIsmFstgRwlQ52JgfIgSie1NkA72poQAhS3Kz9dge91249ry3xRzkxS+iQ3i7EltdnMwYl+VM8qwUeLfDnRKSeIImHyqFkQh41OR80SVnD1rySx08wqdR9V3pu3L62NiPVjyvB04Q2XufU3UjA==~3293766~3748919; Domain=.mastercard.com; Path=/; Expires=Fri, 30 Oct 2026 04:21:02 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-3af49514116f921e8b4bc19dcbfe6483-53ca1946acbc0aad-01",
+          "traceresponse": "00-0fda8282d98e50b18f6314f1fe92056c-07c3e9e06d0d0b7c-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "73b183973e3b25f66d098d15b4621f19",
-          "x-vcap-request-id": "3a508f52-cd68-49b2-50af-23575a3f1794",
+          "x-mc-correlation-id": "e8a85af99bced09a63b23c4462b28158",
+          "x-vcap-request-id": "6690db0e-7c59-417d-5665-8d0df3912b87",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.42.103.154",
+        "primary_ip": "104.81.165.82",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
@@ -1142,56 +355,56 @@
   "parts": [
     {
       "name": "shard-01.json",
-      "sha256": "b8aa7390a43215f3c2e1e95cc462b1b5a356c839cfe4f23695929feb1debd9d8",
-      "size": 9707653
+      "sha256": "31a132480a88e18955f9b90d79694dbf0d5cd5c4d680c1d05ecfa0c5b4a25e8c",
+      "size": 9441838
     },
     {
       "name": "shard-02.json",
-      "sha256": "c6714d26b14d199d93426da58140615cb5098aae5ead6a5f0a134fae08c5e6be",
-      "size": 9682858
+      "sha256": "87b4ad9671300705207b76e40171895a264d294a4158828c61160e170340b37d",
+      "size": 9453982
     },
     {
       "name": "shard-03.json",
-      "sha256": "4b167bfaaf32f69a493000c094b8662e24017adbbd88f69780ce6dd83e9ced23",
-      "size": 9691898
+      "sha256": "feea52dfa992f42155a01a308bef19708a95b786177aad64000ab31484a47e2a",
+      "size": 9451980
     },
     {
       "name": "shard-04.json",
-      "sha256": "59017870efb945e1ca61dbf47232165568bb2a62ff8ec8e0202b0aeb9727cade",
-      "size": 9679503
+      "sha256": "2c842059c2e9992254b0108248e105244ec630ed007ffb8daef7a3b974674d69",
+      "size": 9449498
     },
     {
       "name": "shard-05.json",
-      "sha256": "c8bc42c7c92c62ca484f96602e9422ea18ed42513c3ba03c64132246e5b10518",
-      "size": 9728612
+      "sha256": "c6974d383a5fad14d6ffc20b5a146e9cc8e1199df0d748bfd242674e5e162f18",
+      "size": 9447728
     },
     {
       "name": "shard-06.json",
-      "sha256": "da79cf2015d4e00aaecc8486ef7656ad8068affa88ed5d3fad12d9f86ca3c232",
-      "size": 9697556
+      "sha256": "a4d35af34288b5465fdcdf744fa7591e74c75c10456fb7f244a64d9ddfe6bebb",
+      "size": 9439378
     },
     {
       "name": "shard-07.json",
-      "sha256": "fe55c70b838c3009c7a71870de376d9295cf8508b49cf34068ca9e7193f43db3",
-      "size": 9711321
+      "sha256": "c41cb7612b29e23fde8bea8d1b9777fc552b90b26c0166b51ebfa3f31e5f3f77",
+      "size": 9450394
     },
     {
       "name": "shard-08.json",
-      "sha256": "27361c0423a729a44d3ba9cccaea9ecf41c1abc114a595f4eda79d19cb0403ed",
-      "size": 9697493
+      "sha256": "a7053d84512a2f78b4a37becf1611f153438fcbade25ac8c07aad89c4e9e7587",
+      "size": 9449582
     },
     {
       "name": "shard-09.json",
-      "sha256": "96c305435386914b504ba7139c4c1e17891ba9b0113d5509f747ff6159d7cf46",
-      "size": 9702116
+      "sha256": "c48e10a1fc03b62d2ebda5f007d33fc207d40bf1ef6cbd267bb4627efba00e2d",
+      "size": 9450716
     },
     {
       "name": "shard-10.json",
-      "sha256": "81cabf7a6b58d7622b184f0032826242373eb2f9fd5abe8aea9e63a613cbec09",
-      "size": 9638156
+      "sha256": "6548b6612de43ae09691594b14b373af819b0f2de9298c6e36d986f37df380f6",
+      "size": 9368810
     }
   ],
   "parts_directory": "mastercard.parts",
   "provider": "mastercard",
-  "requested_date": "2026-10-28"
+  "requested_date": "2026-10-29"
 }
