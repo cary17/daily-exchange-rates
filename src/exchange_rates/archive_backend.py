@@ -20,6 +20,8 @@ from typing import BinaryIO, Protocol, Sequence
 _FORMAT = "exchange-rates-release-v1"
 _CHUNK = 1024 * 1024
 _JSON_LIMIT = 8 * _CHUNK
+_INDEX_START = "<!-- exchange-rates-index:start -->"
+_INDEX_END = "<!-- exchange-rates-index:end -->"
 
 
 class ArchiveBackendError(RuntimeError):
@@ -177,8 +179,84 @@ def _inputs(period: str, files: Sequence[Path]) -> tuple[dict[str, Path], dict]:
     return paths, {"format": _FORMAT, "period": period, "files": entries}
 
 
-def _asset_name(filename: str, digest: str) -> str:
-    return f"{filename}--{digest}"
+def _title(period: str) -> str:
+    return f"{period[:4]} 汇率年包" if "-" not in period else f"{period} 汇率月包"
+
+
+def _asset_name(period: str, entry: dict) -> str:
+    """Readable remote name; the 8-char digest prefix is a version label, not the checksum."""
+    filename, short = entry["filename"], entry["sha256"][:8]
+    prefix = "" if "-" in period else period + "-"
+    manifest, checksums = _sidecars(period)
+    if filename == manifest:
+        return f"manifest-{prefix}{short}.json"
+    if filename == checksums:
+        return f"sha256-{prefix}{short}.txt"
+    if re.fullmatch(re.escape(period) + r"\.tar\.gz(?:\.part[0-9]+)?", filename):
+        return f"rates-{period}-{short}.tar.gz{filename[len(period) + len('.tar.gz'):]}"
+    raise ArchiveBackendError("Unexpected archive filename")
+
+
+def _attachment_role(period: str, filename: str) -> str:
+    manifest, checksums = _sidecars(period)
+    if filename == manifest:
+        return "包内文件、日期和卡组织清单"
+    if filename == checksums:
+        return "下载文件完整性校验，不是汇率数据"
+    if ".part" in filename:
+        return "数据分卷，按编号合并后解压；扩展名前的 8 位摘要仅标识版本"
+    return "数据包，含本期已采集的每日汇率、原始响应和元数据"
+
+
+def _body(period: str, index: dict) -> str:
+    lines = [
+        f"# {_title(period)}",
+        "",
+        "本数据包包含本期已采集的每日汇率、原始响应和元数据。最新汇率见 data 分支的 latest JSON；"
+        "GitHub 的 Source code 是源码，不是汇率包。",
+    ]
+    if index["files"]:
+        lines += ["", "附件用途："]
+        lines += [f"- `{entry.get('asset_name', entry['filename'])}`："
+                  f"{_attachment_role(period, entry['filename'])}。" for entry in index["files"]]
+    lines += [
+        "",
+        "<details>",
+        "<summary>机器索引（自动生成，请勿手工修改）</summary>",
+        "",
+        _INDEX_START,
+        "```json",
+        json.dumps(index, sort_keys=True, ensure_ascii=False),
+        "```",
+        _INDEX_END,
+        "",
+        "</details>",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def _index_payload(body) -> dict:
+    """Accept readable bodies and legacy bare-JSON bodies; reject damaged markers."""
+    if not isinstance(body, str):
+        raise ArchiveBackendError("Foreign GitHub release body")
+    if _INDEX_START not in body and _INDEX_END not in body:
+        try:
+            return json.loads(body)
+        except (ValueError, UnicodeError):
+            raise ArchiveBackendError("Foreign GitHub release body") from None
+    if body.count(_INDEX_START) != 1 or body.count(_INDEX_END) != 1:
+        raise ArchiveBackendError("Malformed GitHub release index markers")
+    start = body.index(_INDEX_START) + len(_INDEX_START)
+    end = body.index(_INDEX_END)
+    if end <= start:
+        raise ArchiveBackendError("Malformed GitHub release index markers")
+    match = re.fullmatch(r"\s*```json\r?\n(.*?)\r?\n```\s*", body[start:end], re.DOTALL)
+    if match is None:
+        raise ArchiveBackendError("Malformed GitHub release index block")
+    try:
+        return json.loads(match.group(1))
+    except (ValueError, UnicodeError):
+        raise ArchiveBackendError("Malformed GitHub release index") from None
 
 
 def _index(index: dict, period: str, *, remote: bool = False, empty: bool = False) -> dict:
@@ -200,8 +278,10 @@ def _index(index: dict, period: str, *, remote: bool = False, empty: bool = Fals
         if remote:
             asset_name = _basename(entry.get("asset_name"))
             asset_id = entry.get("asset_id")
+            legacy = asset_name == f"{name}--{entry['sha256']}"
             if (type(asset_id) is not int or asset_id <= 0 or asset_id in ids
-                    or asset_name in assets or asset_name != _asset_name(name, entry["sha256"])):
+                    or asset_name in assets
+                    or (not legacy and asset_name != _asset_name(period, entry))):
                 raise ArchiveBackendError("Invalid archive asset mapping")
             ids.add(asset_id)
             assets.add(asset_name)
@@ -486,11 +566,8 @@ class GitHubArchiveBackend:
                 or release.get("target_commitish") != "main" or type(release.get("id")) is not int
                 or release["id"] <= 0 or type(release.get("draft")) is not bool):
             raise ArchiveBackendError("Invalid GitHub archive release")
-        try:
-            body = json.loads(release.get("body", ""))
-        except (TypeError, ValueError):
-            raise ArchiveBackendError("Foreign GitHub release body") from None
-        return _index(body, period, remote=True, empty=release["draft"])
+        return _index(_index_payload(release.get("body")), period,
+                      remote=True, empty=release["draft"])
 
     def _anchor(self, period: str, *, existing: bool, draft: bool = False) -> None:
         tag = self._json("GET", f"/git/ref/tags/rates-{period}", missing=True)
@@ -548,8 +625,8 @@ class GitHubArchiveBackend:
                      draft=release is not None and release["draft"])
         if release is None:
             release = self._json("POST", "/releases", {
-                "tag_name": f"rates-{period}", "target_commitish": "main", "name": f"rates-{period}",
-                "draft": True, "body": json.dumps({"format": _FORMAT, "period": period, "files": []}),
+                "tag_name": f"rates-{period}", "target_commitish": "main", "name": _title(period),
+                "draft": True, "body": _body(period, {"format": _FORMAT, "period": period, "files": []}),
                 "make_latest": "false",
             })
             self._release_index(release, period)
@@ -567,7 +644,7 @@ class GitHubArchiveBackend:
         entries = []
         for source_entry in metadata["files"]:
             entry = dict(source_entry)
-            entry["asset_name"] = _asset_name(entry["filename"], entry["sha256"])
+            entry["asset_name"] = _asset_name(period, entry)
             asset = by_name.get(entry["asset_name"])
             if asset is None:
                 url = (f"https://uploads.github.com/repos/{self.repository}/releases/{release_id}/assets?"
@@ -591,7 +668,8 @@ class GitHubArchiveBackend:
         # Recheck the tag after uploads; a draft may not have created it yet.
         self._anchor(period, existing=True, draft=release["draft"])
         updated = self._json("PATCH", f"/releases/{release_id}", {
-            "body": json.dumps(index, sort_keys=True), "draft": False, "target_commitish": "main",
+            "name": _title(period), "body": _body(period, index),
+            "draft": False, "target_commitish": "main",
         })
         if (self._release_index(updated, period) != index or updated["draft"]
                 or updated["id"] != release_id):

@@ -68,11 +68,20 @@ git clone --single-branch --branch data https://github.com/cary17/daily-exchange
 
 月包和年包均包含汇率、原始响应及元数据。已归档明细从 `data` 分支移除；该分支仅保留最近三个已归档日历月的月包，全部月包和年包从 [Releases](https://github.com/cary17/daily-exchange-rates/releases) 下载。
 
-- 月包标签：`rates-YYYY-MM`；年包标签：`rates-YYYY`。
-- Release 说明中的 JSON `files` 列表提供附件的 `asset_name`、原文件名 `filename`、大小和 SHA256。下载列出的附件，按 `filename` 恢复文件名后校验。
-- 单包为 `YYYY-MM.tar.gz` 或 `YYYY.tar.gz`；分卷为相同名称加 `.part001`、`.part002` 等，需按编号合并后解压到新的空目录。
+- 月包标题为 `YYYY-MM 汇率月包`，标签 `rates-YYYY-MM`；年包标题为 `YYYY 汇率年包`，标签 `rates-YYYY`。
+- 每个 Release 的附件说明列出数据包、manifest 和 sha256 的用途。manifest 是包内文件、日期和卡组织清单；sha256 仅用于校验，不是汇率数据。
+- 附件名带发行短摘要（如 `rates-2026-10-df78374e.tar.gz`、`manifest-ebb44284.json`、`sha256-55e11b88.txt`），该 8 位前缀只标识版本，不能替代完整校验。
+- 需校验的完整机器索引位于 Release 说明末尾“机器索引”折叠块内。新版下载命令会自动读取；旧版 CLI 无法读取此格式，需先升级。
 
-以已下载并恢复文件名的月包为例：
+推荐用项目命令下载，自动恢复标准文件名 `YYYY-MM.tar.gz` / `YYYY.tar.gz`，并按附件中的大小和 SHA256 校验：
+
+```sh
+python -m exchange_rates download --repository cary17/daily-exchange-rates --period 2026-09 --output-dir rates-2026-09
+```
+
+下载后的目录包含恢复标准名的数据包、manifest 和 sha256 文件。如果数据包分卷，附件名保留 `.part001`、`.part002` 等编号；请按编号顺序合并，不要分别解压。
+
+手动下载时，先按机器索引中的 `filename` 恢复标准文件名，再校验。以月包为例：
 
 ```sh
 sha256sum -c SHA256SUMS

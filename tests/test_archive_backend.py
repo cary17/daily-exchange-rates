@@ -17,11 +17,26 @@ def digest(content):
     return hashlib.sha256(content).hexdigest()
 
 
-def fixture(root, content=b"compressed-data", split=False):
-    period = "2026-09"
+def body_index(body):
+    """Independent release-body parser so tests do not share the decoder under test."""
+    start = body.split("<!-- exchange-rates-index:start -->")
+    assert len(start) == 2, "Missing or duplicate start marker"
+    block, end = start[1].split("<!-- exchange-rates-index:end -->")
+    assert len(body.split("<!-- exchange-rates-index:end -->")) == 2
+    lines = block.strip().splitlines()
+    assert lines[0].strip() == "```json" and lines[-1].strip() == "```"
+    return json.loads("\n".join(lines[1:-1]))
+
+
+def embed(body_index_value):
+    return ("# 测试\n\n<!-- exchange-rates-index:start -->\n```json\n"
+            + json.dumps(body_index_value) + "\n```\n<!-- exchange-rates-index:end -->\n")
+
+
+def fixture(root, content=b"compressed-data", split=False, period="2026-09"):
     root.mkdir(parents=True, exist_ok=True)
-    manifest_name = "manifest.json"
-    checksums_name = "SHA256SUMS"
+    manifest_name, checksums_name = (("manifest.json", "SHA256SUMS") if "-" in period
+                                     else (f"{period}.manifest.json", f"{period}.sha256"))
     if split:
         contents = {f"{period}.tar.gz.part001": content[:3], f"{period}.tar.gz.part002": content[3:]}
     else:
@@ -127,7 +142,7 @@ class FakeHTTP:
             if self.fail_patch:
                 return Response(500)
             payload = json.loads(body)
-            index = json.loads(payload["body"])
+            index = body_index(payload["body"])
             for entry in index["files"]:
                 assert entry["asset_id"] in self.assets
                 assert digest(self.blobs[entry["asset_id"]]) == entry["sha256"]
@@ -138,7 +153,7 @@ class FakeHTTP:
             if method == "DELETE":
                 if self.fail_delete:
                     return Response(403)
-                assert asset_id not in {entry["asset_id"] for entry in json.loads(self.release["body"])["files"]}
+                assert asset_id not in {entry["asset_id"] for entry in body_index(self.release["body"])["files"]}
                 self.assets.pop(asset_id, None)
                 self.blobs.pop(asset_id, None)
                 return Response(204)
@@ -325,9 +340,14 @@ class GitHubTests(unittest.TestCase):
         self.assertEqual(self.http.draft_before_upload, [True] * 3)
         self.assertEqual(len(self.http.upload_streams), 3)
         self.assertEqual(self.http.release["target_commitish"], "main")
+        self.assertEqual(self.http.release["name"], "2026-09 汇率月包")
         self.assertEqual(self.http.tag_sha, self.http.main_sha)
+        names = {entry["filename"]: entry["asset_name"] for entry in index["files"]}
+        self.assertEqual(names["2026-09.tar.gz"], f"rates-2026-09-{index['files'][0]['sha256'][:8]}.tar.gz")
+        self.assertIn("manifest-", names["manifest.json"])
+        self.assertIn("sha256-", names["SHA256SUMS"])
         for entry in index["files"]:
-            self.assertEqual(entry["asset_name"], entry["filename"] + "--" + entry["sha256"])
+            self.assertNotIn(entry["sha256"], entry["asset_name"])
         paths = self.backend.materialize("2026-09", self.root / "out")
         self.assertEqual({name: path.read_bytes() for name, path in paths.items()},
                          {path.name: path.read_bytes() for path in self.files})
@@ -379,6 +399,104 @@ class GitHubTests(unittest.TestCase):
         self.publish()
         self.assertEqual(len(self.http.assets), 3)
 
+    def test_readable_month_and_year_packages(self):
+        month = self.publish()
+        body = self.http.release["body"]
+        self.assertTrue(body.startswith("# 2026-09 汇率月包"))
+        self.assertEqual(body_index(body)["files"], month["files"])
+        self.assertEqual(body_index(body)["period"], "2026-09")
+        self.assertIn("最新汇率见 data 分支", body)
+        self.assertEqual(self.http.release["name"], "2026-09 汇率月包")
+        self.http.release = None
+        self.http.tag_sha = None
+        self.http.assets.clear()
+        self.files = fixture(self.root / "annual", period="2026")
+        annual = GitHubArchiveBackend("owner/repo", "test-token")
+        annual._http = self.http
+        index = annual.publish("2026", self.files)
+        names = {entry["filename"]: entry["asset_name"] for entry in index["files"]}
+        self.assertEqual(self.http.release["name"], "2026 汇率年包")
+        self.assertRegex(names["2026.tar.gz"], r"^rates-2026-[0-9a-f]{8}\.tar\.gz$")
+        self.assertRegex(names["2026.manifest.json"], r"^manifest-2026-[0-9a-f]{8}\.json$")
+        self.assertRegex(names["2026.sha256"], r"^sha256-2026-[0-9a-f]{8}\.txt$")
+        self.assertIn("不是汇率数据", self.http.release["body"])
+        self.assertEqual(body_index(self.http.release["body"])["files"], index["files"])
+        self.assertEqual(annual.materialize("2026", self.root / "annual-out")["2026.tar.gz"].read_bytes(),
+                         b"compressed-data")
+
+    def test_split_asset_names_keep_volume_order_and_restore_names(self):
+        self.files = fixture(self.root / "split", content=b"abcdef", split=True)
+        index = self.publish()
+        names = {entry["filename"]: entry["asset_name"] for entry in index["files"]}
+        self.assertRegex(names["2026-09.tar.gz.part001"], r"^rates-2026-09-[0-9a-f]{8}\.tar\.gz\.part001$")
+        self.assertRegex(names["2026-09.tar.gz.part002"], r"^rates-2026-09-[0-9a-f]{8}\.tar\.gz\.part002$")
+        paths = self.backend.materialize("2026-09", self.root / "out")
+        self.assertEqual(paths["2026-09.tar.gz.part002"].read_bytes(), b"def")
+        self.assertIn("2026-09.tar.gz.part001", paths)
+
+    def test_legacy_bare_json_body_and_long_names_still_read_and_upgrade(self):
+        self.publish()
+        legacy = copy.deepcopy(self.http.release)
+        legacy_index = body_index(legacy["body"])
+        for entry in legacy_index["files"]:
+            entry["asset_name"] = entry["filename"] + "--" + entry["sha256"]
+            self.http.assets[entry["asset_id"]]["name"] = entry["asset_name"]
+        self.http.release = {**legacy, "body": json.dumps(legacy_index)}
+        self.assertTrue(self.backend.has("2026-09"))
+        self.backend.materialize("2026-09", self.root / "out")
+        # Republishing a legacy release upgrades its body and names without losing data.
+        upgraded = self.publish()
+        self.assertTrue(self.http.release["body"].startswith("# 2026-09 汇率月包"))
+        self.assertEqual(body_index(self.http.release["body"])["files"], upgraded["files"])
+        for entry in upgraded["files"]:
+            self.assertNotIn(entry["sha256"], entry["asset_name"])
+        paths = self.backend.materialize("2026-09", self.root / "upgraded")
+        self.assertEqual(paths["2026-09.tar.gz"].read_bytes(), b"compressed-data")
+
+    def test_damaged_or_duplicate_index_markers_rejected(self):
+        self.publish()
+        original = self.http.release["body"]
+        start, end = "<!-- exchange-rates-index:start -->", "<!-- exchange-rates-index:end -->"
+        reversed_markers = (original.replace(start, "SWAP", 1).replace(end, start, 1)
+                            .replace("SWAP", end, 1))
+        for body in (start + original,
+                     original + end,
+                     original.replace(start, "", 1),
+                     reversed_markers,
+                     original.replace('"files":', '"files"', 1),
+                     original.replace("```json", "```", 1)):
+            with self.subTest(body=body[:40]):
+                self.http.release = {**self.http.release, "body": body}
+                with self.assertRaises(ArchiveBackendError):
+                    self.backend.has("2026-09")
+        self.http.release = {**self.http.release, "body": original}
+        self.assertTrue(self.backend.has("2026-09"))
+
+    def test_short_prefix_collision_keeps_full_digest_verification(self):
+        first = self.publish()
+        body = self.http.release["body"]
+        old_assets = dict(self.http.assets)
+        old_archive = next(entry for entry in first["files"] if entry["filename"] == "2026-09.tar.gz")
+        # Same length keeps the size matching while the full digest differs.
+        content = b"changed-data!!!"
+        self.files = fixture(self.root / "new", content=content)
+        short = hashlib.sha256(content).hexdigest()[:8]
+        self.http.assets[old_archive["asset_id"]]["name"] = f"rates-2026-09-{short}.tar.gz"
+        self.http.calls.clear()
+        with self.assertRaisesRegex(ArchiveBackendError, "GitHub asset digest mismatch"):
+            self.publish()
+        self.assertEqual(self.http.release["body"], body)
+        self.assertTrue(set(old_assets) <= set(self.http.assets))
+        self.assertFalse(any(method == "DELETE" for method, path, headers in self.http.calls))
+        self.assertTrue(self.backend.has("2026-09"))
+
+    def test_same_content_reuses_assets_without_upload(self):
+        self.publish()
+        self.http.calls.clear()
+        index = self.publish()
+        self.assertFalse(any(method == "POST" for method, path, headers in self.http.calls))
+        self.assertEqual(len(index["files"]), 3)
+
     def test_cleanup_failure_reports_success_and_retains_old_assets(self):
         self.publish()
         self.files = fixture(self.root / "new", content=b"changed")
@@ -429,13 +547,13 @@ class GitHubTests(unittest.TestCase):
     def test_foreign_body_period_and_path_mapping_raise(self):
         self.publish()
         original = copy.deepcopy(self.http.release)
-        bodies = ["foreign body", json.dumps({"format": "other", "period": "2026-09", "files": []})]
-        index = json.loads(original["body"])
+        bodies = ["foreign body", embed({"format": "other", "period": "2026-09", "files": []})]
+        index = body_index(original["body"])
         index["period"] = "2025"
-        bodies.append(json.dumps(index))
-        index = json.loads(original["body"])
+        bodies.append(embed(index))
+        index = body_index(original["body"])
         index["files"][0]["filename"] = "../outside"
-        bodies.append(json.dumps(index))
+        bodies.append(embed(index))
         for body in bodies:
             with self.subTest(body=body):
                 self.http.release = {**original, "body": body}
