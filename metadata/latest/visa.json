@@ -172,7 +172,7 @@
   "catalog_source_urls": [
     "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html"
   ],
-  "fetched_at_utc": "2026-11-04T10:02:30.373412Z",
+  "fetched_at_utc": "2026-11-04T13:20:51.722782Z",
   "pair_count": 28056,
   "provider": "visa",
   "rate_direction": "base currency per one transaction currency",
