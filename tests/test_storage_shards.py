@@ -263,16 +263,16 @@ class ShardedStorageTests(unittest.TestCase):
         self.assertEqual(self.latest(), before_latest)
         self.assertEqual(self.remote("2025"), before_year)
         self.assertNotEqual(self.remote("2025-12"), before_year)
-        state = json.loads((self.root / "maintenance.json").read_bytes())
+        state = json.loads((self.root / "metadata/maintenance.json").read_bytes())
         self.assertEqual(state["last_error"]["published"], ["2025-12"])
         with self.assertRaises(StorageError):
             self.store.archive_due(date(2026, 1, 3))
-        self.assertIn("last_error", json.loads((self.root / "maintenance.json").read_bytes()))
+        self.assertIn("last_error", json.loads((self.root / "metadata/maintenance.json").read_bytes()))
         self.backend.fail_period = None
         self.store.save_day(daily(day, value=8))
         self.assertEqual(self.remote("2025"), self.remote("2025-12"))
         self.assertEqual(self.members(monthly), self.remote("2025"))
-        self.assertNotIn("last_error", json.loads((self.root / "maintenance.json").read_bytes()))
+        self.assertNotIn("last_error", json.loads((self.root / "metadata/maintenance.json").read_bytes()))
         self.assertEqual(self.store.archive_due(date(2026, 1, 3)), ([], False))
 
     def test_annual_publish_failure_does_not_mark_snapshot(self):
@@ -280,7 +280,7 @@ class ShardedStorageTests(unittest.TestCase):
         self.backend.fail_period = "2025"
         with self.assertRaises(RuntimeError):
             self.store.archive_due(date(2026, 1, 3))
-        state = json.loads((self.root / "maintenance.json").read_bytes())
+        state = json.loads((self.root / "metadata/maintenance.json").read_bytes())
         self.assertNotIn("2025", state["published_years"])
         self.assertNotIn("last_snapshot_year", state)
         self.backend.fail_period = None

@@ -66,7 +66,12 @@ class PublishingTests(unittest.TestCase):
         self.assertTrue((fourth.data_dir / "history/2025/12/2025-12.tar.gz").exists())
         self.assertTrue((fourth.data_dir / "history/2026/01/visa/2026-01-01.json").exists())
         self.assertEqual(DataStore(fourth.data_dir).verify_archives(), 1)
-        self.assertFalse(fourth.publish("No changes"))
+        self.assertTrue((fourth.data_dir / "metadata/maintenance.json").exists())
+        self.assertNotIn("maintenance.json", run(self.remote, "ls-tree", "--name-only", "data"))
+        self.assertIn("metadata/maintenance.json", run(self.remote, "ls-tree", "-r", "--name-only", "data"))
+        fifth = self.publisher("fifth")
+        self.assertFalse(DataStore(fifth.data_dir).archive_due(date(2026, 1, 3))[1])
+        self.assertFalse(fifth.publish("No changes"))
 
     def test_concurrent_remote_update_is_not_overwritten(self):
         first = self.publisher("first")

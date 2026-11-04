@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest import mock
 
 from exchange_rates.archive_backend import DirectoryArchiveBackend
 from exchange_rates.models import DayResult, json_bytes
@@ -88,6 +89,76 @@ class StorageTests(unittest.TestCase):
         with self.assertRaises(StorageError):
             self.store.save_day(result(day, rate=8))
         self.assertEqual((self.root / "latest/visa.json").read_bytes(), latest)
+
+    def test_legacy_state_migrates_with_all_fields_and_is_not_recreated(self):
+        self.root.mkdir(parents=True, exist_ok=True)
+        legacy = {"published_months": ["2025-06"], "published_years": ["2025"],
+                  "retention_as_of": "2026-08-03", "last_snapshot_year": 2025,
+                  "last_error": {"prepared": ["2025-06"], "published": [], "error": "fixture"}}
+        (self.root / "maintenance.json").write_bytes(json_bytes(legacy))
+        self.assertEqual(DataStore(self.root, self.backend)._state(), legacy)
+        migrated = self.root / "metadata/maintenance.json"
+        self.assertEqual(json.loads(migrated.read_bytes()), legacy)
+        self.assertFalse((self.root / "maintenance.json").exists())
+        DataStore(self.root, self.backend).save_day(result(date(2026, 9, 3)))
+        self.assertFalse((self.root / "maintenance.json").exists())
+        self.assertIn("retention_as_of", json.loads(migrated.read_bytes()))
+
+    def test_fresh_store_does_not_create_state(self):
+        DataStore(self.root, self.backend)
+        self.assertFalse((self.root / "metadata/maintenance.json").exists())
+
+    def test_existing_new_state_is_used(self):
+        metadata = self.root / "metadata/maintenance.json"
+        metadata.parent.mkdir(parents=True)
+        metadata.write_bytes(json_bytes({"published_months": ["2025-06"], "published_years": ["2025"]}))
+        self.assertEqual(DataStore(self.root, self.backend)._state()["published_months"], ["2025-06"])
+        self.assertFalse((self.root / "maintenance.json").exists())
+
+    def test_equivalent_state_cleans_legacy_and_conflict_keeps_both(self):
+        metadata = self.root / "metadata/maintenance.json"
+        metadata.parent.mkdir(parents=True)
+        state = {"published_months": ["2025-06"], "published_years": ["2025"]}
+        metadata.write_bytes(json_bytes(state))
+        legacy = self.root / "maintenance.json"
+        legacy.write_bytes(json_bytes(state))
+        self.assertEqual(DataStore(self.root, self.backend)._state(), state)
+        self.assertTrue(metadata.exists())
+        self.assertFalse(legacy.exists())
+        legacy.write_bytes(json_bytes({**state, "last_snapshot_year": 2025}))
+        with self.assertRaises(StorageError):
+            DataStore(self.root, self.backend)
+        self.assertTrue(metadata.exists() and legacy.exists())
+        legacy.write_bytes(json_bytes(state))
+        self.assertEqual(DataStore(self.root, self.backend)._state(), state)
+        self.assertFalse(legacy.exists())
+
+    def test_state_migration_failures_keep_legacy_state(self):
+        self.root.mkdir(parents=True, exist_ok=True)
+        legacy = self.root / "maintenance.json"
+        state = {"published_months": ["2025-06"], "published_years": []}
+        legacy.write_bytes(json_bytes(state))
+        with mock.patch("exchange_rates.storage.atomic_write", side_effect=OSError("fixture write failed")):
+            with self.assertRaises(OSError):
+                DataStore(self.root, self.backend)
+        self.assertEqual(json.loads(legacy.read_bytes()), state)
+        self.assertFalse((self.root / "metadata/maintenance.json").exists())
+        with mock.patch.object(DataStore, "_remove", side_effect=StorageError("fixture delete failed")):
+            with self.assertRaises(StorageError):
+                DataStore(self.root, self.backend)
+        self.assertEqual(json.loads(legacy.read_bytes()), state)
+        self.assertEqual(json.loads((self.root / "metadata/maintenance.json").read_bytes()), state)
+        self.assertEqual(DataStore(self.root, self.backend)._state(), state)
+        self.assertFalse(legacy.exists())
+
+    def test_corrupt_legacy_state_is_not_overwritten(self):
+        self.root.mkdir(parents=True, exist_ok=True)
+        legacy = self.root / "maintenance.json"
+        legacy.write_bytes(b"{not json")
+        with self.assertRaises(StorageError):
+            DataStore(self.root, self.backend)
+        self.assertEqual(legacy.read_bytes(), b"{not json")
+        self.assertFalse((self.root / "metadata/maintenance.json").exists())
 
 
 if __name__ == "__main__":

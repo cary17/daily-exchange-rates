@@ -435,6 +435,8 @@ class DataStore:
         self.root.mkdir(parents=True, exist_ok=True)
         if any(path.is_symlink() for path in self.root.rglob("*")):
             raise StorageError("Data tree must not contain symlinks")
+        self._state_path = self.root / "metadata/maintenance.json"
+        self._migrate_state()
         self.releases = releases if releases is not None else DirectoryArchiveBackend(self.root.parent / "release-output")
         self.retain_months = retain_months
         self.volume_bytes = min(volume_bytes, 1900 * 1024**2)
@@ -457,9 +459,32 @@ class DataStore:
                         directory / ("manifest.json" if monthly else f"{period}.manifest.json"),
                         directory / ("SHA256SUMS" if monthly else f"{period}.sha256"), period)
 
+    def _migrate_state(self) -> None:
+        legacy = self.root / "maintenance.json"
+        if not legacy.exists() and not legacy.is_symlink():
+            return
+        _regular(legacy)
+        previous = self._read_state(legacy)
+        if self._state_path.exists():
+            _regular(self._state_path)
+            if self._read_state(self._state_path) != previous:
+                raise StorageError(f"Conflicting maintenance state: {legacy} and {self._state_path}")
+        else:
+            atomic_write(self._state_path, json_bytes(previous))
+        self._remove(legacy)
+
+    @staticmethod
+    def _read_state(path: Path) -> dict:
+        try:
+            state = json.loads(path.read_bytes())
+        except ValueError as exc:
+            raise StorageError(f"Invalid maintenance state: {path}") from exc
+        if not isinstance(state, dict):
+            raise StorageError(f"Invalid maintenance state: {path}")
+        return state
+
     def _state(self) -> dict:
-        path = self.root / "maintenance.json"
-        state = json.loads(path.read_bytes()) if path.exists() else {}
+        state = self._read_state(self._state_path) if self._state_path.exists() else {}
         state.setdefault("published_months", [])
         state.setdefault("published_years", [])
         return state
@@ -468,7 +493,7 @@ class DataStore:
         state = self._state()
         key = "published_months" if len(period) == 7 else "published_years"
         state[key] = sorted(set(state[key]) | {period})
-        atomic_write(self.root / "maintenance.json", json_bytes(state))
+        atomic_write(self._state_path, json_bytes(state))
 
     def _materialize(self, period: str, destination: Path) -> Artifact | None:
         destination.mkdir(parents=True, exist_ok=True)
@@ -580,13 +605,13 @@ class DataStore:
             state = self._state()
             state["last_error"] = {"prepared": [item.period for item in artifacts],
                                    "published": published, "error": str(exc)}
-            atomic_write(self.root / "maintenance.json", json_bytes(state))
+            atomic_write(self._state_path, json_bytes(state))
             raise
         state = self._state()
         error = state.get("last_error")
         if isinstance(error, dict) and set(error.get("prepared", [])) <= set(error.get("published", []) + published):
             state.pop("last_error", None)
-            atomic_write(self.root / "maintenance.json", json_bytes(state))
+            atomic_write(self._state_path, json_bytes(state))
 
     def _latest(self, result: DayResult, content: dict[str, bytes]) -> None:
         metadata = self.root / "metadata/latest" / f"{result.provider}.json"
@@ -818,7 +843,7 @@ class DataStore:
                     periods.add(f"{path.parent.name}-{path.name}")
         state = self._state()
         state["retention_as_of"] = as_of.isoformat()
-        atomic_write(self.root / "maintenance.json", json_bytes(state))
+        atomic_write(self._state_path, json_bytes(state))
         changed = []
         for period in sorted(periods):
             year, month = int(period[:4]), int(period[5:])
@@ -838,5 +863,5 @@ class DataStore:
         if snapshot:
             self.verify_archives()
             state["last_snapshot_year"] = newest
-            atomic_write(self.root / "maintenance.json", json_bytes(state))
+            atomic_write(self._state_path, json_bytes(state))
         return changed, snapshot
