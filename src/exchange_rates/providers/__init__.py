@@ -84,8 +84,8 @@ _DEFAULTS = {
         "https://www.unionpayintl.com/upload/jfimg/{date}.json", None,
     ),
     "visa": (
-        "https://www.visa.co.in/cmsapi/fx/rates",
-        "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
+        "https://usa.visa.com/cmsapi/fx/rates",
+        "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html",
     ),
     "jcb": (
         "https://www.jcb.jp/rate/{file}",

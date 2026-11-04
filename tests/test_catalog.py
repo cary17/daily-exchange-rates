@@ -14,7 +14,7 @@ from exchange_rates.http import JsonResponse
 from exchange_rates.models import json_bytes
 
 
-VISA_URL = "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
+VISA_URL = "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html"
 MC_URL = "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
 
 

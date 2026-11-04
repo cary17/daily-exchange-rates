@@ -100,7 +100,7 @@ def parse_mastercard_currencies(data) -> tuple[str, ...]:
 
 
 _CATALOG_URLS = {
-    "visa": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
+    "visa": "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html",
     "mastercard": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies",
 }
 

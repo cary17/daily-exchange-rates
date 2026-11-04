@@ -15,10 +15,13 @@
       "referer": "https://www.unionpayintl.com/cn/rate/"
     },
     "visa": {
+      "http": {
+        "sites": ["https://usa.visa.com", "https://www.visa.com.sg", "https://www.visa.co.in"]
+      },
       "recovery_rounds": 2,
-      "endpoint": "https://www.visa.co.in/cmsapi/fx/rates",
-      "currency_endpoint": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html",
-      "referer": "https://www.visa.co.in/support/consumer/travel-support/exchange-rate-calculator.html"
+      "endpoint": "https://usa.visa.com/cmsapi/fx/rates",
+      "currency_endpoint": "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html",
+      "referer": "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html"
     },
     "jcb": {
       "endpoint": "https://www.jcb.jp/rate/{file}",

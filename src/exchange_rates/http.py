@@ -3,7 +3,9 @@
 from concurrent.futures import CancelledError
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from ipaddress import ip_address
+import math
 import time
 from threading import Event, Lock
 from typing import Any, Mapping, Sequence
@@ -14,6 +16,70 @@ import simplejson
 
 from .edge_dns import EdgeResolution, resolve_edges
 from .rate_control import GateBlockedError, RateGate, finite_seconds
+
+
+_MAX_RETRY_AFTER = 300
+_CREDENTIAL_HEADERS = frozenset({"authorization", "cookie", "proxy-authorization", "host"})
+
+
+def _origin(url: str | None) -> str | None:
+    if not isinstance(url, str):
+        return None
+    try:
+        parsed = urlsplit(url)
+        parsed.port  # Rejects malformed or out-of-range ports.
+    except ValueError:
+        return None
+    if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username \
+            or parsed.password or parsed.path not in ("", "/") or parsed.query or parsed.fragment:
+        return None
+    return f"{parsed.scheme}://{parsed.netloc}"
+
+
+def _site_origins(sites: Any) -> tuple[str, ...]:
+    if not isinstance(sites, (list, tuple)) or not sites:
+        raise ValueError("sites must be a non-empty list of HTTPS origins")
+    origins = []
+    for site in sites:
+        origin = _origin(site)
+        if origin is None or not origin.startswith("https://"):
+            raise ValueError("sites must contain HTTPS origins without path, query or credentials")
+        origins.append(origin)
+    if len(set(origins)) != len(origins):
+        raise ValueError("sites must not contain duplicate origins")
+    return tuple(origins)
+
+
+def _referer_for(referer: str, origin: str) -> str | None:
+    """Move a mirror referer to the origin actually serving the request."""
+    parsed = urlsplit(referer)
+    if f"{parsed.scheme}://{parsed.netloc}" == origin:
+        return referer
+    return urlsplit(origin)._replace(path=parsed.path, query=parsed.query).geturl()
+
+
+def _retry_after(headers: Mapping[str, str]) -> float | None:
+    value = next((v for k, v in headers.items() if k.lower() == "retry-after"), None)
+    if value is None:
+        return None
+    value = value.strip()
+    try:
+        seconds = float(value)
+        if not math.isfinite(seconds):
+            return None
+    except ValueError:
+        try:
+            when = parsedate_to_datetime(value)
+        except (TypeError, ValueError):
+            return None
+        if when is None:
+            return None
+        if when.tzinfo is None:
+            when = when.replace(tzinfo=timezone.utc)
+        seconds = (when - datetime.now(timezone.utc)).total_seconds()
+    if seconds < 0:
+        return None
+    return seconds
 
 
 def utc_now() -> str:
@@ -65,6 +131,10 @@ class HttpError(RuntimeError):
         self.records = records or []
 
 
+class _RetryAfterTooLong(HttpError):
+    pass
+
+
 class ResponseDecodeError(HttpError):
     pass
 
@@ -84,7 +154,8 @@ class HttpClient:
                  interval: float = 0.3, cancel_event: Event | None = None,
                  global_interval: float = 0, forbidden_cooldown: float = 0,
                  forbidden_threshold: int = 0,
-                 edge_dns_servers: Sequence[str] = ()):
+                 edge_dns_servers: Sequence[str] = (),
+                 sites: Sequence[str] | None = None):
         finite_seconds("timeout", timeout, positive=True)
         if isinstance(retries, bool) or not isinstance(retries, int) or retries < 0:
             raise ValueError("retries must be a non-negative integer")
@@ -100,6 +171,9 @@ class HttpClient:
                 raise ValueError("edge_dns_servers must contain public IP addresses")
             servers.append(str(address))
         self.edge_dns_servers = tuple(dict.fromkeys(servers))
+        self.sites = _site_origins(sites) if sites is not None else ()
+        self._site_state: list[str | None] = [None]
+        self._site_lock = Lock()
         self._edge_cache: dict[str, EdgeResolution] = {}
         self._edge_lock = Lock()
         self._edge_sessions: dict[tuple, requests.Session] = {}
@@ -192,12 +266,55 @@ class HttpClient:
     def fork(self, cancel_event: Event | None = None) -> "HttpClient":
         child = HttpClient(self.timeout, self.retries, self.interval, cancel_event,
                            self.global_interval, self.forbidden_cooldown,
-                           self.forbidden_threshold, self.edge_dns_servers)
+                           self.forbidden_threshold, self.edge_dns_servers,
+                           self.sites or None)
         child._gate = self._gate
         child._edge_cache = self._edge_cache
         child._edge_lock = self._edge_lock
         child._preferred_edges = dict(self._preferred_edges)
+        # Forks share the selected mirror so a switch is not rediscovered per pair.
+        child._site_state = self._site_state
+        child._site_lock = self._site_lock
         return child
+
+    def _site_url(self, url: str) -> str:
+        """Map a request URL onto the shared selected mirror, if configured."""
+        if not self.sites:
+            return url
+        with self._site_lock:
+            preferred = self._site_state[0]
+        if preferred is None:
+            return url
+        parsed = urlsplit(url)
+        origin = f"{parsed.scheme}://{parsed.netloc}"
+        if origin == preferred:
+            return url
+        if origin not in self.sites:
+            return url
+        target = urlsplit(preferred)
+        return target._replace(path=parsed.path, query=parsed.query,
+                               fragment=parsed.fragment).geturl()
+
+    def _available_sites(self, url: str) -> tuple[str, ...]:
+        """Later configured mirrors only; a switched-away site is not retried."""
+        if not self.sites:
+            return ()
+        parsed = urlsplit(url)
+        origin = f"{parsed.scheme}://{parsed.netloc}"
+        if origin not in self.sites:
+            return ()
+        return self.sites[self.sites.index(origin) + 1:]
+
+    def _select_site(self, origin: str) -> None:
+        # Selection only moves forward, so a worker finishing late cannot drag
+        # the shared site back to one skipped by a faster worker.
+        with self._site_lock:
+            index = self.sites.index(origin) if origin in self.sites else None
+            if index is None:
+                return
+            current = self._site_state[0]
+            if current is None or index > self.sites.index(current):
+                self._site_state[0] = origin
 
     def _check_cancelled(self) -> None:
         if self.cancel_event is not None and self.cancel_event.is_set():
@@ -230,6 +347,74 @@ class HttpClient:
     def _request(self, url: str, params: Mapping[str, Any] | None,
                  headers: Mapping[str, str] | None, *, decode_json: bool,
                  edge_ip: str | None = None, edge_fallback: bool = True) -> JsonResponse:
+        if not self.sites or edge_ip is not None:
+            return self._request_edges(url, params, headers, decode_json=decode_json,
+                                       edge_ip=edge_ip, edge_fallback=edge_fallback)
+        start = len(self.records)
+        attempted: set[str] = set()
+        error = None
+        while True:
+            current = self._site_url(url)
+            if current in attempted:
+                error.records = list(self.records[start:])
+                raise error
+            attempted.add(current)
+            site_headers = headers
+            if current != url and headers:
+                # Mirrors need the referer of the site actually serving this
+                # request, and credentials/Host never cross an origin.
+                site_headers = {
+                    key: value for key, value in headers.items()
+                    if key.lower() != "referer"
+                }
+                referer = next((value for key, value in headers.items()
+                                if key.lower() == "referer"), None)
+                if isinstance(referer, str):
+                    mapped = _referer_for(referer, current)
+                    if mapped is not None:
+                        site_headers["Referer"] = mapped
+                site_headers = {key: value for key, value in site_headers.items()
+                                if key.lower() not in _CREDENTIAL_HEADERS}
+            try:
+                result = self._request_edges(current, params, site_headers,
+                                             decode_json=decode_json, edge_ip=None,
+                                             edge_fallback=edge_fallback)
+            except HttpError as exc:
+                exc.records = list(self.records[start:])
+                if isinstance(exc, _RetryAfterTooLong):
+                    raise
+                if exc.status_code is not None and not 500 <= exc.status_code < 600:
+                    raise
+                error = exc
+            else:
+                if current != url:
+                    result.records = list(self.records[start:])
+                return result
+            # Re-read the shared selection: a concurrent worker may already have
+            # advanced it past sites this request has not tried.
+            pending = [site for site in self._available_sites(current)
+                       if site not in attempted]
+            if not pending:
+                break
+            # A final failed response still governs the next request: honoring it
+            # first keeps a site switch from bypassing the server's wait.
+            last = error.response
+            wait = _retry_after(last.response_headers) if last is not None else None
+            if wait is not None and wait > _MAX_RETRY_AFTER:
+                raise _RetryAfterTooLong(
+                    f"HTTP {error.status_code} asks to retry after more than "
+                    f"{_MAX_RETRY_AFTER}s before switching site", error.status_code,
+                    last, error.records)
+            if wait is not None:
+                self._check_cancelled()
+                self._sleep(wait)
+            self._select_site(pending[0])
+        error.records = list(self.records[start:])
+        raise error
+
+    def _request_edges(self, url: str, params: Mapping[str, Any] | None,
+                       headers: Mapping[str, str] | None, *, decode_json: bool,
+                       edge_ip: str | None, edge_fallback: bool) -> JsonResponse:
         if edge_ip is not None or not self.edge_dns_servers or not edge_fallback:
             return self._request_at(url, params, headers, decode_json=decode_json,
                                     edge_ip=edge_ip)
@@ -238,6 +423,9 @@ class HttpClient:
             return self._request_at(url, params, headers, decode_json=decode_json,
                                     edge_ip=None)
         except HttpError as exc:
+            if isinstance(exc, _RetryAfterTooLong):
+                exc.records = list(self.records[start:])
+                raise
             if (exc.status_code is not None and not 500 <= exc.status_code < 600
                     and not isinstance(exc, ResponseDecodeError)):
                 raise
@@ -251,6 +439,8 @@ class HttpClient:
                                               edge_ip=address)
                 except HttpError as exc:
                     exc.records = list(self.records[start:])
+                    if isinstance(exc, _RetryAfterTooLong):
+                        raise
                     if (exc.status_code is not None and not 500 <= exc.status_code < 600
                             and not isinstance(exc, ResponseDecodeError)):
                         raise
@@ -267,6 +457,7 @@ class HttpClient:
         session = self._get_session(url, edge_ip)
         records: list[dict[str, Any]] = []
         for attempt in range(self.retries + 1):
+            retry_after = None
             self._wait()
             epoch = None
             if self._gate.enabled:
@@ -338,11 +529,21 @@ class HttpClient:
                 if status != 429 and not 500 <= status < 600:
                     raise HttpError(f"HTTP {status} for {url}", status, result,
                                     records)
+                if attempt < self.retries:
+                    retry_after = _retry_after(result.response_headers)
+                    if retry_after is not None and retry_after > _MAX_RETRY_AFTER:
+                        # Retrying sooner would ignore the server; waiting longer may stall the run.
+                        raise _RetryAfterTooLong(
+                            f"HTTP {status} for {url} asks to retry after more than {_MAX_RETRY_AFTER}s",
+                            status, result, records)
                 if attempt == self.retries:
                     raise HttpError(f"HTTP {status} for {url} after retries",
                                     status, result, records)
             finally:
                 if self._gate.enabled and not response_recorded:
                     self._gate.record_response(None, None, epoch=epoch)
-            self._sleep(max(self.interval, 0.5) * (2 ** attempt))
+            delay = max(self.interval, 0.5) * (2 ** attempt)
+            if retry_after is not None:
+                delay = max(delay, retry_after)
+            self._sleep(delay)
         raise AssertionError("unreachable retry state")

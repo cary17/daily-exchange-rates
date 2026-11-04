@@ -1,10 +1,13 @@
 """Offline provider and HTTP contracts, including precision and atomic days."""
 
 from concurrent.futures import CancelledError
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from decimal import Decimal
+from email.utils import formatdate
 import hashlib
+from html import escape
 from itertools import permutations
+from urllib.parse import urlsplit
 from threading import Event, Lock
 from types import SimpleNamespace
 import unittest
@@ -13,11 +16,13 @@ from unittest.mock import Mock, patch
 from curl_cffi import requests
 import simplejson
 
-from exchange_rates.catalog import CurrencyCatalog
+from exchange_rates.catalog import CurrencyCatalog, discover_currencies
+from exchange_rates.cli import http_settings, load_config
 from exchange_rates.http import HttpClient, HttpError, JsonResponse, ResponseDecodeError
 from exchange_rates.models import DayResult, json_bytes
 from exchange_rates.providers import (
-    DateMismatchError, NoDataError, ProviderError, RecoveryError, fetch_day, provider_ids,
+    DateMismatchError, NoDataError, ProviderError, RecoveryError, _query_pair,
+    fetch_day, provider_ids,
 )
 
 
@@ -457,9 +462,45 @@ def official_data(provider, params):
     }}
 
 
-def http_response(status=200, body=b'{"rate":1.234567890123456789012345678901}'):
+def http_response(status=200, body=b'{"rate":1.234567890123456789012345678901}',
+                  headers=None, url="https://example.test/rates"):
     return SimpleNamespace(status_code=status, content=body, text=body.decode(),
-                           url="https://example.test/rates", headers={"Content-Type": "application/json"})
+                           url=url,
+                           headers={"Content-Type": "application/json", **(headers or {})})
+
+
+VISA_SITES = ("https://usa.visa.com", "https://www.visa.com.sg", "https://www.visa.co.in")
+VISA_RATES = "https://usa.visa.com/cmsapi/fx/rates"
+VISA_CATALOG = ("https://usa.visa.com/support/consumer/travel-support/"
+                "exchange-rate-calculator.html")
+
+
+def visa_catalog_html(codes):
+    content = simplejson.dumps({"currencyList": [{"key": code} for code in codes]})
+    return '<dm-calculator content="' + escape(content, quote=True) + '"></dm-calculator>'
+
+
+def visa_rate_text(params):
+    return simplejson.dumps({"status": "success", "originalValues": {
+        "fxRateVisa": "6.707775687", "toAmountWithVisaRate": "6707.775687",
+        "exchangedate": DAY.strftime("%m/%d/%Y"),
+        "fromCurrency": params["toCurr"], "toCurrency": params["fromCurr"],
+    }})
+
+
+def site_get(log, *, failed=(), retry_after=None, on_request=None):
+    def get(url, params=None, headers=None, **kwargs):
+        if on_request is not None:
+            on_request(url)
+        log.append((url, dict(params or {}), dict(headers or {})))
+        host = urlsplit(url).hostname
+        if host in failed:
+            headers = {} if retry_after is None else {"Retry-After": retry_after}
+            return http_response(520, b"down", headers, url=url)
+        if urlsplit(url).path.endswith("calculator.html"):
+            return http_response(200, visa_catalog_html(("USD", "CNY")).encode(), url=url)
+        return http_response(200, visa_rate_text(params).encode(), url=url)
+    return get
 
 
 class HttpTests(unittest.TestCase):
@@ -500,6 +541,139 @@ class HttpTests(unittest.TestCase):
             self.assertEqual([call.args[0] for call in sleep.call_args_list], [0.5, 1.0, 2.0])
             self.assertEqual(len(caught.exception.records), 4)
             self.assertEqual(caught.exception.response.body_text, "server broke")
+
+    def test_retry_after_seconds_overrides_exponential_for_retryable_statuses(self):
+        cases = ((520, "text", "retry-after"), (429, "json", "Retry-After"),
+                 (503, "json", "RETRY-AFTER"), (502, "text", "rEtRy-AfTeR"))
+        for status, kind, header in cases:
+            with self.subTest(status=status, header=header), patch(
+                    "exchange_rates.http.requests.Session") as factory, patch(
+                    "exchange_rates.http.time.sleep") as sleep:
+                factory.return_value.get.return_value = http_response(
+                    status, b"server broke", {header: "60"})
+                with HttpClient(interval=0, retries=3) as client, self.assertRaises(HttpError) as caught:
+                    call = client.request_text if kind == "text" else client.request_json
+                    call("https://example.test/rates")
+                self.assertEqual(factory.return_value.get.call_count, 4)
+                self.assertEqual([c.args[0] for c in sleep.call_args_list], [60.0] * 3)
+                self.assertEqual(caught.exception.status_code, status)
+                self.assertEqual(len(caught.exception.records), 4)
+                self.assertEqual(caught.exception.response.body_text, "server broke")
+
+    def test_retry_after_http_date_uses_frozen_clock(self):
+        fixed = datetime(2026, 11, 4, 12, 0, 0, tzinfo=timezone.utc)
+
+        class FrozenDatetime(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return fixed if tz is not None else fixed.replace(tzinfo=None)
+
+        with patch("exchange_rates.http.datetime", FrozenDatetime), patch(
+                "exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            factory.return_value.get.return_value = http_response(
+                503, headers={"Retry-After": formatdate(fixed.timestamp() + 60, usegmt=True)})
+            with HttpClient(interval=0, retries=1) as client, self.assertRaises(HttpError):
+                client.request_text("https://example.test/rates")
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [60.0])
+
+    def test_invalid_or_missing_retry_after_falls_back_to_exponential(self):
+        cases = (None, "", "abc", "-5", "nan", "inf", "1e400", "Wed, 32 Oct 2015 07:28:00 GMT")
+        for value in cases:
+            with self.subTest(value=value), patch(
+                    "exchange_rates.http.requests.Session") as factory, patch(
+                    "exchange_rates.http.time.sleep") as sleep:
+                headers = None if value is None else {"Retry-After": value}
+                factory.return_value.get.return_value = http_response(503, headers=headers)
+                with HttpClient(interval=0, retries=3) as client, self.assertRaises(HttpError):
+                    client.request_text("https://example.test/rates")
+                self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.5, 1.0, 2.0])
+
+    def test_retry_after_over_bound_fails_without_retrying_early(self):
+        for value, retries, sleeps in (("300", 1, [300.0]), ("301", 3, []), ("3600", 3, [])):
+            with self.subTest(value=value), patch(
+                    "exchange_rates.http.requests.Session") as factory, patch(
+                    "exchange_rates.http.time.sleep") as sleep:
+                factory.return_value.get.return_value = http_response(
+                    503, b"server broke", {"Retry-After": value})
+                with HttpClient(interval=0, retries=retries) as client, self.assertRaises(HttpError) as caught:
+                    client.request_text("https://example.test/rates")
+                self.assertEqual([c.args[0] for c in sleep.call_args_list], sleeps)
+                if sleeps:
+                    self.assertEqual(factory.return_value.get.call_count, 2)
+                else:
+                    self.assertEqual(factory.return_value.get.call_count, 1)
+                    self.assertEqual(caught.exception.status_code, 503)
+                    self.assertEqual(caught.exception.response.body_text, "server broke")
+                    self.assertEqual(len(caught.exception.records), 1)
+
+    def test_retry_after_over_bound_is_terminal_on_default_path(self):
+        with patch("exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            factory.return_value.get.side_effect = [
+                http_response(503, b"limited", {"Retry-After": "3600"}),
+                http_response(200),
+            ]
+            with HttpClient(interval=0, edge_dns_servers=["1.1.1.1"]) as client:
+                client.edge_rounds = lambda url: iter(
+                    [SimpleNamespace(addresses=("8.8.8.8",))])
+                with self.assertRaises(HttpError) as caught:
+                    client.request_text("https://example.test/rates")
+            self.assertEqual(factory.return_value.get.call_count, 1)
+            sleep.assert_not_called()
+            self.assertEqual(caught.exception.status_code, 503)
+            self.assertEqual(caught.exception.response.body_text, "limited")
+            self.assertEqual(len(caught.exception.records), 1)
+
+    def test_retry_after_over_bound_is_terminal_after_edge_selection(self):
+        with patch("exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            factory.return_value.get.side_effect = [
+                requests.RequestsError("network"), requests.RequestsError("network"),
+                http_response(503, b"limited", {"Retry-After": "3600"}),
+                http_response(200),
+            ]
+            with HttpClient(interval=0, retries=1, edge_dns_servers=["1.1.1.1"]) as client:
+                client.edge_rounds = lambda url: iter(
+                    [SimpleNamespace(addresses=("8.8.8.8", "9.9.9.9"))])
+                with self.assertRaises(HttpError) as caught:
+                    client.request_text("https://example.test/rates")
+            self.assertEqual(factory.return_value.get.call_count, 3)
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.5])
+            self.assertEqual(caught.exception.status_code, 503)
+            self.assertEqual(caught.exception.response.body_text, "limited")
+            self.assertEqual(len(caught.exception.records), 3)
+
+    def test_cancellation_interrupts_retry_after_wait(self):
+        cancelled = Event()
+
+        def cancel_on_wait(seconds):
+            cancelled.set()
+            return True
+
+        with patch("exchange_rates.http.requests.Session") as factory, patch.object(
+                cancelled, "wait", side_effect=cancel_on_wait) as wait, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            factory.return_value.get.return_value = http_response(
+                520, b"down", {"Retry-After": "60"})
+            with HttpClient(interval=0, retries=3, cancel_event=cancelled) as client, self.assertRaises(CancelledError):
+                client.request_text("https://example.test/rates")
+            wait.assert_called_once_with(60.0)
+            factory.return_value.get.assert_called_once()
+            sleep.assert_not_called()
+
+    def test_transport_error_after_retry_after_does_not_reuse_header(self):
+        with patch("exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            factory.return_value.get.side_effect = [
+                http_response(503, headers={"Retry-After": "60"}),
+                *[requests.RequestsError("network")] * 3,
+            ]
+            with HttpClient(interval=0, retries=3) as client, self.assertRaises(HttpError) as caught:
+                client.request_text("https://example.test/rates")
+            self.assertEqual([c.args[0] for c in sleep.call_args_list], [60.0, 1.0, 2.0])
+            self.assertEqual(factory.return_value.get.call_count, 4)
+            self.assertIsNone(caught.exception.status_code)
 
     def test_text_response_is_complete_utf8_and_never_json_decoded(self):
         body = '<dm-calculator content="&quot;人民币&quot;"></dm-calculator>'.encode("utf-8")
@@ -553,6 +727,296 @@ class HttpTests(unittest.TestCase):
                 self.assertEqual(len(client.records), 1)
                 wait.assert_called_once_with(0.5)
                 sleep.assert_not_called()
+
+
+class VisaSiteFallbackTests(unittest.TestCase):
+    """Configured Visa mirrors: USA first, then Singapore, then India."""
+
+    def client(self, sites=VISA_SITES, **kwargs):
+        kwargs.setdefault("retries", 0)
+        return HttpClient(interval=0, sites=sites, **kwargs)
+
+    def fetch(self, log, *, sites=VISA_SITES, failed=(), retry_after=None):
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(
+                log, failed=failed, retry_after=retry_after)
+            with self.client(sites) as client:
+                catalog = discover_currencies("visa", {"referer": VISA_CATALOG}, client)
+                row, response = _query_pair(
+                    "visa", DAY, "CNY", "USD", VISA_RATES,
+                    {"Referer": VISA_CATALOG}, client)
+            return catalog, row, response, factory.return_value.get.call_count
+
+    def test_healthy_usa_serves_catalog_and_rates_without_fallback(self):
+        log = []
+        catalog, row, response, count = self.fetch(log)
+        self.assertEqual(count, 2)
+        self.assertEqual(catalog.transaction, ("CNY", "USD"))
+        self.assertEqual(row["rateData"], Decimal("6.707775687"))
+        self.assertEqual([url for url, _, _ in log], [VISA_CATALOG, VISA_RATES])
+        self.assertEqual(response.url, VISA_RATES)
+
+    def test_default_config_uses_usa_first(self):
+        config = load_config(None)["providers"]["visa"]
+        self.assertEqual(config["http"]["sites"], list(VISA_SITES))
+        self.assertEqual(config["endpoint"], VISA_RATES)
+        self.assertEqual(config["currency_endpoint"], VISA_CATALOG)
+        self.assertEqual(config["referer"], VISA_CATALOG)
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(log)
+            settings = http_settings({"http": {}, "providers": {"visa": config}},
+                                     SimpleNamespace(provider="visa", interval=None))
+            with HttpClient(interval=0, **settings) as client:
+                discover_currencies("visa", config, client)
+                _query_pair("visa", DAY, "CNY", "USD", config["endpoint"], {}, client)
+        self.assertEqual([url for url, _, _ in log], [VISA_CATALOG, VISA_RATES])
+
+    def test_fallback_switches_origin_and_keeps_paths_params_and_referer(self):
+        log = []
+        catalog, row, response, count = self.fetch(log, failed={"usa.visa.com"})
+        self.assertEqual(count, 3)
+        # Only the first US request fails; the switch is then sticky.
+        self.assertEqual([urlsplit(url).hostname for url, _, _ in log],
+                         ["usa.visa.com"] + ["www.visa.com.sg"] * 2)
+        self.assertEqual(log[1][0], "https://www.visa.com.sg/support/consumer/"
+                                    "travel-support/exchange-rate-calculator.html")
+        self.assertEqual(log[2][0], "https://www.visa.com.sg/cmsapi/fx/rates")
+        self.assertEqual(log[2][1]["fromCurr"], "USD")
+        self.assertEqual(log[2][1]["toCurr"], "CNY")
+        self.assertTrue(log[1][2]["Referer"].startswith("https://www.visa.com.sg/"))
+        self.assertTrue(log[2][2]["Referer"].startswith("https://www.visa.com.sg/"))
+        self.assertEqual(row["rateData"], Decimal("6.707775687"))
+        self.assertEqual(response.url, "https://www.visa.com.sg/cmsapi/fx/rates")
+        self.assertEqual(catalog.transaction, ("CNY", "USD"))
+
+    def test_transport_failure_also_switches_site(self):
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep"):
+            healthy = site_get(log)
+            failures = [requests.RequestsError("network"), requests.RequestsError("network")]
+
+            def get(url, *args, **kwargs):
+                if failures:
+                    raise failures.pop(0)
+                return healthy(url, *args, **kwargs)
+
+            factory.return_value.get.side_effect = get
+            with self.client(retries=1) as client:
+                discover_currencies("visa", {}, client)
+                row, response = _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+        self.assertEqual([urlsplit(url).hostname for url, _, _ in log],
+                         ["www.visa.com.sg"] * 2)
+        self.assertEqual(response.url, "https://www.visa.com.sg/cmsapi/fx/rates")
+
+    def test_validation_errors_4xx_and_cancellation_never_switch_sites(self):
+        payload = simplejson.loads(visa_rate_text({"toCurr": "CNY", "fromCurr": "USD"}))
+        payload["originalValues"]["exchangedate"] = "09/29/2026"
+        cases = (
+            ("403", http_response(403, b"blocked", url=VISA_RATES)),
+            ("429", http_response(429, b"blocked", url=VISA_RATES)),
+            ("404", http_response(404, b"missing", url=VISA_RATES)),
+            ("bad-json", http_response(200, b"{bad", url=VISA_RATES)),
+            ("date-mismatch", http_response(200, simplejson.dumps(payload).encode(),
+                                            url=VISA_RATES)),
+        )
+        for label, bad in cases:
+            with self.subTest(label=label), patch(
+                    "exchange_rates.http.requests.Session") as factory:
+                log = []
+
+                def get(url, params=None, headers=None, **kwargs):
+                    log.append((url, dict(params or {}), dict(headers or {})))
+                    return bad
+
+                factory.return_value.get.side_effect = get
+                with self.client() as client:
+                    with self.assertRaises((HttpError, ProviderError)):
+                        _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+                self.assertEqual([urlsplit(url).hostname for url, _, _ in log],
+                                 ["usa.visa.com"])
+        cancelled = Event()
+        cancelled.set()
+        with patch("exchange_rates.http.requests.Session") as factory:
+            with self.client(cancel_event=cancelled) as client, \
+                    self.assertRaises(CancelledError):
+                _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+            factory.return_value.get.assert_not_called()
+
+    def test_terminal_retry_after_cap_stops_fallback(self):
+        # With retries=0, a 5xx is already terminal; both cap and last-response
+        # limits live in _request_at. Reuse the cap regression shape here.
+        with patch("exchange_rates.http.requests.Session") as factory:
+            log = []
+            factory.return_value.get.side_effect = site_get(
+                log, failed={"usa.visa.com"}, retry_after="3600")
+            with self.client() as client:
+                with self.assertRaises(HttpError) as caught:
+                    _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+            self.assertEqual(caught.exception.status_code, 520)
+            self.assertEqual([urlsplit(url).hostname for url, _, _ in log], ["usa.visa.com"])
+
+    def test_last_response_retry_after_is_honored_before_next_site(self):
+        with patch("exchange_rates.http.requests.Session") as factory, patch(
+                "exchange_rates.http.time.sleep") as sleep:
+            log = []
+            factory.return_value.get.side_effect = site_get(
+                log, failed={"usa.visa.com"}, retry_after="60")
+            with self.client(retries=1) as client:
+                discover_currencies("visa", {}, client)
+            self.assertEqual([call.args[0] for call in sleep.call_args_list], [60.0, 60.0])
+            self.assertEqual([urlsplit(url).hostname for url, _, _ in log],
+                             ["usa.visa.com", "usa.visa.com", "www.visa.com.sg"])
+
+    def test_all_sites_failing_keeps_every_record(self):
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(
+                log, failed={urlsplit(site).hostname for site in VISA_SITES})
+            with self.client() as client:
+                with self.assertRaises(HttpError) as caught:
+                    _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+        self.assertEqual([url for url, _, _ in log],
+                         [f"{site}/cmsapi/fx/rates" for site in VISA_SITES])
+        self.assertEqual(len(caught.exception.records), 3)
+        self.assertEqual(caught.exception.status_code, 520)
+
+    def test_selected_site_is_sticky_within_run_and_shared_across_forks(self):
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(log, failed={"usa.visa.com"})
+            with self.client() as client:
+                discover_currencies("visa", {}, client)
+                with client.fork() as child:
+                    for spend, home in (("CNY", "USD"), ("USD", "CNY")):
+                        _query_pair("visa", DAY, spend, home, VISA_RATES, {}, child)
+                _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+        self.assertEqual(factory.return_value.get.call_count, 5)
+        self.assertEqual([urlsplit(url).hostname for url, _, _ in log],
+                         ["usa.visa.com"] + ["www.visa.com.sg"] * 4)
+
+    def test_fresh_client_starts_again_at_usa(self):
+        for _ in range(2):
+            log = []
+            with patch("exchange_rates.http.requests.Session") as factory:
+                factory.return_value.get.side_effect = site_get(log)
+                with self.client() as client:
+                    _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, {}, client)
+            self.assertEqual([urlsplit(url).hostname for url, _, _ in log], ["usa.visa.com"])
+
+    def test_invalid_site_configuration_is_rejected_before_any_request(self):
+        invalid = (
+            ["https://usa.visa.com", "http://www.visa.com.sg"],
+            ["https://user:pw@usa.visa.com"],
+            ["https://usa.visa.com/cmsapi"],
+            ["https://usa.visa.com?x=1"],
+            ["https://usa.visa.com#fragment"],
+            "https://usa.visa.com",
+            [],
+            ["https://usa.visa.com", "https://usa.visa.com"],
+            ["usa.visa.com"],
+        )
+        for sites in invalid:
+            with self.subTest(sites=sites), patch(
+                    "exchange_rates.http.requests.Session") as factory:
+                factory.return_value.get.side_effect = site_get([])
+                with self.assertRaises(ValueError):
+                    self.client(sites)
+                factory.return_value.get.assert_not_called()
+
+    def test_unconfigured_endpoint_is_never_rewritten(self):
+        log = []
+        foreign = "https://elsewhere.test/cmsapi/fx/rates"
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(log, failed={"elsewhere.test"})
+            with self.client() as client, self.assertRaises(HttpError):
+                _query_pair("visa", DAY, "CNY", "USD", foreign, {}, client)
+        self.assertEqual([urlsplit(url).hostname for url, _, _ in log], ["elsewhere.test"])
+
+    def test_credentials_are_not_forwarded_across_origins(self):
+        log = []
+        headers = {"Referer": VISA_CATALOG, "Authorization": "Bearer secret",
+                   "Cookie": "session=secret", "Accept": "text/html"}
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(log, failed={"usa.visa.com"})
+            with self.client() as client:
+                _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, headers,
+                            client)
+        self.assertEqual(factory.return_value.get.call_count, 2)
+        self.assertEqual(log[0][1], log[1][1])
+        self.assertEqual(log[1][0], "https://www.visa.com.sg/cmsapi/fx/rates")
+        self.assertNotIn("Authorization", log[1][2])
+        self.assertNotIn("Cookie", log[1][2])
+        self.assertEqual(log[1][2]["Referer"],
+                         "https://www.visa.com.sg/support/consumer/"
+                         "travel-support/exchange-rate-calculator.html")
+        self.assertEqual(log[0][2]["Authorization"], "Bearer secret")
+        self.assertEqual(log[0][2]["Cookie"], "session=secret")
+
+    def test_concurrent_selection_is_monotonic_and_not_duplicated(self):
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory:
+            worker = None
+            responses = iter([http_response(520, b"down", url=VISA_RATES),
+                              http_response(200, visa_rate_text(
+                                  {"toCurr": "CNY", "fromCurr": "USD"}).encode(),
+                                  url="https://www.visa.co.in/cmsapi/fx/rates")])
+
+            def get(url, *args, **kwargs):
+                log.append((url, dict(kwargs.get("headers") or {})))
+                if len(log) == 1:
+                    # A sibling worker advances the shared site mid-request.
+                    worker._select_site(VISA_SITES[2])
+                    return next(responses)
+                return next(responses)
+
+            factory.return_value.get.side_effect = get
+            with self.client() as client:
+                worker = client.fork()
+                row, response = _query_pair("visa", DAY, "CNY", "USD", VISA_RATES,
+                                            {"Referer": VISA_CATALOG}, worker)
+        self.assertEqual([urlsplit(url).hostname for url, _ in log],
+                         ["usa.visa.com", "www.visa.co.in"])
+        self.assertEqual(row["rateData"], Decimal("6.707775687"))
+        self.assertEqual(response.url, "https://www.visa.co.in/cmsapi/fx/rates")
+
+    def test_stale_pending_does_not_retry_india_when_it_was_skipped(self):
+        log = []
+        with patch("exchange_rates.http.requests.Session") as factory:
+            responses = iter([http_response(520, b"down", url=VISA_RATES),
+                              http_response(520, b"down",
+                                            url="https://www.visa.co.in/cmsapi/fx/rates")])
+
+            def get(url, *args, **kwargs):
+                log.append((url, dict(kwargs.get("headers") or {})))
+                if len(log) == 1:
+                    # Shared selection jumps to India; Singapore must be skipped.
+                    worker._select_site(VISA_SITES[2])
+                return next(responses)
+
+            factory.return_value.get.side_effect = get
+            with self.client() as client:
+                worker = client.fork()
+                with self.assertRaises(HttpError):
+                    _query_pair("visa", DAY, "CNY", "USD", VISA_RATES,
+                                {"Referer": VISA_CATALOG}, worker)
+        self.assertEqual([urlsplit(url).hostname for url, _ in log],
+                         ["usa.visa.com", "www.visa.co.in"])
+
+    def test_cross_origin_switch_strips_explicit_host(self):
+        log = []
+        headers = {"Referer": VISA_CATALOG, "Host": "usa.visa.com", "Accept": "text/html"}
+        with patch("exchange_rates.http.requests.Session") as factory:
+            factory.return_value.get.side_effect = site_get(log, failed={"usa.visa.com"})
+            with self.client() as client:
+                _query_pair("visa", DAY, "CNY", "USD", VISA_RATES, headers,
+                            client)
+        self.assertEqual(factory.return_value.get.call_count, 2)
+        self.assertEqual(log[0][2]["Host"], "usa.visa.com")
+        self.assertNotIn("Host", log[1][2])
+        self.assertEqual(log[1][0], "https://www.visa.com.sg/cmsapi/fx/rates")
+        self.assertTrue(log[1][2]["Referer"].startswith("https://www.visa.com.sg/"))
 
 
 if __name__ == "__main__":
