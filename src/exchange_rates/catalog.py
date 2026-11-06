@@ -4,10 +4,11 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from html.parser import HTMLParser
 import re
+from urllib.parse import urlsplit
 
 import simplejson
 
-from .http import HttpClient, JsonResponse
+from .http import HttpClient, HttpError, JsonResponse
 
 
 class CatalogError(RuntimeError):
@@ -115,10 +116,25 @@ def discover_currencies(provider: str, config: Mapping, client: HttpClient) -> C
     if config.get("referer"):
         headers["Referer"] = config["referer"]
     if provider == "visa":
-        response = client.request_text(url, headers=headers)
-        codes = parse_visa_currencies(response.body_text)
-    else:
-        response = client.request_json(url, headers=headers)
-        codes = parse_mastercard_currencies(response.data)
+        # A live 200 can still be useless: usa.visa.com's calculator now redirects to a
+        # Next.js page with no dm-calculator, so the HTTP site failover (5xx only) never
+        # fires. Try the configured mirrors for the same path until one still parses.
+        sites = (config.get("http") or {}).get("sites") or ()
+        path = urlsplit(url)
+        tail = path.path + (f"?{path.query}" if path.query else "")
+        candidates = [url] + [site.rstrip("/") + tail for site in sites
+                              if isinstance(site, str) and site.rstrip("/") + tail != url]
+        errors = []
+        for candidate in candidates:
+            try:
+                response = client.request_text(candidate, headers=headers)
+                codes = parse_visa_currencies(response.body_text)
+            except (CatalogError, HttpError) as exc:
+                errors.append(f"{candidate}: {exc}")
+                continue
+            return CurrencyCatalog(codes, codes, (response,))
+        raise CatalogError("Visa official currencyList was not uniquely found; " + "; ".join(errors))
+    response = client.request_json(url, headers=headers)
+    codes = parse_mastercard_currencies(response.data)
     # Both current official UIs feed the same catalog to their two selectors.
     return CurrencyCatalog(codes, codes, (response,))

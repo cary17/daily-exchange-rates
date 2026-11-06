@@ -108,6 +108,30 @@ class CatalogTests(unittest.TestCase):
         self.assertNotIn("SKK", mc.transaction)
         self.assertNotIn("EUR", visa.transaction)
 
+    def test_visa_catalog_falls_through_to_a_mirror_without_the_calculator(self):
+        # usa.visa.com now serves a Next.js page with no dm-calculator (HTTP 200), so the
+        # parse failure must be able to fall through to a configured mirror.
+        client = Mock(spec=["request_text", "request_json"])
+        good = source_response(text=visa_html(("USD", "CNY")))
+        client.request_text.side_effect = [source_response(text="<html>next</html>"), good]
+        catalog = discover_currencies("visa", {"http": {"sites": [
+            "https://usa.visa.com", "https://www.visa.com.sg"]}}, client)
+        self.assertEqual(catalog.transaction, ("CNY", "USD"))
+        self.assertEqual([call.args[0] for call in client.request_text.call_args_list], [
+            VISA_URL,
+            "https://www.visa.com.sg/support/consumer/travel-support/exchange-rate-calculator.html",
+        ])
+        self.assertEqual(catalog.responses, (good,))
+
+    def test_visa_catalog_failure_names_every_mirror(self):
+        client = Mock(spec=["request_text", "request_json"])
+        client.request_text.return_value = source_response(text="<html>next</html>")
+        with self.assertRaises(CatalogError) as raised:
+            discover_currencies("visa", {"http": {"sites": ["https://usa.visa.com",
+                                                          "https://www.visa.com.sg"]}}, client)
+        self.assertIn("www.visa.com.sg", str(raised.exception))
+        self.assertEqual(client.request_text.call_count, 2)
+
     def test_custom_discovery_endpoint_and_referer(self):
         for provider in ("visa", "mastercard"):
             client = Mock(spec=["request_text", "request_json"])
