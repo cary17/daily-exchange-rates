@@ -756,12 +756,15 @@ class VisaSiteFallbackTests(unittest.TestCase):
         self.assertEqual([url for url, _, _ in log], [VISA_CATALOG, VISA_RATES])
         self.assertEqual(response.url, VISA_RATES)
 
-    def test_default_config_uses_usa_first(self):
+    def test_default_config_starts_at_the_lowest_latency_site(self):
         config = load_config(None)["providers"]["visa"]
-        self.assertEqual(config["http"]["sites"], list(VISA_SITES))
-        self.assertEqual(config["endpoint"], VISA_RATES)
-        self.assertEqual(config["currency_endpoint"], VISA_CATALOG)
-        self.assertEqual(config["referer"], VISA_CATALOG)
+        first = config["http"]["sites"][0]
+        self.assertEqual(first, "https://www.visa.com.sg")
+        # Endpoints must follow the first site, or the catalog request starts elsewhere.
+        self.assertEqual(config["endpoint"], f"{first}/cmsapi/fx/rates")
+        self.assertEqual(config["currency_endpoint"],
+                         f"{first}/support/consumer/travel-support/exchange-rate-calculator.html")
+        self.assertEqual(config["referer"], config["currency_endpoint"])
         log = []
         with patch("exchange_rates.http.requests.Session") as factory:
             factory.return_value.get.side_effect = site_get(log)
@@ -770,7 +773,7 @@ class VisaSiteFallbackTests(unittest.TestCase):
             with HttpClient(interval=0, **settings) as client:
                 discover_currencies("visa", config, client)
                 _query_pair("visa", DAY, "CNY", "USD", config["endpoint"], {}, client)
-        self.assertEqual([url for url, _, _ in log], [VISA_CATALOG, VISA_RATES])
+        self.assertEqual([url for url, _, _ in log], [config["currency_endpoint"], config["endpoint"]])
 
     def test_fallback_switches_origin_and_keeps_paths_params_and_referer(self):
         log = []

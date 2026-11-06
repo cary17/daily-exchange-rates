@@ -7,7 +7,10 @@
     "forbidden_cooldown": 60,
     "forbidden_threshold": 3
   },
-  "archive": {"retain_months": 3, "volume_bytes": 1992294400},
+  "archive": {
+    "retain_months": 3,
+    "volume_bytes": 1992294400
+  },
   "providers": {
     "unionpay": {
       "recovery_rounds": 2,
@@ -16,12 +19,40 @@
     },
     "visa": {
       "http": {
-        "sites": ["https://usa.visa.com", "https://www.visa.com.sg", "https://www.visa.co.in"]
+        "sites": [
+          "https://www.visa.com.sg",
+          "https://www.visa.com.hk",
+          "https://www.visa.co.th",
+          "https://www.visa.com.au",
+          "https://www.visa.com.ge",
+          "https://www.visa.com.vn",
+          "https://www.visa.com.bz",
+          "https://www.visa.com.jm",
+          "https://www.visa.co.nz",
+          "https://www.visa.ee",
+          "https://www.visa.com.tt",
+          "https://www.visa.co.in",
+          "https://www.visa.ca",
+          "https://www.visa.com.ng",
+          "https://www.visa.co.ke",
+          "https://www.visa.com.kh",
+          "https://www.visa.com.lk",
+          "https://www.visa.pl",
+          "https://www.visa.com.my",
+          "https://www.visa.com.mt",
+          "https://www.visa.is",
+          "https://www.visa.com.kz",
+          "https://www.visa.mq",
+          "https://www.visa.com.ph",
+          "https://www.visa.mn",
+          "https://www.visa.gp",
+          "https://www.visa.com.cy"
+        ]
       },
       "recovery_rounds": 2,
-      "endpoint": "https://usa.visa.com/cmsapi/fx/rates",
-      "currency_endpoint": "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html",
-      "referer": "https://usa.visa.com/support/consumer/travel-support/exchange-rate-calculator.html"
+      "endpoint": "https://www.visa.com.sg/cmsapi/fx/rates",
+      "currency_endpoint": "https://www.visa.com.sg/support/consumer/travel-support/exchange-rate-calculator.html",
+      "referer": "https://www.visa.com.sg/support/consumer/travel-support/exchange-rate-calculator.html"
     },
     "jcb": {
       "endpoint": "https://www.jcb.jp/rate/{file}",
@@ -29,7 +60,12 @@
     },
     "mastercard": {
       "http": {
-        "edge_dns_servers": ["168.95.1.1", "168.95.192.1", "168.126.63.1", "219.250.36.130"]
+        "edge_dns_servers": [
+          "168.95.1.1",
+          "168.95.192.1",
+          "168.126.63.1",
+          "219.250.36.130"
+        ]
       },
       "recovery_rounds": 2,
       "endpoint": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/conversion-rates",
