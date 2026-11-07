@@ -1,5 +1,5 @@
 {
-  "curDate": "2026-11-06",
+  "curDate": "2026-11-07",
   "exchangeRateJson": [
     {
       "baseCur": "AFN",
@@ -433,7 +433,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 5.0964571,
+      "rateData": 5.0733096,
       "transCur": "AED"
     },
     {
@@ -1178,7 +1178,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2881401,
+      "rateData": 0.2868314,
       "transCur": "AFN"
     },
     {
@@ -1923,7 +1923,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2309031,
+      "rateData": 0.2298544,
       "transCur": "ALL"
     },
     {
@@ -2668,7 +2668,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0521538,
+      "rateData": 0.0519169,
       "transCur": "AMD"
     },
     {
@@ -3413,7 +3413,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0203772,
+      "rateData": 0.0202847,
       "transCur": "AOA"
     },
     {
@@ -4158,7 +4158,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0126352,
+      "rateData": 0.0125778,
       "transCur": "ARS"
     },
     {
@@ -4903,7 +4903,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 13.0272955,
+      "rateData": 12.9681270,
       "transCur": "AUD"
     },
     {
@@ -5648,7 +5648,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 10.4551397,
+      "rateData": 10.4076536,
       "transCur": "AWG"
     },
     {
@@ -6393,7 +6393,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 11.0086471,
+      "rateData": 10.9586471,
       "transCur": "AZN"
     },
     {
@@ -7138,7 +7138,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 10.7592848,
+      "rateData": 10.7104174,
       "transCur": "BAM"
     },
     {
@@ -7883,7 +7883,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 9.4043719,
+      "rateData": 9.3616583,
       "transCur": "BBD"
     },
     {
@@ -8628,7 +8628,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1506213,
+      "rateData": 0.1499372,
       "transCur": "BDT"
     },
     {
@@ -9373,7 +9373,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 49.7625505,
+      "rateData": 49.5365348,
       "transCur": "BHD"
     },
     {
@@ -10118,7 +10118,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0062433,
+      "rateData": 0.0062149,
       "transCur": "BIF"
     },
     {
@@ -10863,7 +10863,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 18.7147000,
+      "rateData": 18.6297000,
       "transCur": "BMD"
     },
     {
@@ -11608,7 +11608,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 14.6597995,
+      "rateData": 14.5932164,
       "transCur": "BND"
     },
     {
@@ -12353,7 +12353,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.5739865,
+      "rateData": 1.5668377,
       "transCur": "BOB"
     },
     {
@@ -13098,7 +13098,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 3.4190219,
+      "rateData": 3.4034931,
       "transCur": "BRL"
     },
     {
@@ -13843,7 +13843,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 18.7147000,
+      "rateData": 18.6297000,
       "transCur": "BSD"
     },
     {
@@ -14588,7 +14588,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1992940,
+      "rateData": 0.1983888,
       "transCur": "BTN"
     },
     {
@@ -15333,7 +15333,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.3186310,
+      "rateData": 1.3126419,
       "transCur": "BWP"
     },
     {
@@ -16078,7 +16078,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 6.2547041,
+      "rateData": 6.2262959,
       "transCur": "BYN"
     },
     {
@@ -16823,7 +16823,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 9.3573500,
+      "rateData": 9.3148500,
       "transCur": "BZD"
     },
     {
@@ -17568,7 +17568,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 13.3886822,
+      "rateData": 13.3278724,
       "transCur": "CAD"
     },
     {
@@ -18313,7 +18313,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0081016,
+      "rateData": 0.0080648,
       "transCur": "CDF"
     },
     {
@@ -19058,7 +19058,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 23.0051629,
+      "rateData": 22.9006761,
       "transCur": "CHF"
     },
     {
@@ -19803,7 +19803,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0192232,
+      "rateData": 0.0191358,
       "transCur": "CLP"
     },
     {
@@ -20548,7 +20548,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.8037004,
+      "rateData": 2.7909663,
       "transCur": "CNY"
     },
     {
@@ -21293,7 +21293,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0057971,
+      "rateData": 0.0057708,
       "transCur": "COP"
     },
     {
@@ -22038,7 +22038,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0417832,
+      "rateData": 0.0415934,
       "transCur": "CRC"
     },
     {
@@ -22783,7 +22783,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.7797792,
+      "rateData": 0.7762375,
       "transCur": "CUP"
     },
     {
@@ -23528,7 +23528,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1908300,
+      "rateData": 0.1899633,
       "transCur": "CVE"
     },
     {
@@ -24273,7 +24273,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.8654197,
+      "rateData": 0.8614890,
       "transCur": "CZK"
     },
     {
@@ -25018,7 +25018,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1054944,
+      "rateData": 0.1050152,
       "transCur": "DJF"
     },
     {
@@ -25763,7 +25763,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.8155108,
+      "rateData": 2.8027230,
       "transCur": "DKK"
     },
     {
@@ -26508,7 +26508,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.3090412,
+      "rateData": 0.3076375,
       "transCur": "DOP"
     },
     {
@@ -27253,7 +27253,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1374602,
+      "rateData": 0.1368359,
       "transCur": "DZD"
     },
     {
@@ -27998,7 +27998,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.3480510,
+      "rateData": 0.3464702,
       "transCur": "EGP"
     },
     {
@@ -28743,7 +28743,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1162420,
+      "rateData": 0.1157140,
       "transCur": "ETB"
     },
     {
@@ -29488,7 +29488,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 21.0465292,
+      "rateData": 20.9509383,
       "transCur": "EUR"
     },
     {
@@ -30233,7 +30233,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 8.3761637,
+      "rateData": 8.3381201,
       "transCur": "FJD"
     },
     {
@@ -30978,7 +30978,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 25.2573347,
+      "rateData": 25.1426188,
       "transCur": "FKP"
     },
     {
@@ -31723,7 +31723,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 25.2573347,
+      "rateData": 25.1426188,
       "transCur": "GBP"
     },
     {
@@ -32468,7 +32468,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 7.3018728,
+      "rateData": 7.2687085,
       "transCur": "GEL"
     },
     {
@@ -33213,7 +33213,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.6064120,
+      "rateData": 1.5991159,
       "transCur": "GHS"
     },
     {
@@ -33958,7 +33958,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 25.2573347,
+      "rateData": 25.1426188,
       "transCur": "GIP"
     },
     {
@@ -34703,7 +34703,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2581694,
+      "rateData": 0.2569968,
       "transCur": "GMD"
     },
     {
@@ -35448,7 +35448,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0021240,
+      "rateData": 0.0021143,
       "transCur": "GNF"
     },
     {
@@ -36193,7 +36193,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.4527785,
+      "rateData": 2.4416383,
       "transCur": "GTQ"
     },
     {
@@ -36938,7 +36938,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0894048,
+      "rateData": 0.0889987,
       "transCur": "GYD"
     },
     {
@@ -37683,7 +37683,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.3891208,
+      "rateData": 2.3782697,
       "transCur": "HKD"
     },
     {
@@ -38428,7 +38428,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.6969029,
+      "rateData": 0.6937376,
       "transCur": "HNL"
     },
     {
@@ -39173,7 +39173,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1423035,
+      "rateData": 0.1416571,
       "transCur": "HTG"
     },
     {
@@ -39918,7 +39918,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0578292,
+      "rateData": 0.0575666,
       "transCur": "HUF"
     },
     {
@@ -40663,7 +40663,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0010357,
+      "rateData": 0.0010310,
       "transCur": "IDR"
     },
     {
@@ -41408,7 +41408,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 5.8851258,
+      "rateData": 5.8583962,
       "transCur": "ILS"
     },
     {
@@ -42153,7 +42153,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1994692,
+      "rateData": 0.1985632,
       "transCur": "INR"
     },
     {
@@ -42898,7 +42898,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0123938,
+      "rateData": 0.0123375,
       "transCur": "IQD"
     },
     {
@@ -43643,7 +43643,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1527357,
+      "rateData": 0.1520419,
       "transCur": "ISK"
     },
     {
@@ -44388,7 +44388,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1179373,
+      "rateData": 0.1174016,
       "transCur": "JMD"
     },
     {
@@ -45133,7 +45133,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 26.4329158,
+      "rateData": 26.3128606,
       "transCur": "JOD"
     },
     {
@@ -45878,7 +45878,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1190427,
+      "rateData": 0.1185020,
       "transCur": "JPY"
     },
     {
@@ -46623,7 +46623,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1442366,
+      "rateData": 0.1435815,
       "transCur": "KES"
     },
     {
@@ -47368,7 +47368,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2140100,
+      "rateData": 0.2130379,
       "transCur": "KGS"
     },
     {
@@ -48113,7 +48113,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0045929,
+      "rateData": 0.0045720,
       "transCur": "KHR"
     },
     {
@@ -48858,7 +48858,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0426955,
+      "rateData": 0.0425015,
       "transCur": "KMF"
     },
     {
@@ -49603,7 +49603,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0138452,
+      "rateData": 0.0137823,
       "transCur": "KRW"
     },
     {
@@ -50348,7 +50348,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 60.7916193,
+      "rateData": 60.5155108,
       "transCur": "KWD"
     },
     {
@@ -51093,7 +51093,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 22.4576490,
+      "rateData": 22.3556489,
       "transCur": "KYD"
     },
     {
@@ -51838,7 +51838,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0418115,
+      "rateData": 0.0416216,
       "transCur": "KZT"
     },
     {
@@ -52583,7 +52583,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0008359,
+      "rateData": 0.0008321,
       "transCur": "LAK"
     },
     {
@@ -53328,7 +53328,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0002091,
+      "rateData": 0.0002082,
       "transCur": "LBP"
     },
     {
@@ -54073,7 +54073,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0563017,
+      "rateData": 0.0560460,
       "transCur": "LKR"
     },
     {
@@ -54818,7 +54818,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1102629,
+      "rateData": 0.1097621,
       "transCur": "LRD"
     },
     {
@@ -55563,7 +55563,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.1402781,
+      "rateData": 1.1350991,
       "transCur": "LSL"
     },
     {
@@ -56308,7 +56308,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.9281384,
+      "rateData": 2.9148391,
       "transCur": "LYD"
     },
     {
@@ -57053,7 +57053,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.9187086,
+      "rateData": 1.9099941,
       "transCur": "MAD"
     },
     {
@@ -57798,7 +57798,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.0529671,
+      "rateData": 1.0481846,
       "transCur": "MDL"
     },
     {
@@ -58543,7 +58543,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0040869,
+      "rateData": 0.0040683,
       "transCur": "MGA"
     },
     {
@@ -59288,7 +59288,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.3397576,
+      "rateData": 0.3382145,
       "transCur": "MKD"
     },
     {
@@ -60033,7 +60033,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0051133,
+      "rateData": 0.0050901,
       "transCur": "MMK"
     },
     {
@@ -60778,7 +60778,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0051985,
+      "rateData": 0.0051749,
       "transCur": "MNT"
     },
     {
@@ -61523,7 +61523,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.3193342,
+      "rateData": 2.3088001,
       "transCur": "MOP"
     },
     {
@@ -62268,7 +62268,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.4642895,
+      "rateData": 0.4621808,
       "transCur": "MRU"
     },
     {
@@ -63013,7 +63013,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.3968872,
+      "rateData": 0.3950846,
       "transCur": "MUR"
     },
     {
@@ -63758,7 +63758,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.2136641,
+      "rateData": 1.2081518,
       "transCur": "MVR"
     },
     {
@@ -64503,7 +64503,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0108121,
+      "rateData": 0.0107630,
       "transCur": "MWK"
     },
     {
@@ -65998,7 +65998,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 4.6300594,
+      "rateData": 4.6090302,
       "transCur": "MYR"
     },
     {
@@ -66743,7 +66743,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2948206,
+      "rateData": 0.2934815,
       "transCur": "MZN"
     },
     {
@@ -67488,7 +67488,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.1402781,
+      "rateData": 1.1350991,
       "transCur": "NAD"
     },
     {
@@ -68233,7 +68233,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0138647,
+      "rateData": 0.0138017,
       "transCur": "NGN"
     },
     {
@@ -68978,7 +68978,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.5118900,
+      "rateData": 0.5095651,
       "transCur": "NIO"
     },
     {
@@ -69723,7 +69723,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.0261771,
+      "rateData": 2.0169745,
       "transCur": "NOK"
     },
     {
@@ -70468,7 +70468,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1246683,
+      "rateData": 0.1241020,
       "transCur": "NPR"
     },
     {
@@ -71213,7 +71213,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 10.5139178,
+      "rateData": 10.4661648,
       "transCur": "NZD"
     },
     {
@@ -71958,7 +71958,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 48.6235028,
+      "rateData": 48.4026605,
       "transCur": "OMR"
     },
     {
@@ -72703,7 +72703,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 18.7147000,
+      "rateData": 18.6297000,
       "transCur": "PAB"
     },
     {
@@ -73448,7 +73448,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 5.4756569,
+      "rateData": 5.4507871,
       "transCur": "PEN"
     },
     {
@@ -74193,7 +74193,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 4.1733780,
+      "rateData": 4.1544230,
       "transCur": "PGK"
     },
     {
@@ -74938,7 +74938,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2976209,
+      "rateData": 0.2962691,
       "transCur": "PHP"
     },
     {
@@ -75683,7 +75683,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0677455,
+      "rateData": 0.0674378,
       "transCur": "PKR"
     },
     {
@@ -76428,7 +76428,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 4.7850221,
+      "rateData": 4.7632891,
       "transCur": "PLN"
     },
     {
@@ -77173,7 +77173,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0029242,
+      "rateData": 0.0029109,
       "transCur": "PYG"
     },
     {
@@ -77918,7 +77918,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 5.1414011,
+      "rateData": 5.1180495,
       "transCur": "QAR"
     },
     {
@@ -78663,7 +78663,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 3.9461676,
+      "rateData": 3.9282446,
       "transCur": "RON"
     },
     {
@@ -79408,7 +79408,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1776589,
+      "rateData": 0.1768520,
       "transCur": "RSD"
     },
     {
@@ -80153,7 +80153,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.2299434,
+      "rateData": 0.2288990,
       "transCur": "RUB"
     },
     {
@@ -80898,7 +80898,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0127153,
+      "rateData": 0.0126575,
       "transCur": "RWF"
     },
     {
@@ -81643,7 +81643,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 4.9875276,
+      "rateData": 4.9648749,
       "transCur": "SAR"
     },
     {
@@ -82388,7 +82388,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.4104533,
+      "rateData": 2.3995053,
       "transCur": "SBD"
     },
     {
@@ -83133,7 +83133,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.2831119,
+      "rateData": 1.2772841,
       "transCur": "SCR"
     },
     {
@@ -83878,7 +83878,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0420179,
+      "rateData": 0.0418270,
       "transCur": "SDG"
     },
     {
@@ -84623,7 +84623,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.9148412,
+      "rateData": 1.9061442,
       "transCur": "SEK"
     },
     {
@@ -85368,7 +85368,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 14.6597995,
+      "rateData": 14.5932164,
       "transCur": "SGD"
     },
     {
@@ -86113,7 +86113,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 25.2573347,
+      "rateData": 25.1426188,
       "transCur": "SHP"
     },
     {
@@ -86858,7 +86858,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.8187446,
+      "rateData": 0.8150259,
       "transCur": "SLE"
     },
     {
@@ -87603,7 +87603,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0327893,
+      "rateData": 0.0326403,
       "transCur": "SOS"
     },
     {
@@ -88348,7 +88348,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.4981642,
+      "rateData": 0.4959016,
       "transCur": "SRD"
     },
     {
@@ -89093,7 +89093,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0032627,
+      "rateData": 0.0032479,
       "transCur": "SSP"
     },
     {
@@ -89838,7 +89838,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.8439783,
+      "rateData": 0.8401450,
       "transCur": "STN"
     },
     {
@@ -90583,7 +90583,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.1388229,
+      "rateData": 2.1291086,
       "transCur": "SVC"
     },
     {
@@ -91328,7 +91328,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.1402781,
+      "rateData": 1.1350991,
       "transCur": "SZL"
     },
     {
@@ -92073,7 +92073,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.5606561,
+      "rateData": 0.5581096,
       "transCur": "THB"
     },
     {
@@ -92818,7 +92818,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.0322847,
+      "rateData": 2.0230543,
       "transCur": "TJS"
     },
     {
@@ -93563,7 +93563,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 5.3545535,
+      "rateData": 5.3302338,
       "transCur": "TMT"
     },
     {
@@ -94308,7 +94308,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 6.2737848,
+      "rateData": 6.2452900,
       "transCur": "TND"
     },
     {
@@ -95053,7 +95053,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 8.0379633,
+      "rateData": 8.0014558,
       "transCur": "TOP"
     },
     {
@@ -95798,7 +95798,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.3759678,
+      "rateData": 0.3742602,
       "transCur": "TRY"
     },
     {
@@ -96543,7 +96543,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 2.7775271,
+      "rateData": 2.7649119,
       "transCur": "TTD"
     },
     {
@@ -97288,7 +97288,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.5720726,
+      "rateData": 0.5694743,
       "transCur": "TWD"
     },
     {
@@ -98033,7 +98033,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0071430,
+      "rateData": 0.0071106,
       "transCur": "TZS"
     },
     {
@@ -98778,7 +98778,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.4126516,
+      "rateData": 0.4107774,
       "transCur": "UAH"
     },
     {
@@ -99523,7 +99523,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0045974,
+      "rateData": 0.0045765,
       "transCur": "UGX"
     },
     {
@@ -100268,7 +100268,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 18.7147000,
+      "rateData": 18.6297000,
       "transCur": "USD"
     },
     {
@@ -101013,7 +101013,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.4642694,
+      "rateData": 0.4621608,
       "transCur": "UYU"
     },
     {
@@ -101758,7 +101758,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0015612,
+      "rateData": 0.0015541,
       "transCur": "UZS"
     },
     {
@@ -102503,7 +102503,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0209364,
+      "rateData": 0.0208413,
       "transCur": "VES"
     },
     {
@@ -103248,7 +103248,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0007316,
+      "rateData": 0.0007283,
       "transCur": "VND"
     },
     {
@@ -103993,7 +103993,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1590034,
+      "rateData": 0.1582812,
       "transCur": "VUV"
     },
     {
@@ -104738,7 +104738,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 6.9008584,
+      "rateData": 6.8695155,
       "transCur": "WST"
     },
     {
@@ -105483,7 +105483,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0320852,
+      "rateData": 0.0319395,
       "transCur": "XAF"
     },
     {
@@ -106228,7 +106228,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 6.9617960,
+      "rateData": 6.9301763,
       "transCur": "XCD"
     },
     {
@@ -106973,7 +106973,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 10.4551397,
+      "rateData": 10.4076536,
       "transCur": "XCG"
     },
     {
@@ -107718,7 +107718,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0320852,
+      "rateData": 0.0319395,
       "transCur": "XOF"
     },
     {
@@ -108463,7 +108463,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.1763700,
+      "rateData": 0.1755689,
       "transCur": "XPF"
     },
     {
@@ -109208,7 +109208,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.0120074,
+      "rateData": 0.0119528,
       "transCur": "YER"
     },
     {
@@ -109953,7 +109953,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 1.1402781,
+      "rateData": 1.1350991,
       "transCur": "ZAR"
     },
     {
@@ -110698,7 +110698,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.9225930,
+      "rateData": 0.9184027,
       "transCur": "ZMW"
     },
     {
@@ -111443,7 +111443,7 @@
     },
     {
       "baseCur": "MXN",
-      "rateData": 0.7267788,
+      "rateData": 0.7234779,
       "transCur": "ZWG"
     },
     {
