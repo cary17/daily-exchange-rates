@@ -1,19 +1,19 @@
 {
-  "fetched_at_utc": "2026-11-09T04:00:31.451048Z",
+  "fetched_at_utc": "2026-11-10T02:30:38.026700Z",
   "pair_count": 162,
   "provider": "jcb-usd-sell",
   "quote_column": "Sell",
   "rate_data_policy": "reciprocal truncated to 100 significant digits with ROUND_DOWN; the truncated value is not the exact reciprocal",
   "rate_formula": "1 / displayed Sell quote",
   "rate_fraction_policy": "rateNumerator/rateDenominator is the exact reduced rational reciprocal of the displayed decimal",
-  "requested_date": "2026-11-09",
+  "requested_date": "2026-11-10",
   "response_dates": [
     {
-      "date": "2026-11-09",
-      "file": "usd11092026.html"
+      "date": "2026-11-10",
+      "file": "usd11102026.html"
     }
   ],
   "source_urls": [
-    "https://www.jcb.jp/rate/usd11092026.html"
+    "https://www.jcb.jp/rate/usd11102026.html"
   ]
 }
