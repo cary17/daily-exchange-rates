@@ -1,5 +1,5 @@
 {
-  "fetched_at_utc": "2026-11-09T08:40:52.979965Z",
+  "fetched_at_utc": "2026-11-10T03:11:23.809655Z",
   "pair_count": 2400,
   "provider": "unionpay",
   "rate_direction": "base currency per one transaction currency",
@@ -9,17 +9,17 @@
     "rounds": 0,
     "unit": "file"
   },
-  "requested_date": "2026-11-09",
+  "requested_date": "2026-11-10",
   "response_dates": [
     {
       "fields": {
-        "curDate": "2026-11-09"
+        "curDate": "2026-11-10"
       },
       "request_index": 0
     }
   ],
   "response_dates_index": "final_successful_responses",
   "source_urls": [
-    "https://www.unionpayintl.com/upload/jfimg/20261109.json"
+    "https://www.unionpayintl.com/upload/jfimg/20261110.json"
   ]
 }
