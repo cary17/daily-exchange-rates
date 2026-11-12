@@ -1,14 +1,14 @@
 {
   "derived": false,
-  "fetched_at_utc": "2026-11-11T03:31:14.172477Z",
+  "fetched_at_utc": "2026-11-12T03:01:25.769048Z",
   "pair_count": 15,
   "provider": "jcb-jpy",
   "rate_data_policy": "displayed decimal preserved exactly; no reciprocal or rounding",
   "rate_formula": "published JPY per one transCur unit",
-  "requested_date": "2026-11-11",
+  "requested_date": "2026-11-12",
   "response_dates": [
     {
-      "date": "2026-11-11",
+      "date": "2026-11-12",
       "file": "jpy.html"
     }
   ],
