@@ -19,6 +19,7 @@
     },
     "visa": {
       "http": {
+        "browser": true,
         "sites": [
           "https://www.visa.com.sg",
           "https://www.visa.com.hk",

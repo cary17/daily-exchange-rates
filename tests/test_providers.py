@@ -770,6 +770,8 @@ class VisaSiteFallbackTests(unittest.TestCase):
             factory.return_value.get.side_effect = site_get(log)
             settings = http_settings({"http": {}, "providers": {"visa": config}},
                                      SimpleNamespace(provider="visa", interval=None))
+            # This test exercises mirror ordering through the curl transport.
+            settings["browser"] = False
             with HttpClient(interval=0, **settings) as client:
                 discover_currencies("visa", config, client)
                 _query_pair("visa", DAY, "CNY", "USD", config["endpoint"], {}, client)

@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from curl_cffi import CurlOpt, requests
 import simplejson
 
+from .browser import BrowserTransportError, browser_transport
 from .edge_dns import EdgeResolution, resolve_edges
 from .rate_control import GateBlockedError, RateGate, finite_seconds
 
@@ -155,10 +156,15 @@ class HttpClient:
                  global_interval: float = 0, forbidden_cooldown: float = 0,
                  forbidden_threshold: int = 0,
                  edge_dns_servers: Sequence[str] = (),
-                 sites: Sequence[str] | None = None):
+                 sites: Sequence[str] | None = None,
+                 browser: bool = False):
         finite_seconds("timeout", timeout, positive=True)
         if isinstance(retries, bool) or not isinstance(retries, int) or retries < 0:
             raise ValueError("retries must be a non-negative integer")
+        if not isinstance(browser, bool):
+            raise ValueError("browser must be a boolean")
+        if browser and edge_dns_servers:
+            raise ValueError("browser transport cannot pin regional edge addresses")
         finite_seconds("interval", interval)
         if not isinstance(edge_dns_servers, (list, tuple)):
             raise ValueError("edge_dns_servers must be a list of public IP addresses")
@@ -172,6 +178,7 @@ class HttpClient:
             servers.append(str(address))
         self.edge_dns_servers = tuple(dict.fromkeys(servers))
         self.sites = _site_origins(sites) if sites is not None else ()
+        self.browser = browser
         self._site_state: list[str | None] = [None]
         self._site_lock = Lock()
         self._edge_cache: dict[str, EdgeResolution] = {}
@@ -263,11 +270,19 @@ class HttpClient:
                 })
         return self._edge_sessions[key]
 
+    def _sender(self, url: str, edge_ip: str | None):
+        """Curl session for plain sites; the shared browser page for challenged ones."""
+        if not self.browser:
+            return self._get_session(url, edge_ip)
+        if edge_ip is not None:
+            raise ValueError("browser transport cannot pin an edge address")
+        return browser_transport(self.timeout)
+
     def fork(self, cancel_event: Event | None = None) -> "HttpClient":
         child = HttpClient(self.timeout, self.retries, self.interval, cancel_event,
                            self.global_interval, self.forbidden_cooldown,
                            self.forbidden_threshold, self.edge_dns_servers,
-                           self.sites or None)
+                           self.sites or None, self.browser)
         child._gate = self._gate
         child._edge_cache = self._edge_cache
         child._edge_lock = self._edge_lock
@@ -454,7 +469,7 @@ class HttpClient:
     def _request_at(self, url: str, params: Mapping[str, Any] | None,
                     headers: Mapping[str, str] | None, *, decode_json: bool,
                     edge_ip: str | None) -> JsonResponse:
-        session = self._get_session(url, edge_ip)
+        session = self._sender(url, edge_ip)
         records: list[dict[str, Any]] = []
         for attempt in range(self.retries + 1):
             retry_after = None
@@ -472,7 +487,7 @@ class HttpClient:
                     url, params=params, headers=headers, timeout=self.timeout,
                     **({"allow_redirects": False} if edge_ip is not None else {}),
                 )
-            except requests.RequestsError as exc:
+            except (requests.RequestsError, BrowserTransportError) as exc:
                 record = {
                     "attempt": attempt + 1, "fetched_at_utc": utc_now(),
                     "request": {"method": "GET", "url": url,
