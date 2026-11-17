@@ -1,4 +1,3 @@
-import json
 import os
 import time
 from urllib.request import urlopen
@@ -23,39 +22,58 @@ except Exception as exc:
 
 try:
     r = creq.Session(impersonate="chrome").get(API, headers={"Accept": "application/json"}, timeout=30)
-    step("curl_cffi_no_cookies", f"{r.status_code} {r.text[:120]}")
+    step("curl_cffi_no_cookies", f"{r.status_code} {r.text[:80]}")
 except Exception as exc:
     step("curl_cffi_no_cookies", f"error {type(exc).__name__}: {exc}")
 
 jar = {}
-try:
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=False,
-            args=["--no-sandbox", "--disable-blink-features=AutomationControlled"])
-        ctx = browser.new_context(locale="en-US", user_agent=UA)
-        page = ctx.new_page()
-        started = time.time()
-        page.goto(PAGE, wait_until="domcontentloaded", timeout=90000)
-        while "just a moment" in page.title().lower() and time.time() - started < 90:
-            time.sleep(1)
-        step("browser_title", page.title())
-        step("browser_challenge_seconds", f"{time.time() - started:.1f}")
-        step("browser_has_currency_list", "currencyList" in page.content())
-        jar = {c["name"]: c["value"] for c in ctx.cookies()}
-        step("browser_cookies", ",".join(sorted(jar)))
-        browser.close()
-except Exception as exc:
-    step("browser", f"error {type(exc).__name__}: {str(exc)[:300]}")
+with sync_playwright() as p:
+    browser = p.chromium.launch(
+        headless=False,
+        args=["--no-sandbox", "--disable-blink-features=AutomationControlled"])
+    ctx = browser.new_context(locale="en-US", user_agent=UA)
+    page = ctx.new_page()
+    started = time.time()
+    page.goto(PAGE, wait_until="domcontentloaded", timeout=90000)
+    while "just a moment" in page.title().lower() and time.time() - started < 90:
+        time.sleep(1)
+    step("browser_title", page.title())
+    step("browser_challenge_seconds", f"{time.time() - started:.1f}")
+    step("browser_has_currency_list", "currencyList" in page.content())
+
+    jar = {c["name"]: c["value"] for c in ctx.cookies()}
+    step("browser_cookies", ",".join(sorted(jar)))
+
+    def in_page_fetch(url, accept):
+        return page.evaluate(
+            """async ([u, a]) => {
+                 const r = await fetch(u, {credentials: 'include', headers: {'Accept': a}});
+                 const body = await r.text();
+                 return [r.status, body.slice(0, 120)];
+               }""",
+            [url, accept])
+
+    status, body = in_page_fetch(API, "application/json")
+    step("page_fetch_api", f"{status} {body}")
+    step("page_fetch_api_has_rate", '"fxRateVisa"' in body)
+
+    for n in (1, 2, 3, 4, 5):
+        s, b = in_page_fetch(API, "application/json")
+        step(f"page_fetch_repeat_{n}", f"{s} {'fxRateVisa' in b}")
+        time.sleep(2)
+
+    s, b = in_page_fetch(PAGE, "text/html")
+    step("page_fetch_html", f"{s} len={len(b)}")
+    step("context_request_api", str(ctx.request.get(API).status))
+
+    browser.close()
 
 header = {"Accept": "application/json", "Referer": PAGE,
           "Cookie": "; ".join(f"{k}={v}" for k, v in jar.items()), "User-Agent": UA}
-for attempt in (1, 2, 3):
-    try:
-        session = creq.Session(impersonate="chrome")
-        reply = session.get(API, headers=header, timeout=30)
-        step(f"replay_{attempt}", f"{reply.status_code} {reply.text[:120]}")
-        session.close()
-    except Exception as exc:
-        step(f"replay_{attempt}", f"error {type(exc).__name__}: {exc}")
-    time.sleep(3)
+try:
+    session = creq.Session(impersonate="chrome")
+    reply = session.get(API, headers=header, timeout=30)
+    step("replay_with_cookies", f"{reply.status_code}")
+    session.close()
+except Exception as exc:
+    step("replay_with_cookies", f"error {type(exc).__name__}: {exc}")
