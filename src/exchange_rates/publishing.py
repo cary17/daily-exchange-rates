@@ -2,11 +2,21 @@ from __future__ import annotations
 
 import os
 import subprocess
+import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
 GIT_FILE_LIMIT = 100 * 1024 ** 2
 LFS_FILE_LIMIT = 2_000_000_000
+PUSH_ATTEMPTS = 3
+PUSH_DELAY = 5.0
+# GitHub's ref check can fault inside its own server after accepting the pack, answering
+# "fatal error in commit_refs_rules" with HTTP 200; the identical push lands moments later.
+# Auth and protected-ref rejections are absent here, so those still fail on the first try.
+TRANSIENT_PUSH_FAULTS = (
+    "commit_refs_rules", "remote end hung up", "RPC failed", "early EOF",
+    "Could not resolve host", "Connection reset", "HTTP 5", "timed out",
+)
 
 
 class PublishError(RuntimeError):
@@ -19,6 +29,18 @@ def git(cwd: Path, *arguments: str, check: bool = True) -> subprocess.CompletedP
         # Do not include command arguments: a config value may contain authentication.
         raise PublishError(f"Git operation {arguments[0]} failed (exit {result.returncode}): {result.stderr.strip()}")
     return result
+
+
+def push(cwd: Path, *arguments: str) -> None:
+    """Push, retrying only faults that come from GitHub's own server side."""
+    for attempt in range(PUSH_ATTEMPTS):
+        result = git(cwd, "push", *arguments, check=False)
+        if result.returncode == 0:
+            return
+        stderr = result.stderr.strip()
+        if attempt + 1 == PUSH_ATTEMPTS or not any(mark in stderr for mark in TRANSIENT_PUSH_FAULTS):
+            raise PublishError(f"Git operation push failed (exit {result.returncode}): {stderr}")
+        time.sleep(PUSH_DELAY * (attempt + 1))
 
 
 class BranchPublisher:
@@ -117,11 +139,11 @@ class BranchPublisher:
             tree = git(self.data_dir, "write-tree").stdout.strip()
             commit = git(self.data_dir, "commit-tree", tree, "-m", message).stdout.strip()
             git(self.data_dir, "update-ref", "HEAD", commit)
-            git(self.data_dir, "push", f"--force-with-lease=refs/heads/{self.branch}:{self.expected_tip}",
-                "origin", f"HEAD:refs/heads/{self.branch}")
+            push(self.data_dir, f"--force-with-lease=refs/heads/{self.branch}:{self.expected_tip}",
+                 "origin", f"HEAD:refs/heads/{self.branch}")
         else:
             git(self.data_dir, "commit", "--allow-empty", "-m", message)
-            git(self.data_dir, "push", "origin", f"HEAD:refs/heads/{self.branch}")
+            push(self.data_dir, "origin", f"HEAD:refs/heads/{self.branch}")
         return True
 
 

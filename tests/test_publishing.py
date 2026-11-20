@@ -3,7 +3,9 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest import mock
 
+import exchange_rates.publishing as publishing
 from exchange_rates.models import DayResult, json_bytes
 from exchange_rates.publishing import BranchPublisher, PublishError
 from exchange_rates.storage import DataStore
@@ -95,6 +97,47 @@ class PublishingTests(unittest.TestCase):
         with self.assertRaises(PublishError):
             BranchPublisher(self.source, directory)
         self.assertEqual(marker.read_text(), "keep")
+
+    def test_transient_push_fault_is_retried_until_it_lands(self):
+        # GitHub answered the 2026-11-20 Visa merge "fatal error in commit_refs_rules";
+        # the next identical push succeeded, so one fault must not fail the day.
+        real = publishing.git
+        faults = []
+
+        def flaky(cwd, *arguments, check=True):
+            if arguments[0] == "push" and not faults:
+                faults.append(1)
+                return subprocess.CompletedProcess(arguments, 1, "",
+                                                   "remote: fatal error in commit_refs_rules\nfatal: the remote end hung up")
+            return real(cwd, *arguments, check=check)
+
+        publisher = self.publisher("retried")
+        self.save(publisher, date(2026, 2, 1))
+        with mock.patch.object(publishing, "git", side_effect=flaky), \
+                mock.patch.object(publishing.time, "sleep"):
+            self.assertTrue(publisher.publish("Retried day"))
+        self.assertEqual(len(faults), 1)
+        self.assertEqual(run(self.remote, "rev-list", "--count", "data"), "1")
+
+    def test_persistent_or_real_rejection_is_not_retried(self):
+        real = publishing.git
+        pushes = []
+
+        def rejecting(cwd, *arguments, check=True):
+            if arguments[0] != "push":
+                return real(cwd, *arguments, check=check)
+            pushes.append(arguments)
+            return subprocess.CompletedProcess(arguments, 1, "",
+                                               "remote: error: GH006: Protected branch update failed")
+
+        publisher = self.publisher("rejected")
+        self.save(publisher, date(2026, 2, 2))
+        with mock.patch.object(publishing, "git", side_effect=rejecting), \
+                mock.patch.object(publishing.time, "sleep") as sleep:
+            with self.assertRaises(PublishError):
+                publisher.publish("Rejected day")
+        self.assertEqual(pushes, [("push", "origin", "HEAD:refs/heads/data")])
+        sleep.assert_not_called()
 
 
 if __name__ == "__main__":
