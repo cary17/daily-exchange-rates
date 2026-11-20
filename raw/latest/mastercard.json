@@ -2,7 +2,7 @@
   "catalog_requests": [
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:18.597862Z",
+      "fetched_at_utc": "2026-11-20T21:57:57.146771Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -18,16 +18,86 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:18 GMT",
-          "set-cookie": "_abck=5F4FF95571E564AB74AFCE36422F6CAB~-1~YAAQZGw4FwlarNuhAQAAoVdI9hDchpW5wlhT0b6w8QUZRWGjIMgC8TmSsQCOjqRoHXBZJVjR80CBSgcM3vbqAlOKu01fkFy9ZL9dsJ/R0PrQtHNbRJnCL+sDzQiTtEKHrO3absHSueHF5BQymp11XJ247paO0c5GrtqIhwqMaq76J52AcIrfpo2OKNkS3Tt72eR5Oa7UXJdf1vJdZetp9bIqAabNsBc37K1lWmrkUu4FsGfRf6bLCR6Vn/q7pvBl7Kn6T+dKdarqyEvkxAip6lbhwHemt7vzOTESTKP963EN6P6fIm0W3TA2lkRieZ/l7Zoliw2mdEKTLCyWRWCnC8Wt+H2QB2ii2aUazPuJoTEc0upn7isfxM2+5hn2/73QrfpIvB3azpJaXLpPMwLOYr1DgRY0jd5rJ4FR4dYKP1/qHdVbwS37bdouMLvA7jyXgyo9vNt60BCQ13Ia~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:18 GMT; Max-Age=31536000; Secure, ak_bmsc=D9D07106CEB0C62CF2796FFA82C1FD2E~000000000000000000000000000000~YAAQZGw4FwparNuhAQAAoVdI9gGsSATTft8hRwSUqQj1bFOoknENNLwk+nEdawUfd2M2Tt90b10H9tGikmAAtEF+sPVbw/vSRom64fsheDx37bsKBNNIEU5lW6t3nwZ8a5IWmAbF+xyz8sa/58GJwWh/iJpeSWt9EHy7xzFNYldEVpedj4jSPbg0e3JysYfkcIcoPOcppydpdDrBBRmoW8W3GcFDi9spKQocvoyYETspcH7nyIMMRDyEVO2b3R+u6QutlvMg5Kw6gH8uQmyCNUlpdtpLrnQBvqX1Sx/xcXNT3ZkQm0VOk0UkUS/ZF4FoTQ2IkIdeqIh/HlqH0YQCnTbdvDwgTJbT5X7sD38j0OQxc8/BAMWizEeJS+lChANt2KYEtSl+dJGfAByy7AQlLQ==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:18 GMT; Max-Age=7200; HttpOnly, bm_sz=56E9D979CB9D53215378D96F0D00F8EC~YAAQZGw4FwtarNuhAQAAoVdI9gGYH2v+TiFFjOYbJH8CsADmiRaNXnyYXhYnMOXrF9fXdLOeYxZXeSvoxEAHM/qqYQaZ4dflQcXM7mpa8mlMP3d/Z0gZYQ6nHS/Qx5gAM8+cq68O568P38qDsEp9UABL78KbAV0NOhXmXNR/esBV1yREKN7D3Iaa43VH35dTR3diJAZpie+amRxpp+vZyX5L4BF/e/17zx2RaABzw8D16/V0QizIUlXAGSgrMIyXHnbfQkti7Ld+i47FOpMf4M9EhyMgWRBsKLUIq22Ajurzd6VGaOeSMw4lCtI/NepQxAd89kYLAjh0HFVerdLNaE4PZ+/RKKXi59P9F6tX3hsV9B/UlGs1ZLv86k5RMohylLPpjQ8+KVjejyC49dZOW/me~3748404~3228471; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:18 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:57 GMT",
+          "set-cookie": "_abck=2299217C1156FBFBC0A98A2805FFFDCF~-1~YAAQBBkhF1pC/dmhAQAAEVv3+hAKApv/Ik4ygYuea/pOgbBR6LWJUOnNv43KEOWWdZX/wjE5E1OeF4g4tZg7SZtXp0qKBPi3ycF71PjEF5qR36yuyZjwewxwqkCL6L4buUmLdFmDLsK9nAApYjCWxjKgPBxVVElT35uA+H60vg3B9jAbq+rBj/98dmYthYzGl3j9qptrCo4u/p6kH0wLrTkTS/50VPzHUJYqfzheC6suI4XBZ6Z/TjzYlaNIZ2SaF/KfY0d2NB82l8EJybd/oX0qJUDOt1U/Rrs+mEQ98ipdy1S472ryOmgmzoLP6RfCUgIwk5jAxfw2cxXAS9e3RbbcsR/Ra2yh8gJx53ygNqUVPUdgXTh+f4bXJFov60Eg3CWz8w31X6U6JB+NFhoO+IVMfa/DO00UBurIAdHBdGC6uAZD5k7zXa0ljQxuRo22mZJQuCzLWgSIsxEB~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:57 GMT; Max-Age=31536000; Secure, ak_bmsc=D43B82A75EF7A78E532442041130EE75~000000000000000000000000000000~YAAQBBkhF1tC/dmhAQAAEVv3+gFaX8gTE+pjUyRWPA9IbnGikiiSMIcocJMAUOsk8+zAo8/UxRDqWq3cJTVc+NVNxHqBI2WuCrzAQ4UUs4uUbv3gccwEr5i+ApA7OdDO4CnUhuZP51etkfi7lQWODT8MYjIaFkZ1i772IHHyExE5MJqQrxQrcUu6ghdHMbSxj8Ekv6lUfFt3eooPEAZnE2H3jz2Ri3GBf9Azf8atlUnS09cUk7SX5JgGkgIkOVgzrEZ/3rmrQ2zdTtuYzUYrba+FskV8UQyr88TCocEPY2uBX+6LY8UgiuoSG0WA5mVp2omzQaOZrENOFPGofso9B4I6LBFY1FhnTKFm3iOKcZ46I6YVpumMxRf+NfA3vQvscNiQl/dF70VTwzkMeiUX; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:57 GMT; Max-Age=7200; HttpOnly, bm_sz=24565799154872897B0F1E78CD2C8815~YAAQBBkhF1xC/dmhAQAAEVv3+gHkJ1cry17eWks+bArG14LDSqu3UmqQ2+OFOdAOr06gn3N6e7SD1RtkqX/CliOnwPOd9rvIRnlHxXfjGpKpEzvdKiLV5xjPsbMIqgOpfX3c97Vsg9RYKxXxDUHR2bHH9f+fyWDisGUlaumw5cl0lzXwwn/lL6lwDwT0uZMUh4ra2fNaaodXmxQpy+zEhpI/tufwqBxWGYxxDHZK/1etUz878Npjms9TzOw+iZbN9EgFS4ekuSxW68j5FV6ATJ+si+ag2uD05faKBIJuNIKC4U4kTdhnEj+9EingsotI1TOb9EDfvSm1giojAYCIK694fhAzlTsTftecJl4de8j2A5N+We1F95r+XeLiVu5RuTu9viad1Cuh0sGtTmZ9m64=~4342834~4601651; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:57 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-5b15545063a456b821dd58469ba1a1d6-50bfa008ef4ec37d-01",
+          "traceresponse": "00-aa6afb58259fe17046417dda3b9fb2a9-c3bb6c94a5a45799-01",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "9202a3666ccfde25b5bd51bbb515275a",
-          "x-vcap-request-id": "20458c96-f731-42a6-4c5f-2087eda31404",
+          "x-mc-correlation-id": "1b0f9f6adf8284d17e79ad403dd2df72",
+          "x-vcap-request-id": "31afc60e-7eef-4b13-5194-b5a503650f6c",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.61.32.235",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-11-20T21:57:53.354867Z",
+      "request": {
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Fri, 20 Nov 2026 21:57:53 GMT",
+          "set-cookie": "_abck=6C9249190913F949A7C5870240C71E6F~-1~YAAQDBkhFxAQzNmhAQAAQUz3+hCkEQTdO2k1nd4zJ0MIDmDJtYHmWitjkEDtIB14jvnoONYwz5Lwbes/lP1pdLk2FEVmhVthYH1CvuKEpxFP6rmUZIh5dNFtwRmUVParw7kK0lihZKsNmAlmc0gCNyj5BYuZeoKTutpMWfTl2YL5R6AVtu1fIy4tgqLfECeoREhL1FdK0UR2w3dfcMZT395/6rt7Z9Z08gBDYOloafuHuRAPtiJ+19rb0La6Gi4G0MQjQCA2tIAVt1hpNZ2EDceFvog8bWNn3K0Xnkkx7QsLgEbOATzwvsLOLqw34u1bNHEZSodnZg09YNiqOzBUnrI/Nan7H/eRbYPFLd2U04PAN64NJiGhTisK7ilQqM5LiUywQq+VFJ10lDyLgcDw0g+BtTDvgr04xbckQivN3bd/GdWD1ktZp2PPTAwsJyoB5SyuN7U5u89AHKlw~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:53 GMT; Max-Age=31536000; Secure, ak_bmsc=2E09EC9AED16C42A61CBEEAE414A97B1~000000000000000000000000000000~YAAQDBkhFxEQzNmhAQAAQUz3+gH7T2iOJzBd2fBxFGhSpcfl4bTRMLZG/nK05zqPiezfGNysrAuLwOZn5HBWXbx+qKiJgzVE1+Ae9g49nnhlmNddjjqzgEi5JICOF0C+0emJPQvucCJSrDiOY3oXveJnEm+VeXcKEL2VLiYpWy5CMqejgmSKH+M8RUNJKyHUUYisvIKlmgzRgv6owzErNFtVNM8H1MrLEsW0aAhWeZREGQTyU1ktJw58V7wOVRJVfzn+OrKeRGdy/rr81/HUGp3yelLJnYyJrXd9h+qbTrCM2jSG59FNZWu+Ml2+eplzQh6fnsFpQnKcjjtWEtG12J1b/TNe3D4tRLcGhkyYJEQV2eGPKBXEaZcfjbC5cldaw8J2IX9aNutBp5TJ9RwhZOw=; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:53 GMT; Max-Age=7200; HttpOnly, bm_sz=63CDF0B7CB62B5C81032A65F25209322~YAAQDBkhFxIQzNmhAQAAQUz3+gG8qDMjsCEF70W0okCooTYTcfVImNTOfqwwlgVSFoQ/RQBjwnFXrfUoe/qLg24UmKh99wgDiANDArDAJrCdh/Ec+A5Bnc50X3EAFzGJrBKiKAQdk58kvZMxQU5XsnbqJYVn/N9dj9Vx83FB2LGIJMrO2Tgayu003nW+7M8EqOIzxy7epGxoe1zAJ65g7BEMKNDcJcvvp7RZ1gf1ZVM1mtxjvxOV3S9+Qav0a+pkslZCHvU3o1SCwy0pD21Ehvl4rluZkiUrcA7RobW0Uq9lwjYUCfTD3d9Xvoa7QRSk2d1o1QDBBF2EfpGbFpx0nKEmHFtQWYSK8FDBkCMR8Rs1KHJ1EzIc2rr551r4BKL1oRRE6ywUaLqOkN9TyQU/GjgH~3360052~3228213; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:53 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
+          "x-xss-protection": "1; mode=block"
+        },
+        "primary_ip": "23.61.32.235",
+        "status_code": 200,
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      }
+    },
+    {
+      "attempt": 1,
+      "fetched_at_utc": "2026-11-20T21:57:52.682187Z",
+      "request": {
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
+        },
+        "method": "GET",
+        "params": {},
+        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
+      },
+      "response": {
+        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
+        "headers": {
+          "content-encoding": "gzip",
+          "content-length": "1886",
+          "content-type": "application/json",
+          "date": "Fri, 20 Nov 2026 21:57:52 GMT",
+          "set-cookie": "_abck=132CB6DB90B38CA74DAEF71A07A50967~-1~YAAQZGw4F4I/7tyhAQAAlUn3+hBcGw5zwLCHWtnW38LQIkPTAbsF9grkV3396ix/WOA8rZCsTbdhH9w4GTyvGekuy6HzMJrEsSSQ75VlH2u4EFdJX/2s9TpqKkMC0FzpvnmYnJ+UzyZFrlvJSvBbOesW4ogzllDb1ZQs9krH7OqrTOD8Fiau9f1M0g1w5Aw0/EAPZZ5oHVHkvUWJNnfenUeteZMyAkaGSc/Ggm6/5nU9RBtvVVoZZRpdnmi79nyUctebUG0xolssGWTkssY/JjtowIVpQAUiVfBzojEwH+xj5TxfKCiZGlvWV1G+RTjst7xI80V8xynlP7G6vY46G8owprioeVfUEh76rfNpQC5dHHEjeMvGOADX/nTpTLZPpL9A6azlWkMzxK4LTPq51p0ydwk09QKu4A/pnudEteNUA9wsoXgXtM5p3O6oiej+rP7Cp4JxpKg/3aMJ~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:52 GMT; Max-Age=31536000; Secure, ak_bmsc=BFEFA70CDCF291AAE94C01933FE8A6B1~000000000000000000000000000000~YAAQZGw4F4M/7tyhAQAAlkn3+gHHOfk5WMlP/8zb/jN1wUexvJVHOkoBdpryIF9SIuy/jtv+zACJd2DqJoSRaY4SwsM4eLOmAu+CNZiCRtKjgiDxNsEzTSi9BHw65TwUrrDUUEx36a3UBIt8L0hJbgVXxB09Y/3kJlYglqnXsgHqjVx26qqgaRIjVuc9kgvGlVdmNWIjYOr24IPh4k5gzfD4rkSRClBmCAWAk5biKaDpgZI+w9Ei6uhLo4yKHDSNFAIl5hHaba2EtV5fIyCsckPfMWDgC29vURkkegRqF2slWICb+HDv/CUjfFL7fxGdcnDRcYsRR5vMw3nny6M0FLvz8StAxa1OYnGap4jqd6j7S0C7vPKXX+uYCnl8bMwx6hBX0un4GlkAt6lnDXe0ZmeD; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:52 GMT; Max-Age=7200; HttpOnly, bm_sz=52000BAFDE9E311C8AE0C321BD2AE211~YAAQZGw4F4Q/7tyhAQAAlkn3+gFd+B4IVTyCmjO70O7+TExaWNwWDIccx0PlV0bH9rA20wiqEy7JkXvW3ti2YcsL78fjWtFAjabpV7mbsfdT2kotNmv9RLml8viA4/yRiEDd6TfY18395HtP1AGBsKX5lRzFjIIrTe2Z5ssMiCoDuCw+eYNwEjpDt9Pgc0n63Vjk8ZokLaG04haJ/r1F9uED1cquCOWNBU2QaZNO4CnGzRk8DC1y9x3hU/IsALKZB9a9SWzOlxbCoFEkVPdimkQQUenuacNfKq6aZ5s5/dHECKJpS1vlVVseWhYQIWUH16BF4tPD94/Mr2YFINSVoqi+7WVuXphDjG/IYx8WEM9LMvmD6Ur9KDUazuQbTuNheP0YFpq+ZCMlefExfFLwyINpKfo=~4474425~3159094; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:52 GMT; Max-Age=14400",
+          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
+          "traceresponse": "00-77a8af1e3a05ff91174006a2e52a75a7-06c8f09529bc4067-00",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
+          "x-frame-options": "SAMEORIGIN",
+          "x-mc-correlation-id": "83756a23fb6d54f8e5a1f3522b630cb9",
+          "x-vcap-request-id": "2d42d45a-257b-474c-5f33-4c6f1cc4ffcf",
           "x-xss-protection": "1; mode=block"
         },
         "primary_ip": "184.24.32.143",
@@ -37,7 +107,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:11.066219Z",
+      "fetched_at_utc": "2026-11-20T21:57:55.366987Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -53,26 +123,26 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:11 GMT",
-          "set-cookie": "_abck=98598B9CA1FD1CB67ECB2C5DD18A6F17~-1~YAAQim0+F6KAmdehAQAALzpI9hAjy8FuMV7KuJ7ZNGPJ+FofgGmugmT+ceFnBfgBhvI1BDhlBPyoBR4rHQYqKGl+mldp9Jc/gP0yfgu9x8t/tVxrEt1jegxEKwggq/P1duNaYE+lpaa0aI+kQFOf2xu284XJWDLCBNYXN5KQsiK//Ouj3Orukg9Dp+IOZON8TIC27EAqTrhU8GoUw9WIT5I2fChynXDZ/+gnARPsd8KlpBHCBZkSWIhQRy+Y0EBzs45TF4UIytRkP7L8fFkL7hjNnhotJgwaKqT07yc36uT+WW5dQjSnNdyis3Tv1+Tyy59JnZMiVkFV1dX4UXXOrRx4vpvsjHDaEGpxyQPb/SvybZDH7sypDYFLg3fnYGDgniPNxcwk0jgEe0kTizCD5Y2jQX58MyYJtwCINHh9/CQ0DymgbV5lBmfbEYmmaB5XYh6sqp8g1hX9Jj9O~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:11 GMT; Max-Age=31536000; Secure, ak_bmsc=184170252E4433C2E11C47A45F83EA86~000000000000000000000000000000~YAAQim0+F6OAmdehAQAALzpI9gE6QJ/fxY8HnHCYewwscvD0zOpMbId85hh1961/CvqnUtpa5dre6YDKXaVv7MZdH04PdI9AdvV7Dr3psZ2PSW1flfKPcLsjKFrw7ICdcKfiff3yKQHU0OacsHsAPsXVACgzVAIcKbpUokKreb5yOjSS/CEXPV6ZpTlhFMCX5ueXTJA3zvql0A1yo1yFJbofwiTV7xy4TkgN1ujDMFnve3oZ2IOC28qIp2xxK2nNAIaP/uwu/OxXTin+VJvqDwssLFMh4vyxK8bcmBBoftmc5tdurjb9mmYPpYhNBQtf3UXs4C+qXyr2Jam/qPeoe1ye0OCZA4BIHMgdOA59pPue4D3E/yOFC7m6pe0eq+i4AfqLdd2ZPzfIqbiBPNgEdw==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:11 GMT; Max-Age=7200; HttpOnly, bm_sz=566B94AF4817574317746C5BD04EB5D8~YAAQim0+F6SAmdehAQAALzpI9gEolrDewYMCZ6hVrr2L9jn4M3kechfE9S18ffGwzp5n168D5oH6iEl6aEuWT9GhvSwt5GqxyUsyWXrxxtuKkIq3q7ngmVdbBGrm8gSxaStuliq0iAQ9Gz4P/zBaN+9KPXFbXwt5xgY2kkawyxxpc4pAEdYYrd7VNebNdaZ7/pfEgnlWONUbAQ6/cf5ysv8wo7T1BDQineNOxuX0pqZFyZdcHqVklfQJgAEDf/no9iqkhQiIYQE14ZOzY/w+hRoLSJ5/0oxtp4vfghuhtbivqrwpyL2woXBqxLaSjZzZ9caYAW9MZ3VGoE+qzwOmVysh12ScPhNrR6/9LsgMZ1YeUwQveqS0+mixFCwIeB11E7I6UgROtm5KARACGY/JkrA7~4599878~4342578; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:11 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:55 GMT",
+          "set-cookie": "_abck=A8281F3B5420AC8FC0A430ABDE44441F~-1~YAAQWAwDF3BuG/qhAQAAI1T3+hCAQb9k27LI5Gb8i4/tdpJg6kkdsvYBvFHxM9Lgs2re3gUme126DdIJSJanvRjCm+2heXNm76h0S74HxTz+R5iVr/OMHT5xFVbwQICyAAyYoUilkBWvOp68DRVrEJB2v/iAEFL4T0R8g3W5s91FhIFEPL20MngoCk4H2u0tM184g7IlmgXpNN2Hvft6XFhLSLk5A1XkLcfUcklVFRRyB5YtRL1nQUDiU2BbkOamhXQgVVuA7gxWjkTVqLupQNFdFYhoQ2d5SNmmnSUZuViUHLs13VSQSvO6zdGifQ3Gd6B0UKeBDv8HAHBe6SstvrcdKLIdwR/Tg+/GTcvAD90T6CERmoem+QOQoxdiEb3sD/m6wl+CAIxYPQkgGlidOitDK3ni74HSn+CDZK3PDquvbJ6MGERBU2bZAeLL89lnxxsWKLMIa+djVOH0~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:55 GMT; Max-Age=31536000; Secure, ak_bmsc=2B03A683617E522E0A1633D8CE40D61A~000000000000000000000000000000~YAAQWAwDF3FuG/qhAQAAI1T3+gFHwlvFbuRqbJL+49DavwCitT5DrvE24MXj6Ziog3ZRys63VrY3nG6nDI7Irlhecaltly51ok3PgEEYncTvChy9jpykxKPl7jkVNCumvttY6LgI8f9pWvcaq0EBD/+APLH5B9Ut0K5G0TkEs/B+s6MPRgg9agbfOg9XGjmkhR4z/RqIJkwJLUQnrEe9RDGn9ry8WauBrAlckdWsFvCR24bvBFxNvQjE0bbNGuIGMVj4fDv9YsdVE4Jbam8g9/X9xE8AQoCasYbJaWLF18nJCJcuFf23LYDKI4j/uTN6fXFRjtuY1VaqVjuRyB2wkyj7Ne70GbuIl+so5TWzOow+PnlAPvtL5BJhWRI3G0OIPUvnl0MaKm8Us4remHbUOHb5; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:55 GMT; Max-Age=7200; HttpOnly, bm_sz=47B9C7C8E4F4E20B642A3E10A7557654~YAAQWAwDF3JuG/qhAQAAI1T3+gFLKnotzdShUNFXP4LE0dLBmPGOpkpM8wJysCv0v9qjuXuHJuxMesXkgjZiI8nI93+c+GFdlsRw0vhQUbAkyfHKNymGupYlKmnYdkqgCM6T3deUDdhuOViUl0ygtsbsyFThkczn7lRxQt7NwUiyRuv/qr28vRTQsdttl5bgayVhsXKruj7sMpbVaM5KqbUCeyXsbrB5L5IICCfnFDlF6SIzafqIqzvTWEefXRJfr9HTxkCcEf393oQc5UtAo5upxKHB1umeI274sgMukLkwUZkeGWCD8aAo0aeaJYDwueR1HwZH1yYWEXdkKMrR2yX02S2WJrEq3vKLG5dAyg4SqmTnpHgqnwRFhiMQaYQH93IFGWP6NJPBiFg0rTRqwiTAXCk=~3293497~4534342; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:55 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-9ef04b229c13c6fa2cfaa9f20e5e7abe-5b8286ed583b69ee-00",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "98751956b10ffb516f10a110d88cea2d",
-          "x-vcap-request-id": "c4b70ecd-9049-4056-4bc7-0a55562e47b6",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "2.19.146.88",
+        "primary_ip": "184.25.34.115",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:10.557212Z",
+      "fetched_at_utc": "2026-11-20T21:57:55.003799Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -88,16 +158,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:10 GMT",
-          "set-cookie": "_abck=48BE4B57B543A9CFEB245184E8AD6306~-1~YAAQDBkhF88rANmhAQAAKzhI9hBm6LuZl0XoOe6xf+/1fhH+Iypfv5Po/9MrG46E0GphHvkFLhaxzhfSmiTGT/+4XIX6LQI153S58m77fddXmmU3BJJCPikDZZUg4yNv3UBf70I+E1NLZzd0i1FwbziPJxRA0xNensfcz8eGY18jge+6oll1N42ztfeO8wdQvgZx2b+P6X1/cAawBeEnFCA/I8EhjUwBsqDNbW5WRj5opQcGauefQOKj+K8aSJo2Wv+Cj0Z0JsAszhCQWbFFaNa45tLVU62AxSmIHOen8iQ3r+huq8182z4sAfwM1ZBMZ/omjH8PVca+/4Moc5oVA8xDs2JZJ/guo3r1aPK1zAWqxcyqs8UswQjZZ8Qta7A5+RnV95dsU4V4h2TpSSTBWQd+sNCcokdJvE41qd8Hqb11ndfR0y61hFgJjqyn6RJ2SuOyNWV/RTVq0hOn~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:10 GMT; Max-Age=31536000; Secure, ak_bmsc=7F177BB96700384BA1570BE2B2E19966~000000000000000000000000000000~YAAQDBkhF9ArANmhAQAAKzhI9gESL0D2rFjtaI2ZyhTx0y1qIEjiub1kmiCfQ/tsA9svdUzahOvAxJqJ1tYciFWTR1o594Xd4djm3H1ZToEwvCc+QqHU3UBFylpjXhhp6nO7QeVOoQ5KO97CzhAwV89n42EXZ4nPDs5Hw3CoOQDSgh2DDCQIwAP/eTFwATCU3rfrMuQ5YsRRoVEXXjnpT1lTOTPL5nXUoeyA66+IXAmEwZpVrgDclcJmVoiV6/mVZia0JXF5XFBEr2RuQMupClNFjIly4+2ODMPikYAByA9UKDk3yN/YKoFicaIt14mkiflLu5bYptwHRRtmEllwmeZC5w7QAI86kNEZt9aIxqh4bkG4+OAwoaEzNnthGKNMaSmyhdmj6Fz1qn6jbDg=; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:10 GMT; Max-Age=7200; HttpOnly, bm_sz=35A225C618B3E59C55DADEB37DECEE19~YAAQDBkhF9ErANmhAQAAKzhI9gHF1bydJursCyBCn6ScFbU4SMfpTJ20ozb3cNuYO7yhDH4nQRE3xOpzdhLT07SuLZPyla+EIRPSepRBD4Uexow1eY9xkmvEry437QTe1HBkwXk1dHhdxPTij3PyKJGDpy9UyDIjuWWXbD6Tw2A7LeoG3Ad1w2KGK1Hzhhxj4KTm/U5HviVH5p81qNiHYulei4n/zqmtSVS7KNw7otm7uQowxn9hV86O43iwOO909m3Aj7ZKDf4Qt4vWWSriWxQtJU1YmH3rRcFB2mK5p2NBNTlVO12n2KHh/f6/PWYUuT6AtfxyYvmmfu6U0k/pTiG0G9hZ42nwv2YnJyoHSBuRa4j70WiXg5eluP8AFZeDGfsAIpxeUKWzp+mCsJRx1Q==~3162693~3553092; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:10 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:54 GMT",
+          "set-cookie": "_abck=33C6EF3DE1EFEA4FF279BFF62E46C9D5~-1~YAAQDBkhF64RzNmhAQAAmFL3+hAsd6Bj0EOQPAgG7GfeQJNuRCPkq/OHdm9sp3MJ2hedXpDNPnuN8FDfW+idwzulR1TXYg6DtJb7XwJ1xUTKxnJCK+nhDPRUSXunnCgqECSeZxl3LDzIidMaaDsmDREw2ILwf6KAyUBPqgIerSitGxPcyZL6KA8+jQuAaGHlzo9HWcLQbH4j8IQxNgLefU74MbRrRjs2berukxxtJ9inXYhHUAxgHuk3ebYb20Uqe1XZltwEx90t+30mkXwNVGPRTt8Z9x3/3iZu+0cP9LYgbegD/cXlhVYdtDrQOudXU7Fjqmxd3C5apMJvXxPH3nhZeU0GyAwrW38boPqOyPS9tGnypr51pRjMEx0Unozecsd4laenGnEiPcdfRC7k1ABG35QOzkyMiLow5TC1Wz/bWlWmqu2AfeYDBC1uTI4P+TdQ43b2Zt9wJQIA~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:54 GMT; Max-Age=31536000; Secure, ak_bmsc=DCD027A94BF1D08C41CC816C66EC20D0~000000000000000000000000000000~YAAQDBkhF68RzNmhAQAAmFL3+gEVwvDstgU1u0IRpCpnyKHClwQCVNSbdAC3p5in5xMw5Pmb6nwcfg2QOs00aWKiKLmq/pJq+3xrsg77CavxOg6F9LrbqgO6nEk15OCQarWQ4ngiEQuH/Gri8AUKednfIfmjetQ3vINV2+fBZ/MddVQ2bPQjJ22vKtTNUsAxc3lyezrXV2NUH2gN2U9HTSgQPFYUefD9hZukmc+KB4sSVQxyRd++b9TnO0pCrUkxhLR/GMgaS83RKKCOkxn2MFbnsoRwCDqLyluohogakfraYfzxNHVSgWzfW6AEy/V1uuBjdhdzV6qYveLekDulaM/09g0ojaFXyx1E2FH63ovMMqDgzgOtjrI53I53TbAyVvlk1SxIV37mgaYaTCVALA==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:54 GMT; Max-Age=7200; HttpOnly, bm_sz=6FBF1EA6780BB63CF42FDC1D309CD3AE~YAAQDBkhF7ARzNmhAQAAmFL3+gFsW/RsNaw0w6or0T0LR/k3sqM+jyPNqSFKks+KfS5vOyo2N9jHkRnSysz5Z8iwf+92Z+TIRkpZBaA5VSwZn7G+d7cdld0XEX3L8jlOdXkzvDgZCUigaaVADo5RYv3WK7g1JSe76y8jmiZS5dER6owvKehv/vnizfoxJkPDvkOW9b/LuXJ9lXiXbPKH1ObgNPUQcBPs6dVdbtr/e5Nyxys9gBWryrw4+YbGK+3zzYeAcCGMs1WeYi+kE4IdcVx/yAAJfYneUd3SmLr6AR8NE95QZExCfIa7MG8rXcgbWSG0DijheggTiXVpDZOcFsYeiDl+HXiihARlEQJDY9ZeRPjjc90mOUvufWVkBCaoLCZEleG6eOdsARfKxKP9ona3~3486004~3160386; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:54 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-313c9d529f939a3fc44def08436b7d67-c882ceef5e76aa38-01",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "c3e102de205a8266966f4e8a79985fb7",
-          "x-vcap-request-id": "cde382f0-6f82-4a1d-6279-1bcf537c0122",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
           "x-xss-protection": "1; mode=block"
         },
         "primary_ip": "23.61.32.235",
@@ -107,7 +177,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:11.785346Z",
+      "fetched_at_utc": "2026-11-20T21:57:52.938023Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -123,86 +193,16 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:11 GMT",
-          "set-cookie": "_abck=7D6E2891385C62779AD50D4ED4CEFFCC~-1~YAAQim0+F1CBmdehAQAABj1I9hDQ9xCS7l4XebvphxiTF9OJYpm0iETswf6+hlHRijDW2h+PAHWx0Rz4quX30Jk3wm7f+kqhp2q1dRhTD82pV++jP1yxY5GO/NRFjxmNicPHHI0l6iy9+XpqbfpvpGQ7rcB/HT/hs1m3AgM7T/iFVC8w0LGHBpaYKrKhGWx/rcAhyZYs3aO2SCNo8HnQqhFHeNvSlXV06Gho7Ry5653F1GteKfaGXipZjA3Cntq7nyGmNYmKMcwYDfs55zn505hcASIco16NVRQInGCMHM47KnSEj9C7fYOOZhYBhVRR+DOkyp2500GvElk+21sRLdTkg0uuzwjPGfvUGjZryy1PR3/nyCB1gR1nGoyBUiT+Haj8zZDYGxrLd80ZhpMM46JuQ5evGX/RRYQJlZhB0vWnRIJW3Nl2LIhGxPBNshC8AWiNZ0kG1kwCHYbc~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:11 GMT; Max-Age=31536000; Secure, ak_bmsc=8B795ACD0333DFEFF7BB6BF1DFBC1913~000000000000000000000000000000~YAAQim0+F1GBmdehAQAABj1I9gGZebeZAr/t+w3LPBD36EfnI3t77pfSDkEK/tqmQ74ScXiATsmXGM3r0BvrPCFyTN70nmgfXgtwE0n/Qabt0d7PatPVXilFfxZLqo/kBoHX2OJoDJcldoLYpE080af8rDsAy1aQQUoGCH7YhxIa4U5F2JKlNvt8S6Y74dcDYA615azDWw0gZmefqa9Wkg7Kmoa7YZTGxQ/o+uYUaw6XjumStna10sS9PA73M2Kn3caeI0Yzmr14jMZMSnV6zgSZBkpBgISYbguwIMeO1nFVQOb7ATYi/8WKl4MOR9xRV/eSgCjSknejcsY/XSvKr4WPPKXEwggAHEfdbphf1cA1pSgayb0tNH9Kro470CrTurTjQuMbMGubnMt1Nvi3yw==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:11 GMT; Max-Age=7200; HttpOnly, bm_sz=01A275E8F521629383BC1CB4B6345408~YAAQim0+F1KBmdehAQAABz1I9gHpmQj/gDWnavIGKSKByspfRphB0cYbfzZedhSwozzGjSz6JVvVoEDCr9zznRqdfRUIL/vZHncsdcOXDnkrvnEFQ1RpdvKtr9BmyfAwo8cWqT1UDFOewDv7eWInRBUy9HFtHvjuQTqPtuZuYiswP99VRk/rHAkbKWxEyKAj+7D51nSpgm/FeYonFSVDjvLhx3GKQpG4Ynq/Y7uAxf2jGBaVST+CpDNCKJY+Y2CPET9lOMOYuQDmanPulz/+Gs0VUelu6iig0bmDBpaJPbQQBbDXVNSF5wwVz5GquRMzHRG5uftldyMBM8UzTDc45/T/TO1cmRY3t/joRFmhTX7BfEp1Wpfe6Zn4HjuiR/b158H7VG1SiAD+KiU4z45WIDQD~4599878~4342578; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:11 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:52 GMT",
+          "set-cookie": "_abck=8CE6B8EFD8AEA477182F789F1A78423A~-1~YAAQDBkhF78PzNmhAQAAoUr3+hBH1EoIsg/F3Aw9h8Skvon2rcuwihz2LTnoC+IoKNMrFeCKEzDoGgPzteZzOy1ZTp9MzLV/ghVaoB1DoJlQo5FCLqQlDXxEA0jATKHKBlx7OmUaXCS4YyDQfkS3xvZ8fq55DOCTguVofvoeGRene3cn1p5oZmeGoqbGLazdPYk/jUimJHG6bOobBZB/ZLbaS/cDLuZkVpnUZ5WCxDXm+IIQRRx+TJLmROojpEAMcdMFY96QwOaVTJA36SzDjqkJndos/J9zT2Ip9WxjROgp3pkgn7nnd4ruqIGHauLc82KlzldUCOxhh+p3Re1nWOZCXjzjeafcr1VC11HXCmUr8z6D07Yjr9i5pSreQZ1/Ukt8aRP2m48XLQUVrswY6+9bWoYTezr0DL1ufZB9s+4xq61BQvVuGCc1P5QLf5WlrH7w2elp6zP1O2Fn~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:52 GMT; Max-Age=31536000; Secure, ak_bmsc=0289CE237BD2D01A8BE0A86CFDAA2225~000000000000000000000000000000~YAAQDBkhF8APzNmhAQAAoUr3+gFfsxzwwIcajuDG/DiQRb1F2z+GTJlCRnR7X2Igltdis9fExWzC/bgkkMplJOHgYDzBBZWhWZyffDXvk9KTS5W3FK5E+BGGQC1dIN0wt51BvCz9f0y5tBlTvju0z2Zmx1LvMgM9/i1OBZDHV5XKDqomtydGLHEgFTKlrXBUYEOcKN0eptHcnoVr5sAnb6oR2ZztY38FGMr72YTm/014J0ONNDIdeZVZkLcLlILkLxlfo6jGnHVeUERrWAo4PiSZfN8wA5zBS5gYBmoMbWI0JScVdiimtt0g+W//WCGqDFVtMvBgNw92kuJzgIj+LpFAsMFY2aVyvlFttZJONwl5XsSJCeU6RhO7VJmBs15V+a8/BwZ2OhcdwyL1+WM=; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:52 GMT; Max-Age=7200; HttpOnly, bm_sz=F0B8C89E54AC4F67BEE59CB17BBDA0E8~YAAQDBkhF8EPzNmhAQAAoUr3+gFdEQ2rFEwLPZ6o8EHU0FrWqU28aYeE869ROq93A0wQ/IjdeXuNS6wuejxkCm8aOueb3xV5Oc2zdrBI5wvR9JIPqU0+69pdZuXBqvKelQtu5RWnpdyXdJf+HWNwNDolSEAiXK8bYbCq5wgyX+vuqVeVrYGFOx8s1IJa5KMNNew2IwmtBc6BnyByDlDhPFJSaP4q6mvDi/OMy3IN+yQ0PmdMCMk9JRmUlSgmppWbJxqSpbLS44tDQMU9sdTCFY0/IKvMhNQspqYdfzpLvqEbpY/2QwyC4B56sR5tnV7vcQw+h04r40+7CG9aMzq9cDQv5Jv4CR6YKBajOWc6UMmWRmn4ZG6g9F2+p5VYeLTWl5qkHNy5lwJ1Hbd72Q3DLw==~4474425~3159094; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:52 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-9ef04b229c13c6fa2cfaa9f20e5e7abe-5b8286ed583b69ee-00",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "98751956b10ffb516f10a110d88cea2d",
-          "x-vcap-request-id": "c4b70ecd-9049-4056-4bc7-0a55562e47b6",
-          "x-xss-protection": "1; mode=block"
-        },
-        "primary_ip": "2.19.146.88",
-        "status_code": 200,
-        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
-      }
-    },
-    {
-      "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:10.585316Z",
-      "request": {
-        "headers": {
-          "Accept": "application/json, text/plain, */*",
-          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
-        },
-        "method": "GET",
-        "params": {},
-        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
-      },
-      "response": {
-        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
-        "headers": {
-          "content-encoding": "gzip",
-          "content-length": "1886",
-          "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:10 GMT",
-          "set-cookie": "_abck=ADF8491BF2B86F26BD6280832C0EE093~-1~YAAQim0+FzWAmdehAQAAUThI9hDtSMcDAYPrdxhzsuwowD623cf0ERhWRGQ/DftjwRvzarPvOKbxbS6aTj9M3pEr7/Yp1vWIs3vcfS0twW4kqJg+J56fvHQWgBcFyXIwgNuSoXtgefVfCdUFjshfbRkiHZcjY1/etghqYG0NlkjrlHJa7eNRBvzzLcCrf/bWJfjQNv5kPp2W73wTUdjMlwxR332obTlj7+4acLwZMrCUlcjujQWcoMiFpYkbHbbAO6Ccr8qonIFqn90R8mpzwnFcy7YgMXz4xpr+0bhRS+fHsJqPsI/DTAfQZWYZ+UqLhrJmLF//n3LKnMi/fc9zjVOCINq1O0z2PArULSmRzzPTjvfpZOLe3vYMney1CtePAxVx9XxwSMVrkoflHtSfEG+5LAXalBHlwEtEt3yzzCvPyg/4Jc33PcLJZ22atGA4x0MxQ9BGTko+91yr~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:10 GMT; Max-Age=31536000; Secure, ak_bmsc=94DAB94B84854D384AEC5A6127678A60~000000000000000000000000000000~YAAQim0+FzaAmdehAQAAUThI9gEa7SU7fTXR6k4uet3La6KOp/AOg3HYKwpgK4KZtxcW/P5MWF2hPjgNbTC9EyFaO8vbjlCeLRF7LEPGqCHb2VOxqfp0N1Yv9TY6643tnl3CwzS6dpGRDDpK9Z+rLs0g6hk+U5njLR3j2MCNPKP6xBVV3D4ynav46TxZUaechx4dWg4hDzbhlCF9s2L5KBmuqiSU93x9jFk1Gm77tiLcuZhLlP3pBpf9OGxhwhaxue/UR01TPqPKOaQRgsr79bX8/EeECviXx9/6551ljAc9tt8nKgpE5aSOLLVttmulK9KzckrxL0joVH1/PsQVuCqOtRdoof+IJbVeyavSE0A1KcY7yI5PpScgVy5qytrrScmQqhKB1huaHQmZaEBU; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:10 GMT; Max-Age=7200; HttpOnly, bm_sz=019A43C96207D9DB9A6586187A4D0ABE~YAAQim0+FzeAmdehAQAAUThI9gENQJbktHqmlFlrCfucKM1bEQVfO+Ck/dhPIZSQZ1OkpR9SHRP2rTFG5x/TQUynVrWjPF356Ud12q7HeV6Q9reb7pwyqI6/AEQuLhhNIs8UVpDtfLQxJb5Vhnz3h+FtCu3W+wrJOlxu49rzFKnZkDy+PklcpA9uiN++uFWfqibPIHABla7wM+M/ZdyGCZgbEfgfuuS+AOx3yyYRtfdakuF1+CuajMj6o/marfbEjCkj61JHT/0nH5NaFXWDBXHCgBfWFaf8k9tF+v2nt4w6uRPPrRHr4Zbchuzo14YzZAtgF02XEIZ/wtmgzQ0xLAaxTGL3Qqzw2m+eoyJsn1b8s8b4FCEBa8G51mHLdYdXMmQ23M6shv3LtZ1JmTnBqgQ=~3162693~3553092; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:10 GMT; Max-Age=14400",
-          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-5b15545063a456b821dd58469ba1a1d6-50bfa008ef4ec37d-01",
-          "vary": "Accept-Encoding",
-          "x-content-type-options": "nosniff",
-          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
-          "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "9202a3666ccfde25b5bd51bbb515275a",
-          "x-vcap-request-id": "20458c96-f731-42a6-4c5f-2087eda31404",
-          "x-xss-protection": "1; mode=block"
-        },
-        "primary_ip": "2.19.146.88",
-        "status_code": 200,
-        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
-      }
-    },
-    {
-      "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:16.011001Z",
-      "request": {
-        "headers": {
-          "Accept": "application/json, text/plain, */*",
-          "Referer": "https://www.mastercard.com/in/en/personal/get-support/currency-exchange-rate-converter.html"
-        },
-        "method": "GET",
-        "params": {},
-        "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
-      },
-      "response": {
-        "body_text": "{\"data\":{\"currencies\":[{\"alphaCd\":\"AFN\",\"currNam\":\"AFGHANISTAN AFGHANI\"},{\"alphaCd\":\"ALL\",\"currNam\":\"ALBANIAN LEK\"},{\"alphaCd\":\"DZD\",\"currNam\":\"ALGERIAN DINAR\"},{\"alphaCd\":\"AOA\",\"currNam\":\"ANGOLAN KWANZA\"},{\"alphaCd\":\"ARS\",\"currNam\":\"ARGENTINE PESO\"},{\"alphaCd\":\"AMD\",\"currNam\":\"ARMENIAN DRAM\"},{\"alphaCd\":\"AWG\",\"currNam\":\"ARUBAN GUILDER\"},{\"alphaCd\":\"AUD\",\"currNam\":\"AUSTRALIAN DOLLAR\"},{\"alphaCd\":\"AZN\",\"currNam\":\"AZERBAIJAN MANAT\"},{\"alphaCd\":\"BSD\",\"currNam\":\"BAHAMIAN DOLLAR\"},{\"alphaCd\":\"BHD\",\"currNam\":\"BAHRAIN DINAR\"},{\"alphaCd\":\"BDT\",\"currNam\":\"BANGLADESH TAKA\"},{\"alphaCd\":\"BBD\",\"currNam\":\"BARBADOS DOLLAR\"},{\"alphaCd\":\"BYN\",\"currNam\":\"BELARUSSIAN RUBLE\"},{\"alphaCd\":\"BZD\",\"currNam\":\"BELIZE DOLLAR \"},{\"alphaCd\":\"BMD\",\"currNam\":\"BERMUDAN DOLLAR\"},{\"alphaCd\":\"BTN\",\"currNam\":\"BHUTANESE NGULTRUM  \"},{\"alphaCd\":\"BOB\",\"currNam\":\"BOLIVIAN BOLIVIANO\"},{\"alphaCd\":\"BAM\",\"currNam\":\"BOSNIAN CONVERTIBLE MARK\"},{\"alphaCd\":\"BWP\",\"currNam\":\"BOTSWANA PULA\"},{\"alphaCd\":\"BRL\",\"currNam\":\"BRAZILIAN REAL\"},{\"alphaCd\":\"BND\",\"currNam\":\"BRUNEI DOLLAR\"},{\"alphaCd\":\"BIF\",\"currNam\":\"BURUNDI FRANC\"},{\"alphaCd\":\"KHR\",\"currNam\":\"CAMBODIAN RIEL\"},{\"alphaCd\":\"CAD\",\"currNam\":\"CANADIAN DOLLAR\"},{\"alphaCd\":\"CVE\",\"currNam\":\"CAPE VERDE ESCUDO\"},{\"alphaCd\":\"XCG\",\"currNam\":\"CARIBBEAN GUILDER\"},{\"alphaCd\":\"KYD\",\"currNam\":\"CAYMAN ISLAND DOLLAR   \"},{\"alphaCd\":\"XOF\",\"currNam\":\"CFA FRANC BCEAO\"},{\"alphaCd\":\"XAF\",\"currNam\":\"CFA FRANC BEAC\"},{\"alphaCd\":\"XPF\",\"currNam\":\"CFP FRANC\"},{\"alphaCd\":\"CLP\",\"currNam\":\"CHILEAN PESO\"},{\"alphaCd\":\"CNY\",\"currNam\":\"CHINA YUAN RENMINBI\"},{\"alphaCd\":\"COP\",\"currNam\":\"COLOMBIAN PESO\"},{\"alphaCd\":\"KMF\",\"currNam\":\"COMOROS FRANC\"},{\"alphaCd\":\"CDF\",\"currNam\":\"CONGOLESE FRANC\"},{\"alphaCd\":\"CRC\",\"currNam\":\"COSTA RICA COLON\"},{\"alphaCd\":\"CUP\",\"currNam\":\"CUBAN PESO\"},{\"alphaCd\":\"CZK\",\"currNam\":\"CZECH KORUNA\"},{\"alphaCd\":\"DKK\",\"currNam\":\"DANISH KRONE\"},{\"alphaCd\":\"DJF\",\"currNam\":\"DJIBOUTI FRANC\"},{\"alphaCd\":\"DOP\",\"currNam\":\"DOMINICAN PESO\"},{\"alphaCd\":\"XCD\",\"currNam\":\"EAST CARIBBEAN DOLLAR\"},{\"alphaCd\":\"EGP\",\"currNam\":\"EGYPTIAN POUND\"},{\"alphaCd\":\"SVC\",\"currNam\":\"EL SALVADOR COLON   \"},{\"alphaCd\":\"ETB\",\"currNam\":\"ETHIOPIA BIRR\"},{\"alphaCd\":\"EUR\",\"currNam\":\"EURO\"},{\"alphaCd\":\"FKP\",\"currNam\":\"FALKLAND ISLAND POUND\"},{\"alphaCd\":\"FJD\",\"currNam\":\"FIJI DOLLAR\"},{\"alphaCd\":\"GMD\",\"currNam\":\"GAMBIA DALASI\"},{\"alphaCd\":\"GEL\",\"currNam\":\"GEORGIAN LARI\"},{\"alphaCd\":\"GHS\",\"currNam\":\"GHANAIAN CEDI\"},{\"alphaCd\":\"GIP\",\"currNam\":\"GIBRALTAR POUND    \"},{\"alphaCd\":\"GBP\",\"currNam\":\"GREAT BRITISH POUND\"},{\"alphaCd\":\"GTQ\",\"currNam\":\"GUATEMALA QUETZAL   \"},{\"alphaCd\":\"GNF\",\"currNam\":\"GUINEA FRANC\"},{\"alphaCd\":\"GYD\",\"currNam\":\"GUYANA DOLLAR\"},{\"alphaCd\":\"HTG\",\"currNam\":\"HAITI GOURDE\"},{\"alphaCd\":\"HNL\",\"currNam\":\"HONDURAS LEMPIRA\"},{\"alphaCd\":\"HKD\",\"currNam\":\"HONG KONG DOLLAR\"},{\"alphaCd\":\"HUF\",\"currNam\":\"HUNGARIAN FORINT\"},{\"alphaCd\":\"ISK\",\"currNam\":\"ICELANDIC KRONA\"},{\"alphaCd\":\"INR\",\"currNam\":\"INDIAN RUPEE\"},{\"alphaCd\":\"IDR\",\"currNam\":\"INDONESIAN RUPIAH\"},{\"alphaCd\":\"IQD\",\"currNam\":\"IRAQ DINAR\"},{\"alphaCd\":\"ILS\",\"currNam\":\"ISRAELI SHEQEL\"},{\"alphaCd\":\"JMD\",\"currNam\":\"JAMAICAN DOLLAR\"},{\"alphaCd\":\"JPY\",\"currNam\":\"JAPANESE YEN\"},{\"alphaCd\":\"JOD\",\"currNam\":\"JORDAN DINAR\"},{\"alphaCd\":\"KZT\",\"currNam\":\"KAZAKHSTAN TENGE    \"},{\"alphaCd\":\"KES\",\"currNam\":\"KENYAN SHILLING\"},{\"alphaCd\":\"KWD\",\"currNam\":\"KUWAITI DINAR      \"},{\"alphaCd\":\"KGS\",\"currNam\":\"KYRGYZSTAN SOM      \"},{\"alphaCd\":\"LAK\",\"currNam\":\"LAOTIAN KIP\"},{\"alphaCd\":\"LBP\",\"currNam\":\"LEBANESE POUND     \"},{\"alphaCd\":\"LSL\",\"currNam\":\"LESOTHO LOTI        \"},{\"alphaCd\":\"LRD\",\"currNam\":\"LIBERIAN DOLLAR\"},{\"alphaCd\":\"LYD\",\"currNam\":\"LIBYA DINAR\"},{\"alphaCd\":\"MOP\",\"currNam\":\"MACAU PATACA \"},{\"alphaCd\":\"MKD\",\"currNam\":\"MACEDONIA DENAR\"},{\"alphaCd\":\"MGA\",\"currNam\":\"MALAGASCY ARIARY\"},{\"alphaCd\":\"MWK\",\"currNam\":\"MALAWI KWACHA       \"},{\"alphaCd\":\"MYR\",\"currNam\":\"MALAYSIAN RINGGIT\"},{\"alphaCd\":\"MVR\",\"currNam\":\"MALDIVE RUFIYAA\"},{\"alphaCd\":\"MRU\",\"currNam\":\"MAURITANIA OUGUIYA NEW\"},{\"alphaCd\":\"MUR\",\"currNam\":\"MAURITIAN RUPEE\"},{\"alphaCd\":\"MXN\",\"currNam\":\"MEXICAN PESO\"},{\"alphaCd\":\"MDL\",\"currNam\":\"MOLDOVA LEU        \"},{\"alphaCd\":\"MNT\",\"currNam\":\"MONGOLIA TUGRIK    \"},{\"alphaCd\":\"MAD\",\"currNam\":\"MOROCCAN DIRHAM\"},{\"alphaCd\":\"MZN\",\"currNam\":\"MOZAMBIQUE METICAL\"},{\"alphaCd\":\"MMK\",\"currNam\":\"MYANMAR KYAT    \"},{\"alphaCd\":\"NAD\",\"currNam\":\"NAMIBIA DOLLAR\"},{\"alphaCd\":\"NPR\",\"currNam\":\"NEPALESE RUPEE  \"},{\"alphaCd\":\"NZD\",\"currNam\":\"NEW ZEALAND DOLLAR\"},{\"alphaCd\":\"NIO\",\"currNam\":\"NICARAGUA CORDOBA ORO\"},{\"alphaCd\":\"NGN\",\"currNam\":\"NIGERIAN NAIRA     \"},{\"alphaCd\":\"NOK\",\"currNam\":\"NORWEGIAN KRONE\"},{\"alphaCd\":\"OMR\",\"currNam\":\"OMAN RIAL\"},{\"alphaCd\":\"PKR\",\"currNam\":\"PAKISTANI RUPEE\"},{\"alphaCd\":\"PAB\",\"currNam\":\"PANAMA BALBOA\"},{\"alphaCd\":\"PGK\",\"currNam\":\"PAPUA NEW GUINEA KINA\"},{\"alphaCd\":\"PYG\",\"currNam\":\"PARAGUAY GUARANI\"},{\"alphaCd\":\"PEN\",\"currNam\":\"PERU NUEVO SOL     \"},{\"alphaCd\":\"PHP\",\"currNam\":\"PHILIPPINE PESO\"},{\"alphaCd\":\"PLN\",\"currNam\":\"POLISH ZLOTY\"},{\"alphaCd\":\"QAR\",\"currNam\":\"QATAR RIAL\"},{\"alphaCd\":\"RON\",\"currNam\":\"ROMANIAN LEU\"},{\"alphaCd\":\"RUB\",\"currNam\":\"RUSSIAN RUBLE\"},{\"alphaCd\":\"RWF\",\"currNam\":\"RWANDA FRANC\"},{\"alphaCd\":\"SHP\",\"currNam\":\"SAINT HELENA POUND\"},{\"alphaCd\":\"WST\",\"currNam\":\"SAMOA TALA    \"},{\"alphaCd\":\"STN\",\"currNam\":\"SAO TOME ANDPRINCIPE DOBRA NEW\"},{\"alphaCd\":\"SAR\",\"currNam\":\"SAUDI ARABIA RIYAL\"},{\"alphaCd\":\"RSD\",\"currNam\":\"SERBIAN DINAR\"},{\"alphaCd\":\"SCR\",\"currNam\":\"SEYCHELLES RUPEE\"},{\"alphaCd\":\"SLE\",\"currNam\":\"SIERRA LEONE SLE\"},{\"alphaCd\":\"SGD\",\"currNam\":\"SINGAPORE DOLLAR\"},{\"alphaCd\":\"SBD\",\"currNam\":\"SOLOMON ISLAND DOLLAR \"},{\"alphaCd\":\"SOS\",\"currNam\":\"SOMALI SHILLING\"},{\"alphaCd\":\"ZAR\",\"currNam\":\"SOUTH AFRICAN RAND\"},{\"alphaCd\":\"KRW\",\"currNam\":\"SOUTH KOREAN WON\"},{\"alphaCd\":\"SSP\",\"currNam\":\"SOUTH SUDAN POUND   \"},{\"alphaCd\":\"LKR\",\"currNam\":\"SRI LANKAN RUPEE\"},{\"alphaCd\":\"SDG\",\"currNam\":\"SUDANESE POUND\"},{\"alphaCd\":\"SRD\",\"currNam\":\"SURINAME DOLLAR     \"},{\"alphaCd\":\"SZL\",\"currNam\":\"SWAZILAND LILANGENI \"},{\"alphaCd\":\"SEK\",\"currNam\":\"SWEDISH KRONA\"},{\"alphaCd\":\"CHF\",\"currNam\":\"SWISS FRANC\"},{\"alphaCd\":\"TWD\",\"currNam\":\"TAIWAN DOLLAR\"},{\"alphaCd\":\"TJS\",\"currNam\":\"TAJIKISTAN SOMONI   \"},{\"alphaCd\":\"TZS\",\"currNam\":\"TANZANIAN SHILLING  \"},{\"alphaCd\":\"THB\",\"currNam\":\"THAI BAHT\"},{\"alphaCd\":\"TOP\",\"currNam\":\"TONGA PAANGA\"},{\"alphaCd\":\"TTD\",\"currNam\":\"TRINIDAD AND TOGABO DOLLAR\"},{\"alphaCd\":\"TND\",\"currNam\":\"TUNISIAN DINAR\"},{\"alphaCd\":\"TRY\",\"currNam\":\"TURKISH LIRA\"},{\"alphaCd\":\"TMT\",\"currNam\":\"TURKMENISTAN MANAT  \"},{\"alphaCd\":\"UGX\",\"currNam\":\"UGANDA SHILLING\"},{\"alphaCd\":\"UAH\",\"currNam\":\"UKRAINIAN HRYVNIA\"},{\"alphaCd\":\"AED\",\"currNam\":\"UNITED ARAB EMIRATES DIRHAM\"},{\"alphaCd\":\"USD\",\"currNam\":\"UNITED STATES DOLLAR\"},{\"alphaCd\":\"UYU\",\"currNam\":\"URUGUAY PESO\"},{\"alphaCd\":\"UZS\",\"currNam\":\"UZBEKISTAN SUM      \"},{\"alphaCd\":\"VUV\",\"currNam\":\"VANUATU VATU        \"},{\"alphaCd\":\"VES\",\"currNam\":\"VENEZUELAN BOLIVAR SOBERANO   \"},{\"alphaCd\":\"VND\",\"currNam\":\"VIETNAM DONG\"},{\"alphaCd\":\"YER\",\"currNam\":\"YEMEN RIAL\"},{\"alphaCd\":\"ZMW\",\"currNam\":\"ZAMBIA KWACHA\"},{\"alphaCd\":\"ZWG\",\"currNam\":\"ZIMBABWE GOLD\"}]}}",
-        "headers": {
-          "content-encoding": "gzip",
-          "content-length": "1886",
-          "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:16 GMT",
-          "set-cookie": "_abck=89C8DB5B1ED8D0900769CAA14164C35F~-1~YAAQBBkhF2UrKNmhAQAAg01I9hAw1WxzG9JtPudwqNBpm4U5u/p25B+qsVLkW0M0nArCTVsGTzjlhTX7ukHz7lv+PB8x8k86vUAW4spVM3ujJP0w3zEiSFxmk9OgwFbVQFWlh53Ia04Z4kGQcg+n8yqBaRd8lYZ6FCW930FCgQ+iJn6wQi89n8+sjKo5bCGQL+i9cbwdDaPdMCWnZrfh5eVNZk8YE491J7mjq2gbno1qKD/sTXE2K50oZwKjAnV9imE96CXwWtkKr+7XEdmf1Ch2hwkkQdR9hIdLeS2P5feRr7pOZHchOOB1ypi54FjYVssxyLJxBQlOt0Y6DSQOT0eFmgRX5tmzi3KwYqFzzhInknEIBlCrwoppdGbOLmfwwH6Ar8vDcmniPeabyeV9aGCZWRWa2cXua/frWhGGBTInaqsmjrVsS8wzVODymLZdYQ3i392XXWzER5tM~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:16 GMT; Max-Age=31536000; Secure, ak_bmsc=C1C44F4D6D88EC9DB00DF7F8799C58FB~000000000000000000000000000000~YAAQBBkhF2YrKNmhAQAAg01I9gEpXz41NmRC2jxf8YZWbaVUjdwPik/V/T+dW/FXWefDKsyAYSxMV1LtYPdOITEFM2Jju/TcKmvgvae10Fm2iA9F3/wzAlujpGMiAURKp1yhEphV9cjWHcZ0pEZQpFCwa/UrOJhNmJKXigyGnVUNUc8Kdo2l6o623zterhXXc8FfCJgxj2w6gR70Hsps6hhoOOJF2VdKc+fQ3TrjNxDDyymfH89j3OdVZzOi+qTSdfLdFsmqFLRsLMMHpaGkvyyV6p4xgUITn+MdVIu4T8aRP3jQPvs2Jb1aSePo8mUyeMs9k17fIPL1I2LdZpo55fVX266mHa6jMEVinKFQ+xyruZZGxJ3iTrlE146/Kdr3iuLLxL77fGlOU5nwF1+ZcDCM; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:16 GMT; Max-Age=7200; HttpOnly, bm_sz=DC5D0600195A9A736D8595EFE6B59678~YAAQBBkhF2crKNmhAQAAg01I9gFaSveS8lIkbuEa/2KJIX6zCq3ijOCp766e0ghxbxBnAdljKidOTvrViShpHgof77/Zm9gisGIA/zrI1g2B8dFBUbydITXfwCFqruchDFQZIRemfr7rK9ZDXAOZCcp3osTY6VliqIj/u0hi4DhH7nRKVFGtzQtJN+7yDThaCHkcRj/krbOs+lqxZyHWNeniDHw/4hCLc6sj6s4X76AAC3j2T/BZIY/kHeT0sgY+EIVkV3nSZTlF30Ut3zDW7CK/Ka/cTGWInfjIXTjuybdFTf+W35qyyxtQ920BPlrM/bcY+3Xnckp9rAz/r3JBBsz5X/3EGyuQM4VtD7U2M09eB1XRHCCqsBUoQEoeiliUZWSn/e5IkD4bRhq08EQ1zSv1V3w=~3224625~4600374; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:15 GMT; Max-Age=14399",
-          "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-313c9d529f939a3fc44def08436b7d67-c882ceef5e76aa38-01",
-          "vary": "Accept-Encoding",
-          "x-content-type-options": "nosniff",
-          "x-dt-tracestate": "5c24aa51-2c374e65@dt",
-          "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "c3e102de205a8266966f4e8a79985fb7",
-          "x-vcap-request-id": "cde382f0-6f82-4a1d-6279-1bcf537c0122",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
           "x-xss-protection": "1; mode=block"
         },
         "primary_ip": "23.61.32.235",
@@ -212,7 +212,7 @@
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:16.159082Z",
+      "fetched_at_utc": "2026-11-20T21:57:55.204577Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -228,26 +228,26 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:16 GMT",
-          "set-cookie": "_abck=9480D8FE282DB705C11AF993E23F00C0~-1~YAAQMVHbF59UkOyhAQAAE05I9hBKFgHIUN46o1usZ3PoPHZ6HoD05xo024Tb8CRr3dwUFdaCGBhmGFam9M6cIZObEO1aXPqRGylyBPewa1BURDWEPZ19C8iXbWh/wyDoCUUa1IfU3LpzfMY02zHp6TwmZyMqulvLVieAKXSSnLXtd5nqa9BZqyfhTUTUzI2cEo5TgE5DFdpyImvWjZf/qMty0svt7wnLq/TkhMHN//Lm6kxjiKSBdGI55MTJrgrN8igxMCtowpxoQN3Un0pS0qv68x4oY7Wl8Lkuhssh3JaUjQmMTx+4aCDAzyRtXiNxYgV+0jVchCvY0qUpqf34RGcXaQLJhHGpMwRqDhaXgqt+1FUihua94I8pOkYFjKn7TxcRNkxnHUrXrkIl9ksrr0Jtgn/dIM3rMA8pBHSJaZJ57gZHk8YdlZY8uTsYwVUXpPFefAsKziGiaxsc~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:16 GMT; Max-Age=31536000; Secure, ak_bmsc=4F74DF327C99D7F38524C605D90C7C48~000000000000000000000000000000~YAAQMVHbF6BUkOyhAQAAE05I9gGwsUAxYSyZtyl4PlANOVI4RCNt29CNEVCIu+e9jwN6uEg+SBkuc2jiIHU803q/S+CbxI6UWk5iO2Rrl82ZgLR2WZ/uBwM+Yc+YO3cZGbDFHsErLgZfypgcue+r6i8Qd7Zm6vmP9Swme+8EOpwjo0Lm8iaFBoKB/v2KlbI140bVXhbJu8PHhYJHgndQjcbSV+H6R5bdLmX0Nutx9DSfBq3ppWtc6XDQPzkf3NAWAUOPdbLW720tSfSj/VMTeU74k9W64VlpTDd7JQWIvV50HK3hKiL14ekjI7oQAW8noPmLUio+T/98VcDWrC/Jl1RN2RBVGNzKN87B8ac0cy6hR4nlA1rBN2TSlJSllnxO/bYPWTGWE/+/jvuZG49Qkws=; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:16 GMT; Max-Age=7200; HttpOnly, bm_sz=B6C7C59150522242F20C720F8BFE2DF8~YAAQMVHbF6FUkOyhAQAAE05I9gE+/1Puy4xnQxSYFG3C3N36TLJaKxe27F8cl00E0Z9t5OwOP87Qtgq3O/kb5YsJYDmV098KSJwCiljoCiOSp0Vp3kVOF/t2/AjO6tXtaM+v0EvX4owTO9vaxip2wZh5ybi2BizswmIYuJpvkfml3wKH0BK43XZxyU0d4Z7YPSzqKlxpmIn8b7xt8ZZ9hANqXlmfLIBXZpjuavkEMK5f/UCdNOLZEOQryeDrVBk3la4Eespo4wegdNngJhl5kegW094dhktuPuQrbDdNHfMbUc4tAorLSMnW9VSpPBAibKje/Ny7TpLsxoYH5t2tXU+mD+Ca382YgH1KZgttjaRy2VF+83NPfnsEcy0Px+5Odc7I50ykRYdPqs20+uNmDLX5xA==~4601655~3159352; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:16 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:55 GMT",
+          "set-cookie": "_abck=0263D647B59C24BA224B4BA0A3B8341E~-1~YAAQjPkpFy+yNPGhAQAAeVP3+hBDCIS6TgJH9kADu8mG/VuMQ754y8n3uB7xrOAMSaCO1phsEni3rrDHUp4Ku9M7mcmlEQC8ImEjMYZ9D/pe0Y6dTVtOMbD9NW1SDg1G04V99zKO7rSRVg2M/KSVWseKx3eCpKLhsYqwX1JIOqC6NnQ5l6X1zwfv57GhC+pAmuUJkDmjrEyZcs85j74kKsRp3b0bvVpEWbwo8FniaICj6WEo4y1rcQDjS0olZyB9e0Zh+8k9GXTOezuOLPk3IC8KF+/PC2wa6kgkr4aRzN9rrl5E59V9E6NDuWsGd2b3lXhARKe9+J45/mb9VnAmJA0ObDtUnkNBZ4CgdzC3pU+85gVf8M1ugt/UzV2b3XINP76nxWJpYvnM2IFO5AXVZVzhBWjRBc7KiFE19j9FO3m5Qp5SmeCC979+ypwVF7x5TBkG62pS5S571KDV~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:55 GMT; Max-Age=31536000; Secure, ak_bmsc=C5E9E84C7A71404EC22CFBDC3044C012~000000000000000000000000000000~YAAQjPkpFzCyNPGhAQAAeVP3+gHfo822RBlKIZBy00C21qnBQ16sDUtreoSqA+iPIgUgmx+MA/9OLY1vF0CDBK/1JiKuLH70r56Qu8gz3YyylZcDEEKVzswZkkbFoiD7w/rAbXOllDpCQohRylRZMuc3rFBYWAsHwlXdM5Q47K5qPUgHdw75QSZCUihzInxyVL1IsqoZL/NpByF/DlN0xQpBdsEIu8oeoW6oKzwMXOb18NrV/MaysH1FkvjssEaJT7RnqDaow5iUIKEiV6dOIfPViCMGeqz5Io0/uKyLHeWajqSfdyp1tG0o2dwPleJfZh1mQIx99FaEncI8OR5YhfSLZApJ8YDOt6Thv1okscdpTt8oOnoAS7GyiXXWDafFB0kDugAUOD1An4pBvLYz; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:55 GMT; Max-Age=7200; HttpOnly, bm_sz=D04114C009370493769C9F53A382A8C6~YAAQjPkpFzGyNPGhAQAAeVP3+gFfGPTGXOt0jsjpD5ikJ37W074U5ECY0hsIwFyFX5U9NSAJlGXcM/N9nPmFB/L+q2V3o3/462cdYG+xjZRape6VUBfHr51TDbDXlwlbF5y0fXrhT+u33hTXxg/PdpcMkj64bCNz3Kc5ZKOsK5v4YD001nGbphcivXDaxHjlF7oqVrwYm6MLFuHnmTAVEUqaqK6p081tQPJLuMBVSFqv0Hh2r2tjxUtFh2om82dPCtrZ5OB6D1Y+4Cp0rgq2Z588GRP6kojo9GBdTQJKWZ7lYVeUkGwOj1Cmv4MlddYGXUctLDW+VJQrdIVOxkjDSyOVglPjDCp7LLjxchnry2c/gk09CZBACXlg6orjsn/RT3+RC8fNHKChm55HtyLzmsU=~3293497~4534342; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:55 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-ec45eea94b4e71cf2f3311fedd80ead0-0145ace8b220c4d5-00",
+          "traceresponse": "00-9ef3f63c15c6d9c63b185bdc4e8d8632-0501f6f4e47d1641-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "ddc46c4dfa4ea9553bd3dcf55597752a",
-          "x-vcap-request-id": "1feb3056-3c93-4885-6bf5-205f18afaff3",
+          "x-mc-correlation-id": "51b1e35aa63ed07542153fab12daf926",
+          "x-vcap-request-id": "e806f838-2ebe-4b83-65ab-a1f9642ed6b8",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.203.89.45",
+        "primary_ip": "23.195.208.157",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:12.499264Z",
+      "fetched_at_utc": "2026-11-20T21:57:53.888432Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -263,26 +263,26 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:12 GMT",
-          "set-cookie": "_abck=BA98ACAC3191915696F4373DAF5E9FDB~-1~YAAQxQwDF2onN/GhAQAAzj9I9hBp2a8HseLuhcdn0CXf7G0pGStuJCIHyhgAJQHDEpidAihXIko0zke1eopcL3cETxK9IfWGUnhMsFtbQsMAZRHpC3mFVH63vUckbeUxZuQsejLaPYGhTfzCLrKxjP/sVIgcHC6cnAaFrU/Uk3s1ULKq5SM6iUCwI0//VvtTM5fBfsltyKlIl/yBTcxvRXtSXF1oMRR3GPjRapC/kXGEmZ7SlIeEqJo/v5WYle4KWE7c/hRRJ3yMAYMJP7fo+i6TCX8QnYmt7z7zFNW01kq4nwhqZDsnwA3k4ya7S1r5aet5n1dg6N1JiLEbLuXwWEh7HxomY49tMSsNFlgrF9BdW/mcA+k2PF6lg7dk0lCXBX2wL/nm04NjAuaaPSoyJOVdplP7lhGaj1a2BH/d/roNGDQmhsN+gfGov0r8u/urNDT/posXYiFRsbjj~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:12 GMT; Max-Age=31536000; Secure, ak_bmsc=207BE1A3DB8B5AB235AF0D32020189F6~000000000000000000000000000000~YAAQxQwDF2snN/GhAQAAzj9I9gFhAE48P3N5ujlKn2hs0hp3w2sXO2tXO/Lw2tAGI5ZHf3hz55TephDOyCVnkjF4vh8xg7+wFZWpTSaLRwvpSMHcLUTKaopaEOqzQ4BjyXHBKK2kWwTVzvGtXMdFzQFrbKcP98z50GAokeLuY1lnmONCWUYVhygLDJoTwNNXgn/VK0ION35UeZaT8d7UkONmaWnNYa2zQ3KmeDgDpiT0fp9FukBSYLCbpWu0pEbLX9n0t1cLE7Lj3lP9XoCwHko6BZeu1x0pf61Bt/hiD33AGnLn3IaIlLoW12yQYX4T8h8kS8yLLau22FXPVBgBrmenoSxNKBAuy1ooBBrRqxzAxCOrkFIYvQt+ne5lynrT3dFbxvLTmSxuNsNfvDBDBQ==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:12 GMT; Max-Age=7200; HttpOnly, bm_sz=8EAD0886887D6F518419F9831BCEEACB~YAAQxQwDF2wnN/GhAQAAzj9I9gFOLB9aJP1ATniTuHu9H/EZhHSFhAZ0YrWN089hO2Ga6eqsCTjjxa7BEBNC9Ev9jQJoy4pmHfv8Sd2RgXT1mFpETWbW7L+sv5LnWos7BIVQeXnyHFbKClzCG7fpLixouMcrpzf/0MJy0jzlfh5CZrv7fzakOA99P8PVXpIYXPxeoPpAmeCwBZWDcxXERvHWnX4Y3fg4A1nc7RLzAplTmhdAq+R7ZKtXwiKlbvJkHO83NSSwTk2w2CxFhgPtNm01AA2qgR0KNr++RZoyftBy2wmp6MMbMqjzuIN0VmVl/3ahyZQq/F9BMMHYaHa97hCbwxHsWd8CvxPabe+t9ROPomNeRbbfLyyxMJLN1wQ4VoZN2m4/YNlEXfsDR/FbDPCP~4600373~4600386; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:12 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:53 GMT",
+          "set-cookie": "_abck=F00AA8B0D49D98B6FFB1F860762CC2ED~-1~YAAQDBkhF6gQzNmhAQAAWk73+hD5nfcoGKVnK2xDkT2l+dwB09T6S6LkyAeOQ8Tn+2M77CA8cSfWhEbPlc1CeJop4207WgU0jxGaH+E23EiN0zIp9TjGCABuFMCmeAN8g1S7AAIg2Tn0yV4qYCWg5+AsVzmeB+TPMDzD/Mk8iYmitn+vIAjwiMr0rfZMbrLAoRk+sv/Mb6AmeKu0eAHzpCV/CMKWRWQoKtEgdmq6h6FlzKxfgNql7rJDk/stCDO86dI04ddRrXTd2/bGrDK+neENNRGiSLLeUPdlzJcpHhyanTzb3fsCq0HvxFe0CLZJWlNmkIqwxKdZ6wJfkALyzYdAeQMATNN1ozVjyM0ANVRXUnDl6KneBdwWM4ox13tXfBdrXrJHOHpvmVA7RgnfuoKrB24azQFstDQiui6zMJ4h9NCPUof4AoDenSu5MrsFVm/9kPMDjzF6U2hG~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:53 GMT; Max-Age=31536000; Secure, ak_bmsc=B902130ECCB80FE32EA1ABEE04B770F0~000000000000000000000000000000~YAAQDBkhF6kQzNmhAQAAWk73+gHabcavMOFol8Y1XqOYp42wMI9DqDk0N/sTKyAssjs0pg2rSzWXxdorArsU1mEFFiYdh0aakFuue4QiGFkJGVSaeHfArSbTmMGUAs9h6LqWI1FkzPp3J0M0l2MozlZMWX6xDwMCaSks5YpPFmZWjUvCkDoaPPaxfYk7VOs6AEQ3jgdhaZ0H3/uog4B/ytR6tDmfIGQsxQrqkusSww9EjIGudGgEUbnI+EJ2B6f0yohfI+fgIevrnB+2jKtrUa02e3YwVJgEi+5lGo0kZLU5vsoxWbHeeBuVJnC3xCOOVlXxz7Z4V/W5zBXp6YMRXzwi5nPT7XDF67WXTPVRHnWH4vCyKnb3TjkghMAE7G/SkTsozDDWdHZPZIOYAT2b; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:53 GMT; Max-Age=7200; HttpOnly, bm_sz=7264C0FDC4704DFC36C4AC6486AEAA04~YAAQDBkhF6oQzNmhAQAAWk73+gHtjwfUZE/uiZfQo13tgDELUwj5dUwstHYkuXEEIQddnos9l13/C/FcnC4ptmNi/uxJgvpUn786DaVL4MxbNGQN/J0W+6x/f0rNgg7dMq4EZGv1+XUfjRqG773QXJySP/5+04kEv1y4hup7JayQjQXoqndWIdWfw4JCaSOrqoUljuGyEuG9pAgzD2JL0y2+AFXLsXn/3HkACWrYEKVwvFwUFM0wnc2EvczMrnXuY/hj/2qTBi7+wJnNdI7CmwhIkx0Dm5Q9BQgZL0sj9J3SKi5HBtAww/+bkCx3Bn58crC7fpX54ufrytKRgM9T4UPttJwGE+6t/OXafldOya8ohTRDxa0EbJQRH/wDzCFWAh00vg9JCTi1Wy+7mXzMn6M=~3360052~3228213; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:53 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-aa6afb58259fe17046417dda3b9fb2a9-c3bb6c94a5a45799-01",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "1b0f9f6adf8284d17e79ad403dd2df72",
-          "x-vcap-request-id": "31afc60e-7eef-4b13-5194-b5a503650f6c",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "104.81.165.82",
+        "primary_ip": "23.61.32.235",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:11.595835Z",
+      "fetched_at_utc": "2026-11-20T21:57:52.006590Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -298,26 +298,26 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:11 GMT",
-          "set-cookie": "_abck=908ED4E5DC701DC56DD12EFA84568468~-1~YAAQhm0+F3NX2MShAQAASTxI9hCkVWFiY43u5zCVaRc5KMUhNlm4VpX0DBHS9OtdjE0HYUoZlF+hzWh1S3+SrjGkMcKjahz1qBmR7EHgrpJSsUaEbf0tOijISX7JyoxU3SDUuZS/OfxtjOWwg9wJBnV2SxBVJ5TCaT+oeq0OCbNdr8CA+UbmqA5XDKKT1GhaXOrC1TT1Ek7VRBPGMDTVKNordjvp2qbVjVK58/VIxuQpp5qAuq23BDLaig1eN5lUb+TLeQmvigHBd6bdt8nXYDNxgCX4mzQZyTXoaOZGzOGCKhp59VeeaA8dy2Llkp9nfF8FSmBZ0qwIjJYkYicrqZF35b/GJTp6VDZqf1r55D7kaRTfbxZ1Q3+mzB1jngL6XhbyaHAuUIMsFBhvvyR8FJJhvibncphnTs9RTZpA4oxNeO27CPO09WOg/LCYrFYvpu0Cio93BUxAEUlq~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:11 GMT; Max-Age=31536000; Secure, ak_bmsc=6791C10C83BCA7576D62D7D410F9AE4C~000000000000000000000000000000~YAAQhm0+F3RX2MShAQAASTxI9gHEjb1KovSn66vtNKyZ2OcRsTnVtF6yazRQ13artblYu8EAZvXlZUje/2vgUKA3xRy/9jiY7KAG0yjb8DOxmYZBsUrU5pXY3nyx1ZOO0Ui0G1KkQ59oMcEdkWmEwBBgemk5HNZNZBZ/Hei5672SbXLGlUxIf/5EvRiFxiULDIWYM96WojCNskSvVx/0HZy5swwad8f0iThBD6UXsDIwT6ekWPatDkPoJC8wTbtPnaVtOOKbrO/1Tf1nyjZSw4DZTjBopVqnxZnAiYclegcDEzevhTM8NWyo9scDWJ8xUN/v0AtIjBE6hetYwEPjiUWWiKU5Zd5kNsUfxxT+9DqUybt8PKkEPvq59JGj1cEqkciVfqvkKt+LkWTWVo7oSw==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:11 GMT; Max-Age=7200; HttpOnly, bm_sz=154D877927AF442847F904642AEDB848~YAAQhm0+F3VX2MShAQAASTxI9gGF7sQ4j4cPr/id7pDkIALgxy4l1xIrt/9HM+drqHl5YNYFzwu9MdEzTn1w8fQH3pARp2IK6T1fQyymmpg8PDmlYGVgQhmo1psXq+yp3/70DT5m5CvLWJTtKb5+4u7WMQbu+Cu1zjcygTdk+LCduiu3Berff+FEkAyqQU7CnIJ1xuxUTK9t88TWib25974ptnE4WpC9UPiDQdFCfgpcUTKxWa6zvvZh5WTkMT85UxKa5ZiNuqX7kMvqM5cHjeDk2ZPcOYx9nDvwvpoR+AUI1qhCSyn6j9bC1fmBrkJ8vr8Xi+r9aWQb8W5Q1k+vr4A5o31d58vo14svyZvoZarxveyYttu/Wt4jiAgBwzHMSOddhPcb75KO/Fd/jQ1dX9I=~4599878~4342578; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:11 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:52 GMT",
+          "set-cookie": "_abck=2358EF19689919A4FD4A3331C7A0A72E~-1~YAAQDBkhF98OzNmhAQAABEf3+hB/Y/0fPQcEYesCvAA+AF+J/guvHMMp/Q0rBBkEtugY0f3JBwHR65GvXZBcBhYrqX+1JqyNJs4HV0WPP3IJIpsJjFqz5qfVSCs8V2UXtT+GevHbV8DToFAH6626nOPcAMNFYUnqU0PqRJWMPkKI0+wx7GZ6/dx+oT+8Ay6pLFTeGukGlAGjU4g60beZ/asnyQyTJ2+JobhBln8oMgDXN4Yp4fLBF5hU+Ai8vXBo+C9hZKl9bi0CVtKQQbGfKRVSNeBSkYh8DB0sZERh/PwOT68aVDZtb3CgqaXvmR1i88rO6Fe3KNEw7qkF4k32YUKxMo/YvY5e17UJDxnQPD3hHJpXbGMIG//WRFY8iu933CQkU1oz7Upn4rIZWvbMm33k+hOblsAX4Vc/cBORB569ZtrECk6p4vg2HC+HSFUmgbwYQXNvSqUgVjZh~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:52 GMT; Max-Age=31536000; Secure, ak_bmsc=57C8E44E2474B2DFF303DDD1BE3EAA09~000000000000000000000000000000~YAAQDBkhF+AOzNmhAQAABEf3+gGry31Bq9+ptNj8dHaaUQlKJEj9T80Nh2POqGqh+Aj9kPHQEx7OVpCbWMMByv65wLxnmycTZ9yFKYuF+utKKo1bWNbKMwmRdxeNX4X9TnMybAxsaFdkJbvNIirxGRiKfBE4f7VBgXXTSVSInLtZsLIU47XzkSfvnnIQExEQ4jJ1oEUMWDBUWd2PW77eWG/BcS6cWELmYyRhbOjmoPufYqXRt7UcKIk/ykadUrSf9WMiT5LXIvcPhEkBkltZthEXAjnkitHVh4SL7O01EguTgMKYIYxfiojXXilmBMVCI7+ri6syOg/7X03etK7//o4CmyPVsCzt0efxg2ZCJm+lvvaGRX4j6Jfal3OB0ozLyOt9dtZyTljet0ZhWMwtvWti; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:52 GMT; Max-Age=7200; HttpOnly, bm_sz=5A22C8AB5E39CC42157F8E2084ED184D~YAAQDBkhF+EOzNmhAQAABEf3+gHWgKrpUVYcgJynr/UKhrWa+hNxMK3qTsaumukF+o/IBtAXN78xwI2Pv6aX/vG4bsuAOqHsenqW8Rdt3nlF8eFJi8d5NfMu54paKS1luMr+12aZsO9qLn15Flmql4Gs4e56l0AS0dNysPOXuThIlZSwhzDGQ0WuT9XhuNFLKxhl0qsOXz88ZEttE1J0vOLfxPEFQf+etJOLSepq5VgaMGLkvSdX+2hV8WuGNTIdG6fp7UtFMvZlwqmLVeGhg1lf7e0GQBEeuET1/hhe2HA9K1KiCoztWHnUJKG7UZQR4lMLsPMBsROTo+Ajuq68oxjAbpD7E2hqQO4qMMboLD0xOuwFuME8TykziQR2zTuupXCrTs8fVZHQ9qgNlVt7sQ6Wrg==~3159877~3553345; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:51 GMT; Max-Age=14399",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-5b15545063a456b821dd58469ba1a1d6-50bfa008ef4ec37d-01",
+          "traceresponse": "00-6b0d1d006f7c67d35bf6492d05dca7c0-17d27e056341ffcf-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "9202a3666ccfde25b5bd51bbb515275a",
-          "x-vcap-request-id": "20458c96-f731-42a6-4c5f-2087eda31404",
+          "x-mc-correlation-id": "f3ba4efcc728046a4e8f29261fb67ebd",
+          "x-vcap-request-id": "a2dd2b80-1138-44b3-7f26-b2b3b3481423",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "2.19.146.88",
+        "primary_ip": "23.61.32.235",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
     },
     {
       "attempt": 1,
-      "fetched_at_utc": "2026-11-20T00:08:09.248936Z",
+      "fetched_at_utc": "2026-11-20T21:57:55.420975Z",
       "request": {
         "headers": {
           "Accept": "application/json, text/plain, */*",
@@ -333,19 +333,19 @@
           "content-encoding": "gzip",
           "content-length": "1886",
           "content-type": "application/json",
-          "date": "Fri, 20 Nov 2026 00:08:09 GMT",
-          "set-cookie": "_abck=1F0034DEB80B7F585008895AC5B6F97E~-1~YAAQb1XIF4kH8dGhAQAAHzNI9hAmwPnjUFDHC/rr6waYkS20E2eM5oeXIiwBhYxm5KSo6wWfnTwm21+Uqkpz1TLAwuu5E5f8AQEkNZu+fRs8y04tVtOcWDsaHlYpRxH07JyUB1uLaOTeKKZPG7uZBoSabJWnX8wIv8P7xjvv0SgV/KdOc91VuJbeQCtu01NW2toODjen7/IIswcnNOS3ZPPCsWJ967vR12cC5fdOVvV0aB9bVanDNkKxhsh5T7+QRrAVc5MW6C0Wm9J58bs2I31QSuh8iF9X8jw5IClB8pRRmbC76z/d24a288Gidr2aoXrRk7Yw7btJvWNq66wYJ6S9J5Lg8CVgKiuKWml7y5Q2C09VPPOcnC4U7NE/j36n+cNcAkXaY7SGlS00ZpYT0q5a+mOKER+5CD2d1odoYxv1H1eQgwwSZq71i5A1ctQZQZYVUxwR0h7eea6W~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 00:08:09 GMT; Max-Age=31536000; Secure, ak_bmsc=B5C6FB8D852D60F77FDB195CD50A6D01~000000000000000000000000000000~YAAQb1XIF4oH8dGhAQAAHzNI9gGM2szBKsIVKIoIGnKA+Zc6Zpqtd9Z7jV58w+UrplCdsCYnZM/1nXlUA29kow0v8d8w+atsK2Ces4XzE4rqoO8lhWHkNnD+g79e13G6/8MYshOy3tS1d9+fEDLhgFvWg0GRT/ClOtiiNa+OBkoLTroudU9sRv9ur53lAlUmpwTcmww5iT6/xzZtz8tr17OhYTEw9MOWoBiLb3/G7erpeFYGrZkiXODeLDg7h57y6fFHNUF6D2I6IYXOxBkcGxelTOvY/Q8dJM/8Bvy1f2XF4IUQzGTinDkhrh9RMCg0Rawf1VapdFoYYZD2D/ur4ohNDAFRNYeOCoCzl/bHkEogpaiHta7S7coUu0Q7SBvC2Bg6YhMOKgyNCC51QES1wMY1; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 02:08:09 GMT; Max-Age=7200; HttpOnly, bm_sz=AFE0BE9D75E70C2258C1F35671D1A8E3~YAAQb1XIF4sH8dGhAQAAHzNI9gFRAxaIcl0iY3WadHpM+yNjje04Upv+niRs5+kVMmvdcndplz0GZzqL1yeMStVSiATK35rqvZ6vNiPHkVdze7RzXH2j2xQ02iBqXnY9TUrWWQDCt92JJgDWoGJT2b3Bc+nENYoLVET6SGYeTMy06sEOhuNE/+exPBAw+Tz7PBaU9KBBlvsIEH/7sBzsIEaB5DNThsklWH7HHVUfobpYm7siVFoN9OXXtmT1gPTyKinRR9XKBSQVpeYtPHCGWlDRA1EcgYXZvNn8hHVghNJMFBMTYxLizigYG1PIAPseUJpyBtsRM41hpBfAeRlYMCqgabzyu+dHU4KaW7bd7UBDAH4zUDq7CSfFCiEVSfBy9M8klZuRG8mJVcLhKklgVb9g0yo=~4599858~3354690; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 04:08:09 GMT; Max-Age=14400",
+          "date": "Fri, 20 Nov 2026 21:57:55 GMT",
+          "set-cookie": "_abck=735BE9467296D74AA0FD956366B7D3BD~-1~YAAQ0c9YaIKAhtqhAQAAV1T3+hBclUJFdcP2w+zKQdsL/qTMmqloevZxQ0XNMiUgI7rPVcZVj7oHLOko5AaWfbrSrktMsl+3kxWEa8sgsLHH/zCRXyCFYjo6xveoHEGuJiIVbq6VW21lzty2m+/eFZw7fPgftHQQm5bJxfADIdHi0LJL7HRTz0grQIG9bVjD8BqqElXRHsXH9eAjExqTKlIZEhQ+Hxmu2X38mSfs8qITWCpJNWst9YDtmQ9zbW1eWrAgX+5tc8SVvaERdDBnbe1O657sSgKIWUbAypvFpE+Qu5xm/Vpjlxm/PMKxuF5oszN1utQ/24L1/v3JIEqUstbs9ZDlZbeR15kblu0VhaJ7qem/Ofu4uqsXTleTzgEGUDkqoG2T2O+MMzp1lUHWnDQ4SOy+aKAStBzKMRjq8lBcFQoo/ByG7A5ShD/+Q5mlx8vs7o6Si/UuoW+i~-1~-1~-1~-1~-1; Domain=.mastercard.com; Path=/; Expires=Sat, 20 Nov 2027 21:57:55 GMT; Max-Age=31536000; Secure, ak_bmsc=215017C1C743DD8AE7D356EC47594680~000000000000000000000000000000~YAAQ0c9YaIOAhtqhAQAAV1T3+gEVJ+n0n3tuhewo4YNCI122UZSdBwxif+bZDbGrZj7T0sSc3MxdFPpWggz6gJejFEX9AGRRevW/AppZYPhsTSTvls6rQZOWiVktafADoReNbOiC7feKshABZwdKDHIOVRHRP1/sXXczbnLNJ0FjOorZb9MF3J3HhTqyw4zi4gdUdwfZfaCG969yVEDdSU3E/3cKxy1MghCH/n7viJL0N9tNQexeffwDTPTzFT7LmCTceb/Ex51PN4Fu3WdEmwgTEser1KHY2nC1ReCVGtFgpFwFN1qfyvEsRU1FExE9A+ikd1kWSI4ZeibV7Fph1xfKTI3goXV0gvrdttnNuK4hE9/o20WRuCRkqmaIcCMKv/BG2qTsqZ+/HrkmAKhsOw==; Domain=.mastercard.com; Path=/; Expires=Fri, 20 Nov 2026 23:57:55 GMT; Max-Age=7200; HttpOnly, bm_sz=0CE41208EE05F6ADB8CD7EB9F67E86B6~YAAQ0c9YaISAhtqhAQAAV1T3+gE6HWOXUD8kskLcYpwuzTvNaPQxPd6ksGs+QoM75wZn9iwcXMHXzJw6kuJFxwuH5UqYFA3f+2C9VNkoWuoLwuZzw/yxxRLQrg8/+XL8dMp62O+AhYuGsothzHbXD7EQ2szvk628U6VtiCtbT6rnpsRHXL6V2yWGMqJYYm5lgSzRMVFt2ReE49rUWo518Mzl2WNeVgjKFxXIgQNB/21tLgyOvzD3M2NDCOYOsUpuc/+IllP8R1M37F14N6SwabAp+CbWxBfKFYSsqUPBJWWjUJZNuQt6T+wudwdE8CgTAG0sV//mesXs5WT/a518Kd7YqkL3hCM+bQNw+aSKf1hKT9CBNC3037kfWfbXp0i3KsXd5UEO88pjAe0QclocwmRT~3293497~4534342; Domain=.mastercard.com; Path=/; Expires=Sat, 21 Nov 2026 01:57:55 GMT; Max-Age=14400",
           "strict-transport-security": "max-age=31536000 ; includeSubDomains ; preload",
-          "traceresponse": "00-aa6afb58259fe17046417dda3b9fb2a9-c3bb6c94a5a45799-01",
+          "traceresponse": "00-ae26ce05ae9afac7002955d01077435c-2239acd5eb541711-00",
           "vary": "Accept-Encoding",
           "x-content-type-options": "nosniff",
           "x-dt-tracestate": "5c24aa51-2c374e65@dt",
           "x-frame-options": "SAMEORIGIN",
-          "x-mc-correlation-id": "1b0f9f6adf8284d17e79ad403dd2df72",
-          "x-vcap-request-id": "31afc60e-7eef-4b13-5194-b5a503650f6c",
+          "x-mc-correlation-id": "c5bafce88d31355c32202573dc004142",
+          "x-vcap-request-id": "26368a6e-f200-46f3-419b-c69d5ee9228a",
           "x-xss-protection": "1; mode=block"
         },
-        "primary_ip": "23.198.79.154",
+        "primary_ip": "23.196.200.160",
         "status_code": 200,
         "url": "https://www.mastercard.com/marketingservices/public/mccom-services/currency-conversions/currencies"
       }
@@ -355,56 +355,56 @@
   "parts": [
     {
       "name": "shard-01.json",
-      "sha256": "f015c080254fd22aebc59a169704b97f5c9391b7c376197d60d246f6690ff1b8",
-      "size": 9443835
+      "sha256": "f43f18096d55af416ab59959cd7391cc2b9b9c25ad8485df5f7642c26ca40486",
+      "size": 9558146
     },
     {
       "name": "shard-02.json",
-      "sha256": "fcfcd242b58da6897417d65bac18973b527e8c452a119c67499d7d68be422ab8",
-      "size": 9441283
+      "sha256": "7125e30fa26f27ae7d31b1ec0f3c59c8ea868cde2743d243b75b1e44b41d5938",
+      "size": 9449438
     },
     {
       "name": "shard-03.json",
-      "sha256": "7e80176c1fed413eeb45028a975405d68957870e17dcab65f0753547c243813f",
-      "size": 9453509
+      "sha256": "7fd50b534fcc0bb55a53cc6916956e71dd6e8426c0d223dac018cd2204355c5e",
+      "size": 9452364
     },
     {
       "name": "shard-04.json",
-      "sha256": "2cdfedb4d82cbe620a4e6daa6bac8f35cd036c8cb016e11cc5de2208d0b210d4",
-      "size": 13656333
+      "sha256": "49b7f4521b4fbb729bd39cdab1f5341d6d983bcd79357fa97f0dd814e38f0616",
+      "size": 9461126
     },
     {
       "name": "shard-05.json",
-      "sha256": "0ee4fafb59c375c0e58369390dcf8b51ff256f5c706d1e0c0d8545de9adbc37d",
-      "size": 9444454
+      "sha256": "e859b2dceec45999c88da3a3ee7c2f44236ed0feec4fe472ac46559874a7d47b",
+      "size": 9446247
     },
     {
       "name": "shard-06.json",
-      "sha256": "256c9413cbbdb08ebec807dcac6ffcf3959053f6e0bb53a0e61bb0dafbc3bb4c",
-      "size": 9456912
+      "sha256": "487b9e148119c8ef843c0309e7a9bbaee6f8043079835e7fccda77a4eebbf0b7",
+      "size": 9446584
     },
     {
       "name": "shard-07.json",
-      "sha256": "59ed40fc1a0fe22f941458ea7e82a293c5f43c3fd643caa47d2228fa4643ffb1",
-      "size": 9449461
+      "sha256": "e0d9c743600460c4967df69cec226cb3439bc03d2844dd444b0466fdaeea9c6b",
+      "size": 9456825
     },
     {
       "name": "shard-08.json",
-      "sha256": "b97a4aedca2492f0c23a7af0ebea2df7ab0f3d1503a21ba44d1b769da3e04211",
-      "size": 17513986
+      "sha256": "d22ad973097b2dc4641f5237cc64263a58f577dc76888d0744ca01e88ebd358b",
+      "size": 9460881
     },
     {
       "name": "shard-09.json",
-      "sha256": "09e0cc6f3716ae0f8ec3c537fc2fd335ab0095333f3f868db146ee2c5b6f47b7",
-      "size": 9446743
+      "sha256": "d79eeef7a24059c9d0f0a39cd187735e315a847e3f5c2ee446fbd8c1e91f9424",
+      "size": 9458099
     },
     {
       "name": "shard-10.json",
-      "sha256": "22221aa5fa49cbab46ca203ae8997c1361a80f5f4200bd36df5c13b5026b7f5d",
-      "size": 9450298
+      "sha256": "017666f28bf397e78d4c171cad5dade344a50f36e9294a3b9d84b299537db2e5",
+      "size": 9434198
     }
   ],
   "parts_directory": "mastercard.parts",
   "provider": "mastercard",
-  "requested_date": "2026-11-19"
+  "requested_date": "2026-11-20"
 }
