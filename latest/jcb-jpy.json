@@ -1,19 +1,19 @@
 {
-  "curDate": "2026-11-25",
+  "curDate": "2026-11-26",
   "exchangeRateJson": [
     {
       "baseCur": "JPY",
-      "rateData": 159.474,
+      "rateData": 159.446,
       "transCur": "USD"
     },
     {
       "baseCur": "JPY",
-      "rateData": 174.89,
+      "rateData": 174.959,
       "transCur": "EUR"
     },
     {
       "baseCur": "JPY",
-      "rateData": 209.136,
+      "rateData": 209.063,
       "transCur": "GBP"
     },
     {
@@ -23,17 +23,17 @@
     },
     {
       "baseCur": "JPY",
-      "rateData": 24.051,
+      "rateData": 24.006,
       "transCur": "CNY"
     },
     {
       "baseCur": "JPY",
-      "rateData": 123.905,
+      "rateData": 123.803,
       "transCur": "SGD"
     },
     {
       "baseCur": "JPY",
-      "rateData": 105.851,
+      "rateData": 105.721,
       "transCur": "AUD"
     },
     {
@@ -43,17 +43,17 @@
     },
     {
       "baseCur": "JPY",
-      "rateData": 4.718,
+      "rateData": 4.702,
       "transCur": "THB"
     },
     {
       "baseCur": "JPY",
-      "rateData": 4.868,
+      "rateData": 4.828,
       "transCur": "TWD"
     },
     {
       "baseCur": "JPY",
-      "rateData": 39.009,
+      "rateData": 38.939,
       "transCur": "MYR"
     },
     {
@@ -63,7 +63,7 @@
     },
     {
       "baseCur": "JPY",
-      "rateData": 2.509,
+      "rateData": 2.513,
       "transCur": "PHP"
     },
     {
@@ -73,7 +73,7 @@
     },
     {
       "baseCur": "JPY",
-      "rateData": 111.859,
+      "rateData": 112.295,
       "transCur": "CAD"
     }
   ]
